@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+/*
+    글꼴 등 사전에 로드해와야 하는 정보입니다.
+
+    만든이: 진서영
+    날짜: 2023-03-17
+*/
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
