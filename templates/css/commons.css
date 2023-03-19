@@ -154,7 +154,9 @@
 .mv-100 {margin: 100px 0;}
 
 .mt-10 {margin-top: 10px;}
+.mt-15 {margin-top: 15px;}
 .mt-20 {margin-top: 20px;}
+.mt-25 {margin-top: 25px;}
 .mt-30 {margin-top: 30px;}
 .mt-40 {margin-top: 40px;}
 .mt-50 {margin-top: 50px;}
@@ -314,6 +316,15 @@
 }
 
 /*
+    a태그 디자인
+*/
+.link {
+    color: #22201E;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*
     입력창 디자인(form-input)
     - 입력창은 small, medium, large 사이즈로 분류되어 있습니다.
     - 디폴트로 양 끝이 완전히 둥근 모양이고, 모서리만 깎은 semi-round가 있습니다.
@@ -370,7 +381,7 @@
     border-width: 2px;
     border-style: solid;
     font-size: 18px;
-    padding: 1em;
+    padding: 0.75em;
     padding-left: 1.7em;
     padding-right: 3em;
 
@@ -386,4 +397,7 @@
 */
 .font-purple {
     color: #776BFF;
+}
+.font-h2 {
+    font-size: 24px;
 }
