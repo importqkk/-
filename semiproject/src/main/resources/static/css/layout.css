@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+header {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+footer {
+    background-color: #f8f8ff;
+    bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+aside {
+    position: fixed;
+    top: 95.5px;
+    left: 0;
+    bottom: 0;
+    width: 600px;
+    z-index: 999;
+    background-color: #ffffff;
+}
+
+/*
+    flex
+*/
+.flex {
+    display: flex;
+}
+.flex.center {
+    justify-content: center;
+}
+.flex.right {
+    justify-content: right;
+}
