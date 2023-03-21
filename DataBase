@@ -63,9 +63,6 @@ CREATE TABLE  member  (
     -- 숫자 5~6자리
     check(regexp_like(member_post, '^[0-9]{5,6}$')),
     
-    -- 상세주소
-    -- 한글, -,\s 포함 2글자 이상 50글자 이하 
-    check(regexp_like(member_detail_addr,'^[가-힣\s-0-9]{2,50}$')),
     
     -- 포인트
     -- 0점 이상
@@ -129,7 +126,7 @@ CREATE TABLE  Product  (
      
     -- 상품이름
     -- 한글, 영어, 숫자, -,_ 기호 포함 1~33글자
-    check(regexp_like(product_name,'^[a-z0-9가-힣-]{1,33}$')),
+    check(regexp_like(product_name,'^[a-z0-9가-힣-!@#$%^&*]{1,33}$')),
     
     -- 상품 가격 0원 이상
     check(product_price >=0),
@@ -169,11 +166,12 @@ CREATE TABLE  Review  (
 --문의게시판
 CREATE TABLE  QA  (
 	 QA_no 	number	PRIMARY KEY,
+	 QA_title 	varchar2(90) NOT NULL,
 	 QA_content 	VARCHAR2(3000)	NOT NULL,
 	 QA_answer 	VARCHAR2(3000),
 	 QA_head 	VARCHAR2(12)	NOT NULL	,
 	 QA_secret 	number DEFAULT 0	NOT NULL,
-     QA_group number not null,
+         QA_group number not null,
 	 QA_parent 	references QA(QA_no) on delete cascade,
 	 QA_depth 	number 	DEFAULT 0	NOT NULL,
      member_Id 	REFERENCES member(member_id) on delete set null,
