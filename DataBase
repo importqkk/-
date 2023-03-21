@@ -87,7 +87,7 @@ CREATE TABLE  member  (
 CREATE TABLE  order_  (
 	 order_no 	number	PRIMARY KEY	 ,
 	 order_receiver 	varchar2(21)	NOT NULL,
-     order_post number not null,
+     	 order_post number not null,
 	 order_basic_addr 	VARCHAR2(150)	NOT NULL,
 	 order_detail_addr 	VARCHAR2(150)	NOT NULL,
 	 order_receiver_phone 	varchar2(11)	NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE  order_  (
 CREATE TABLE  Product  (
 	 product_no 	number	PRIMARY KEY	 ,
 	 product_name 	varchar2(99)	NOT NULL,
-	 product_brand	varchar(30) 	NOT NULL,
+	 product_brand	varchar2(30) 	NOT NULL,
 	 product_type 	varchar2(100)	NOT NULL,
 	 product_price 	number	NOT NULL,
 	 product_stock 	number 	DEFAULT 0	NOT NULL,
@@ -171,12 +171,13 @@ CREATE TABLE  QA  (
 	 QA_no 	number	PRIMARY KEY,
 	 QA_content 	VARCHAR2(3000)	NOT NULL,
 	 QA_answer 	VARCHAR2(3000),
-	 QA_head 	VARCHAR(12 )	NOT NULL	,
+	 QA_head 	VARCHAR2(12)	NOT NULL	,
 	 QA_secret 	number DEFAULT 0	NOT NULL,
      QA_group number not null,
 	 QA_parent 	references QA(QA_no) on delete cascade,
 	 QA_depth 	number 	DEFAULT 0	NOT NULL,
      member_Id 	REFERENCES member(member_id) on delete set null,
+     
      -- qa 말머리
      check (qa_head in('상품문의','결제문의','기타문의')),
      
@@ -208,7 +209,7 @@ CREATE TABLE  cart  (
 	 cart_count 	number	NOT NULL,
 	 cart_price 	number	NOT NULL,
      product_no references product(product_no) on delete cascade,
-     member_Id 	REFERENCES member(member_id) on delete set null,
+     member_Id 	REFERENCES member(member_id) on delete cascade,
      
      -- 장바구니 상품수량
      check(cart_count >=0),
