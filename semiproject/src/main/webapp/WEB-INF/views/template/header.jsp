@@ -70,113 +70,114 @@
 	    <title>SEMI</title>
 	</head>
 	<body>
-	    <main>
-	        <header style="border-bottom: 0.5px solid #72706f;">
-	            <div class="container-1000">
-	                <div class="flex">
-	                    <div class="flex w-25">
-	                        <div class="w-15">
-	                            <i class="fa-solid fa-bars fa-2x font-purple mt-20 menu-btn"></i>
-	                            <i class="fa-solid fa-xmark fa-2x font-purple mt-15 close-btn"></i>
-	                        </div>
-	                        <div class="w-100 center">
-	                                <h1 style="font-size: 50px;">
-	                                    <a class="link font-purple" href="#">SEMI</a>
-	                                </h1>
-	                        </div>
-	                    </div>
-	                    <div class="center w-50">
-	                        <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
-	                    </div>
-	                    <div class="right w-25">
-	                        <a class="link" href="#">
-	                            <i class="fa-solid fa-cart-shopping custom-size font-purple pe-30 mt-25"></i>
-	                        </a>
-	                        <a class="link" href="#">
-	                            <i class="fa-solid fa-user custom-size font-purple mt-25"></i>
-	                        </a>
-	                    </div>
-	                </div>
-	            </div>
-	        </header>
-	        <aside class="side-menu">
-	            <div class="container-600 flex">
-	                <div class="w-45"></div>
-	                <div class="row w-50">
-	                    <a class="link" href="#">
-	                        <div class="row large flex menu-item">
-	                            <div class="w-85">
-	                                <div class="font-h2">면역력</div>
-	                            </div>
-	                            <div class="w-15 right pe-20">
-	                                <i class="fa-solid fa-chevron-right"></i>
-	                            </div>
-	                        </div>
-	                    </a>
-	                    <a class="link" href="#">
-	                        <div class="row large flex menu-item">
-	                            <div class="w-85">
-	                                <div class="font-h2">피부</div>
-	                            </div>
-	                            <div class="w-15 right pe-20">
-	                                <i class="fa-solid fa-chevron-right"></i>
-	                            </div>
-	                        </div>
-	                    </a>
-	                    <a class="link" href="#">
-	                        <div class="row large flex menu-item">
-	                            <div class="w-85">
-	                                <div class="font-h2">활력</div>
-	                            </div>
-	                            <div class="w-15 right pe-20">
-	                                <i class="fa-solid fa-chevron-right"></i>
-	                            </div>
-	                        </div>
-	                    </a>
-	                    <a class="link" href="#">
-	                        <div class="row large flex menu-item">
-	                            <div class="w-85">
-	                                <div class="font-h2">헤어</div>
-	                            </div>
-	                            <div class="w-15 right pe-20">
-	                                <i class="fa-solid fa-chevron-right"></i>
-	                            </div>
-	                        </div>
-	                    </a>
-	                    <a class="link" href="#">
-	                        <div class="row large flex menu-item">
-	                            <div class="w-85">
-	                                <div class="font-h2">다이어트</div>
-	                            </div>
-	                            <div class="w-15 right pe-20">
-	                                <i class="fa-solid fa-chevron-right"></i>
-	                            </div>
-	                        </div>
-	                    </a>
-	                    <a class="link" href="#">
-	                        <div class="row large flex menu-item">
-	                            <div class="w-85">
-	                                <div class="font-h2">위</div>
-	                            </div>
-	                            <div class="w-15 right pe-20">
-	                                <i class="fa-solid fa-chevron-right"></i>
-	                            </div>
-	                        </div>
-	                    </a>
-	                    <a class="link" href="#">
-	                        <div class="row large flex menu-item">
-	                            <div class="w-85">
-	                                <div class="font-h2">안티에이징</div>
-	                            </div>
-	                            <div class="w-15 right pe-20">
-	                                <i class="fa-solid fa-chevron-right"></i>
-	                            </div>
-	                        </div>
-	                    </a>
-	                </div>
-	                <div class="w-5"></div>
-	            </div>
-	            
-	        </aside>
-	        <section>
-	            <article>
+    <main>
+        <div id="wrapper">
+        <header style="border-bottom: 0.5px solid #72706f;">
+            <div class="container-1000">
+                <div class="flex">
+                    <div class="flex w-25">
+                        <div class="w-15">
+                            <i class="fa-solid fa-bars fa-2x font-purple mt-20 menu-btn"></i>
+                            <i class="fa-solid fa-xmark fa-2x font-purple mt-15 close-btn"></i>
+                        </div>
+                        <div class="w-100 center">
+                                <h1 style="font-size: 50px;">
+                                    <a class="link font-purple" href="#">SEMI</a>
+                                </h1>
+                        </div>
+                    </div>
+                    <div class="center w-50">
+                        <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
+                    </div>
+                    <div class="right w-25">
+                        <a class="link" href="#">
+                            <i class="fa-solid fa-cart-shopping custom-size font-purple pe-30 mt-25"></i>
+                        </a>
+                        <a class="link" href="#">
+                            <i class="fa-solid fa-user custom-size font-purple mt-25"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <aside class="side-menu">
+            <div class="container-1000 flex">
+                <div class=""></div>
+                <div class="row w-30">
+                    <a class="link" href="#">
+                        <div class="row large flex menu-item">
+                            <div class="w-85">
+                                <div class="font-h2">면역력</div>
+                            </div>
+                            <div class="w-15 right pe-20">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="link" href="#">
+                        <div class="row large flex menu-item">
+                            <div class="w-85">
+                                <div class="font-h2">피부</div>
+                            </div>
+                            <div class="w-15 right pe-20">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="link" href="#">
+                        <div class="row large flex menu-item">
+                            <div class="w-85">
+                                <div class="font-h2">활력</div>
+                            </div>
+                            <div class="w-15 right pe-20">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="link" href="#">
+                        <div class="row large flex menu-item">
+                            <div class="w-85">
+                                <div class="font-h2">헤어</div>
+                            </div>
+                            <div class="w-15 right pe-20">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="link" href="#">
+                        <div class="row large flex menu-item">
+                            <div class="w-85">
+                                <div class="font-h2">다이어트</div>
+                            </div>
+                            <div class="w-15 right pe-20">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="link" href="#">
+                        <div class="row large flex menu-item">
+                            <div class="w-85">
+                                <div class="font-h2">위</div>
+                            </div>
+                            <div class="w-15 right pe-20">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="link" href="#">
+                        <div class="row large flex menu-item">
+                            <div class="w-85">
+                                <div class="font-h2">안티에이징</div>
+                            </div>
+                            <div class="w-15 right pe-20">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="w-70"></div>
+            </div>
+            
+        </aside>
+        <section>
+            <article>
