@@ -10,6 +10,7 @@
 
             </article>
         </section>
+    </div>
         <footer>
             <div class="container-1000">
                 <div class="row flex">
