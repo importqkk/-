@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +7,35 @@
     <link rel="stylesheet" type="text/css" href="css/load.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/commons.css">
     <link rel="stylesheet" type="text/css" href="css/test.css">
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Document</title>
+    <style>
+
+    </style>
 </head>
-<body test>
+<body>
+    <div class="row">
+        <div class="parent">
+            <input class="search w-100">
+            <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <a class="link">안녕하세요</a>
+    </div>
+    <div class="row">
+        <i class="fa-solid fa-circle-check c-p100"></i>
+        <i class="fa-regular fa-circle c-p100"></i>
+    </div>
+    <div class="flex qty-stepper center">
+        <span class="minus disabled">-</span>
+        <span class="number">1</span>
+        <span class="plus">+</span>
+    </div>
     <h1>positive btns</h1>
     <button class="form-btn large positive">large</button>
     <button class="form-btn medium positive">medium</button>
@@ -44,7 +66,9 @@
     <div class="font-purple">본문</div>
     <hr>
     <div class="container-500 mb-40">
-        <input type="text" class="form-input-search w-100">
+        <button type="submit">
+            <input type="text" class="form-input-search w-100">
+        </button>
     </div>
     <div class="container-500 mb-40">
         <input type="text" class="form-input-search small w-100">
@@ -58,6 +82,81 @@
             </select>
             <input type="text" class="form-input-search w-50">
             <button class="form-btn large positive w-20">입력</button>
+        </div>
+        <div class="row">
+            <hr>
+        </div>
+        <div class="row">
+            <h3>안녕하세요</h3>
+            <span class="font-h3 #22201e">안녕하세요</span>
+        </div>
+        <div class="row">
+            <hr>
+        </div>
+        <div class="container-800">
+            <div class="row">
+                <div class="pagination">
+                    <a href="#" class="disabled">&laquo;</a>
+                    <a href="#" class="disabled">&lt;</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#" class="on">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">7</a>
+                    <a href="#">8</a>
+                    <a href="#">9</a>
+                    <a href="#">10</a>
+                    <a href="#">&gt;</a>
+                    <a href="#">&raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-qna">
+                <thead>
+                    <tr>
+                        <th>1111111111</th>
+                        <th>2222222222</th>
+                        <th>3333333333</th>
+                        <th>4444444444</th>
+                        <th>5555555555</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>11111</td>
+                        <td>22222</td>
+                        <td>33333</td>
+                        <td>44444</td>
+                        <td>55555</td>
+                    </tr>
+                    <tr>
+                        <td>11111</td>
+                        <td>22222</td>
+                        <td>33333</td>
+                        <td>44444</td>
+                        <td>55555</td>
+                    </tr>
+                    <tr>
+                        <td>11111</td>
+                        <td>22222</td>
+                        <td>33333</td>
+                        <td>44444</td>
+                        <td>55555</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>111</td>
+                        <td>222</td>
+                        <td>333</td>
+                        <td>444</td>
+                        <td>555</td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
     </div>

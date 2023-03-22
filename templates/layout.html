@@ -16,15 +16,28 @@
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
+        .logo {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            /* font-size: 100%;
+            font: inherit; */
+            font-family: inherit;
+            vertical-align: baseline;
+        }
+        .search-box {
+            margin-top: 8px;
+        }
         .custom-size {
             font-size: 25px;
         }
         .menu-btn,
         .close-btn {
+            font-size: 45px;
             cursor: pointer;
         }
         .close-btn {
-            font-size: 45px;
+            font-size: 53px;
         }
         .fa-chevron-right {
             margin-top: 10px;
@@ -44,7 +57,7 @@
         }
         .social {
             vertical-align: middle;
-            margin-top: 12px;
+            margin-top: 30px;
         }
     </style>
     <script type="text/javascript">
@@ -72,25 +85,31 @@
             <div class="container-1000">
                 <div class="flex">
                     <div class="flex w-25">
-                        <div class="w-15">
-                            <i class="fa-solid fa-bars fa-2x font-purple mt-20 menu-btn"></i>
-                            <i class="fa-solid fa-xmark fa-2x font-purple mt-15 close-btn"></i>
+                        <div class="w-20">
+                            <i class="fa-solid fa-bars fa-2x c-p100 mt-15 menu-btn"></i>
+                            <i class="fa-solid fa-xmark fa-2x c-p100 mt-10 close-btn"></i>
                         </div>
                         <div class="w-100 center">
-                                <h1 style="font-size: 50px;">
-                                    <a class="link font-purple" href="#">SEMI</a>
+                                <h1 class="c-p100 logo" style="font-size: 50px;">
+                                    <a class="link" style="color: #776BFF;" href="#">SEMI</a>
                                 </h1>
                         </div>
                     </div>
-                    <div class="center w-50">
-                        <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
+                    <div class="center w-60">
+                        <div class="search-box">
+                            <input class="search-input w-100">
+                            <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
                     </div>
-                    <div class="right w-25">
+                    <!-- <div class="center w-50">
+                        <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
+                    </div> -->
+                    <div class="right w-15">
                         <a class="link" href="#">
-                            <i class="fa-solid fa-cart-shopping custom-size font-purple pe-30 mt-25"></i>
+                            <i class="fa-solid fa-cart-shopping custom-size c-p100 pe-30 mt-25"></i>
                         </a>
                         <a class="link" href="#">
-                            <i class="fa-solid fa-user custom-size font-purple mt-25"></i>
+                            <i class="fa-solid fa-user custom-size c-p100 mt-25"></i>
                         </a>
                     </div>
                 </div>
@@ -181,8 +200,10 @@
 
             <!----------------------메인컨텐츠---------------------->
             <div class="container-1000">
-                Elit pellentesque habitant morbi tristique senectus et netus et malesuada. Iaculis eu non diam phasellus vestibulum. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Auctor eu augue ut lectus arcu bibendum. Vel quam elementum pulvinar etiam non quam. Elementum pulvinar etiam non quam lacus suspendisse faucibus. Fringilla ut morbi tincidunt augue interdum velit. Cursus in hac habitasse platea dictumst. Pharetra vel turpis nunc eget lorem dolor. Quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor. Nunc sed velit dignissim sodales ut. Tortor at auctor urna nunc id cursus metus. Faucibus turpis in eu mi. Diam in arcu cursus euismod quis viverra.
-
+                <div class="row pt-10">
+                    Elit pellentesque habitant morbi tristique senectus et netus et malesuada. Iaculis eu non diam phasellus vestibulum. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Auctor eu augue ut lectus arcu bibendum. Vel quam elementum pulvinar etiam non quam. Elementum pulvinar etiam non quam lacus suspendisse faucibus. Fringilla ut morbi tincidunt augue interdum velit. Cursus in hac habitasse platea dictumst. Pharetra vel turpis nunc eget lorem dolor. Quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor. Nunc sed velit dignissim sodales ut. Tortor at auctor urna nunc id cursus metus. Faucibus turpis in eu mi. Diam in arcu cursus euismod quis viverra.
+                </div>
+            </div>
             <!---------------------------------------------------->
             </article>
         </section>
@@ -191,7 +212,7 @@
             <div class="container-1000">
                 <div class="row flex">
                     <div class="w-50">
-                        <h1 class="font-purple">SEMI</h1>
+                        <h1 class="c-p100">SEMI</h1>
                     </div>
                     <div class="w-50 right">
                         <a class="link" href="#">
