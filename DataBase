@@ -84,7 +84,7 @@ CREATE TABLE  member  (
 CREATE TABLE  order_  (
 	 order_no 	number	PRIMARY KEY	 ,
 	 order_receiver 	varchar2(21)	NOT NULL,
-     	 order_post number not null,
+     order_post number not null,
 	 order_basic_addr 	VARCHAR2(150)	NOT NULL,
 	 order_detail_addr 	VARCHAR2(150)	NOT NULL,
 	 order_receiver_phone 	varchar2(11)	NOT NULL,
@@ -151,7 +151,7 @@ CREATE TABLE  Review  (
 	 review_star 	number 	DEFAULT 0	NOT NULL,
 	 review_time 	date 	DEFAULT sysdate	NOT NULL,
 	 review_like 	number 	DEFAULT 0	NOT NULL,
-     order_no 	REFERENCES  order_(order_no) on delete CASCADE,
+     product_no 	REFERENCES  product(product_no) on delete CASCADE,
      member_Id REFERENCES member(member_id) on delete CASCADE,
      
      -- 리뷰 별점
@@ -171,9 +171,10 @@ CREATE TABLE  QA  (
 	 QA_answer 	VARCHAR2(3000),
 	 QA_head 	VARCHAR2(12)	NOT NULL	,
 	 QA_secret 	number DEFAULT 0	NOT NULL,
-         QA_group number not null,
+     QA_group number not null,
 	 QA_parent 	references QA(QA_no) on delete cascade,
 	 QA_depth 	number 	DEFAULT 0	NOT NULL,
+	 qa_date date default  sysdate,
      member_Id 	REFERENCES member(member_id) on delete set null,
      
      -- qa 말머리
@@ -227,7 +228,8 @@ CREATE TABLE  order_product  (
 	 product_count 	number	NOT NULL,
 	 product_price 	number	NOT NULL,
      product_no 	REFERENCES product(product_no) on delete cascade,
-	 order_no 	REFERENCES order_(order_no) on delete cascade
+	 order_no 	REFERENCES order_(order_no) on delete cascade,
+	 primary key(product_no,order_no)
 );
 
 
@@ -266,6 +268,13 @@ CREATE TABLE  review_img  (
 	 review_no 	REFERENCES	review(review_no) on delete cascade,	 
 	 primary key(img_no, review_no) 
 );
+
+
+
+
+
+
+
 
 
 
