@@ -3,11 +3,8 @@
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 		
-	<div class="container-1000">
-		<div class="row">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a ante ligula. Nam lacus erat, facilisis sit amet risus eget, ornare bibendum mauris. Etiam sit amet nibh pharetra, sollicitudin libero ac, ullamcorper elit. Praesent nunc libero, tincidunt eget porttitor non, cursus ut orci. Etiam ultrices libero eget sagittis egestas. Etiam pretium fringilla auctor. Cras quis mauris elit. Etiam sed condimentum nisi, nec bibendum leo. Sed eu consequat odio. Aliquam erat volutpat.
-			Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean varius scelerisque nulla vitae placerat. Donec at justo vitae justo tempor accumsan. Cras consectetur elementum leo sit amet volutpat. Morbi eget scelerisque nibh. Sed sed egestas odio. Maecenas tristique at nulla vitae volutpat. Morbi pretium ligula sit amet convallis condimentum. Duis sed lectus efficitur, posuere massa eget, lacinia ligula. Aenean ut nisl eu nulla malesuada viverra.
-		</div>
-	</div>
+      <div class="container-1000">
+          Elit pellentesque habitant morbi tristique senectus et netus et malesuada. Iaculis eu non diam phasellus vestibulum. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Auctor eu augue ut lectus arcu bibendum. Vel quam elementum pulvinar etiam non quam. Elementum pulvinar etiam non quam lacus suspendisse faucibus. Fringilla ut morbi tincidunt augue interdum velit. Cursus in hac habitasse platea dictumst. Pharetra vel turpis nunc eget lorem dolor. Quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor. Nunc sed velit dignissim sodales ut. Tortor at auctor urna nunc id cursus metus. Faucibus turpis in eu mi. Diam in arcu cursus euismod quis viverra.
+      </div>
 		
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
