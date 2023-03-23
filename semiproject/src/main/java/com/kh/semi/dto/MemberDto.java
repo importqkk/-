@@ -10,14 +10,14 @@ public class MemberDto {
 	private String memberName;
 	private String memberNick;
 	private String memberPw;
-	private String memberTel;
+	private String memberPhone;
 	private String memberEmail;
-	private int memberPost;
+	private String memberPost;
 	private String memberBasicAddr;
 	private String memberDetailAddr;
 	private int memberPoint;
 	private Date memberJoin;
-	private Date memberRole;	
+	private String memberRole;	
 	
 	
 }
