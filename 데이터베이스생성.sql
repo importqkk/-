@@ -118,7 +118,6 @@ CREATE TABLE  Product  (
 	 product_no 	number	PRIMARY KEY	 ,
 	 product_name 	varchar2(99)	NOT NULL,
 	 product_brand	varchar2(30) 	NOT NULL,
-	 product_type 	varchar2(100)	NOT NULL,
 	 product_price 	number	NOT NULL,
 	 product_stock 	number 	DEFAULT 0	NOT NULL,
 	 product_content 	varchar2(3000)	NOT NULL,
@@ -274,5 +273,6 @@ CREATE TABLE  review_img  (
 
 
 
- 
+ -- 다 실행 시키고 커밋해야 적용됩니다
+commit;
 
