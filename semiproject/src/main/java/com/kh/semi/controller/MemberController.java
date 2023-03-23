@@ -32,7 +32,7 @@ public class MemberController {
 	}
 //	 로그인
 	@GetMapping("/login")  
-	public String login() {
+	public String login() {  
 		return "/WEB-INF/views/member/login.jsp";
 	}
 
