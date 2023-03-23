@@ -304,6 +304,7 @@
     border-width: 2px;
     border-style: solid;
 }
+
 .form-btn.positive {
     background-color: #776BFF;
     border-color: #776BFF;
@@ -370,6 +371,15 @@
     border-style: solid;
 }
 
+.form-input.post{
+    font-size: 15px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-width: 2px;
+    border-style: solid;
+    width: 18.5%
+    
+}
 /*
     검색창(form-input-search)
     - 검색창은 헤더에 사용하는 일반 검색창과, QnA페이지에 있는 작은 검색창(small)로 나뉩니다.
