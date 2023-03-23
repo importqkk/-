@@ -21,9 +21,7 @@ CREATE TABLE  member  (
 	 member_point 	number DEFAULT 100	NOT NULL,
 	 member_join 	DATE 	DEFAULT sysdate	NOT NULL,
 	 member_role 	VARCHAR2(12) DEFAULT '일반회원'	NOT NULL,
-	 agree_TOS 	number	NOT NULL,
-	 agree_privacy 	number	NOT NULL,
-	 agree_promotion 	number	NULL,
+	 agree_promotion 	number	not NULL,
      
 
      -- 아이디 
@@ -72,10 +70,8 @@ CREATE TABLE  member  (
     -- 일반 혹은 관리자
     check(member_role in ('일반회원','관리자')),
  
-    --이용약관 동의
+    --이용약관 마케 동의
     -- boolean  0 또는 1 
-     check (agree_TOS  in(0,1)),
-     check (agree_privacy  in(0,1)),
      check (agree_promotion  in(0,1))
 );
 
@@ -90,7 +86,7 @@ CREATE TABLE  order_  (
 	 order_receiver_phone 	varchar2(11)	NOT NULL,
 	 order_date 	DATE 	DEFAULT sysdate	NOT NULL,
 	 order_request 	varchar2(300)	NULL,
-     member_Id 	REFERENCES member(member_id) on delete cascade,
+     	member_Id 	REFERENCES member(member_id) on delete cascade,
     
     --수령인 이름
     -- 성, 이름 포함 한글 2글자 이상 7글자 이하
@@ -151,8 +147,8 @@ CREATE TABLE  Review  (
 	 review_star 	number 	DEFAULT 0	NOT NULL,
 	 review_time 	date 	DEFAULT sysdate	NOT NULL,
 	 review_like 	number 	DEFAULT 0	NOT NULL,
-     order_no 	REFERENCES  order_(order_no) on delete CASCADE,
-     member_Id REFERENCES member(member_id) on delete CASCADE,
+     	product_no 	REFERENCES  product(product_no) on delete CASCADE,
+     	member_Id REFERENCES member(member_id) on delete CASCADE,
      
      -- 리뷰 별점
      --0 ~ 5점
@@ -171,10 +167,10 @@ CREATE TABLE  QA  (
 	 QA_answer 	VARCHAR2(3000),
 	 QA_head 	VARCHAR2(12)	NOT NULL	,
 	 QA_secret 	number DEFAULT 0	NOT NULL,
-         QA_group number not null,
+         	 QA_group number,
 	 QA_parent 	references QA(QA_no) on delete cascade,
-	 QA_depth 	number 	DEFAULT 0	NOT NULL,
-     member_Id 	REFERENCES member(member_id) on delete set null,
+	 QA_depth 	number 	DEFAULT 0	,
+     	member_Id 	REFERENCES member(member_id) on delete set null,
      
      -- qa 말머리
      check (qa_head in('상품문의','결제문의','기타문의')),
@@ -198,21 +194,14 @@ CREATE TABLE  img  (
 	 img_size 	long	NOT NULL
     
 
-     
+         
 );
 
 --장바구니
 CREATE TABLE  cart  (
-	 cart_no 	number	PRIMARY KEY,
-	 cart_count 	number	NOT NULL,
-	 cart_price 	number	NOT NULL,
-     product_no references product(product_no) on delete cascade,
-     member_Id 	REFERENCES member(member_id) on delete cascade,
-     
-     -- 장바구니 상품수량
-     check(cart_count >=0),
-     -- 장바구니 상품가격
-     check(cart_price >=0)
+     	product_no  references product(product_no) on delete cascade,
+     	member_Id  REFERENCES member(member_id) on delete cascade,
+	PRODUCT_COUNT number not null,
 
 );
 
@@ -266,7 +255,6 @@ CREATE TABLE  review_img  (
 	 review_no 	REFERENCES	review(review_no) on delete cascade,	 
 	 primary key(img_no, review_no) 
 );
-
 
 
 
