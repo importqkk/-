@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	.social {
-        vertical-align: middle;
-        margin-top: 12px;
-    }
+.social {
+    vertical-align: middle;
+    margin-top: 30px;
+}
 </style>
 
             </article>
@@ -15,7 +15,7 @@
             <div class="container-1000">
                 <div class="row flex">
                     <div class="w-50">
-                        <h1 class="font-purple">SEMI</h1>
+                        <h1 class="c-p100">SEMI</h1>
                     </div>
                     <div class="w-50 right">
                         <a class="link" href="#">
