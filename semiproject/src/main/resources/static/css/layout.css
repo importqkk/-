@@ -2,7 +2,7 @@
 
 html {
     height: 100%;
-    }
+}
 
 body {
     height: 100%;
@@ -14,7 +14,7 @@ header {
     top: 0;
     padding-top: 10px;
     padding-bottom: 10px;
-    height: 98px;
+    height: 95px;
 }
 
 footer{
@@ -26,6 +26,11 @@ footer{
     padding-bottom: 10px;
     width: 100%;
     transform: translatY(-100%); */
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: inherit;
+    vertical-align: baseline;
 }
 
 aside {
@@ -50,6 +55,7 @@ aside {
 */
 .flex {
     display: flex;
+    align-items: center;
 }
 .flex.center {
     justify-content: center;
