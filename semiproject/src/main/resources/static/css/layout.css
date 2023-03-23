@@ -2,7 +2,7 @@
 
 html {
     height: 100%;
-    }
+}
 
 body {
     height: 100%;
@@ -55,6 +55,7 @@ aside {
 */
 .flex {
     display: flex;
+    align-items: center;
 }
 .flex.center {
     justify-content: center;
