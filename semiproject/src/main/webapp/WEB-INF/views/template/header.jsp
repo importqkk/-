@@ -37,7 +37,8 @@
         }
         .menu-btn,
         .close-btn {
-            font-size: 45px;
+            font-size: 40px;
+            margin-top: 3px;
             cursor: pointer;
         }
         .close-btn {
@@ -59,9 +60,14 @@
         .menu-item:hover {
             background-color: #f8f8ff;
         }
+        .fa-cart-shopping,
+        .fa-user {
+            margin-top: 12px;
+            font-size: 30px;
+        }
         .social {
             vertical-align: middle;
-            margin-top: 12px;
+            margin-top: 30px;
         }
     </style>
     <script type="text/javascript">
@@ -90,12 +96,12 @@
                 <div class="flex">
                     <div class="flex w-25">
                         <div class="w-20">
-                            <i class="fa-solid fa-bars fa-2x c-p100 mt-15 menu-btn"></i>
-                            <i class="fa-solid fa-xmark fa-2x c-p100 mt-10 close-btn"></i>
+                            <i class="fa-solid fa-bars fa-2x c-p100 menu-btn"></i>
+                            <i class="fa-solid fa-xmark fa-2x c-p100 close-btn"></i>
                         </div>
                         <div class="w-100 center">
                                 <h1 class="c-p100 logo" style="font-size: 50px;">
-                                    <a class="link" style="color: #776BFF;" href="#">SEMI</a>
+                                    <a class="link" style="color: #776BFF;" href="/">SEMI</a>
                                 </h1>
                         </div>
                     </div>
@@ -110,10 +116,10 @@
                     </div> -->
                     <div class="right w-15">
                         <a class="link" href="#">
-                            <i class="fa-solid fa-cart-shopping custom-size c-p100 pe-30 mt-25"></i>
+                            <i class="fa-solid fa-cart-shopping c-p100 pe-30"></i>
                         </a>
                         <a class="link" href="#">
-                            <i class="fa-solid fa-user custom-size c-p100 mt-25"></i>
+                            <i class="fa-solid fa-user c-p100"></i>
                         </a>
                     </div>
                 </div>
