@@ -78,7 +78,7 @@ CREATE TABLE  member  (
      check (agree_privacy  in(0,1)),
      check (agree_promotion  in(0,1))
 );
-
+ 
 
 --주문
 CREATE TABLE  order_  (
@@ -90,6 +90,8 @@ CREATE TABLE  order_  (
 	 order_receiver_phone 	varchar2(11)	NOT NULL,
 	 order_date 	DATE 	DEFAULT sysdate	NOT NULL,
 	 order_request 	varchar2(300)	NULL,
+	 order_userPoint number DEFAULT 0 not null,
+	 order_stat varchar2(15) DEFAULT '결제완료',
      member_Id 	REFERENCES member(member_id) on delete cascade,
     
     --수령인 이름
@@ -171,9 +173,11 @@ CREATE TABLE  QA  (
 	 QA_answer 	VARCHAR2(3000),
 	 QA_head 	VARCHAR2(12)	NOT NULL	,
 	 QA_secret 	number DEFAULT 0	NOT NULL,
-         QA_group number not null,
+     QA_group number not null,
 	 QA_parent 	references QA(QA_no) on delete cascade,
 	 QA_depth 	number 	DEFAULT 0	NOT NULL,
+	 QA_date date default sysdate not null,
+	 QA_read number default 0 not null,
      member_Id 	REFERENCES member(member_id) on delete set null,
      
      -- qa 말머리
@@ -227,7 +231,8 @@ CREATE TABLE  order_product  (
 	 product_count 	number	NOT NULL,
 	 product_price 	number	NOT NULL,
      product_no 	REFERENCES product(product_no) on delete cascade,
-	 order_no 	REFERENCES order_(order_no) on delete cascade
+	 order_no 	REFERENCES order_(order_no) on delete cascade,
+	 primary key(product_no,order_no)
 );
 
 
@@ -269,5 +274,5 @@ CREATE TABLE  review_img  (
 
 
 
-
+ 
 
