@@ -46,9 +46,9 @@ public class MemberDao {
 			memberDto.setMemberName(rs.getString("member_name"));
 			memberDto.setMemberNick(rs.getString("member_nick"));
 			memberDto.setMemberPw(rs.getString("member_pw"));
-			memberDto.setMemberPhone(rs.getString("member_tel"));
+			memberDto.setMemberPhone(rs.getString("member_phone"));
 			memberDto.setMemberEmail(rs.getString("member_email"));
-			memberDto.setMemberPost(rs.getString("member_post"));
+			memberDto.setMemberPost(rs.getInt("member_post"));
 			memberDto.setMemberBasicAddr(rs.getString("member_basic_addr"));
 			memberDto.setMemberDetailAddr(rs.getString("member_detail_addr"));
 			memberDto.setMemberPoint(rs.getInt("member_point"));
@@ -66,11 +66,11 @@ public class MemberDao {
 	}
 	
 //	최종 로그인 시각만 갱신하는 기능(로그인 성공 시 호출)
-	public boolean updateMemberLogin(String memberId) {
-		String sql = "update member "
-						+ "set member_login = sysdate "
-						+ "where member_id = ?";
-		Object[] param = {memberId};
-		return jdbcTemplate.update(sql, param) > 0;
-	}
+//	public boolean updateMemberLogin(String memberId) {
+//		String sql = "update member "
+//						+ "set member_login = sysdate "
+//						+ "where member_id = ?";
+//		Object[] param = {memberId};
+//		return jdbcTemplate.update(sql, param) > 0;
+//	}
 }

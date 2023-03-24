@@ -1,5 +1,7 @@
 package com.kh.semi.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.MemberDao;
@@ -25,6 +29,12 @@ public class MemberController {
 	public String join() {
 		return "/WEB-INF/views/member/join.jsp";
 	}
+	 @PostMapping("/join")
+	 public String join(@ModelAttribute MemberDto memberDto) throws IllegalStateException, IOException {
+		 //회원가입!
+		 
+		 return "redirect:joinFinish";
+	 }
 	
 	@GetMapping("/joinFinish")
 	public String joinFinish() {
