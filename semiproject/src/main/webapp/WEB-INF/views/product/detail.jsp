@@ -87,8 +87,30 @@
 			
 
         }
-		.detail-img
-
+        
+        /* 상세 이미지 초기 설정*/
+		.detail-img-initial {
+			  position: relative;
+			  overflow: hidden;
+			  height: 400px; /* 보여질 높이 설정 */
+		}
+		
+		.detail-img-click {
+			  position: absolute;
+			  top: 0; 
+			  left: 0;
+			  width:100%;
+			  height: auto;
+		}
+		
+		/* 상세정보 펼치기 */
+		.show-detail{
+			display:block;
+			margin: 0 auto;
+		}
+		.hide-detail{
+			display:none;
+		}
     </style>
     <script type="text/javascript">
     
@@ -124,11 +146,14 @@
     	
     	//---------상세 이미지 높이 조절----------
     	
-    	function showMore(){
-    		var detailImg = document.querySelector('.detail-img');
+   		function detailImg(){
+    		// 버튼이 눌렸을 때의 이미지 상태를 확인
+    		var = document.querySelector(".detail-img")
     		
+    		//
     		
     	}
+    	
     
     </script>
     <title>상품 상세페이지</title>
@@ -194,7 +219,7 @@
                     <h3 class="oneLine total-price">${productDto.productPrice}</h3>
                     <h3 class="oneLine">원</h3>
                 </div>
-                <div class="row center ">
+                <div class="row center">
                     <button class="w-49 form-btn small neutral" onclick="location.href='/cart/' ">장바구니</button>
                     <button class="w-49 form-btn small positive" onclick="location.href='/order/' ">구매하기</button>
                 </div>
@@ -228,16 +253,19 @@
         <hr class="w-30">
     </div>
 	<div class="container-1000">
-		<!--상세이미지 -->
-		<div class="row center">
-			<img width="1000" class="detail-img" src="/static/image/detail_img.jpg">
+		<!--상세이미지 초기상태 -->
+		<div class="row detail-img-initial">
+			<img width="1000" class="center" src="/static/image/detail_img.jpg">
 		</div>
 	</div>
 	
 
     <div class="container-1000">
         <div class="row center">
-            <button class="w-90 form-btn small positive">상세정보 펼쳐 보기</button>
+			<!--상세이미지 전부 보이기-->
+            <button class="w-95 form-btn small positive show-detail" onclick="detailImg();">상세정보 펼쳐 보기</button>
+			<!--상세이미지 숨기기 -->
+            <button class="w-95 form-btn small positive hide-detail" onclick="detailImg();">상세정보 접기</button>
         </div>
     </div>
 
