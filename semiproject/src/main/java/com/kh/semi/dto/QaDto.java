@@ -13,7 +13,7 @@ public class QaDto {
 	public String qaContent;
 	public String qaAnswer;
 	public String qaHead;
-	public boolean qaSecret;
+	public int qaSecret;
 	public int qaGroup;
 	public Integer qaParent;
 	public int qaDepth;

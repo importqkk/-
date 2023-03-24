@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class QaPaginationVO {
-	private String column = "qaNo";
+	private String column = "qaTitle";
 	private String keyword = "";
 	private int page = 1;
 	private int size = 10;

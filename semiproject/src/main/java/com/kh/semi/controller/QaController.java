@@ -115,7 +115,7 @@ public class QaController {
 		return "redirect:/qa/list";
 	}
 	
-	@GetMapping("/delete.{boardNo")
+	@GetMapping("/delete.{qaNo}")
 	public String delete2(@PathVariable int qaNo) {
 		qaDao.delete(qaNo);
 		return"redirect:/qa/list";

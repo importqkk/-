@@ -14,6 +14,7 @@ public class QaService {
 	@Autowired
 	private QaDao qaDao;
 	
+	//게시글 등록 서비스
 	public int write(QaDto qaDto, List<Integer> attachmentNo) {
 		int qaNo = qaDao.sequence();
 		qaDto.setQaNo(qaNo);
@@ -26,11 +27,14 @@ public class QaService {
 			qaDto.setQaGroup(parentDto.getQaGroup());
 			qaDto.setQaDepth(parentDto.getQaDepth()+1);
 		}
+		
+		//게시글 등록
 		qaDao.insert(qaDto);
 		
-		for(int no : attachmentNo) {
-			qaDao.connect(qaNo, no);
-		}
+//		//첨부파일번호 글번호 연결
+//		for(int no : attachmentNo) {
+//			qaDao.connect(qaNo, no);
+//		}
 		return qaNo;
 	}
 }

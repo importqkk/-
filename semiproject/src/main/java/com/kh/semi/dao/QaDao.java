@@ -30,20 +30,19 @@ public class QaDao {
 			qaDto.setQaContent(rs.getString("content"));
 			qaDto.setQaAnswer(rs.getString("qa_answer"));
 			qaDto.setQaHead(rs.getString("qa_head"));
-			qaDto.setQaSecret(rs.getBoolean("qa_secret"));
+			qaDto.setQaSecret(rs.getInt("qa_secret"));
 			qaDto.setQaGroup(rs.getInt("qa_group"));
 			qaDto.setQaTime(rs.getDate("qa_time"));
 			qaDto.setProductNo(rs.getInt("product_no"));
 			qaDto.setQaRead(rs.getInt("qa_read"));
 			
-			qaDto.setQaParent(rs.getObject("qa_parent") == null ?
-																	null : rs.getInt("qa_parent"));
+			qaDto.setQaParent(rs.getInt("qa_parent"));
 			qaDto.setQaDepth(rs.getInt("qa_depth"));
 			return qaDto;
 		}
 	};
 	
-	// QA게시판에 공지사항을 띄울시
+	// QA게시판에 공지사항만 조회
 //		public List<QaDto> selectNoticeList(int begin, int end){
 //			String sql = "select * from ("
 //							+ "select rownum rn, TMP.* from ("
@@ -123,6 +122,7 @@ public class QaDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+	//조회수
 	public boolean updateReadCount(int qaNo) {
 		String sql = "update qa ser qa_read = qa_read+1"
 				+ "where qa_no = ?";
@@ -185,11 +185,12 @@ public class QaDao {
 		jdbcTemplate.update(sql, param);
 	}
 
-	public void connect(int qaNo, int attachmentNo) {
-		String sql = "insert into qa_attachment values(?, ?)";
-		Object[] param = {qaNo, attachmentNo};
-		jdbcTemplate.update(sql, param);
-	}
+	// 첨부파일
+//	public void connect(int qaNo, int attachmentNo) {
+//		String sql = "insert into qa_attachment values(?, ?)";
+//		Object[] param = {qaNo, attachmentNo};
+//		jdbcTemplate.update(sql, param);
+//	}
 	
 	
 }
