@@ -34,10 +34,16 @@ public class CartProductInfoDao {
 		}
 	};
 	
-	public List<CartProductInfoDto> cartItemInfo(int productNo, String memberId) {
-		String sql = "select * from cart_product_info "
-					+ "where product_no=? and member_id=?";
-		Object[] param = {productNo, memberId};
+//	public List<CartProductInfoDto> cartItemInfo(int productNo, String memberId) {
+//		String sql = "select * from cart_product_info "
+//					+ "where product_no=? and member_id=?";
+//		Object[] param = {productNo, memberId};
+//		return jdbcTemplate.query(sql, mapper, param);
+//	}
+	
+	public List<CartProductInfoDto> cartItemInfo(String memberId) {
+		String sql = "select * from cart_product_info where member_id=?";
+		Object[] param = {memberId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
