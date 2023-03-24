@@ -15,6 +15,8 @@ public class OrderDto {
 	private Date orderDate;
 	private String orderRequest;
 	private String memberId;
+	private int totalPrice;
 	
 //	private int order_Total_price;
+
 }
