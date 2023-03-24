@@ -13,7 +13,7 @@ import com.kh.semi.dto.MemberDto;
 
 @Repository
 public class MemberDao {
-	
+	  
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -24,7 +24,7 @@ public class MemberDao {
 					+ "member_basic_addr, member_detail_addr,"
 					+ "member_point, member_join, member_role"
 				+ ") values("
-					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, '일반회원'"
+					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, '일반회원'"  
 				+ ")";
 		Object[] param = {
 			memberDto.getMemberId(), memberDto.getMemberName(),
