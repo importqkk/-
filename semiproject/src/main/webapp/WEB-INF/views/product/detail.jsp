@@ -103,7 +103,46 @@
 
     </style>
     <script type="text/javascript">
+    	function productCountPlus(){
+    		// 현재 숫자 가져오기 
+    		var number = document.querySelector(".number");
+    		// 현재 숫자에서 1더하기
+    		number.textContent = Number(number.textContent) + 1; 
+    		
+    		// 상품 개당 가격 
+    		var productPrice = document.querySelector(".product-price");
+    		// 상품 총 가격 출력	
+    		var totalPrice = document.querySelector(".total-price");
+    		totalPrice.textContent = Number(number.textContent)*Number(productPrice.textContent);
+    		
+    	}
     	
+    	function productCountMinus(){
+    		// 현재 숫자 가져오기 
+    		var number = document.querySelector(".number");
+    		// 현재 숫자에서 1빼기
+    		if(Number(number.textContent)>1){
+    			number.textContent = Number(number.textContent) -1;	
+    		}   	
+    		
+    		// 상품 개당 가격 
+    		var productPrice = document.querySelector(".product-price");
+    		// 상품 총 가격 출력	
+    		var totalPrice = document.querySelector(".total-price");
+    		totalPrice.textContent = Number(number.textContent)*Number(productPrice.textContent);
+    	}
+    	
+//     	function productTotalPrice(){
+//     		// 상품 개수 받기 
+//     		var number = Number(document.querySelector(".nubmer"));
+//     		// 상품 개당 가격 받기 
+//     		var productPrice = Number(document.querySelector(".product-price"));
+    		
+
+    		
+    		
+//     	}
+    
     </script>
     <title>상품 상세페이지</title>
 </head>
@@ -120,17 +159,18 @@
             <!-- 상품 가격 부터 구매하기 버튼까지-->
             <div class="flex-remain"> 
                 <div class="row">
-                    <h5 class="font-grey oneLine">브랜드</h5>
-                    <h5 class="font-grey oneLine"> 자로우포뮬러스</h5>
+                    <h5 class="font-grey oneLine">${productDto.productBrand}</h5>
+                    <h5 class="font-grey oneLine">${productDto.productName}</h5>
                  
                 </div>
                 <div class="row">
-                    <h2>자로우 도필러스 이피에스 60캡슐</h2>
+                    <h2>${productDto.productName}</h2>
                 </div>
                 <div class="row">
                     <br>
-                    <h3>30,000원</h3>
-                    <br>
+                    <h3 class="oneLine product-price">${productDto.productPrice}</h3>
+                    <h3 class="oneLine">원</h3>
+                    <br><br><br>
                     <h4 class="font-boldgrey oneLine">배송비</h4>
                     &nbsp;
                     <h4 class="oneLine">3,000원</h4><br>
@@ -147,22 +187,29 @@
                     <hr>
                     <div class="flex">
                         <div class="w-70">
-                            <h5 class="font-boldgrey oneLine">자로우 도필러스 이피에스 60캡슐</h5>
+                            <h5 class="font-boldgrey oneLine">${productDto.productName}</h5>
                         </div>
                         <div class="flex-remain center">
-                            <button class="w-100 form-btn small neutral center">하하</button>
+                            <button class="w-100 form-btn small neutral center">
+								<div class="qty-stepper flex">
+									<a onclick="productCountMinus();" class="w-30 minus">-</a>
+									<a class="w-30 number">1</a>
+									<a onclick="productCountPlus();" class="w-30 plus">+</a>
+								</div>
+							</button>
                         </div>                        
                     </div>
                     <br><hr>
                 
                 </div>
                 <div class="row">
-                    <h3 class="font-purple oneLine">총 금액</h3>
-                    <h3 class="oneLine">&nbsp;30,000원</h3>
+                    <h3 class="font-purple oneLine">총 금액&nbsp;</h3>
+                    <h3 class="oneLine total-price">${productDto.productPrice}</h3>
+                    <h3 class="oneLine">원</h3>
                 </div>
                 <div class="row center ">
-                    <button class="w-49 form-btn small neutral">장바구니</button>
-                    <button class="w-49 form-btn small positive"><a href="#">구매하기</a></button>
+                    <button class="w-49 form-btn small neutral" onclick="location.href='/cart/' ">장바구니</button>
+                    <button class="w-49 form-btn small positive" onclick="location.href='/order/' ">구매하기</button>
                 </div>
                 
             </div>

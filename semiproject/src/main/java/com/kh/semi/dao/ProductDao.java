@@ -24,6 +24,7 @@ public class ProductDao {
 			ProductDto productDto = new ProductDto();
 			productDto.setProductNo(rs.getInt("product_no"));
 			productDto.setProductName(rs.getString("product_name"));
+			productDto.setProductBrand(rs.getString("product_brand"));
 			productDto.setProductPrice(rs.getInt("product_price"));
 			productDto.setProductStock(rs.getInt("product_stock"));
 			productDto.setProductContent(rs.getString("product_content"));
