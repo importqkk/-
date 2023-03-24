@@ -82,7 +82,7 @@
                         </div>
                         <div class="w-100 center">
                                 <h1 style="font-size: 50px;">
-                                    <a class="link font-purple" href="#">SEMI</a>
+                                    <a class="link font-purple" href="/">SEMI</a>
                                 </h1>
                         </div>
                     </div>

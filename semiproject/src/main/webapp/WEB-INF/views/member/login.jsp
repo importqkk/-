@@ -30,7 +30,7 @@
         <button type="submit" class="form-btn positive w-100 medium">로그인</button>
       </div>	
       <div class="row center">
-        <a href="find" class="link">아이디찾기</a>|<a href="find" class="link">비밀번호 찾기</a>|<a href="find" class="link">회원가입</a>
+        <a href="find" class="link">아이디찾기</a>|<a href="find" class="link">비밀번호 찾기</a>|<a href="join" class="link">회원가입</a>
       </div>
   
     </div>

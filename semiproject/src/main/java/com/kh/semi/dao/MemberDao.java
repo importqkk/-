@@ -24,7 +24,7 @@ public class MemberDao {
 					+ "member_basic_addr, member_detail_addr,"
 					+ "member_point, member_join, member_role"
 				+ ") values("
-					+ "?, ?, ?, ?, ?, null, ?, ?, ?, ?, sysdate, '일반회원'"
+					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, '일반회원'"
 				+ ")";
 		Object[] param = {
 			memberDto.getMemberId(), memberDto.getMemberName(),
@@ -61,6 +61,12 @@ public class MemberDao {
 	public MemberDto selectOne(String memberId) {
 		String sql = "select * from member where member_id = ?";
 		Object[] param = {memberId};
+		List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	public MemberDto selectByNickname(String memberNick) {
+		String sql = "select * from member where member_nick = ?";
+		Object[] param = {memberNick};
 		List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
 	}
