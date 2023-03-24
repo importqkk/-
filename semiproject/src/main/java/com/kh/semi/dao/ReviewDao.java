@@ -1,5 +1,6 @@
 package com.kh.semi.dao;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +30,19 @@ public class ReviewDao {
 	
 	//리뷰 등록
 	public void insert(ReviewDto reviewDto) {
-		String sql = "insert into reply( "
-				+ "review_no, review_content, reply_star, "
+		String sql = "insert into review( "
+				+ "review_no, review_content, review_star, "
 				+ "review_time, review_like, "
-				+ "order_no, member_id "
+				+ "product_no, member_id "
 				+ ") "
-				+ "values(review_seq.nextval, ?, 0, sysdate, 0, ?, ?)";
+				+ "values(review_seq.nextval, ?, ?, sysdate, 0, ?, ?)";
 		Object[] param = {
-				reviewDto.getReviewContent(), reviewDto.getProductNo(),
+				reviewDto.getReviewContent(), 
+				reviewDto.getReviewStar(),
+				reviewDto.getProductNo(),
 				reviewDto.getMemberId()
 		};
+		System.out.println(Arrays.toString(param));
 		jdbcTemplate.update(sql, param);
 	}
 	

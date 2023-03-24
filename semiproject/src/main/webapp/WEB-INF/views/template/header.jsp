@@ -95,7 +95,7 @@
                         </div>
                         <div class="w-100 center">
                                 <h1 class="c-p100 logo" style="font-size: 50px;">
-                                    <a class="link" style="color: #776BFF;" href="#">SEMI</a>
+                                    <a class="link" style="color: #776BFF;" href="/">SEMI</a>
                                 </h1>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                         <a class="link" href="#">
                             <i class="fa-solid fa-cart-shopping custom-size c-p100 pe-30 mt-25"></i>
                         </a>
-                        <a class="link" href="#">
+                        <a class="link" href="/member/login">
                             <i class="fa-solid fa-user custom-size c-p100 mt-25"></i>
                         </a>
                     </div>

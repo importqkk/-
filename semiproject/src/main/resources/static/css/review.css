@@ -1,0 +1,42 @@
+.input-file-button{
+            text-align: center;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 13px;
+            padding: 0.75em;
+            padding-left: 1.5em;
+            padding-right: 1.5em;
+            border-width: 2px;
+            border-style: solid;
+            background-color: #776BFF;
+            border-color: #776BFF;
+            color: white;
+        }
+
+        #chooseFile{
+            visibility: hidden;
+        }
+
+        .star-rating .starR{
+            text-decoration: none;
+            color: #776BFF;
+        }
+        .star-rating .starR.on{
+            color: #776BFF;
+        }
+        
+        .review-item{
+        	font-size:15px;
+        	padding:1em;
+        }
+        .review-item .memberId{
+        	font-size: 1.25em
+        }
+        .review-item .reviewContent{
+        	font-size:1em;
+        	min-height:2em;
+        }
+        .review-item .reviewTime{
+        	font-size:0.7em;
+        	color: gray;
+        }
