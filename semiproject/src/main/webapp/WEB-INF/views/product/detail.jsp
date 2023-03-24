@@ -4,18 +4,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/load.css">
-    <!-- font awsome 아이콘 -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <!-- tabler 아이콘 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
     <!-- font awesome cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-f9q3yD8+iyf0zvJolTO0+QGd/U8rFyV7vUTd/h5u5lJxRZJz8sRkpA7MUzFGAG+AsTJ16ULbL3qT/ZHxT+XQVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       
@@ -99,10 +87,12 @@
 			
 
         }
-
+		.detail-img
 
     </style>
     <script type="text/javascript">
+    
+    	//------제품 개수 설정------------------------------------
     	function productCountPlus(){
     		// 현재 숫자 가져오기 
     		var number = document.querySelector(".number");
@@ -132,16 +122,13 @@
     		totalPrice.textContent = Number(number.textContent)*Number(productPrice.textContent);
     	}
     	
-//     	function productTotalPrice(){
-//     		// 상품 개수 받기 
-//     		var number = Number(document.querySelector(".nubmer"));
-//     		// 상품 개당 가격 받기 
-//     		var productPrice = Number(document.querySelector(".product-price"));
-    		
-
+    	//---------상세 이미지 높이 조절----------
+    	
+    	function showMore(){
+    		var detailImg = document.querySelector('.detail-img');
     		
     		
-//     	}
+    	}
     
     </script>
     <title>상품 상세페이지</title>
@@ -153,7 +140,7 @@
         <div class="flex">
             <!-- 상품 이미지 -->
             <div class="w-50 center">
-                <img src="templates/image/katalk.png" class="img-size img-rad-10 img-background ">
+                <img src="/static/image/basic_img.jpg" class="img-size img-rad-10 img-background ">
             </div>
          
             <!-- 상품 가격 부터 구매하기 버튼까지-->
@@ -240,6 +227,13 @@
         <hr class="w-30">
         <hr class="w-30">
     </div>
+	<div class="container-1000">
+		<!--상세이미지 -->
+		<div class="row center">
+			<img width="1000" class="detail-img" src="/static/image/detail_img.jpg">
+		</div>
+	</div>
+	
 
     <div class="container-1000">
         <div class="row center">
@@ -247,7 +241,6 @@
         </div>
     </div>
 
-    <!-- 상세정보  -->
 
 
 
@@ -256,12 +249,10 @@
         <div class="flex"> 
             <div class="flex-content w-33 center">
                 <h3>제품상세정보</h3>
-                
             </div>
             <div class="flex-content w-33 center">
                 <h3 class="oneLine">후기</h3>
                 <h3 class="oneLine font-grey">(150)</h3>
-               
             </div>
             <div class="flex-content w-33 center">
                 <h3>상품구매안내</h3>
