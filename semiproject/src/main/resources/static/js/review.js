@@ -3,6 +3,7 @@ $(function(){
             $('.star-rating .starR').click(function(){
                 $(this).parent().children('.starR').removeClass('on').removeClass('fa-solid')        
                 $(this).addClass('fa-solid').addClass('on').prevAll('.starR').addClass('on').addClass('fa-solid');
+                $(this).attr('value');
         });
     });
 $(function(){
@@ -33,11 +34,11 @@ $(function(){
 	
 	$(".review-insert-btn").click(function(){
 		var content = $("[name=reviewContent]").val();
-		var rating = $("[name=reviewStar]").val();
-//		var rating = $(this).attr('value');
+		var rating = $(".starR").attr("value");
+//		var rating = $("[name=reviewStar]").val();
 //		console.log(content);
 //		console.log(productNo);
-//		console.log(rating);
+		console.log(rating);
 		
 		if(content.trim().length == 0) return;
 		
@@ -47,7 +48,7 @@ $(function(){
 			data:{
 				productNo: productNo,
 				reviewContent: content,
-				reviewStar: rating
+				reviewStar: value
 			},
 			success:function(response){
 				loadList();
