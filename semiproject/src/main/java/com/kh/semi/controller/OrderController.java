@@ -25,7 +25,7 @@ public class OrderController {
 	//주문생성 페이지
 	@GetMapping("/buy")
 	public String buy() {
-		return "/WEB-INF/views/order/buy.jsp";
+		return "/WEB-INF/views/order/buy.jsp"; 
 	}
 	
 	@PostMapping("/buy")

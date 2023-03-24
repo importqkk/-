@@ -11,7 +11,7 @@ public class OrderDto {
 	private String orderReceivePhone;
 	private String orderPost;
 	private String orderBasicAddr;
-	private String orderDetailAddr;
+	private String orderDetailAddr; 
 	private Date orderDate;
 	private String orderRequest;
 	private String memberId;

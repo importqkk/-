@@ -123,7 +123,7 @@
                         <div>
                             <label>배송비 : <span class="right">3000원</span></label>
                         </div>
-                        <div>
+                        <div> 
                             <label>적립금 : <span class="right">1000원</span></label>
     
                         </div>
