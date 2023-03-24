@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.semi.dao.CartDao;
 import com.kh.semi.dao.CartProductInfoDao;
@@ -24,20 +25,13 @@ public class CartController {
 	@Autowired
 	private CartProductInfoDao cartProductInfoDao;
 	
-	// 장바구니 페이지(list)
-	@GetMapping
-	public String cart(@ModelAttribute CartDto cartDto, 
-			Model model, HttpSession session) {
-		String memberId = (String)session.getAttribute("memberId");
-		List<CartDto> itemList = cartDao.cartList(memberId);
-		List<CartProductInfoDto> itemInfo = cartProductInfoDao.cartItemInfo(cartDto.getProductNo(), memberId);
-		model.addAttribute("itemList", itemList);
-		model.addAttribute("itemInfo", itemInfo);
-		return "/WEB-INF/views/cart/cartMain.jsp";
-	}
-	
+	/*
+		완료
+	*/
+	// 장바구니에 상품 담기
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute CartDto cartDto,
+	public String insert(@ModelAttribute CartDto cartDto, 
+			CartProductInfoDto cartProductInfoDto,
 			HttpSession session, RedirectAttributes attr) {
 		// 아이디 셋팅
 		String memberId = (String)session.getAttribute("memberId");
@@ -55,9 +49,43 @@ public class CartController {
 		else {
 			attr.addAttribute("mode", "error");
 		}
-		return "redirect:#";
+		return "redirect:main";
 	}
 	
+	// 장바구니에서 상품 삭제
+	@GetMapping("/delete")
+	public String delete(HttpSession session, @RequestParam int productNo,
+			@ModelAttribute CartDto cartDto) {
+		String memberId = (String)session.getAttribute("memberId");
+		cartDto.setMemberId(memberId);
+		cartDto.setProductNo(productNo);
+		cartDao.cartDeleteItem(cartDto);
+		return "redirect:main";
+	}
+	
+	
+	/*
+		진행중
+	*/
+	// 장바구니 페이지(list)
+	@GetMapping("/main")
+	public String cart(@ModelAttribute CartProductInfoDto cartProductInfoDto, 
+			@ModelAttribute CartDto cartDto,
+			Model model, HttpSession session) {
+		String memberId = (String)session.getAttribute("memberId");
+		cartDto.setMemberId(memberId);
+		cartProductInfoDto.setMemberId(memberId);
+		List<CartDto> itemList = cartDao.cartList(cartDto.getMemberId());
+		List<CartProductInfoDto> itemInfo = cartProductInfoDao.cartItemInfo(memberId);
+		model.addAttribute("itemList", itemList);
+		model.addAttribute("itemInfo", itemInfo);
+		return "/WEB-INF/views/cart/cartMain.jsp";
+	}
+	
+	
+	/*
+		진행해야함
+	*/
 	// 장바구니 상품 수량 변경
 	@PostMapping("/update")
 	public String update(@ModelAttribute CartDto cartDto, 
@@ -77,16 +105,6 @@ public class CartController {
 		else {
 			attr.addAttribute("mode", "error");
 		}
-		return "redirect:cart";
-	}
-	
-	// 장바구니에서 상품 삭제
-	@PostMapping("/delete")
-	public String delete(@ModelAttribute CartDto cartDto, 
-			HttpSession session) {
-		String memberId = (String)session.getAttribute("memberId");
-		cartDto.setMemberId(memberId);
-		cartDao.cartDeleteItem(cartDto);
 		return "redirect:cart";
 	}
 	
