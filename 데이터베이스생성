@@ -138,7 +138,6 @@ CREATE TABLE  Product  (
 
 
 
-
 --리뷰
 CREATE TABLE  Review  (
 	 review_no 	number	PRIMARY KEY	 ,
