@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.semi.dao.OrderDao;
+import com.kh.semi.dao.OrderProductDao;
 import com.kh.semi.dto.OrderDto;
+import com.kh.semi.dto.OrderProductDto;
 
 @Controller
 @RequestMapping("/order")
@@ -20,7 +22,9 @@ public class OrderController {
 //	private memberDao memberdao;
 	
 	@Autowired
-	private OrderDao orderdao;
+	private OrderDao orderDao;
+	@Autowired
+	private OrderProductDao orderProductDao;
 	
 	//주문생성 페이지
 	@GetMapping("/buy")
@@ -29,8 +33,9 @@ public class OrderController {
 	}
 	
 	@PostMapping("/buy")
-	public String buy(@ModelAttribute OrderDto orderDto){
-		orderdao.insertOrder(orderDto);
+	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto orderProductDto){
+		orderDao.insertOrder(orderDto);
+		orderProductDao.OrderProductInsert(orderProductDto);
 		return "redirect:buyFinish";
 		
 	}

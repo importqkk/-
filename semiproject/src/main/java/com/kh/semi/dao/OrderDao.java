@@ -8,13 +8,14 @@ import org.springframework.stereotype.Repository;
 import com.kh.semi.dto.OrderDto;
 
 
+
 @Repository
 public class OrderDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	
-	//주문등록 
+	//주문생성
 	public void insertOrder(OrderDto orderDto) {
 		String sql="insert into Order_(ORDER_NO,ORDER_RECEIVER,ORDER_POST,ORDER_BASIC_ADDR,ORDER_DETAIL_ADDR,ORDER_RECEIVER_PHONE,ORDER_DATE,ORDER_REQUEST,MEMBER_ID)"
 				+ "values('order_seq.nextval()',?,?,?,?,?,sysdate,?,?)";
@@ -23,13 +24,6 @@ public class OrderDao {
 				orderDto.getOrderDetailAddr(),orderDto.getOrderReceivePhone(),orderDto.getOrderDate(),orderDto.getOrderRequest(),orderDto.getMemberId()
 		};
 		
-		jdbcTemplate.update(sql,param);
-	}
-	
-	public void insertOrderProduct() { 
-		String sql="insert into order_product (PRODUCT_COUNT, PRODUCT_PRICE, PRODUCT_NO,ORDER_NO)"
-				+"values(?,?,?,?)";
-		Object[] param= {};
 		jdbcTemplate.update(sql,param);
 	}
 	
@@ -48,9 +42,7 @@ public class OrderDao {
 		return dto;
 	};
 	
-//	public memberDto memberAddr() {
-//		
-//	}
+
 	
 }
 		
