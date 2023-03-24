@@ -18,12 +18,12 @@ public class ProductController {
 	private ProductDao productDao;
 	
 
-	@GetMapping("/list")
+	@GetMapping("/detail")
 	public String list(@RequestParam int productNo,
 						Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);
 		model.addAttribute("productDto",productDto); 
 		
-		return "/WEB-INF/views/product/list.jsp";
+		return "/WEB-INF/views/product/detail.jsp";
 	}
 }

@@ -57,4 +57,11 @@ public class ImgDao {
 		List<ImgDto> list = jdbcTemplate.query(sql, mapper,param);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	public List<ImgDto> selectList(){
+		String sql = "select * from img";
+		List<ImgDto> list = jdbcTemplate.query(sql, mapper);
+		return list;
+	}
+	
 }
