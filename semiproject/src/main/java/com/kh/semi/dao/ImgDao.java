@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.kh.semi.dto.ImageDto;
 import com.kh.semi.dto.ImgDto;
 @Repository
 public class ImgDao {
