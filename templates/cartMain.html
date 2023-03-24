@@ -27,6 +27,21 @@
         .check-btn, .fa-xmark {
             cursor: pointer;
         }
+        .number {
+            border: none;
+            text-align: center;
+            outline: none;
+        }
+        .qty-selector {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            text-align: center;
+            border: 2px solid #776bff;
+            border-radius: 100px;
+            outline: none;
+            appearance: none;
+            background:url('./image/down-arrow.png') no-repeat 88% 55%/11px auto;
+        }
     </style>
     <script type="text/javascript">
         $(function() {
@@ -46,6 +61,16 @@
             $(".selected-btn").click(function() {
                 var checkItem = $(".check-item:checked").length;
                 if(checkItem < 1) alert("구매하실 상품을 한 개 이상 선택해주세요.");
+            })
+
+            // qty-stepper
+            $(".plus").click(function() {
+                var number = $(this).prev(".number").val();
+
+            })
+            $(".minus").click(function() {
+                var number = $(this).prev(".number").val();
+                number.text(number - 1);
             })
         });
     </script>
@@ -86,7 +111,7 @@
                 <div>
                     <div class="flex qty-stepper-small center">
                         <span class="minus disabled">-</span>
-                        <span class="number">1</span>
+                        <input type="text" readonly class="number" value="1">
                         <span class="plus">+</span>
                     </div>
                 </div>
@@ -111,11 +136,23 @@
                     <h4><span>30,000</span>원</h4>
                 </div>
                 <div>
-                    <div class="flex qty-stepper-small center">
+                    <select class="w-10 qty-selector">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                    <!-- <div class="flex qty-stepper-small center">
                         <span class="minus disabled">-</span>
                         <span class="number">1</span>
                         <span class="plus">+</span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="flex row" style="align-self: baseline;">
