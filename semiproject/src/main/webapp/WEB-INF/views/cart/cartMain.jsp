@@ -17,6 +17,16 @@
     .check-btn, .fa-xmark {
         cursor: pointer;
     }
+    .qty-selector {
+	    padding-top: 5px;
+	    padding-bottom: 5px;
+	    text-align: center;
+	    border: 2px solid #776bff;
+	    border-radius: 100px;
+	    outline: none;
+	    appearance: none;
+	    background:url('/static/image/down-arrow.png') no-repeat 88% 55%/11px auto;
+	}
 </style>
 <script type="text/javascript">
     $(function() {
@@ -38,6 +48,7 @@
             if(checkItem < 1) alert("구매하실 상품을 한 개 이상 선택해주세요.");
         })
     });
+    
 </script>
 
     <div class="container-1000 mt-40">
@@ -67,7 +78,7 @@
 	            </div>
 	            <div class="w-100">
 	                <div class="row-medium flex">
-	                    <h4 class="me-5 c-b80">${cartProductInfoDto.productBrand}</h4>
+	                    <h4 class="me-5 c-b80">[${cartProductInfoDto.productBrand}]</h4>
 	                    <span class="c-b80">${cartProductInfoDto.productName}</span>
 	                </div>
 	                <div class="row">
@@ -76,16 +87,27 @@
 							원
 	                    </h4>
 	                </div>
+	                <!------------ 수량조절 ------------>
 	                <div>
-	                    <div class="flex qty-stepper-small center">
-	                        <span class="minus disabled">-</span>
-	                        <span class="number">1</span>
-	                        <span class="plus">+</span>
-	                    </div>
+	                    <select class="w-10 qty-selector">
+	                        <option>1</option>
+	                        <option>2</option>
+	                        <option>3</option>
+	                        <option>4</option>
+	                        <option>5</option>
+	                        <option>6</option>
+	                        <option>7</option>
+	                        <option>8</option>
+	                        <option>9</option>
+	                        <option>10</option>
+	                    </select>
 	                </div>
 	            </div>
+	            <!------------ 상품 삭제할 x 아이콘 ------------>
 	            <div class="flex row" style="align-self: baseline;">
-	                <i class="fa-solid fa-xmark font-h2 delete-btn"></i>
+	            	<a href="delete?memberId=${cartProductInfoDto.memberId}&productNo=${cartProductInfoDto.productNo}" class="link">
+	                	<i class="fa-solid fa-xmark font-h2 delete-btn"></i>
+	                </a>
 	            </div>
 	        </div>
 	    </c:forEach>
