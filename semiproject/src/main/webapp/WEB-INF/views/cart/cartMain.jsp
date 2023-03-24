@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 		
@@ -42,7 +44,7 @@
 
         <div class="row-large flex">
             <h1 class="me-15">장바구니</h1>
-            <h1 class="c-p100">3</h1>
+            <h1 class="c-p100">3</h1>	<!-- 바꿔야함 -->
         </div>
 
         <div class="row-medium">
@@ -54,38 +56,46 @@
             </div>
         </div>
 
-        <div class="row-large flex cart-item">
-            <div class="flex me-15">
-                <input type="checkbox" class="check-item">
-            </div>
-            <div class="flex me-15">
-                <img class="product-img" src="/static/image/productDummy.png" width="130" height="130">
-            </div>
-            <div class="w-100">
-                <div class="row-medium flex">
-                    <h4 class="me-5 c-b80">[자로우포뮬러스]</h4>
-                    <span class="c-b80">자로우 도필러스 이피에스 60캡슐</span>
-                </div>
-                <div class="row">
-                    <h4><span>30,000</span>원</h4>
-                </div>
-                <div>
-                    <div class="flex qty-stepper-small center">
-                        <span class="minus disabled">-</span>
-                        <span class="number">1</span>
-                        <span class="plus">+</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex row" style="align-self: baseline;">
-                <i class="fa-solid fa-xmark font-h2 delete-btn"></i>
-            </div>
-        </div>
+<!-- ------------------------------------ 반복문 돌릴 부분 ------------------------------------ -->
+        <c:forEach var="cartProductInfoDto" items="${itemInfo}">
+	        <div class="row-large flex cart-item">
+	            <div class="flex me-15">
+	                <input type="checkbox" class="check-item">
+	            </div>
+	            <div class="flex me-15">
+	                <img class="product-img" src="/static/image/productDummy.png" width="130" height="130">	<!-- 바꿔야함 -->
+	            </div>
+	            <div class="w-100">
+	                <div class="row-medium flex">
+	                    <h4 class="me-5 c-b80">${cartProductInfoDto.productBrand}</h4>
+	                    <span class="c-b80">${cartProductInfoDto.productName}</span>
+	                </div>
+	                <div class="row">
+	                    <h4>
+	                    	<fmt:formatNumber value="${cartProductInfoDto.productPrice}" pattern="#,##0"></fmt:formatNumber>
+							원
+	                    </h4>
+	                </div>
+	                <div>
+	                    <div class="flex qty-stepper-small center">
+	                        <span class="minus disabled">-</span>
+	                        <span class="number">1</span>
+	                        <span class="plus">+</span>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="flex row" style="align-self: baseline;">
+	                <i class="fa-solid fa-xmark font-h2 delete-btn"></i>
+	            </div>
+	        </div>
+	    </c:forEach>
+<!-- ------------------------------------ 반복문 돌릴 부분 ------------------------------------ -->
 
         <div class="row-large">
-            <a class="form-btn medium neutral w-100" href="메인으로가는링크">더 쇼핑하기</a>
+            <a class="form-btn medium neutral w-100" href="/">더 쇼핑하기</a>
         </div>
 
+<!-- ----------------------------------------- 계산 ---------------------------------------- -->
         <div class="row-large">
             <table class="table table-cart">
                 <tbody class="center">
@@ -97,15 +107,16 @@
                         <th class="w-35">예상 결제 금액</th>
                     </tr>
                     <tr>
-                        <td><h2 class="product-price">60,000</h2></td>
+                        <td><h2 class="product-price">60,000</h2></td><!-- 바꿔야함 -->
                         <td><h2 class="plus c-b80">+</h2></td>
-                        <td><h2 class="delevery-prive">3,000</h2></td>
+                        <td><h2 class="delevery-prive">3,000</h2></td><!-- 바꿔야함 -->
                         <td><h2 class="equal c-b80">=</h2></td>
-                        <td><h2 class="total-price">63,000</h2></td>
+                        <td><h2 class="total-price">63,000</h2></td><!-- 바꿔야함 -->
                     </tr>
                 </tbody>
             </table>
         </div>
+<!-- ----------------------------------------- 계산 ---------------------------------------- -->
 
         <div class="row">
             <div class="row">
