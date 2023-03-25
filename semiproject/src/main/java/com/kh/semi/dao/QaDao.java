@@ -99,7 +99,8 @@ public class QaDao {
 			qaDto.getQaNo(), qaDto.getMemberId(),
 			qaDto.getQaTitle(), qaDto.getQaContent(),
 			qaDto.getQaHead(), qaDto.getQaGroup(),
-			qaDto.getQaParent(), qaDto.getQaDepth()
+			qaDto.getQaParent(), qaDto.getQaDepth(),
+			qaDto.getProductNo(), qaDto.getQaRead()
 		};
 		jdbcTemplate.update(sql, param);
 	}
@@ -185,12 +186,12 @@ public class QaDao {
 		jdbcTemplate.update(sql, param);
 	}
 
-	// 첨부파일
-//	public void connect(int qaNo, int attachmentNo) {
-//		String sql = "insert into qa_attachment values(?, ?)";
-//		Object[] param = {qaNo, attachmentNo};
-//		jdbcTemplate.update(sql, param);
-//	}
+	 //첨부파일
+	public void connect(int qaNo, int attachmentNo) {
+		String sql = "insert into qa_attachment values(?, ?)";
+		Object[] param = {qaNo, attachmentNo};
+		jdbcTemplate.update(sql, param);
+	}
 	
 	
 }
