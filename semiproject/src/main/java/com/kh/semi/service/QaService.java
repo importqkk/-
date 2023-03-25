@@ -31,10 +31,12 @@ public class QaService {
 		//게시글 등록
 		qaDao.insert(qaDto);
 		
-//		//첨부파일번호 글번호 연결
-//		for(int no : attachmentNo) {
-//			qaDao.connect(qaNo, no);
-//		}
+		//첨부파일번호 글번호 연결
+		if(attachmentNo != null) {
+			for(int no : attachmentNo) {
+				qaDao.connect(qaNo, no);
+			}
+		}
 		return qaNo;
 	}
 }
