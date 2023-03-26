@@ -115,7 +115,7 @@
                         <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
                     </div> -->
                     <div class="right w-15">
-                        <a class="link" href="#">
+                        <a class="link" href="/cart/main">
                             <i class="fa-solid fa-cart-shopping c-p100 pe-30"></i>
                         </a>
                         <a class="link" href="#">
