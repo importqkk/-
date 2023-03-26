@@ -47,6 +47,16 @@
             var checkItem = $(".check-item:checked").length;
             if(checkItem < 1) alert("구매하실 상품을 한 개 이상 선택해주세요.");
         })
+        $(".qty-selector").on("input", function() {
+        	var quentity = $(this).val();
+        	if(quentity > 10) {
+        		alert ("최소 1개, 최대 10개까지 구매할 수 있습니다.");
+        		$(".all-btn, .selected-btn").click(function() {
+        			alert ("상품을 1개 이상, 10개 이하로 담아주세요.");
+        			return false;
+        		});
+        	}
+        })
     });
     
 </script>
@@ -67,7 +77,7 @@
             </div>
         </div>
 
-<!-- ------------------------------------ 반복문 돌릴 부분 ------------------------------------ -->
+<!-- ------------------------------------ 반복문 돌릴 부분 start ------------------------------------ -->
         <c:forEach var="cartProductInfoDto" items="${itemInfo}">
 	        <div class="row-large flex cart-item">
 	            <div class="flex me-15">
@@ -111,7 +121,7 @@
 	            </div>
 	        </div>
 	    </c:forEach>
-<!-- ------------------------------------ 반복문 돌릴 부분 ------------------------------------ -->
+<!-- ------------------------------------ 반복문 돌릴 부분 end ------------------------------------ -->
 
         <div class="row-large">
             <a class="form-btn medium neutral w-100" href="/">더 쇼핑하기</a>
@@ -131,7 +141,7 @@
                     <tr>
                         <td><h2 class="product-price">60,000</h2></td><!-- 바꿔야함 -->
                         <td><h2 class="plus c-b80">+</h2></td>
-                        <td><h2 class="delevery-prive">3,000</h2></td><!-- 바꿔야함 -->
+                        <td><h2 class="delevery-price">3,000</h2></td><!-- 바꿔야함 -->
                         <td><h2 class="equal c-b80">=</h2></td>
                         <td><h2 class="total-price">63,000</h2></td><!-- 바꿔야함 -->
                     </tr>
