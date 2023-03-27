@@ -46,11 +46,36 @@ public class ReviewDao {
 		jdbcTemplate.update(sql, param);
 	}
 	
+	//리뷰 목록
 	public List<ReviewDto> selectList(int productNo){
 		String sql = "select * from review where product_no = ? "
-				+ "order by review_no asc";
+				+ "order by review_no desc";
 		Object[] param = {productNo};
 		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	//리뷰 수정
+	public void update(ReviewDto reviewDto) {
+		String sql = "update review set review_content = ?, review_star = ? where review_no = ?";
+		Object[] param = {
+				reviewDto.getReviewContent(), reviewDto.getReviewStar(),
+				reviewDto.getReviewNo()
+		};
+		jdbcTemplate.update(sql, param);
+	}
+	
+	//리뷰 삭제
+	public void delete(int reviewNo) {
+		String sql = "delete review where review_no = ?";
+		Object[] param = {reviewNo};
+		jdbcTemplate.update(sql, param);
+	}
+	
+	public ReviewDto selectOne(int reviewNo) {
+		String sql = "select * from review where review_no = ?";
+		Object[] param = {reviewNo};
+		List<ReviewDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
 	}
 
 }

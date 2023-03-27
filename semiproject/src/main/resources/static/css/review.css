@@ -17,11 +17,19 @@
             visibility: hidden;
         }
 
-        .star-rating .starR{
+        .reviewStar .starR{
             text-decoration: none;
             color: #776BFF;
         }
-        .star-rating .starR.on{
+        .reviewStar .starR.on{
+            color: #776BFF;
+        }
+        
+        .review-star .starR{
+            text-decoration: none;
+            color: #776BFF;
+        }
+        .review-star .starR.on{
             color: #776BFF;
         }
         

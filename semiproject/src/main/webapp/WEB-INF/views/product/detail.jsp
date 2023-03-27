@@ -1,11 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="/static/css/review.css">
 <script>
-	var memberId = "${sessionScope.memberId}"
+	var memberId = "${sessionScope.memberId}";
+	var reviewNo = "${reviewLikeDto.reviewNo}";
 </script>
 <script src="/static/js/review.js"></script>
+<script src="/static/js/review-like.js"></script>
 <script type="text/template" id="review-template">
 	<div class="review-item">
 		<div class="memberId"></div>
@@ -15,40 +18,70 @@
 		<div class="reviewLike"></div>
 	</div>
 </script>
+
+<script type="text/template" id="review-edit-template">
+	<div class="edit-panel">
+		<div class="reviewStar"></div>
+
+		<div class="row review-edit-content">
+            <textarea name="reviewContent" class="form-input w-100 semi-round" style="min-height:100px"></textarea>
+        </div>
+
+		<div class="flex w-100 btn-panel">
+			<div class="w-50">
+                <label class="input-file-button" for="chooseFile">
+                    ÏÇ¨ÏßÑÎì±Î°ù
+                </label>
+                <input type="file" id="chooseFile" name="attach" class="form-input w-10">
+        	</div>
+			<div class="flex w-50 right">
+                <button type="button" class="form-btn small neutral review-cancel-btn me-10">Ï∑®ÏÜå</button>
+                <button type="button" class="form-btn small positive review-edit-btn">ÏàòÏ†ï</button>
+            	</div> 
+		</div>
+	</div>
+</script>
     <div class="container-1000">
     	<div class="row">
     	</div>
-<!--         <div class="star-rating"> -->
-<!--             <i class="fa-regular fa-star starR" value="1"></i> -->
-<!--             <i class="fa-regular fa-star starR" value="2"></i> -->
-<!--             <i class="fa-regular fa-star starR" value="3"></i> -->
-<!--             <i class="fa-regular fa-star starR" value="4"></i> -->
-<!--             <i class="fa-regular fa-star starR" value="5"></i> -->
-<!--         </div> -->
-
-        <div class="view-panel center">
-            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">∏Æ∫‰ ¿€º∫«œ±‚</button>
-        </div>
-       
-        <div class="row review-content">
-            <textarea name="reviewContent" class="form-input w-100 semi-round" style="min-height:100px"></textarea>
-            <textarea name="reviewStar"></textarea>
-        </div>
-        <div class="flex w-100 btn-panel">
-            <div class="w-50">
-                <label class="input-file-button" for="chooseFile">
-                    ªÁ¡¯µÓ∑œ
-                </label>
-                <input type="file" id="chooseFile" name="attach" class="form-input w-10">
-            </div>
-            <div class="flex w-50 right">
-                <button type="button" class="form-btn small neutral cancel-btn me-10">√Îº“</button>
-                <button type="button" class="form-btn small positive review-insert-btn">µÓ∑œ</button>
-            </div> 
-        </div>
-        <hr>
+		
+		<!-- Î¶¨Î∑∞ Îì±Î°ùÏ∞Ω -->
+		<div class="review-write">
+			<!-- Î¶¨Î∑∞ Î≥ÑÏ†ê -->
+	        <div class="review-star">
+	            <i class="fa-regular fa-star starR" value="1"></i>
+	            <i class="fa-regular fa-star starR" value="2"></i>
+	            <i class="fa-regular fa-star starR" value="3"></i>
+	            <i class="fa-regular fa-star starR" value="4"></i>
+	            <i class="fa-regular fa-star starR" value="5"></i>
+	        </div>
+	        
+	        <!-- Î¶¨Î∑∞ Îì±Î°ùÌïòÍ∏∞ Î≤ÑÌäº -->
+	        <div class="view-panel center">
+	            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">Î¶¨Î∑∞ ÏûëÏÑ±ÌïòÍ∏∞</button>
+	        </div>
+	       
+	       <!-- Î¶¨Î∑∞ ÏûëÏÑ±Ï∞Ω -->
+	        <div class="row review-content">
+	            <textarea name="reviewContent" class="form-input w-100 semi-round" style="min-height:100px"></textarea>
+	        </div>
+	        <div class="flex w-100 btn-panel">
+	            <div class="w-50">
+	                <label class="input-file-button" for="chooseFile">
+	                    ÏÇ¨ÏßÑÎì±Î°ù
+	                </label>
+	                <input type="file" id="chooseFile" name="attach" class="form-input w-10">
+	            </div>
+	            <div class="flex w-50 right">
+	                <button type="button" class="form-btn small neutral cancel-btn me-10">Ï∑®ÏÜå</button>
+	                <button type="button" class="form-btn small positive review-insert-btn">Îì±Î°ù</button>
+	            </div> 
+	        </div>
+		</div>
+        
+        
         <div class="row review-list">
-        	∏Æ∫‰ ∏Ò∑œ ¿ßƒ°
+        	Î¶¨Î∑∞ Î™©Î°ù ÏúÑÏπò
         </div>
     </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
