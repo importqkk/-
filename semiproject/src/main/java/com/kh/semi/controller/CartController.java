@@ -77,8 +77,10 @@ public class CartController {
 		cartProductInfoDto.setMemberId(memberId);
 		List<CartDto> itemList = cartDao.cartList(cartDto.getMemberId());
 		List<CartProductInfoDto> itemInfo = cartProductInfoDao.cartItemInfo(memberId);
+		int cartCnt = cartDao.cartCnt(memberId);
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("itemInfo", itemInfo);
+		model.addAttribute("cartCnt", cartCnt);
 		return "/WEB-INF/views/cart/cartMain.jsp";
 	}
 	
