@@ -1,4 +1,4 @@
-package com.kh.semi.dto;
+	package com.kh.semi.dto;
 
 import java.sql.Date;
 
@@ -17,7 +17,10 @@ public class MemberDto {
 	private String memberDetailAddr;
 	private int memberPoint;
 	private Date memberJoin;
-	private String memberRole;	
+	private String memberRole;
+	private int agreeTos;	
+	private int agreePrivacy;	
+	private int agreePromotion;	
 	
 	
 }

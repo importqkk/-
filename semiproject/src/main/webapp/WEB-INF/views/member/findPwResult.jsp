@@ -3,16 +3,18 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+ <style>
+   .container-500 {
+     margin-top: 100px;
+   }
+ </style>
 <div class="container-500">
 	<div class="row center">
-		<h2>SEMI</h2>
+<h2>임시비밀번호가 고객님의 이메일로 발송되었습니다.</h2>
+<h2>로그인 후 원하는 비밀번호로 변경해주시기 바랍니다. </h2>
 	</div>
-	<div class="row center">
-<h3>회원가입이 완료되었습니다!</h3>
-<h4>나의 체질에 맞는 영양제를 찾으러 가볼까요?</h4>
-	</div>
-	<div class="row center">
-		<a href="login" class="form-btn neutral">로그인 하러 하기</a>
+<div class="row center">
+<h2><a href="login">로그인 하러가기</a></h2>
 	</div>
 </div>
 

@@ -1,6 +1,7 @@
 $(function(){
 	var valid = {
 		memberIdValid:false,			//아이디	(형식+중복)
+		memberNameValid:false,	//이름(형식)
 		memberNickValid:false,		//닉네임(형식+중복)
 		memberPwValid:false,		//비밀번호(형식)
 		memberPwReValid:false,		//비밀번호 확인(일치)
@@ -8,6 +9,7 @@ $(function(){
 		memberAddressValid:true,	//주소(애매한 입력)
 		isAllValid:function(){
 			return this.memberIdValid
+						&& this.memberNameValid
 						&& this.memberNickValid
 						&& this.memberPwValid
 						&& this.memberPwReValid
@@ -51,6 +53,15 @@ $(function(){
 			$(this).removeClass("valid invalid invalid2")
 						.addClass("invalid");
 		}
+	});
+		//이름 검사
+	$("[name=memberName]").blur(function(){
+		var regex = /^[가-힣]{2,7}$/;
+		var isValid = regex.test($(this).val());
+		
+		valid.memberPhoneValid = isValid;
+		$(this).removeClass("valid invalid")
+					.addClass(isValid ? "valid" : "invalid");
 	});
 	
 	//비밀번호 검사
@@ -152,12 +163,12 @@ $(function(){
 
 	});
 	
-	//폼 검사
-	$(".join-form").submit(function(e){
-		console.table(valid);
-
-		return valid.isAllValid();
-	});
+//	//폼 검사
+//	$(".join-form").submit(function(e){
+//		console.table(valid);
+//
+//		return valid.isAllValid();
+//	});
 });
 
 

@@ -17,16 +17,23 @@
             <label>아이디</label>
             <input type="text" name="memberId" placeholder="영문 소문자, 숫자 8~16자"
                 class="form-input w-100 medium light" >
-         <div class="valid-message">사용 가능한 아이디입니다</div>
+        <div class="valid-message">사용 가능한 아이디입니다</div>
 		<div class="invalid-message">아이디는 영문소문자로 시작하며 숫자를 포함한 8~16자로 작성하세요</div>
 		<div class="invalid-message2">이미 사용중인 아이디입니다</div>
+        </div>
+         <div class="row">
+        	<label>이름</label>
+        	<input type="text" name="memberName" placeholder="성, 이름 포함 한글 2글자 이상 7글자 이하"
+            	class="form-input w-100 medium light" >
+        <div class="valid-message">사용 가능한 이름입니다</div>
+		<div class="invalid-message">이름은 성, 이름 포함 한글 2~7자로 작성하세요</div>
         </div>
         <div class="row">
           <label>닉네임</label>
           <input type="text" name="memberNick" placeholder="한글, 숫자 2~10자"
               class="form-input w-100 medium light" >
-         <div class="valid-message">사용 가능한 닉네임입니다</div>
-		<div class="invalid-message">닉네임은 한글 또는 숫자 2~10글자로 작성하세요</div>
+        <div class="valid-message">사용 가능한 닉네임입니다</div>
+		<div class="invalid-message">닉네임은 한글 또는 숫자 2~10자로 작성하세요</div>
 		<div class="invalid-message2">이미 사용중인 닉네임입니다</div> 
       </div>
         <div class="row">
@@ -43,6 +50,7 @@
 		<div class="valid-message">비밀번호가 일치합니다</div>
 		<div class="invalid-message">비밀번호가 일치하지 않습니다</div>
 		<div class="invalid-message2">비밀번호를 먼저 작성하세요</div>
+		</div>
               <div class="row">
                 <label>이메일</label>
                 <input type="email" name="memberEmail" class="form-input w-100 medium light">
