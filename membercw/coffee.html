@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입(2)</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    
+    <script type="text/javascript">
+        //독립형 자바스크립트 템플릿
+        window.addEventListener("load", function(){
+            //[1] 아이디 입력창에 입력을 마치면 형식 검사 후 메세지 출력
+            //[2] 비밀번호 입력창에 입력을 마치면 형식 검사 후 메세지 출력
+            //[3] 비밀번호 확인창에 입력을 마치면 비밀번호 일치 검사 후 메세지 출력
+
+
+            //[1], [2]
+            var regexInputList = document.querySelectorAll(".form-regex");
+            for(var i=0; i < regexInputList.length; i++) {
+                regexInputList[i].addEventListener("blur", function(){
+                    //regexInputList[i] 사용하지 말 것
+                    //this == 입력이 발생한 입력창
+                    var input = this.value;//입력값
+
+                    //태그에 있는 정규표현식 문자열을 정규표현식으로 생성
+                    var regex = new RegExp(this.dataset.regex);
+                    
+                    var isValid = regex.test(input);
+
+                    this.classList.remove("valid", "invalid");
+                    this.classList.add(isValid ? "valid" : "invalid");
+                });
+            }
+
+            //[3]
+            document.querySelector("#passwordRe")
+                    .addEventListener("blur", function(){
+                //this == 비밀번호 확인창
+                var memberPw = document.querySelector("[name=memberPw]").value;
+                var memberPwRe = this.value;
+
+                this.classList.remove("valid", "invalid", "invalid2");
+                if(memberPw.length == 0) {
+                    this.classList.add("invalid2");
+                }
+                else if(memberPw == memberPwRe) {
+                    this.classList.add("valid");
+                }
+                else {
+                    this.classList.add("invalid");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <form autocomplete="off">
+    <div class="container-500">
+      <h2>SEMI</h2>
+
+      <h3>회원가입이 완료되었습니다!</h3>
+      
+      <h4>나의 체질에 맞는 영양제를 찾으러 가볼까요?</h4>
+      
+      <button class="form-btn positive w-100 medium"><a href="login">로그인 하러 가기</a></button>
+    </form>
+</body>
+</html>
