@@ -36,7 +36,7 @@
 </c:if>
 
 <div class="container-1000">
-    <div class="row center">
+    <div class="row left">
         <h1>Q&A 게시판</h1>
     </div>
     

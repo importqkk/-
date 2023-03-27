@@ -7,7 +7,7 @@
 
 <div class="container-1000">
 
-<div class="row">
+<div class="row left">
 <c:choose>
 	<c:when test="${boardParent==null }">
 		<h1>문의 남기기</h1>
@@ -48,7 +48,8 @@
 	<div class="row right">
             <input type="checkbox">
             <span class="c-p100 font-h3">비밀글</span>
-	<button type="submit" class="form-btn positive medium ms-30 me-20 font-h3">등록</button>
+	<button type="submit" class="form-btn positive medium ms-20 me-20 font-h3">등록</button>
+	<a href="/qa/list"class="form-btn nuetral medium font-h3">취소</a>
 	</div>
 </form>
 </div>
