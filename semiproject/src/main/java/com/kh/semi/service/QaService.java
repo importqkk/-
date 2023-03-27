@@ -15,7 +15,7 @@ public class QaService {
 	private QaDao qaDao;
 	
 	//게시글 등록 서비스
-	public int write(QaDto qaDto, List<Integer> attachmentNo) {
+	public int write(QaDto qaDto) {
 		int qaNo = qaDao.sequence();
 		qaDto.setQaNo(qaNo);
 		
@@ -32,11 +32,11 @@ public class QaService {
 		qaDao.insert(qaDto);
 		
 		//첨부파일번호 글번호 연결
-		if(attachmentNo != null) {
-			for(int no : attachmentNo) {
-				qaDao.connect(qaNo, no);
-			}
-		}
+//		if(attachmentNo != null) {
+//			for(int no : attachmentNo) {
+//				qaDao.connect(qaNo, no);
+//			}
+//		}
 		return qaNo;
 	}
 }

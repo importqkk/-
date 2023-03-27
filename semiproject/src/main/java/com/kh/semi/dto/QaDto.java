@@ -17,15 +17,14 @@ public class QaDto {
 	public int qaGroup;
 	public Integer qaParent;
 	public int qaDepth;
-	public Date qaTime;
-	public int productNo;
+	public Date qaDate;
 	public int qaRead;
 	
 	//가상의 Getter 추가
 	//같은 날짜는 시간 분, 다른 날짜는 연월일
-	public String getBoardTimeAuto() {
+	public String getQaTimeAuto() {
 		java.util.Date now = new java.util.Date();
-		java.util.Date write = new java.util.Date(qaTime.getTime());
+		java.util.Date write = new java.util.Date(qaDate.getDate());
 		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		String nowStr = f.format(now);

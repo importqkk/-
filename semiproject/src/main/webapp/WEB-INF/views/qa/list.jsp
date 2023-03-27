@@ -9,14 +9,14 @@
 <script type="text/javascript">
 	function checkAll(){
 		var allCheckbox = document.querySelector(".check-all");
-		var checkboxes = document.querySelectorAll("input[type=checkbox][name=qaNo]");
+		var checkboxes = document.querySelectorAll("input[type=checkbox][name=boardNo]");
 		for(var i=0; i < checkboxes.length; i++) {
 			checkboxes[i].checked = allCheckbox.checked;
 		}
 	}
 	function checkUnit(){
 		var allCheckbox = document.querySelector(".check-all");
-		var checkboxes = document.querySelectorAll("input[type=checkbox][name=qaNo]");
+		var checkboxes = document.querySelectorAll("input[type=checkbox][name=boardNo]");
 		var count = 0;
 		for(var i=0; i < checkboxes.length; i++) {
 			if(checkboxes[i].checked) {
@@ -27,7 +27,7 @@
 	}
 	function formCheck() {
 		var checkboxes = document.querySelectorAll(
-							"input[type=checkbox][name=qaNo]:checked");	
+							"input[type=checkbox][name=boardNo]:checked");	
 		if(checkboxes.length == 0) return false;
 		
 		return confirm("정말 삭제하시겠습니까?");
@@ -47,7 +47,7 @@
     	<c:if test="${sessionScope.memberRole == '관리자'}">
     	<button type="submit" class="form-btn negative">삭제</button>
     	</c:if>
-        <a href="write" class="form-btn positive">글쓰기</a>
+        <a href="write" class="form-btn neutral">글쓰기</a>
     </div>
     <div class="row">
         <table class="table table-border">
@@ -71,77 +71,76 @@
             <tbody class="center">
             
             	<!-- 공지사항을 출력 -->
-				<c:forEach var="qaDto" items="${noticeList}">
+				<c:forEach var="boardDto" items="${noticeList}">
 				<tr style="background-color:#eee">
 					<c:if test="${sessionScope.memberRole == '관리자'}">
 					<td></td>
 					</c:if>
-					<td>${qaDto.qaNo}</td>
+					<td>${boardDto.boardNo}</td>
 					<td class="left">
 						<!-- 제목을 누르면 상세로 이동 -->
-						<a href="detail?qaNo=${qaDto.qaNo}" class="link">
+						<a href="detail?boardNo=${boardDto.boardNo}" class="link">
 							
-							<c:if test="${qaDto.qaHead != null}">
+							<c:if test="${boardDto.boardHead != null}">
 								<!-- 말머리가 있으면 출력 -->
-								[${qaDto.qaHead}]
+								[${boardDto.boardHead}]
 							</c:if>
 							
-							${qaDto.qaTitle}
+							${boardDto.boardTitle}
 							
-							<c:if test="${qaDto.qaReply > 0}">
+							<c:if test="${boardDto.boardReply > 0}">
 								<!-- 댓글이 있으면 개수 출력 -->
-								[${qaDto.qaReply}]
+								[${boardDto.boardAnswer}]
 							</c:if>
 						</a>
 					</td>
-					<td class="left">${qaDto.memberId}</td>
+					<td class="left">${boardDto.memberId}</td>
 					
 					<%-- DTO에 만든 가상의 Getter 메소드를 불러 처리 --%>
-					<td>${qaDto.qaTimeAuto}</td>
-					<td>${qaDto.qaRead}</td>
+					<td>${boardDto.boardTimeAuto}</td>
+					<td>${boardDto.boardRead}</td>
 				</tr>
 				</c:forEach>
 				
 				<!-- 검색 또는 목록 결과를 출력 -->
-				<c:forEach var="qaDto" items="${list}">
+				<c:forEach var="boardDto" items="${list}">
 				<tr>
 					<c:if test="${sessionScope.memberRole == '관리자'}">
 					<!-- 개별 선택 체크박스를 배치 -->
 					<td>
-						<input type="checkbox" name="qaNo" value="${qaDto.qaNo}"
+						<input type="checkbox" name="boardNo" value="${boardDto.boardNo}"
 								onchange="checkUnit();">
 					</td>
 					</c:if>
 					
-					<td>${qaDto.qaNo}</td>
+					<td>${boardDto.boardNo}</td>
 					<td class="left">
-						<!-- qaDepth만큼 띄어쓰기를 실시 -->
-						<c:forEach var="i" begin="1" end="${qaDto.qaDepth}">
+						<!-- boardDepth만큼 띄어쓰기를 실시 -->
+						<c:forEach var="i" begin="1" end="${boardDto.boardDepth}">
 							&nbsp;&nbsp;
 						</c:forEach>
-						<!-- qaDepth가 1 이상일 경우만 답글 표식을 추가 -->
-						<c:if test="${qaDto.qaDepth > 0}">
+						<!-- boardDepth가 1 이상일 경우만 답글 표식을 추가 -->
+						<c:if test="${boardDto.boardDepth > 0}">
 							→
 						</c:if>
 					
 						<!-- 제목을 누르면 상세로 이동 -->
-						<a href="detail?qaNo=${qaDto.qaNo}" class="link">
+						<a href="detail?boardNo=${boardDto.boardNo}" class="link">
 							
-							<c:if test="${qaDto.qaHead != null}">
+							<c:if test="${boardDto.boardHead != null}">
 								<!-- 말머리가 있으면 출력 -->
-								[${qaDto.qaHead}]
+								[${boardDto.boardHead}]
 							</c:if>
 							
-							${qaDto.qaTitle}
+							${boardDto.boardTitle}
 						</a>
 					</td>
-					<td class="left">${qaDto.memberId}</td>
+					<td class="left">${boardDto.memberId}</td>
 					
 					<%-- DTO에 만든 가상의 Getter 메소드를 불러 처리 --%>
-					<td>${qaDto.qaTimeAuto}</td>
+					<td>${boardDto.boardTimeAuto}</td>
 					
-					<td>${qaDto.qaRead}</td>
-					<td>${qaDto.qaLike}</td>
+					<td>${boardDto.boardRead}</td>
 				</tr>
 				</c:forEach>
             </tbody>
@@ -151,14 +150,14 @@
     	<c:if test="${sessionScope.memberRole == '관리자'}">
     	<button type="submit" class="form-btn negative">삭제</button>
     	</c:if>
-        <a href="write" class="form-btn positive">글쓰기</a>
+        <a href="write" class="form-btn neutral">글쓰기</a>
     </div>
     
     <c:if test="${sessionScope.memberRole == '관리자'}">
     </form>
     </c:if>
     
-    <div class="row pagination">
+    <div class="row pagination center">
     
     	<!-- 처음 -->
     	<c:choose>
@@ -218,36 +217,36 @@
 		<form action="list" method="get">
 		
 			<c:choose>
-				<c:when test="${vo.column == 'qa_content'}">
+				<c:when test="${vo.column == 'board_content'}">
 					<select name="column" class="form-input">
-						<option value="qa_title">제목</option>
-						<option value="qa_content" selected>내용</option>
+						<option value="board_title">제목</option>
+						<option value="board_content" selected>내용</option>
 						<option value="member_id">작성자</option>
-						<option value="qa_head">말머리</option>
+						<option value="board_head">카테고리</option>
 					</select>
 				</c:when>
 				<c:when test="${vo.column == 'member_id'}">
 					<select name="column" class="form-input">
-						<option value="qa_title">제목</option>
-						<option value="qa_content">내용</option>
+						<option value="board_title">제목</option>
+						<option value="board_content">내용</option>
 						<option value="member_id" selected>작성자</option>
-						<option value="qa_head">말머리</option>
+						<option value="board_head">카테고리</option>
 					</select>
 				</c:when>
-				<c:when test="${vo.column == 'qa_head'}">
+				<c:when test="${vo.column == 'board_head'}">
 					<select name="column" class="form-input">
-						<option value="qa_title">제목</option>
-						<option value="qa_content">내용</option>
+						<option value="board_title">제목</option>
+						<option value="board_content">내용</option>
 						<option value="member_id">작성자</option>
-						<option value="qa_head" selected>말머리</option>
+						<option value="board_head" selected>카테고리</option>
 					</select>
 				</c:when>
 				<c:otherwise>
 					<select name="column" class="form-input">
-						<option value="qa_title" selected>제목</option>
-						<option value="qa_content">내용</option>
+						<option value="board_title" selected>제목</option>
+						<option value="board_content">내용</option>
 						<option value="member_id">작성자</option>
-						<option value="qa_head">말머리</option>
+						<option value="board_head">카테고리</option>
 					</select>
 				</c:otherwise>
 			</c:choose>

@@ -2,7 +2,7 @@
 create SEQUENCE order_seq;
 create SEQUENCE product_seq;
 create SEQUENCE review_seq;
-create SEQUENCE qa_seq;
+create SEQUENCE board_seq;
 create SEQUENCE img_seq;
 create SEQUENCE cart_seq;
 create SEQUENCE tag_seq;
@@ -172,14 +172,14 @@ CREATE TABLE  QA  (
 	 QA_depth 	number 	DEFAULT 0	,
      	member_Id 	REFERENCES member(member_id) on delete set null,
      
-     -- qa 말머리
-     check (qa_head in('상품문의','결제문의','기타문의')),
+     -- board 말머리
+     check (board_head in('상품문의','결제문의','기타문의')),
      
-     -- qa 비밀글
+     -- board 비밀글
      --boolean 0 또는 1 
-     check (qa_secret in (0,1)),
+     check (board_secret in (0,1)),
      
-     -- qa 계층형 구조 
+     -- board 계층형 구조 
      check (QA_group>0),
      check (QA_parent>0),
      --  깊이는 없거나 1개가 최대
