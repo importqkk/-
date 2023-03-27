@@ -76,7 +76,9 @@ $(function(){
 			method:"get",
 			success:function(response){
 //				console.log(response);
+				
 				for(var i=0; i < response.length; i++){
+					
 					
 					var template  = $("#review-template").html();
 					var html = $.parseHTML(template);
@@ -85,7 +87,7 @@ $(function(){
 					$(html).find(".reviewTime").text(response[i].reviewTime);
 					$(html).find(".reviewContent").text(response[i].reviewContent);
 					$(html).find(".reviewLike").text(response[i].reviewLike);
-					
+				
 					
 					
 					if(memberId == response[i].memberId){
@@ -101,6 +103,8 @@ $(function(){
 					 	$(html).find(".memberId").append(deleteButton)
 					 								.append(editButton);
 					}
+					
+						
 //					$(html).find(".reviewStar").empty(); // 이전에 채워진 별표 초기화
 					for (var j = 0; j < response[i].reviewStar; j++) {
 					    $(html).find(".reviewStar").append('<i class="fa-solid fa-star starR on"></i>');
@@ -108,8 +112,46 @@ $(function(){
 					for (var j = response[i].reviewStar; j < 5; j++) {
 					    $(html).find(".reviewStar").append('<i class="fa-regular fa-star starR"></i>');
 					}
-										
+					
+					var likeButton = $("<i>").addClass("fa-heart fa-regular")
+												.attr("data-review-no", response[i].reviewNo)
+												.click(likeReview);
+					
+					var reviewNo = response[i].reviewNo;
+											
+						$.ajax({
+							url:"/rest/review/check",
+							method:"post",
+							data:{
+								reviewNo:reviewNo
+							},
+							success:function(response){
+								console.log(response);
+//								console.log(reviewNo);
+								
+								
+						        if(response){
+						            $(html).find(".fa-heart").removeClass("fa-regular fa-solid").addClass("fa-solid");        
+						        }
+						        else{
+						            $(html).find(".fa-heart").removeClass("fa-regular fa-solid").addClass("fa-regular");
+						        }
+								
+						        
+								
+							},
+							error:function(){
+								alert("좋아요 체크 기능 오류");
+								
+							}
+							
+						});
+												
+					$(html).find(".reviewLike").append(likeButton);
+						
+
 					$(".review-list").append(html);
+										
 				}
 			},
 			error:function(){
@@ -201,6 +243,43 @@ $(function(){
 		$(html).find(".review-cancel-btn").click(function(){
 			$(".edit-panel").hide();
 			$(".review-write").show();
+		});
+	}
+	
+	function likeReview(){
+		//loadList();
+		var reviewNo = $(this).data("review-no");
+//		console.log(reviewNo);
+		console.log(this);
+		
+		$.ajax({
+			url:"/rest/review/like",
+			method:"post",
+			data:{
+				reviewNo:reviewNo
+			},
+			success:function(response){
+				$(".fa-heart").click(function(){
+					if(response.result){
+	//					console.log(this);
+						
+						$(".reviewLike").removeClass("fa-solid fa-regular")
+													.addClass("fa-solid");
+					}
+					else{
+						$(this).find("fa-heart").removeClass("fa-solid fa-regular")
+													.addClass("fa-regular");
+					}
+						
+					
+				});
+				
+				
+				
+				
+			},
+			error:function(){}
+			
 		});
 	}
 	
