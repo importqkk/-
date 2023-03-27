@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor
 @AllArgsConstructor @Builder
-public class CartDto {
+public class CartProductInfoDto {
 
-	private int productCount, productNo;
-	private String memberId;
+	private String memberId, productBrand, productName;
+	private int productNo, productPrice, productStock, productCount;
 	
 }

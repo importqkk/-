@@ -25,6 +25,12 @@ public class OrderController {
 	private OrderProductDao orderProductDao;
 	
 	//주문생성 페이지
+//	@PostMapping("/insert")
+
+	@GetMapping("/buy")
+	public String buy() {
+		return "/WEB-INF/views/order/buy.jsp";
+	}
 	
 	@PostMapping("/buy")
 	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto orderProductDto,HttpSession session){

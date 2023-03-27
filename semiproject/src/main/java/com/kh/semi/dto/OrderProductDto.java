@@ -13,7 +13,7 @@ public class OrderProductDto {
 	
 	//총 금액 계산
 	public void calculating() {
-		this.totalPrice = this.productPrice*this.productCount; 
+		this.totalPrice = this.productPrice*this.productCount;
 	}
 	
 	

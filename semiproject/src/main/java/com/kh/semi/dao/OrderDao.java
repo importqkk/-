@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.OrderDto;
+import com.kh.semi.dto.ProductDto;
 
 
 
@@ -54,6 +55,14 @@ public class OrderDao {
 		
 	}
 	
+	//주문목록 상세조회
+	public OrderDto selectOne(int orderNo) {
+		String sql = "select * from order_ where order_no=?";
+		Object[] param = {orderNo};
+		List<OrderDto> list = jdbcTemplate.query(sql,mapper,param);
+		return list.isEmpty() ? null:list.get(0);
+	}
+
 	
 	
 	

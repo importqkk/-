@@ -7,69 +7,41 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <style>
-
-        /* 결제정보 사각박스 */
-        .order {
-                
-                text-align: center;
-                border-width: 1px;
-                border-color: rgb(119,107,255);
-                background-color: rgb(248, 248, 255);
-                border-style: solid;
-                width: auto;
-                height: 150px;
-                border-radius: 1em;
-            }
-
-
-
-  /*주문 스크롤시 결제정보창 내려가기 */
-    .orderscroll {
-        position: sticky;
-		top:0;
-    }
-
     </style>
+    <script type="text/javascript">
+    $(function(){
+    		  // 주문 페이지가 열리면, 서버에서 수량 정보 가져오기
+    		  $.ajax({
+    		    type: 'GET',
+    		    url: '/rest/quantity',
+    		    data: {'productNo': productNo},
+    		    success: function(data) {
+    		      // 수량 정보가 있으면, 해당 정보로 업데이트
+    		      if (data) {
+    		        $(".number").text(data.quantity);
+    		        $(".total-price").text(data.quantity * productPrice + 3000);
+    		        console.log(productNo);
+    		      }
+    		    },
+    		    error: function(xhr, status, error) {
+    		      console.log("에러다에러");
+    		    }
+    
+    });
+    
 </head>
 <body test>
  <div class="container-1000">
         <div class="flex">
             <div class=" w-60 pt-20">
-                <p>
-                <h2>주문상품</h2>
-                </p>
+                <p><h2>주문상품</h2></p>
+                
                 <div class="row flex">
                     <img src="https://picsum.photos/100/100" class="pe-20">
-                    <label>[브랜드명] 상품이름</label>
-                </div>
-                <div class="row flex">
-                    <img src="https://picsum.photos/100/100" class="pe-20">
-                    <label>[브랜드명] 상품이름</label>
-                </div>
-                <div class="row flex">
-                    <img src="https://picsum.photos/100/100" class="pe-20">
-                    <label>[브랜드명] 상품이름</label>
-                </div>
-                <div class="row flex">
-                    <img src="https://picsum.photos/100/100" class="pe-20">
-                    <label>[브랜드명] 상품이름</label>
-                </div>
-                <div class="row flex">
-                    <img src="https://picsum.photos/100/100" class="pe-20">
-                    <label>[브랜드명] 상품이름</label>
-                </div>
-                <div class="row flex">
-                    <img src="https://picsum.photos/100/100" class="pe-20">
-                    <label>[브랜드명] 상품이름</label>
-                </div>
-                <div class="row flex">
-                    <img src="https://picsum.photos/100/100" class="pe-20">
-                    <label>[브랜드명] 상품이름</label>
+                    
                 </div>
                 <div class="row left">
-                    <p>
-                    <h2>배송지</h2>
-                    </p>
+                    <p><h2>배송지</h2></p>
                     <div class="row">
                         <p>받는사람</p>
                         <input type="text" class="form-input light w-100 medium">
@@ -92,7 +64,7 @@
                     </div>
 
                     <div class="row">
-                        <p></p>
+                        
                         <input type="text" class="form-input light medium w-100" placeholder="기본주소" readonly>
                     </div>
 
@@ -109,9 +81,8 @@
             </div>
             <div class="orderscroll w-30">
                 <div>
-                    <p>
-                    <h2>결제정보</h2>
-                    </p>
+                    
+                    <p><h2>결제정보</h2></p>
                     <p><label>적립금</label></p>
                     <input type="text" class="form-input medium light">
                     <button class="form-btn positive medium">전액</button>
@@ -119,7 +90,7 @@
                     <div class="row abc">
                         <label>제품금액: <span>3000원</span></label>
                         <div>
-                            <label>배송비 : <span class="right">3000원</span></label>
+                            <label>배송비 : <span class="right">${productDto.productdeliveryprice}</span></label>
                         </div>
                         <div> 
                             <label>적립금 : <span class="right">1000원</span></label>
@@ -150,6 +121,7 @@
                 </div>
             </div>
             
+           
 
     </div>
 
