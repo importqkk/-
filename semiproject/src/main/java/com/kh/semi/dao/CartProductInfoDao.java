@@ -30,6 +30,7 @@ public class CartProductInfoDao {
 						.productName(rs.getString("product_name"))
 						.productPrice(rs.getInt("product_price"))
 						.productStock(rs.getInt("product_stock"))
+						.productCount(rs.getInt("product_count"))
 					.build();
 		}
 	};
