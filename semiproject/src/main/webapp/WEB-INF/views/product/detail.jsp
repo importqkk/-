@@ -153,6 +153,51 @@
 		            $(".item-form").attr("method", "post");
 		         });
 		      });
+		 
+		 $(function(){
+		       $(".minus").click(function(){// 마이너스 버튼이 눌리면 비동기 통신 시작 
+		          var number = $(this).next(".number").text();
+		          number = parseInt(number);
+		          if(number>=2){
+		            number=number-1;
+		         }
+		          
+		          $.ajax({ // 서버에 데이터 요청
+		             type:'POST',
+		             url:"/rest/number",
+		              data: JSON.stringify({'number': number.toString()}),
+		                contentType: 'application/json; charset=utf-8',
+		                success: function(data) {
+		                
+		                    $(".number").text(number);
+		                },
+		                error: function(xhr, status, error) {
+		                   console.log("에러다에러");
+		                   $(".plus").prev(".number").text(number);
+		                }
+		           });   
+		       });
+		       $(".plus").click(function(){// 플러스 버튼이 눌리면 비동기 통신 시작 
+		          var number = $(this).prev(".number").text(); // plus잔의 
+		          
+		          number = parseInt(number);
+		          number = number+1;
+		          console.log(number);
+		          $.ajax({ // 서버에 데이터 요청
+		             type:'POST',
+		              url:"/rest/number",
+		              data: JSON.stringify({'number': number.toString()}),
+		                contentType: 'application/json; charset=utf-8',
+		                success: function(data) {
+		                   console.log("몰라시발");
+		                   $(".plus").prev(".number").text(number);
+		                },
+		                error: function(xhr, status, error) {
+		                    console.error("에러다에러");
+		                }
+		           });   
+		        });   
+		    });         
     
     </script>
     <title>상품 상세페이지</title>
@@ -206,9 +251,9 @@
 	                        <div class="flex-remain center">
 	                            <button class="w-100 form-btn small neutral center">
 									<div class="qty-stepper flex">
-										<a onclick="productCountMinus();" class="w-30 minus">-</a>
+										<a class="w-30 minus">-</a>
 										<a name="productCount" class="w-30 number">1</a>
-										<a onclick="productCountPlus();" class="w-30 plus">+</a>
+										<a class="w-30 plus">+</a>
 									</div>
 								</button>
 	                        </div>                        
