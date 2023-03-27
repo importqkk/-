@@ -1,14 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+-<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<html lang="ko">
+
 <head>
-    <!-- font awesome cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-f9q3yD8+iyf0zvJolTO0+QGd/U8rFyV7vUTd/h5u5lJxRZJz8sRkpA7MUzFGAG+AsTJ16ULbL3qT/ZHxT+XQVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-      
-    <!-- jquery cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         .flex-remain{
             flex:1;
@@ -96,7 +91,7 @@
 		}
 		
 		.detail-img-click {
-			  position: absolute;
+			  position: relative;
 			  top: 0; 
 			  left: 0;
 			  width:100%;
@@ -110,55 +105,109 @@
 		}
 		.hide-detail{
 			display:none;
+			margin: 0 auto;
 		}
+		
+		.disc{
+			list-style-type : disc;
+		}
+		
     </style>
     <script type="text/javascript">
-    
-    	//------제품 개수 설정------------------------------------
-    	function productCountPlus(){
-    		// 현재 숫자 가져오기 
-    		var number = document.querySelector(".number");
-    		// 현재 숫자에서 1더하기
-    		number.textContent = Number(number.textContent) + 1; 
-    		
-    		// 상품 개당 가격 
-    		var productPrice = document.querySelector(".product-price");
-    		// 상품 총 가격 출력	
-    		var totalPrice = document.querySelector(".total-price");
-    		totalPrice.textContent = Number(number.textContent)*Number(productPrice.textContent);
-    		
-    	}
+    $(function(){
+    	// 이미지 높이 조절----------------------------------------------------
     	
-    	function productCountMinus(){
-    		// 현재 숫자 가져오기 
-    		var number = document.querySelector(".number");
-    		// 현재 숫자에서 1빼기
-    		if(Number(number.textContent)>1){
-    			number.textContent = Number(number.textContent) -1;	
-    		}   	
-    		
-    		// 상품 개당 가격 
-    		var productPrice = document.querySelector(".product-price");
-    		// 상품 총 가격 출력	
-    		var totalPrice = document.querySelector(".total-price");
-    		totalPrice.textContent = Number(number.textContent)*Number(productPrice.textContent);
-    	}
+    	// 초기상태에서 클리되었을때 
+   		$(".show-detail").click(function(){
+   			
+   			// 상세이미지를 전부 펼처보임
+   			$(".detail-img-initial").addClass("detail-img-click");
+   			$(".detail-img-click").removeClass("detail-img-initial");
+   			
+   			// 버튼을 접기로 바꿈
+   			$(".show-detail").css("display","none");// 펼처 보기 버튼 숨기기
+   			$(".hide-detail").css("display","block");// 접기 버튼 열기  
+   		});
     	
-    	//---------상세 이미지 높이 조절----------
+   		// 펼쳐진상태에서 클리되었을때 
+   		$(".hide-detail").click(function(){
+   			
+   			// 상세이미지를 숨김 
+   			$(".detail-img-click").addClass("detail-img-initial");
+   			$(".detail-img-initial").removeClass("detail-img-click");
+   			
+   			// 버튼을 펼처보기로 바뀸
+   			$(".show-detail").css("display","block");// 펼처 보기 버튼 숨기기
+   			$(".hide-detail").css("display","none");// 접기 버튼 열기  
+   		});
+   		// 이미지 높이 조절----------------------------------------------------
     	
-   		function detailImg(){
-    		// 버튼이 눌렸을 때의 이미지 상태를 확인
-    		var = document.querySelector(".detail-img")
-    		
-    		//
-    		
-    	}
     	
-    
+   		
+    	// 상품 개당 가격 조절 ajax-------------------------------------
+    	var productPrice = $(".product-price").text();
+
+   		
+    	$(".minus").click(function(){// 마이너스 버튼이 눌리면 비동기 통신 시작 
+    		var number = $(this).next(".number").text();
+    		number = parseInt(number);
+    		if(number>=2){
+				number=number-1;
+			}
+    		// 총 금액
+            
+    		$.ajax({ // 서버에 데이터 요청
+    			type:'POST',
+    			url:"/rest/number",
+        		data: JSON.stringify({'number': number.toString()}),
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) { // 개수 비동기 통신 성공 시, 
+					
+                	// 개수 최신화
+                    $(".number").text(number);
+                	
+                	// 총 금액 최신화 
+                    $(".total-price").text(number*productPrice+3000);
+                    
+                 },
+                error: function(xhr, status, error) {
+                	 console.log("에러다에러");
+                	
+                }
+        	});	
+    	});
+    	$(".plus").click(function(){// 플러스 버튼이 눌리면 비동기 통신 시작 
+    		var number = $(this).prev(".number").text(); // plus잔의 
+    		
+    		number = parseInt(number);
+    		number = number+1;
+
+    		$.ajax({ // 서버에 데이터 요청
+    			type:'POST',
+        		url:"/rest/number",
+        		data: JSON.stringify({'number': number.toString()}),
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) {
+           
+                	// 개수 최신화
+                    $(".number").text(number);
+                	
+                	// 총 금액 최신화 
+                    $(".total-price").text(number*productPrice+3000);
+                },
+                error: function(xhr, status, error) {
+                    console.log("에러다에러");
+                }
+        	});	
+        });
+    	// 상품 가격 조절 ajax-------------------------------------------
+    });	   	
+    	
     </script>
     <title>상품 상세페이지</title>
 </head>
 <body test>
+	<h6 class="productNo" style="display:none;">${productDto.productNo}</h6>
     <div class="container-1000">
         <hr>
         <!-- 이미지 부터 구매하기 버튼까지 -->
@@ -204,9 +253,9 @@
                         <div class="flex-remain center">
                             <button class="w-100 form-btn small neutral center">
 								<div class="qty-stepper flex">
-									<a onclick="productCountMinus();" class="w-30 minus">-</a>
+									<a class="w-30 minus">-</a>
 									<a class="w-30 number">1</a>
-									<a onclick="productCountPlus();" class="w-30 plus">+</a>
+									<a class="w-30 plus">+</a>
 								</div>
 							</button>
                         </div>                        
@@ -263,9 +312,9 @@
     <div class="container-1000">
         <div class="row center">
 			<!--상세이미지 전부 보이기-->
-            <button class="w-95 form-btn small positive show-detail" onclick="detailImg();">상세정보 펼쳐 보기</button>
+            <button class="w-95 form-btn small positive show-detail" >상세정보 펼쳐 보기</button>
 			<!--상세이미지 숨기기 -->
-            <button class="w-95 form-btn small positive hide-detail" onclick="detailImg();">상세정보 접기</button>
+            <button class="w-95 form-btn small positive hide-detail" >상세정보 접기</button>
         </div>
     </div>
 
@@ -440,14 +489,65 @@
                 <br>
             </div>
             <div class="row">
-                <h4 class="font-grey">배송은 </h4>
+                <h4 class="font-grey">배송은 평일 결제 시 오후 12시에 출고가 마감됩니다. 오후 12시 이후 결제 건은 익일 출고가 진행됩니다. (주말 결제 시 다음 영업일 출고) </h4>
+                <ul class="disc ms-20">
+                	<li> 배송이 시작된 후에는 배송지 변경 및 취소가 불가능합니다.</li>
+                	<li>배송기간은 출고일로부터 평균 3~5일 정도 소요됩니다.</li>
+                	<li>도서·산간 지역 배송 시 추가 배송비가 없으나, 배송 기일이 추가적으로 소요될 수 있는 점 양해하여 주시기 바랍니다.</li>
+                	<li>배송 과정 중 기상 악화 혹은 도로교통 상황에 따라 부득이하게 지연 배송이 발생될 수 있습니다</li>                	
+                </ul>
+            </div>
+            
+            <div class="row">
+                <h3 class="font-boldgrey">반품 및 교환 안내</h3>
+                <br>
+            </div>
+            <div class="row">
+                <h4 class="font-grey">교환 및 반품은 상품을 수령한 날부터 7일 이내에 고객센터로 문의해 주시기 바랍니다.</h4>
+                <ul class="disc ms-20">
+                	<li>제품 이상, 오배송 등과 같은 회사에 귀책사유가 있는 경우 맞교환이 진행됩니다. (배송비 회사 부담/부분 반품 가능)</li>
+                	<li>제품 교환은 단순 고객 변심의 경우에는 교환을 원하는 제품은 반품(배송비 5,000원 고객부담)으로 진행되고, 수령을 원하는 제품은 추가 결제로 배송됩니다.</li>
+                	<li>반품 후 환불금액은 상품 회수 및 검수 후 결정됩니다. (검수 시 상품의 훼손 및 누락이 있을 경우 변동될 수 있습니다.)</li>
+                	<li>반품완료 및 교환회수 완료는 택배기사가 고객님께 반품/교환 상품을 인계받은(수거) 날로부터 약 3~5일 소요됩니다. (영업일 기준)</li>                	
+                </ul>
+            </div>
+            
+            <div class="row">
+                <h3 class="font-boldgrey">주문취소 안내</h3>
+                <br>
+            </div>
+            <div class="row">
+                <h4 class="font-grey">주문취소는 [발송대기] 상태일 경우에만 취소가 가능합니다. 앱과 홈페이지에서 직접 취소하실 수 있습니다.</h4>
+                <ul class="disc ms-20">
+                	<li>필리케어 APP : MY필리 > 결제내역 > 해당 결제건 선택</li>
+                	<li>홈페이지 : MY필리 > 결제관리 > 해당 결제건 선택</li>
+                	<li>[배송중]부터는 취소가 불가능하니, 고객센터에 문의하여 반품으로 진행해 주시기 바랍니다.</li>
+                	<li>주문 상품의 부분 취소가 필요하신 경우 전체 주문취소 후 다시 구매해 주시기 바랍니다.</li>
+                	<li>주문 시 사용하였던 쿠폰 및 포인트는 유효기간이 지나지 않은 경우 복원됩니다.</li>                         	
+                </ul>
+            </div>
+            
+            <div class="row">
+                <h3 class="font-boldgrey">전자상거래 등에서 소비자보호에 관한 법률에 따라 다음의 경우 청약철회가 제한될 수 있습니다.</h3>
+                <br>
+            </div>
+            <div class="row">
+                <ul class="disc ms-20">
+                	<li>고객님이 배송 포장을 개봉하여 상품의 실링 스티커 제거 및 사용하여 상품의 가치가 훼손된 경우</li>
+					<li>고객님의 단순 변심으로 인한 교환/반품 신청이 상품 수령한 날로부터 7일이 경과한 경우</li>
+					<li>고객님의 사용 또는 일부 소비에 의해 상품의 가치가 훼손된 경우</li>
+					<li>시간 경과에 따라 상품 등의 가치가 현저히 감소하여 재판매가 불가능한 경우</li>
+					<li>상품 포장, 용기의 멸실 또는 훼손 & 무상 교환을 위해 고의로 상품을 불량으로 만드는 경우</li>
+					<li>구매한 상품의 구성품이 누락된 경우 (사은품 등)</li>
+					<li>구매한 상품과 반품 입고 상품의 정보(상품번호/SKU)가 상이한 경우</li>
+					<li>기타 상품상세페이지에 반품/교환이 불가하다고 안내되어 있는 경우</li>                         	
+                </ul>
             </div>
         </div>
     
     </div>
 </body>
 
-</html>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 

@@ -17,6 +17,8 @@
 	    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
 	    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
 	    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
+	    <!-- font awesome cdn -->
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-f9q3yD8+iyf0zvJolTO0+QGd/U8rFyV7vUTd/h5u5lJxRZJz8sRkpA7MUzFGAG+AsTJ16ULbL3qT/ZHxT+XQVQ=="/>
 	    <!-- jquery cdn -->
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	    <style>
