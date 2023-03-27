@@ -1,26 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+-<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/load.css">
-    <!-- font awsome 아이콘 -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <!-- tabler 아이콘 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
-    <!-- font awesome cdn -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-f9q3yD8+iyf0zvJolTO0+QGd/U8rFyV7vUTd/h5u5lJxRZJz8sRkpA7MUzFGAG+AsTJ16ULbL3qT/ZHxT+XQVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-      
-    <!-- jquery cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         .flex-remain{
             flex:1;
@@ -96,126 +79,158 @@
         .font-white{
             color: white;
             -webkit-text-stroke: 2px #776BFF; /* 텍스트 테두리 색 지정 */
-			
+         
 
         }
-
-
+        
+        /* 상세 이미지 초기 설정*/
+      .detail-img-initial {
+           position: relative;
+           overflow: hidden;
+           height: 400px; /* 보여질 높이 설정 */
+      }
+      
+      .detail-img-click {
+           position: relative;
+           top: 0; 
+           left: 0;
+           width:100%;
+           height: auto;
+      }
+      
+      /* 상세정보 펼치기 */
+      .show-detail{
+         display:block;
+         margin: 0 auto;
+      }
+      .hide-detail{
+         display:none;
+         margin: 0 auto;
+      }
+      
+      .disc{
+         list-style-type : disc;
+      }
+      
     </style>
     <script type="text/javascript">
-    	function productCountPlus(){
-    		// 현재 숫자 가져오기 
-    		var number = document.querySelector(".number");
-    		// 현재 숫자에서 1더하기
-    		number.textContent = Number(number.textContent) + 1; 
-    		
-    		// 상품 개당 가격 
-    		var productPrice = document.querySelector(".product-price");
-    		// 상품 총 가격 출력	
-    		var totalPrice = document.querySelector(".total-price");
-    		totalPrice.textContent = Number(number.textContent)*Number(productPrice.textContent);
-    		
-    	}
-    	
-    	function productCountMinus(){
-    		// 현재 숫자 가져오기 
-    		var number = document.querySelector(".number");
-    		// 현재 숫자에서 1빼기
-    		if(Number(number.textContent)>1){
-    			number.textContent = Number(number.textContent) -1;	
-    		}   	
-    		
-    		// 상품 개당 가격 
-    		var productPrice = document.querySelector(".product-price");
-    		// 상품 총 가격 출력	
-    		var totalPrice = document.querySelector(".total-price");
-    		totalPrice.textContent = Number(number.textContent)*Number(productPrice.textContent);
-    	}
-    	
-//     	function productTotalPrice(){
-//     		// 상품 개수 받기 
-//     		var number = Number(document.querySelector(".nubmer"));
-//     		// 상품 개당 가격 받기 
-//     		var productPrice = Number(document.querySelector(".product-price"));
-    		
+    $(function(){
+       // 이미지 높이 조절----------------------------------------------------
+       
+       // 초기상태에서 클리되었을때 
+         $(".show-detail").click(function(){
+            
+            // 상세이미지를 전부 펼처보임
+            $(".detail-img-initial").addClass("detail-img-click");
+            $(".detail-img-click").removeClass("detail-img-initial");
+            
+            // 버튼을 접기로 바꿈
+            $(".show-detail").css("display","none");// 펼처 보기 버튼 숨기기
+            $(".hide-detail").css("display","block");// 접기 버튼 열기  
+         });
+       
+         // 펼쳐진상태에서 클리되었을때 
+         $(".hide-detail").click(function(){
+            
+            // 상세이미지를 숨김 
+            $(".detail-img-click").addClass("detail-img-initial");
+            $(".detail-img-initial").removeClass("detail-img-click");
+            
+            // 버튼을 펼처보기로 바뀸
+            $(".show-detail").css("display","block");// 펼처 보기 버튼 숨기기
+            $(".hide-detail").css("display","none");// 접기 버튼 열기  
+         });
+         // 이미지 높이 조절----------------------------------------------------
+       
+       
+         
+       // 상품 개당 가격 조절 ajax-------------------------------------
+       var productPrice = $(".product-price").text();
 
-    		
-    		
-//     	}
+         
+       $(".minus").click(function(){// 마이너스 버튼이 눌리면 비동기 통신 시작 
+          var number = $(this).next(".number").text();
+          number = parseInt(number);
+          if(number>=2){
+            number=number-1;
+         }
+          // 총 금액
+            
+          $.ajax({ // 서버에 데이터 요청
+             type:'POST',
+             url:"/rest/number",
+              data: JSON.stringify({'number': number.toString()}),
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) { // 개수 비동기 통신 성공 시, 
+               
+                   // 개수 최신화
+                    $(".number").text(number);
+                   
+                   // 총 금액 최신화 
+                    $(".total-price").text(number*productPrice+3000);
+                    
+                 },
+                error: function(xhr, status, error) {
+                    console.log("에러다에러");
+                   
+                }
+           });   
+       });
+       $(".plus").click(function(){// 플러스 버튼이 눌리면 비동기 통신 시작 
+          var number = $(this).prev(".number").text(); // plus잔의 
+          
+          number = parseInt(number);
+          number = number+1;
 
-		 $(function(){
-		         $(".cart-in").click(function(){
-		            $(".item-form").attr("action", "/cart/insert");
-		            $(".item-form").attr("method", "post");
-		         });
-		         $(".buy").click(function(){
-		            $(".item-form").attr("action", "order/detail");
-		            $(".item-form").attr("method", "post");
-		         });
-		      });
-		 
-		 $(function(){
-		       $(".minus").click(function(){// 마이너스 버튼이 눌리면 비동기 통신 시작 
-		          var number = $(this).next(".number").text();
-		          number = parseInt(number);
-		          if(number>=2){
-		            number=number-1;
-		         }
-		          
-		          $.ajax({ // 서버에 데이터 요청
-		             type:'POST',
-		             url:"/rest/number",
-		              data: JSON.stringify({'number': number.toString()}),
-		                contentType: 'application/json; charset=utf-8',
-		                success: function(data) {
-		                
-		                    $(".number").text(number);
-		                },
-		                error: function(xhr, status, error) {
-		                   console.log("에러다에러");
-		                   $(".plus").prev(".number").text(number);
-		                }
-		           });   
-		       });
-		       $(".plus").click(function(){// 플러스 버튼이 눌리면 비동기 통신 시작 
-		          var number = $(this).prev(".number").text(); // plus잔의 
-		          
-		          number = parseInt(number);
-		          number = number+1;
-		          console.log(number);
-		          $.ajax({ // 서버에 데이터 요청
-		             type:'POST',
-		              url:"/rest/number",
-		              data: JSON.stringify({'number': number.toString()}),
-		                contentType: 'application/json; charset=utf-8',
-		                success: function(data) {
-		                   console.log("몰라시발");
-		                   $(".plus").prev(".number").text(number);
-		                },
-		                error: function(xhr, status, error) {
-		                    console.error("에러다에러");
-		                }
-		           });   
-		        });   
-		    });         
-    
+          $.ajax({ // 서버에 데이터 요청
+             type:'POST',
+              url:"/rest/number",
+              data: JSON.stringify({'number': number.toString()}),
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) {
+           
+                   // 개수 최신화
+                    $(".number").text(number);
+                   
+                   // 총 금액 최신화 
+                    $(".total-price").text(number*productPrice+3000);
+                },
+                error: function(xhr, status, error) {
+                    console.log("에러다에러");
+                }
+           });   
+        });
+       // 상품 가격 조절 ajax-------------------------------------------
+       
+       $(function(){
+	         $(".cart-btn").click(function(){
+	            $(".item-form").attr("action", "/cart/insert");
+	            $(".item-form").attr("method", "post");
+	         });
+	         $(".buy-btn").click(function(){
+	            $(".item-form").attr("action", "/order/detail");
+	            $(".item-form").attr("method", "post");
+	         });
+	      });
+    });         
+       
     </script>
     <title>상품 상세페이지</title>
 </head>
-<body>
+<body test>
+   <h6 class="productNo" style="display:none;">${productDto.productNo}</h6>
     <div class="container-1000">
         <hr>
-        <!-- 이미지 부터 구매하기 버튼까지 -->
-        <div class="flex">
-            <!-- 상품 이미지 -->
-            <div class="w-50 center">
-                <img src="templates/image/katalk.png" class="img-size img-rad-10 img-background ">
-            </div>
-         
-         	<!-- --------------------------------------------- 여기를 폼으로 감싸보기(장바구니) -------------------------------------------- -->
-            <!-- 상품 가격 부터 구매하기 버튼까지-->
-            <form class="item-form">
-	            <div class="flex-remain">
+        
+	        <!-- 이미지 부터 구매하기 버튼까지 -->
+	        <div class="flex">
+	            <!-- 상품 이미지 -->
+	            <div class="w-50 center">
+	                <img src="/static/image/basic_img.jpg" class="img-size img-rad-10 img-background ">
+	            </div>
+	         	
+	            <!-- 상품 가격 부터 구매하기 버튼까지-->
+	            <div class="flex-remain"> 
 	                <div class="row">
 	                	<input hidden name="productNo" value="${productDto.productNo}">
 	                    <h5 class="font-grey oneLine">${productDto.productBrand}</h5>
@@ -250,30 +265,33 @@
 	                        </div>
 	                        <div class="flex-remain center">
 	                            <button class="w-100 form-btn small neutral center">
-									<div class="qty-stepper flex">
-										<a class="w-30 minus">-</a>
-										<a name="productCount" class="w-30 number">1</a>
-										<a class="w-30 plus">+</a>
-									</div>
-								</button>
+	                        <div class="qty-stepper flex">
+	                           <a class="w-30 minus">-</a>
+	                           <a class="w-30 number">1</a>
+	                           <a class="w-30 plus">+</a>
+	                        </div>
+	                     </button>
 	                        </div>                        
 	                    </div>
 	                    <br><hr>
 	                
 	                </div>
-	                <div class="row">
-	                    <h3 class="font-purple oneLine">총 금액&nbsp;</h3>
-	                    <h3 class="oneLine total-price">${productDto.productPrice}</h3>
-	                    <h3 class="oneLine">원</h3>
-	                </div>
-	                <div class="row center ">
-	                    <button class="w-49 form-btn small neutral cart-in">장바구니</button>
-	                    <button class="w-49 form-btn small positive buy" onclick="location.href='/order/' ">구매하기</button>
-	                </div>
+	                <form class="item-form">
+		                <div class="row">
+		                	<input hidden name="productNo" value="${productDto.productNo}">
+		                    <h3 class="font-purple oneLine">총 금액&nbsp;</h3>
+		                    <h3 class="oneLine total-price">${productDto.productPrice}</h3>
+		                    <h3 class="oneLine">원</h3>
+		                </div>
+		                <div class="row center">
+		                    <button class="w-49 form-btn small neutral cart-btn">장바구니</button>
+		                    <button class="w-49 form-btn small positive buy-btn" onclick="location.href='/order/' ">구매하기</button>
+		                </div>
+	                </form>
 	            </div>
-	            <!-- --------------------------------------------- 여기를 폼으로 감싸보기(장바구니) -------------------------------------------- -->
-            </form>
-        </div>
+	            
+	        </div>
+        
     </div>
     <!-- 구매하기 버튼 이후부터 -->
 
@@ -300,14 +318,23 @@
         <hr class="w-30">
         <hr class="w-30">
     </div>
+   <div class="container-1000">
+      <!--상세이미지 초기상태 -->
+      <div class="row detail-img-initial">
+         <img width="1000" class="center" src="/static/image/detail_img.jpg">
+      </div>
+   </div>
+   
 
     <div class="container-1000">
         <div class="row center">
-            <button class="w-90 form-btn small positive">상세정보 펼쳐 보기</button>
+         <!--상세이미지 전부 보이기-->
+            <button class="w-95 form-btn small positive show-detail" >상세정보 펼쳐 보기</button>
+         <!--상세이미지 숨기기 -->
+            <button class="w-95 form-btn small positive hide-detail" >상세정보 접기</button>
         </div>
     </div>
 
-    <!-- 상세정보  -->
 
 
 
@@ -316,12 +343,10 @@
         <div class="flex"> 
             <div class="flex-content w-33 center">
                 <h3>제품상세정보</h3>
-                
             </div>
             <div class="flex-content w-33 center">
                 <h3 class="oneLine">후기</h3>
                 <h3 class="oneLine font-grey">(150)</h3>
-               
             </div>
             <div class="flex-content w-33 center">
                 <h3>상품구매안내</h3>
@@ -481,14 +506,19 @@
                 <br>
             </div>
             <div class="row">
-                <h4 class="font-grey">배송은 </h4>
+                <h4 class="font-grey">배송은 평일 결제 시 오후 12시에 출고가 마감됩니다. 오후 12시 이후 결제 건은 익일 출고가 진행됩니다. (주말 결제 시 다음 영업일 출고) </h4>
+                <ul class="disc ms-20">
+                   <li> 배송이 시작된 후에는 배송지 변경 및 취소가 불가능합니다.</li>
+                   <li>배송기간은 출고일로부터 평균 3~5일 정도 소요됩니다.</li>
+                   <li>도서·산간 지역 배송 시 추가 배송비가 없으나, 배송 기일이 추가적으로 소요될 수 있는 점 양해하여 주시기 바랍니다.</li>
+                   <li>배송 과정 중 기상 악화 혹은 도로교통 상황에 따라 부득이하게 지연 배송이 발생될 수 있습니다</li>                   
+                </ul>
             </div>
         </div>
     
     </div>
 </body>
 
-</html>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
