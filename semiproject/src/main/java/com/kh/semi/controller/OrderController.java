@@ -1,5 +1,7 @@
 package com.kh.semi.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +17,7 @@ import com.kh.semi.dto.OrderProductDto;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-//	@Autowired
-//	private ProductDao productdao;
-	
-//	@Autowired
-//	private memberDao memberdao;
+
 	
 	@Autowired
 	private OrderDao orderDao;
@@ -27,15 +25,14 @@ public class OrderController {
 	private OrderProductDao orderProductDao;
 	
 	//주문생성 페이지
-	@GetMapping("/buy")
-	public String buy() {
-		return "/WEB-INF/views/order/buy.jsp"; 
-	}
 	
 	@PostMapping("/buy")
-	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto orderProductDto){
+	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto orderProductDto,HttpSession session){
+		//회원 아이디
+		String memberId=(String)session.getAttribute("memberId");
+		orderDto.setMemberId(memberId);
 		orderDao.insertOrder(orderDto);
-		orderProductDao.OrderProductInsert(orderProductDto);
+		orderProductDao.InsertOrderProduct(orderProductDto);
 		return "redirect:buyFinish";
 		
 	}

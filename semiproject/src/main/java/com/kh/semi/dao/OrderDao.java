@@ -1,5 +1,7 @@
 package com.kh.semi.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -41,8 +43,19 @@ public class OrderDao {
 		dto.setMemberId(rs.getString("MEMBER_ID"));
 		return dto;
 	};
-	
 
+
+	//주문목록 조회
+	public List<OrderDto> setMemberId(String memberId) {
+		String sql="select * from order_ where member_id=?";
+		Object[]param= {memberId};
+		
+		return jdbcTemplate.query(sql, mapper,param);
+		
+	}
+	
+	
+	
 	
 }
 		

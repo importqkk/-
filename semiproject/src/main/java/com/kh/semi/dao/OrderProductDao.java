@@ -16,7 +16,7 @@ public class OrderProductDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	//주문 상품을 넣는곳
-	public void OrderProductInsert(OrderProductDto orderProductDto ) {
+	public void InsertOrderProduct(OrderProductDto orderProductDto ) {
 		String sql="insert into Order_Product(PRODUCT_COUNT, PRODUCT_PRICE, PRODUCT_NO, ORDER_NO) values"
 				+ "(?,?,?,?)";
 		Object[] param= {orderProductDto.getProductCount(),orderProductDto.getProductPrice(),orderProductDto.getProductNo(),orderProductDto.getOrderNo()};
@@ -33,5 +33,8 @@ public class OrderProductDao {
 			
 			return dto;
 		};
+		
 	}
+	
+	
 }

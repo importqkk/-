@@ -25,10 +25,8 @@
 
   /*주문 스크롤시 결제정보창 내려가기 */
     .orderscroll {
-        position: fixed;
-        right:24%;
-        width: 20%;
-        top: 13%;
+        position: sticky;
+		top:0;
     }
 
     </style>

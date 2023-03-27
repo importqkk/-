@@ -6,17 +6,23 @@ import lombok.Data;
 
 @Data
 public class OrderDto {
+	//주문번호
 	private int orderNO;
+	//사용자로부터 입력받거나 DB로 입력받는값
 	private String orderRecever;
 	private String orderReceivePhone;
 	private String orderPost;
 	private String orderBasicAddr;
 	private String orderDetailAddr; 
-	private Date orderDate;
 	private String orderRequest;
-	private String memberId;
-	private int totalPrice;
 	
-//	private int order_Total_price;
+	
+	//session 읉 통해 가져올값
+	private String memberId;
+	
+	private String orderStat;
+	private Date orderDate;
+	
+	
 
 }
