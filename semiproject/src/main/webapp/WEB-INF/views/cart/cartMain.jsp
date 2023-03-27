@@ -30,17 +30,28 @@
 </style>
 <script type="text/javascript">
     $(function() {
+    	// 페이지가 로드되면 모든 체크박스 체크 처리
+    	/*$(".check-all, .check-item").prop("checked", true);*/
         // 전체 체크박스 체크하면 개별 체크박스 체크 처리
         $(".check-all").change(function() {
             var isChecked = $(this).prop("checked");
             $(".check-all, .check-item").prop("checked", isChecked);
         })
-        // 개별 체크박스 전부 체크하면 전체 체크박스 체크 처리
+        // 개별 체크박스 처리
         $(".check-item").change(function() {
+        	// 개별 체크박스 전부 체크하면 전체 체크박스 체크 처리
             var checkboxCount = $(".check-item").length;
             var checkedCount = $(".check-item:checked").length;
             var isAllchecked = checkboxCount == checkedCount;
             $(".check-all").prop("checked", isAllchecked);
+            console.log($(".check-item:checked"));
+            // 금액 합계 표에 체크된 상품 정보만 표시 (포기)
+            if($(".check-item:checked")) {
+            	var productPrice = $(this).parent().next().next().find(".productPrice").text();
+                var productCount = $(this).parent().next().next().find(".qty-selector").val();
+                $(".total-product-price").text((parseInt(productPrice) * parseInt(productCount)).toLocaleString());
+    			$(".final-price").text((parseInt(productPrice) * parseInt(productCount) + 3000).toLocaleString());
+            }
         })
         // 아무 상품도 선택하지 않고 선택상품 결제 버튼 누르면 경고창 뜨게 하기
         $(".selected-btn").click(function() {
@@ -101,21 +112,21 @@
             <h1 class="c-p100">${cartCnt}</h1> <%-- 상품 총 수량(상품별 개수X, 상품 종류 개수O) --%>
         </div>
 
-        <div class="row-medium">
+        <%-- <div class="row-medium">
             <div class="flex me-15">
                 <label class="flex">
-                    <input type="checkbox" class="me-10 check-all"> <%-- 상품 전체선택 체크박스 --%>
+                    <input type="checkbox" class="me-10 check-all"> 상품 전체선택 체크박스
                     <h3>전체선택</h3>
                 </label>
             </div>
-        </div>
+        </div> --%>
 
 <!-- ------------------------------------ 반복문 돌릴 부분 start ------------------------------------ -->
         <c:forEach var="cartProductInfoDto" items="${itemInfo}">
 	        <div class="row-large flex cart-item">
-	            <div class="flex me-15">
-	                <input type="checkbox" class="check-item">	<%-- 상품 개별선택 체크박스 --%>
-	            </div>
+	            <%-- <div class="flex me-15">
+	                <input type="checkbox" class="check-item">	상품 개별선택 체크박스
+	            </div> --%>
 	            <div class="flex me-15">
 	                <img class="product-img" src="/static/image/productDummy.png" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
 	            </div>
@@ -127,8 +138,8 @@
 	                </div>
 	                <div class="row">
 	                    <h4>
-	                    	<span class="productPrice"><fmt:formatNumber value="${cartProductInfoDto.productPrice}" pattern="#,##0"></fmt:formatNumber></span> <%-- 해당상품가격 --%>
-	                    	<!-- <span class="productPrice">${cartProductInfoDto.productPrice}</span> <%-- 해당상품가격 --%> -->
+	                    	<!-- <span class="productPrice"><fmt:formatNumber value="${cartProductInfoDto.productPrice}" pattern="#,##0"></fmt:formatNumber></span> <%-- 해당상품가격 --%> -->
+	                    	<span class="productPrice">${cartProductInfoDto.productPrice}</span> <%-- 해당상품가격 --%>
 							원
 	                    </h4>
 	                </div>
@@ -315,11 +326,11 @@
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
 
         <div class="row">
-            <div class="row">
+<!--             <div class="row">
                 <a class="form-btn medium neutral w-100 selected-btn" href="#">선택상품 결제하기</a>
-            </div>
+            </div> -->
             <div class="row">
-                <a class="form-btn medium positive w-100 all-btn" href="#">전체상품 결제하기</a>
+                <a class="form-btn medium positive w-100 all-btn" href="#">결제하기</a>
             </div>
         </div>
 
