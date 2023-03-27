@@ -36,6 +36,7 @@ public class CartController {
 		// 아이디 셋팅
 		String memberId = (String)session.getAttribute("memberId");
 		cartDto.setMemberId(memberId);
+		cartProductInfoDto.setMemberId(memberId);
 		// 담으려는 수량 - 이 부분 서비스로 뺄까 고민중
 		int productCount = cartDto.getProductCount();
 		// 재고 수량
