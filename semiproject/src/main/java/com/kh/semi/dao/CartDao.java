@@ -57,7 +57,14 @@ public class CartDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
-	// 장바구니에 있는 상품 개수 갱신 기능 (뷰)
-	// 금액 정보 업데이트 기능 (뷰)
+	// 장바구니 총 상품 개수
+	public int cartCnt(String memberId) {
+		String sql = "select count(*) from cart_product_info where member_id=?";
+		Object[] param = {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	// 장바구니에 있는 상품 개수 갱신 기능
+	// 금액 정보 업데이트 기능
 	
 }
