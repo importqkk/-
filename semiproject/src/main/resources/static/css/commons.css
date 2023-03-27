@@ -495,10 +495,10 @@ input[type="checkbox"] {
     cursor: pointer;
   }
 
-  input[type="checkbox"]:checked {
-    background: #776bff;
-    border: 2px solid #776bff;
-  }
+input[type="checkbox"]:checked {
+  background: #776bff;
+  border: 2px solid #776bff;
+}
 
 /*
     글자 스타일
