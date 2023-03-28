@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<head>
+
     <style>
         .flex-remain{
             flex:1;
@@ -27,6 +27,10 @@
             background-color: #F5F5f5;
         }
         .w-49 {width: 49%;}  /*장바구니, 구매버튼을 위한 간격*/
+		
+		.font-black{
+			color: black;
+		}
 
         .font-lightgrey {
             color: #A2a1a1;
@@ -112,11 +116,22 @@
 			list-style-type : disc;
 		}
 		
+		.fs-20{
+			font-size: 18px;
+			text-decoration: none;
+			font-weight: bold;
+		}
+		
+		.up-10{
+			
+		}
+		
     </style>
     <script type="text/javascript">
     $(function(){
-    	// 이미지 높이 조절----------------------------------------------------
     	
+    	
+    	// 이미지 높이 조절---------------------------------------------------   	
     	// 초기상태에서 클리되었을때 
    		$(".show-detail").click(function(){
    			
@@ -144,8 +159,10 @@
     	
     	
    		
+   		
+   		
     	// 상품 개당 가격 조절 ajax-------------------------------------
-    	var productPrice = $(".product-price").text();
+//     	var productPrice = $(".product-price").text();
 
    		
     	$(".minus").click(function(){// 마이너스 버튼이 눌리면 비동기 통신 시작 
@@ -167,7 +184,7 @@
                     $(".number").text(number);
                 	
                 	// 총 금액 최신화 
-                    $(".total-price").text(number*productPrice+3000);
+                    $(".total-price").text((number*productPrice+3000).toLocaleString());
                     
                  },
                 error: function(xhr, status, error) {
@@ -193,7 +210,7 @@
                     $(".number").text(number);
                 	
                 	// 총 금액 최신화 
-                    $(".total-price").text(number*productPrice+3000);
+                    $(".total-price").text((number*productPrice+3000).toLocaleString());
                 },
                 error: function(xhr, status, error) {
                     console.log("에러다에러");
@@ -201,11 +218,14 @@
         	});	
         });
     	// 상품 가격 조절 ajax-------------------------------------------
+    	
+    	
+    	// 스크롤을 해당하는 곳으로 옮기고 10만큼 올리는 예제 
+    	$("scrollTarget")
     });	   	
     	
     </script>
-    <title>상품 상세페이지</title>
-</head>
+
 <body test>
 	<h6 class="productNo" style="display:none;">${productDto.productNo}</h6>
     <div class="container-1000">
@@ -282,16 +302,16 @@
     <div class="container-1000 ">
         <div class="flex"> 
             <div class="flex-content w-33 center">
-                <h3>제품상세정보</h3>
+<!--                 <a class="fs-20 font-black" href="#scrollTargetDetailImage">제품상세정보</a> -->
                 
-            </div>
-            <div class="flex-content w-33 center">
-                <h3 class="oneLine">후기</h3>
-                <h3 class="oneLine font-grey">(150)</h3>
+<!--             </div> -->
+<!--             <div class="flex-content w-33 center"> -->
+<!--                 <a class="fs-20 oneLine font-black" href="#scrollTargetReview">후기</a> -->
+<!--                 <h3 class="fs-20 oneLine font-black">(150)</h3> -->
                
-            </div>
-            <div class="flex-content w-33 center">
-                <h3>상품구매안내</h3>
+<!--             </div> -->
+<!--             <div class="flex-content w-33 center"> -->
+<!--                 <a class="fs-20 font-black" href="#scrollTargetPurchaseGuide">상품구매안내</a> -->
                 
             </div>
         </div>
@@ -303,7 +323,7 @@
     </div>
 	<div class="container-1000">
 		<!--상세이미지 초기상태 -->
-		<div class="row detail-img-initial">
+		<div class="row detail-img-initial" id="scrollTargetDetailImage"> <!-- id 상세이미지로 스크롤 타겟팅 -->
 			<img width="1000" class="center" src="/static/image/detail_img.jpg">
 		</div>
 	</div>
@@ -401,8 +421,8 @@
         
         <!-- 리뷰 칸 -->
 
-        <div class="container-1000">
-            <div class="row left">
+        <div class="container-1000"> 
+            <div class="row left" id="scrollTargetReview"> <!-- 상품 리뷰 안내 -->
                 <!-- 리뷰 예시 1-->
                 <h2>testa***</h2>
                 <div class="flex">
@@ -483,9 +503,9 @@
             </div>
         </div>
 
-        <div class="container-1000">
+        <div class="container-1000" >
             <div class="row">
-                <h3 class="font-boldgrey">배송안내</h3>
+                <h3 class="font-boldgrey" id="scrollTargetPurchaseGuide">배송안내</h3>
                 <br>
             </div>
             <div class="row">
