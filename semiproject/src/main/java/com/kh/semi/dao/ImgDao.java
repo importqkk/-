@@ -38,7 +38,7 @@ public class ImgDao {
 	
 	public void insert(ImgDto imgDto) {
 		String sql = "insert into img("
-						+ "img_no, img_name "
+						+ "img_no, img_name,"
 						+ "img_type, img_size) "
 						+ "values(?,?,?,?)";
 		Object[] param = {
