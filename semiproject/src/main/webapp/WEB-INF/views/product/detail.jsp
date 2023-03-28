@@ -162,7 +162,7 @@
    		
    		
     	// 상품 개당 가격 조절 ajax-------------------------------------
-//     	var productPrice = $(".product-price").text();
+     	var productPrice = $(".product-price").text();
 
    		
     	$(".minus").click(function(){// 마이너스 버튼이 눌리면 비동기 통신 시작 
