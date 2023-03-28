@@ -33,7 +33,7 @@ public class ProductImgDao {
 	
 	// 이미지 조회
 	public ProductImgDto selectOne(int productNo) {
-		String sql = "select * from product_img where productNo = ?";
+		String sql = "select * from product_with_img where product_no = ?";
 		Object[] param = {productNo};
 		List<ProductImgDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
