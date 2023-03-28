@@ -57,8 +57,7 @@ public class CartDao {
 	}
 	// 상품 이미지 조회 (테스트 필요)
 	public Integer cartImg(int productNo) {
-		String sql = "select * from img where img_no = "
-					+ "(select img_no from product_img where product_no=?)";
+		String sql = "select * from product_with_img where product_no=?";
 		Object[] param = {productNo};
 		return jdbcTemplate.queryForObject(sql, Integer.class, param);
 	}
