@@ -28,10 +28,25 @@ public class CartDao {
 	
 	// 장바구니에 저장(insert)
 	public void cartInsert(CartDto cartDto) {
-		String sql = "insert into cart(member_id, product_no, product_count) values(?, ?, ?)";
+		String sql = "insert into cart(member_id, product_no, product_count) "
+					+ "values(?, ?, ?)";
 		Object[] param = {cartDto.getMemberId(), cartDto.getProductNo(), 
 						cartDto.getProductCount()};
 		jdbcTemplate.update(sql, param);
+	}
+	// 이미 장바구니에 있는 상품인지 확인
+	public CartDto selectOne(CartDto cartDto) {
+		String sql = "select * from cart where member_id=? and product_no=?";
+		Object[] param = {cartDto.getMemberId(), cartDto.getProductNo()};
+		List<CartDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	// 이미 장바구니에 있는 상품인 경우 선택한 수량만큼 장바구니 수량 플러스
+	public boolean cartPlus(CartDto cartDto) {
+		String sql = "update cart set product_count=product_count+? where member_id=? and product_no=?";
+		Object[] param = {cartDto.getProductCount(), cartDto.getMemberId(), 
+						cartDto.getProductNo()};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
 	// 장바구니 조회(list)
@@ -40,9 +55,10 @@ public class CartDao {
 		Object[] param = {memberId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-	// 상품 이미지 조회
+	// 상품 이미지 조회 (테스트 필요)
 	public Integer cartImg(int productNo) {
-		String sql = "select * from img where img_no = (select img_no from product_img where product_no=?)";
+		String sql = "select * from img where img_no = "
+					+ "(select img_no from product_img where product_no=?)";
 		Object[] param = {productNo};
 		return jdbcTemplate.queryForObject(sql, Integer.class, param);
 	}
