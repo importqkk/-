@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Component
 // 컴포넌트 선언
-@ConfigurationProperties(prefix = "fileupload")
+@ConfigurationProperties(prefix = "custom.fileupload")
 // application.properties에서 custom.fileupload 설정을 가져오는 어노테이션
 public class FileUploadProperties {
 
