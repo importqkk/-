@@ -14,9 +14,11 @@ import com.kh.semi.dao.CartDao;
 import com.kh.semi.dao.CartProductInfoDao;
 import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ProductImgDao;
+import com.kh.semi.dao.ProductWithImgDao;
 import com.kh.semi.dto.CartDto;
 import com.kh.semi.dto.CartProductInfoDto;
 import com.kh.semi.dto.ProductDto;
+import com.kh.semi.dto.ProductWIthImgDto;
 
 @Controller
 @RequestMapping("/cart")
@@ -30,6 +32,8 @@ public class CartController {
 	private ProductDao productDao;
 	@Autowired
 	private ProductImgDao productImgDao;
+	@Autowired
+	private ProductWithImgDao productWithImgDao;
 	
 	/*
 		완료
@@ -113,10 +117,11 @@ public class CartController {
 		List<CartProductInfoDto> itemInfo = cartProductInfoDao.cartItemInfo(memberId);
 		int cartCnt = cartDao.cartCnt(memberId);
 		int productNo = cartDto.getProductNo();
+		ProductWIthImgDto productImg = productWithImgDao.selectOne(productNo);
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("itemInfo", itemInfo);
 		model.addAttribute("cartCnt", cartCnt);
-		model.addAttribute("productImg", productImgDao.selectOne(productNo));
+		model.addAttribute("productImg", productImg);
 		return "/WEB-INF/views/cart/cartMain.jsp";
 	}
 	
