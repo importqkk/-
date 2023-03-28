@@ -28,7 +28,7 @@ public class CartDao {
 	
 	// 장바구니에 저장(insert)
 	public void cartInsert(CartDto cartDto) {
-		String sql = "insert into cart values(?, ?, ?)";
+		String sql = "insert into cart(member_id, product_no, product_count) values(?, ?, ?)";
 		Object[] param = {cartDto.getMemberId(), cartDto.getProductNo(), 
 						cartDto.getProductCount()};
 		jdbcTemplate.update(sql, param);
@@ -39,6 +39,12 @@ public class CartDao {
 		String sql = "select * from cart where member_id=?";
 		Object[] param = {memberId};
 		return jdbcTemplate.query(sql, mapper, param);
+	}
+	// 상품 이미지 조회
+	public Integer cartImg(int productNo) {
+		String sql = "select * from img where img_no = (select img_no from product_img where product_no=?)";
+		Object[] param = {productNo};
+		return jdbcTemplate.queryForObject(sql, Integer.class, param);
 	}
 	
 	// 장바구니 상품 개수 변경(update - set)
