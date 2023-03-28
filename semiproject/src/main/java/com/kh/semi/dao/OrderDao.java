@@ -19,11 +19,12 @@ public class OrderDao {
 	
 	//주문생성
 	public void insertOrder(OrderDto orderDto) {
-		String sql="insert into Order_(ORDER_NO,ORDER_RECEIVER,ORDER_POST,ORDER_BASIC_ADDR,ORDER_DETAIL_ADDR,ORDER_RECEIVER_PHONE,ORDER_DATE,ORDER_REQUEST,MEMBER_ID)"
+		String sql="insert into Order_(ORDER_NO,ORDER_RECEIVER,ORDER_POST,ORDER_BASIC_ADDR,ORDER_DETAIL_ADDR,ORDER_RECEIVER_PHONE,"
+				+ "ORDER_DATE,ORDER_REQUEST,ORDER_USERPOINT,ORDER_STAT,MEMBER_ID)"
 				+ "values('order_seq.nextval()',?,?,?,?,?,sysdate,?,?)";
 		
 		Object[] param= {orderDto.getOrderNO(),orderDto.getOrderRecever(),orderDto.getOrderPost(),orderDto.getOrderBasicAddr(),
-				orderDto.getOrderDetailAddr(),orderDto.getOrderReceivePhone(),orderDto.getOrderDate(),orderDto.getOrderRequest(),orderDto.getMemberId()
+				orderDto.getOrderDetailAddr(),orderDto.getOrderReceivePhone(),orderDto.getOrderDate(),orderDto.getOrderRequest(),orderDto.getOrderUserPoint(),orderDto.getOrderStat(),orderDto.getMemberId()
 		};
 		
 		jdbcTemplate.update(sql,param);
@@ -40,6 +41,8 @@ public class OrderDao {
 		dto.setOrderReceivePhone(rs.getString("ORDER_RECEIVER_PHONE"));
 		dto.setOrderDate(rs.getDate("ORDER_DATE"));
 		dto.setOrderRequest(rs.getString("ORDER_REQUEST"));
+		dto.setOrderUserPoint(rs.getInt("ORDER_USERPOINT"));
+		dto.setOrderStat(rs.getString("ORDER_STAT"));
 		dto.setMemberId(rs.getString("MEMBER_ID"));
 		return dto;
 	};
@@ -68,6 +71,8 @@ public class OrderDao {
 		Object[] param = {productNo};
 		return jdbcTemplate.queryForObject(sql, Integer.class, param);
 	}
+	
+	
 	
 	
 	

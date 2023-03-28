@@ -4,13 +4,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.OrderDao;
 import com.kh.semi.dao.OrderProductDao;
+import com.kh.semi.dto.MemberDto;
 import com.kh.semi.dto.OrderDto;
 import com.kh.semi.dto.OrderProductDto;
 
@@ -23,12 +26,15 @@ public class OrderController {
 	private OrderDao orderDao;
 	@Autowired
 	private OrderProductDao orderProductDao;
+	@Autowired
+	private MemberDao memberDao;
 	
 	//주문생성 페이지
 //	@PostMapping("/insert")
 
 	@GetMapping("/buy")
-	public String buy() {
+	public String buy(Model model,@ModelAttribute MemberDto memberDto) {
+		model.addAttribute(memberDto);
 		return "/WEB-INF/views/order/buy.jsp";
 	}
 	

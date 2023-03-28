@@ -10,7 +10,11 @@
     </style>
     <script type="text/javascript">
  	
-    
+    $(function(){// 페이지 로드됐을때
+    	$(".defalut-addr").click(function(){
+    		$("")
+    	})
+    }
  
     </script>
     
@@ -20,51 +24,45 @@
         <div class="flex">
             <div class=" w-60 pt-20">
                 <p><h2>주문상품</h2></p>
-                
+                <h1 class="memberDto" style="display=none">${memberDto}</h1>
                 <div class="row flex">
                     <img src="https://picsum.photos/100/100" class="pe-20">
                     <div class="row-medium flex">
-	                	<span hidden class="productNo">${cartProductInfoDto.productNo}</span> <%-- 상품번호(숨김) --%>
-	                    <h4 class="me-5 c-b80">[${cartProductInfoDto.productBrand}]</h4>	<%-- 브랜드명 --%>
-	                    <span class="c-b80">${cartProductInfoDto.productName}</span>	<%-- 상품명 --%>
+	                	
 	                </div>
                 </div>
                 <div class="row left">
-                    <p><h2>배송지</h2></p>
+                   	<h2>배송지</h2> <input type="checkbox" class="defalut-addr"> 
                     <div class="row">
                         <p>받는사람</p>
-                        <input type="text" class="form-input light w-100 medium">
+                        <input type="text" class="form-input light w-100 medium" id="orderReciver">
                     </div>
 
                     <div class="row">
                         <p>연락처</p>
-                        <input type="text" class="form-input light w-100 medium">
-                    </div>
-
-                    <div class="row">
-                        <p>이메일</p>
-                        <input type="text" class="form-input light medium w-100 ">
+                        <input type="text" class="form-input light w-100 medium" name="orderReciverPhone">
                     </div>
 
                     <div class="row">
                         <p>주소</p>
-                        <input type="text" class="form-input light medium w-50" placeholder="우편번호">
+                        <input type="text" class="form-input light medium w-50" name="orderPost" placeholder="우편번호">
                         <button class="form-btn medium positive">우편번호찾기</button>
                     </div>
 
                     <div class="row">
-                        
-                        <input type="text" class="form-input light medium w-100" placeholder="기본주소" readonly>
+                        <p></p>
+                        <input type="text" class="form-input light medium w-100" name="orderBasicAddr" placeholder="기본주소" readonly>
                     </div>
 
                     <div class="row">
-                        <input type="text" class="form-input light medium w-100" placeholder="상세주소">
+                        <input type="text" class="form-input light medium w-100" name="orderDetailAddr" placeholder="상세주소">
                     </div>
 
                     <div class="row">
                         <p>배송요청사항</p>
-                        <input type="text" class="form-input light medium w-100">
+                        <input type="text" class="form-input light medium w-100" name="orderRequest">
                     </div>
+                </div>
                 </div>
 
             </div>

@@ -21,6 +21,7 @@ public class OrderDto {
 	private String memberId;
 	
 	private String orderStat;
+	private int orderUserPoint;
 	private Date orderDate;
 	
 	
