@@ -164,67 +164,37 @@
     	// 상품 개당 가격 조절 ajax-------------------------------------
      	var productPrice = $(".product-price").text();
 
-   		
-    	$(".minus").click(function(){// 마이너스 버튼이 눌리면 비동기 통신 시작 
-    		var number = $(this).next(".number").text();
-    		number = parseInt(number);
-    		if(number>=2){
-				number=number-1;
-			}
-    		// 총 금액
+    	$(".productCount").on('change',function(){
+    		
+    		 var number = $(this).val();
+    		 number = parseInt(number);
+    		 $.ajax({ // 서버에 데이터 요청
+     			type:'POST',
+         		url:"/rest/number",
+         		data: JSON.stringify({'number': number.toString()}),
+                 contentType: 'application/json; charset=utf-8',
+                 success: function(data) {
             
-    		$.ajax({ // 서버에 데이터 요청
-    			type:'POST',
-    			url:"/rest/number",
-        		data: JSON.stringify({'number': number.toString()}),
-                contentType: 'application/json; charset=utf-8',
-                success: function(data) { // 개수 비동기 통신 성공 시, 
-					
-                	// 개수 최신화
-                    $(".number").text(number);
-                	
-                	// 총 금액 최신화 
-                    $(".total-price").text((number*productPrice+3000).toLocaleString());
-                    
+                 	// 개수 최신화
+                     $(".number").text(number);
+                 	
+                 	// 총 금액 최신화 
+                     $(".total-price").text((number*productPrice+3000).toLocaleString());
                  },
-                error: function(xhr, status, error) {
-                	 console.log("에러다에러");
-                	
-                }
-        	});	
+                 error: function(xhr, status, error) {
+                     console.log("에러다에러");
+                 }
+         	});
     	});
-    	$(".plus").click(function(){// 플러스 버튼이 눌리면 비동기 통신 시작 
-    		var number = $(this).prev(".number").text(); // plus잔의 
-    		
-    		number = parseInt(number);
-    		if(number<9){
-    			number = number+1;	
-    		}
-    		
-
-    		$.ajax({ // 서버에 데이터 요청
-    			type:'POST',
-        		url:"/rest/number",
-        		data: JSON.stringify({'number': number.toString()}),
-                contentType: 'application/json; charset=utf-8',
-                success: function(data) {
-           
-                	// 개수 최신화
-                    $(".number").text(number);
-                	
-                	// 총 금액 최신화 
-                    $(".total-price").text((number*productPrice+3000).toLocaleString());
-                },
-                error: function(xhr, status, error) {
-                    console.log("에러다에러");
-                }
-        	});	
-        });
+    	
+    	
+    	
+    	
     	// 상품 가격 조절 ajax-------------------------------------------
     	
     	
     	// 스크롤을 해당하는 곳으로 옮기고 10만큼 올리는 예제 
-    	$("scrollTarget")
+    	// $("scrollTarget")
     });	   	
     	
     </script>
@@ -232,6 +202,7 @@
 <body test>
 	<h6 class="productNo" style="display:none;">${productDto.productNo}</h6>
     <div class="container-1000">
+    	<form class="two-form"> <!-- 장바구니, 구매하기 까지 감싼 form -->
         <hr>
         <!-- 이미지 부터 구매하기 버튼까지 -->
         <div class="flex">
@@ -274,13 +245,20 @@
                             <h5 class="font-boldgrey oneLine">${productDto.productName}</h5>
                         </div>
                         <div class="flex-remain center">
-                            <button class="w-100 form-btn small neutral center">
-								<div class="qty-stepper flex">
-									<a class="w-30 minus">-</a>
-									<a class="w-30 number">1</a>
-									<a class="w-30 plus">+</a>
-								</div>
-							</button>
+<!--                             <button class="w-100 form-btn small neutral center"> -->
+								<select class="productCount" name="number">
+								  <option value="1">1</option>
+								  <option value="2">2</option>
+								  <option value="3">3</option>
+								  <option value="4">4</option>
+								  <option value="5">5</option>
+								  <option value="6">6</option>
+								  <option value="7">7</option>
+								  <option value="8">8</option>
+								  <option value="9">9</option>
+								  <option value="10">10</option>
+								</select>
+<!-- 							</button> -->
                         </div>                        
                     </div>
                     <br><hr>
@@ -298,6 +276,7 @@
                 
             </div>
         </div>
+        </form>
     </div>
     <!-- 구매하기 버튼 이후부터 -->
 
