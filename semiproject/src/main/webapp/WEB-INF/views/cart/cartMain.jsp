@@ -128,7 +128,14 @@
 	                <input type="checkbox" class="check-item">	상품 개별선택 체크박스
 	            </div> --%>
 	            <div class="flex me-15">
-	                <img class="product-img" src="/static/image/productDummy.png" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+	            	<c:choose>
+	            		<c:when test="${productImg != null}">
+	            			<img class="product-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productImg.imgNo}" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+	            		</c:when>
+	            		<c:otherwise>
+	            			<img class="product-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+	            		</c:otherwise>
+	            	</c:choose>
 	            </div>
 	            <div class="w-100">
 	                <div class="row-medium flex">
@@ -138,8 +145,8 @@
 	                </div>
 	                <div class="row">
 	                    <h4>
-	                    	<!-- <span class="productPrice"><fmt:formatNumber value="${cartProductInfoDto.productPrice}" pattern="#,##0"></fmt:formatNumber></span> <%-- 해당상품가격 --%> -->
-	                    	<span class="productPrice">${cartProductInfoDto.productPrice}</span> <%-- 해당상품가격 --%>
+	                    	<span class="productPrice"><fmt:formatNumber value="${cartProductInfoDto.productPrice}" pattern="#,##0"></fmt:formatNumber></span> <%-- 해당상품가격 --%>
+	                    	<!-- <span class="productPrice">${cartProductInfoDto.productPrice}</span> <%-- 해당상품가격 --%> -->
 							원
 	                    </h4>
 	                </div>
@@ -330,7 +337,7 @@
                 <a class="form-btn medium neutral w-100 selected-btn" href="#">선택상품 결제하기</a>
             </div> -->
             <div class="row">
-                <a class="form-btn medium positive w-100 all-btn" href="#">결제하기</a>
+                <a class="form-btn medium positive w-100 all-btn" href="#">주문하기</a>
             </div>
         </div>
 
