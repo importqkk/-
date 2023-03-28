@@ -197,7 +197,10 @@
     		var number = $(this).prev(".number").text(); // plus잔의 
     		
     		number = parseInt(number);
-    		number = number+1;
+    		if(number<9){
+    			number = number+1;	
+    		}
+    		
 
     		$.ajax({ // 서버에 데이터 요청
     			type:'POST',
