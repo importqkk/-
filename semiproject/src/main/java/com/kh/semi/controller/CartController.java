@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.semi.dao.CartDao;
 import com.kh.semi.dao.CartProductInfoDao;
+import com.kh.semi.dao.ProductImgDao;
 import com.kh.semi.dto.CartDto;
 import com.kh.semi.dto.CartProductInfoDto;
 import com.kh.semi.dto.ProductDto;
@@ -24,6 +25,8 @@ public class CartController {
 	private CartDao cartDao;
 	@Autowired
 	private CartProductInfoDao cartProductInfoDao;
+	@Autowired
+	private ProductImgDao productImgDao;
 	
 	/*
 		완료
@@ -43,13 +46,13 @@ public class CartController {
 		ProductDto productDto = new ProductDto();
 		int productStock = productDto.getProductStock();
 		// 담으려는 수량이 재고보다 적거나 같을 때 장바구니에 추가
-		if(productCount <= productStock) {
+		//if(productCount <= productStock) {
 			cartDao.cartInsert(cartDto);
-		}
+		/*}
 		// 담으려는 수량이 재고보다 많으면 에러
 		else {
 			attr.addAttribute("mode", "error");
-		}
+		}*/
 		return "redirect:main";
 	}
 	
@@ -82,6 +85,7 @@ public class CartController {
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("itemInfo", itemInfo);
 		model.addAttribute("cartCnt", cartCnt);
+		model.addAttribute("productImg", productImgDao.selectOne(cartDto.getProductNo()));
 		return "/WEB-INF/views/cart/cartMain.jsp";
 	}
 	
