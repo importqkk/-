@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.semi.dto.ProductDto;
+
 @Repository
 public class ProductTagDao {
 
@@ -21,4 +23,7 @@ public class ProductTagDao {
 		List<Integer> list = jdbcTemplate.queryForList(sql,Integer.class,param); // 
 		return list.isEmpty() ? null:list; // list가 비었으면 null 아니면 integer형태 리스트를 출력 
 	}
+	
+	
+
 }
