@@ -42,6 +42,7 @@ public class ImgController {
 		return "/WEB-INF/views/home.jsp";
 	}
 	
+	// 이미지 불러오기
 	@GetMapping("/download")
 	public ResponseEntity<ByteArrayResource> download(@RequestParam int imgNo) throws IOException {
 		// 헤더
