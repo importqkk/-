@@ -284,16 +284,16 @@
     <div class="container-1000 ">
         <div class="flex"> 
             <div class="flex-content w-33 center">
-<!--                 <a class="fs-20 font-black" href="#scrollTargetDetailImage">제품상세정보</a> -->
+                <a class="fs-20 font-black" href="#scrollTargetDetailImage">제품상세정보</a>
                 
-<!--             </div> -->
-<!--             <div class="flex-content w-33 center"> -->
-<!--                 <a class="fs-20 oneLine font-black" href="#scrollTargetReview">후기</a> -->
-<!--                 <h3 class="fs-20 oneLine font-black">(150)</h3> -->
+            </div>
+            <div class="flex-content w-33 center">
+                <a class="fs-20 oneLine font-black" href="#scrollTargetReview">후기</a>
+                <h3 class="fs-20 oneLine font-black">(150)</h3>
                
-<!--             </div> -->
-<!--             <div class="flex-content w-33 center"> -->
-<!--                 <a class="fs-20 font-black" href="#scrollTargetPurchaseGuide">상품구매안내</a> -->
+            </div>
+            <div class="flex-content w-33 center">
+                <a class="fs-20 font-black" href="#scrollTargetPurchaseGuide">상품구매안내</a>
                 
             </div>
         </div>

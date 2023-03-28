@@ -3,11 +3,9 @@ package com.kh.semi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dto.ProductDto;
@@ -21,6 +19,8 @@ public class ProductController {
 	private ProductDao productDao;
 	
 
+
+	// 상품 상세 페이지 - 상품 번호를 통해 페이지를 보여줌  
 	@GetMapping("/detail")
 	public String list(@RequestParam int productNo,
 						Model model) {
@@ -29,4 +29,7 @@ public class ProductController {
 		
 		return "/WEB-INF/views/product/detail.jsp";
 	}
+	
+	// 상품 리스트 페이지 
+	
 }
