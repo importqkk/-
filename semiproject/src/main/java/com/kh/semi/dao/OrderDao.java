@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.OrderDto;
-import com.kh.semi.dto.ProductDto;
 
 
 

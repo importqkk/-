@@ -9,25 +9,10 @@
 <style>
     </style>
     <script type="text/javascript">
-    $(function(){
-    		  // 주문 페이지가 열리면, 서버에서 수량 정보 가져오기
-    		  $.ajax({
-    		    type: 'GET',
-    		    url: '/rest/quantity',
-    		    data: {'productNo': productNo},
-    		    success: function(data) {
-    		      // 수량 정보가 있으면, 해당 정보로 업데이트
-    		      if (data) {
-    		        $(".number").text(data.quantity);
-    		        $(".total-price").text(data.quantity * productPrice + 3000);
-    		        console.log(productNo);
-    		      }
-    		    },
-    		    error: function(xhr, status, error) {
-    		      console.log("에러다에러");
-    		    }
+ 	
     
-    });
+ 
+    </script>
     
 </head>
 <body test>
@@ -38,7 +23,11 @@
                 
                 <div class="row flex">
                     <img src="https://picsum.photos/100/100" class="pe-20">
-                    
+                    <div class="row-medium flex">
+	                	<span hidden class="productNo">${cartProductInfoDto.productNo}</span> <%-- 상품번호(숨김) --%>
+	                    <h4 class="me-5 c-b80">[${cartProductInfoDto.productBrand}]</h4>	<%-- 브랜드명 --%>
+	                    <span class="c-b80">${cartProductInfoDto.productName}</span>	<%-- 상품명 --%>
+	                </div>
                 </div>
                 <div class="row left">
                     <p><h2>배송지</h2></p>
@@ -124,6 +113,7 @@
            
 
     </div>
+</div>
 
 </body>
 </html>
