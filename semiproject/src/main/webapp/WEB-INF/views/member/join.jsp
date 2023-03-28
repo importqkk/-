@@ -25,7 +25,7 @@
         	<label>이름</label>
         	<input type="text" name="memberName" placeholder="성, 이름 포함 한글 2글자 이상 7글자 이하"
             	class="form-input w-100 medium light" >
-        <div class="valid-message">사용 가능한 이름입니다</div>
+        <div class="valid-message">멋진 이름입니다!</div>
 		<div class="invalid-message">이름은 성, 이름 포함 한글 2~7자로 작성하세요</div>
         </div>
         <div class="row">
@@ -52,14 +52,14 @@
 		<div class="invalid-message2">비밀번호를 먼저 작성하세요</div>
 		</div>
               <div class="row">
-                <label>이메일</label>
-                <input type="email" name="memberEmail" class="form-input w-100 medium light">
-              </div>
-              <div class="row">
-                  <label>휴대전화</label>
-                  <input type="tel" name="memberPhone" class="form-input w-100 medium light">
-                  <div class="invalid-message">올바른 휴대전화번호가 아닙니다</div>
-              </div>
+            <label>이메일</label>
+            <input type="email" name="memberEmail" class="form-input w-100 medium light">
+          </div>
+          <div class="row">
+              <label>휴대전화</label>
+              <input type="tel" name="memberPhone" placeholder="대시(-)를 제외하고 작성" class="form-input w-100 medium light">
+              <div class="invalid-message">올바른 휴대전화번호가 아닙니다</div>
+          </div>
         <div class="row">
         	<label class="form-label w-100 mb-10">주소</label><br>
     		<input type="text" name="memberPost" class="form-input medium light" placeholder="우편번호" readonly>

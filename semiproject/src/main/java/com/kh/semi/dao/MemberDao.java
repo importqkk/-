@@ -25,7 +25,7 @@ public class MemberDao {
 				+ "member_point, member_join, member_role,"
 				+ "agree_tos, agree_privacy, agree_promotion"
 			+ ") values("
-				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, '일반회원',1,1,0" 
+				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, '일반회원',?,?,?" 
 			+ ")";
 		Object[] param = {
 				memberDto.getMemberId(), 
@@ -58,7 +58,7 @@ public class MemberDao {
 			memberDto.setMemberPw(rs.getString("member_pw"));
 			memberDto.setMemberPhone(rs.getString("member_phone"));
 			memberDto.setMemberEmail(rs.getString("member_email"));
-			memberDto.setMemberPost(rs.getInt("member_post"));
+			memberDto.setMemberPost(rs.getString("member_post"));
 			memberDto.setMemberBasicAddr(rs.getString("member_basic_addr"));
 			memberDto.setMemberDetailAddr(rs.getString("member_detail_addr"));
 			memberDto.setMemberPoint(rs.getInt("member_point"));
@@ -109,14 +109,13 @@ public class MemberDao {
 //	비밀번호를 제외한 나머지 정보 변경 기능
 	public boolean changeInformation(MemberDto memberDto) {
 		String sql = "update member set "
-						+ "member_name=?"
 						+ "member_nick=?, member_phone=?, "
-						+ "member_email=?"
+						+ "member_email=?,"
 						+ "member_post=?, member_basic_addr=?, "
 						+ "member_detail_addr=? "
 						+ "where member_id = ?";
 		Object[] param = {
-			memberDto.getMemberName(),memberDto.getMemberNick(), memberDto.getMemberPhone(),
+			memberDto.getMemberNick(), memberDto.getMemberPhone(),
 			memberDto.getMemberEmail(), memberDto.getMemberPost(), 
 			memberDto.getMemberBasicAddr(),memberDto.getMemberDetailAddr(), 
 			memberDto.getMemberId()

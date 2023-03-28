@@ -93,9 +93,17 @@
                         <a class="link" href="#">
                             <i class="fa-solid fa-cart-shopping custom-size font-purple pe-30 mt-25"></i>
                         </a>
-                        <a class="link" href="/member/login">
+                        <a class="link" href="/member/mypage">
                             <i class="fa-solid fa-user custom-size font-purple mt-25"></i>
                         </a>
+                        <c:if test="${memberId == null}"> <!-- 로그인 전 -->
+                        <a class="link" href="/member/join">join</a>
+                        <a class="link" href="/member/login">login</a>
+                        </c:if>
+                        <c:if test="${memberId != null}"> <!-- 로그인 후 -->
+                        <a class="link" href="/member/mypage">mypage</a>
+                        <a class="link" href="/member/logout">logout</a>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -178,6 +186,6 @@
                 <div class="w-70"></div>
             </div>
             
-        </aside>
+        </aside> 
         <section>
             <article>
