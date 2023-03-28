@@ -62,6 +62,12 @@ public class OrderDao {
 		return list.isEmpty() ? null:list.get(0);
 	}
 
+	//상품 이미지 조회
+	public Integer productImg(int productNo) {
+		String sql = "select * from img where img_no = (select img_no from product_img where product_no=?)";
+		Object[] param = {productNo};
+		return jdbcTemplate.queryForObject(sql, Integer.class, param);
+	}
 	
 	
 	

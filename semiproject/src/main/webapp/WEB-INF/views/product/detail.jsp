@@ -258,8 +258,7 @@
 	                
 	                </div>
 	                <div class="row">
-	                	<%-- <input name="productCount">
-	                	<input hidden name="productNo" value="${productDto.productNo}"> --%>
+	            
 	                    <h3 class="font-purple oneLine">총 금액&nbsp;</h3>
 	                    <h3 class="oneLine total-price">${productDto.productPrice}</h3>
 	                    <h3 class="oneLine">원</h3>
@@ -503,3 +502,4 @@
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+

@@ -1,10 +1,13 @@
 package com.kh.semi.dao;
 
+
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 
 import com.kh.semi.dto.OrderProductDto;
 
@@ -23,17 +26,25 @@ public class OrderProductDao {
 		
 		jdbcTemplate.update(sql,param);
 		
-		//조회를 위한 rowmapper 
-		RowMapper<OrderProductDto> mapper = (rs,idx) ->{
-			OrderProductDto dto=new OrderProductDto();
-			dto.setProductCount(rs.getInt("PRODUCT_COUNT"));
-			dto.setProductPrice(rs.getInt("PRODUCT_PRICE"));
-			dto.setProductNo(rs.getInt("PRODUCT_NO"));
-			dto.setOrderNo(rs.getInt("ORDER_NO"));
-			
-			return dto;
-		};
 		
+	}
+	//조회를 위한 rowmapper 
+			RowMapper<OrderProductDto> mapper = (rs,idx) ->{
+				OrderProductDto dto=new OrderProductDto();
+				dto.setProductCount(rs.getInt("PRODUCT_COUNT"));
+				dto.setProductPrice(rs.getInt("PRODUCT_PRICE"));
+				dto.setProductNo(rs.getInt("PRODUCT_NO"));
+				dto.setOrderNo(rs.getInt("ORDER_NO"));
+				
+				return dto;
+			};
+	
+	//
+	public List<OrderProductDto> orderInfo(int orderNo){
+		String sql="select * from order_product where order_no=?";
+		Object[] param= {orderNo};
+		return jdbcTemplate.query(sql,mapper,param);
+			
 	}
 	
 	
