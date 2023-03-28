@@ -39,4 +39,25 @@ public class ProductDao {
 		return list.isEmpty() ? null:list.get(0);
 	}
 	
+	public int sequence() {
+		String sql = "select product_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	public void insert(ProductDto productDto) {
+		String sql = "insert into product values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object[] param = {productDto.getProductNo(), productDto.getProductName(),
+				productDto.getProductBrand(), productDto.getProductPrice(),
+				productDto.getProductStock(), productDto.getProductContent(),
+				productDto.getProductDeliveryPrice(), productDto.getProductSellCount(),
+				productDto.getProductJoin()};
+		jdbcTemplate.update(sql, param);
+	}
+	
+	// 상품 재고 불러오기
+	public int selectStock(int productNo) {
+		String sql = "select product_stock from product where product_no=?";
+		Object[] param = {productNo};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
 }
