@@ -99,12 +99,37 @@ public class MemberDao {
 			};
 		return jdbcTemplate.queryForObject(sql, String.class, param);
 	}
-//	최종 로그인 시각만 갱신하는 기능(로그인 성공 시 호출)
-//	public boolean updateMemberLogin(String memberId) {
-//		String sql = "update member "
-//						+ "set member_login = sysdate "
-//						+ "where member_id = ?";
-//		Object[] param = {memberId};
-//		return jdbcTemplate.update(sql, param) > 0;
-//	}
+//	비밀번호 변경 기능
+	public boolean changePassword(String memberId, String memberPw) {
+		String sql = "update member set member_pw = ? where member_id = ?";
+		Object[] param = {memberPw, memberId};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+//	비밀번호를 제외한 나머지 정보 변경 기능
+	public boolean changeInformation(MemberDto memberDto) {
+		String sql = "update member set "
+						+ "member_name=?"
+						+ "member_nick=?, member_phone=?, "
+						+ "member_email=?"
+						+ "member_post=?, member_basic_addr=?, "
+						+ "member_detail_addr=? "
+						+ "where member_id = ?";
+		Object[] param = {
+			memberDto.getMemberName(),memberDto.getMemberNick(), memberDto.getMemberPhone(),
+			memberDto.getMemberEmail(), memberDto.getMemberPost(), 
+			memberDto.getMemberBasicAddr(),memberDto.getMemberDetailAddr(), 
+			memberDto.getMemberId()
+		};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+
+//	회원 삭제(탈퇴)
+	public boolean delete(String memberId) {
+		String sql = "delete member where member_id = ?";
+		Object[] param = {memberId};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	
 }
