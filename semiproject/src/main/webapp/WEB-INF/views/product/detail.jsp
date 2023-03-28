@@ -1,5 +1,7 @@
 -<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -187,6 +189,9 @@
 	         });
 	      });
        // 장바구니버튼, 주문 버튼 개별 경로처리--------------------------------
+       $(".cart-btn").click(function() {
+    	   
+       })
     });         
        
     </script>
@@ -233,8 +238,8 @@
 	                </div>
 	                <div class="row">
 	                    <hr>
-	                    <div class="flex">
-	                        <div class="w-70">
+	                    <div class="flex row">
+	                        <div class="w-70 row">
 	                            <h5 class="font-boldgrey oneLine">${productDto.productName}</h5>
 	                        </div>
 	                        <div class="flex-remain center">
@@ -252,10 +257,15 @@
 								  <option value="10">10</option>
 								</select>
 <!-- 							</button> -->
-                        	</div>                                         
+                        	</div>                                    
 	                    </div>
-	                    <br><hr>
-	                
+	                    <%-- 재품 재고보다 담은 수량이 많을 경우(장바구니 버튼 클릭했을때 mode==error가 오면 --%>
+	                    <c:if test="${param.mode=='error'}">
+	                    	<div class="row">
+	                    		<span>재고가 부족합니다. (남은 수량: ${productDto.productStock}개)</span>
+	                    	</div>
+	                    </c:if>
+	                    <hr>
 	                </div>
 	                <div class="row">
 	                	<%-- <input name="productCount">
