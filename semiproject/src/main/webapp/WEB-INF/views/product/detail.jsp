@@ -14,7 +14,9 @@
 		<div class="reviewStar"></div> 
 		<div class="reviewTime"></div>
 		<div class="reviewContent"></div>
-		<div class="reviewLike"><div>
+		<div class="reviewLike">
+			<span class="heart-count">${reviewDto.reviewLike}</span>
+		<div>
 	</div>
 </script>
 
@@ -81,15 +83,9 @@
         
         <div class="row review-list">
         	리뷰 목록 위치
-        	<!-- 리뷰 좋아요 -->
-        </div>
-        <div class="row">
-<%--         	<c:forEach var="reviewDto" items="${list}"> --%>
-<%-- 	        	<span>${reviewDto.reviewLike}</span> --%>
-<%-- 	        	<c:if test="${sessionScope.memberId != null}"> --%>
-<!-- 	        		<i class="fa-heart fa-solid"></i> -->
-<%-- 	        	</c:if>        	 --%>
-<%--         	</c:forEach> --%>
+	        <div class="row target">
+	     
+	        </div>
         </div>
     </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

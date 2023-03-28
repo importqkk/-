@@ -28,6 +28,11 @@ public class ReviewDao {
 				.build();
 	};
 	
+	public int sequence(){
+		String sql = "select review_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	};
+	
 	//리뷰 등록
 	public void insert(ReviewDto reviewDto) {
 		String sql = "insert into review( "
@@ -76,6 +81,20 @@ public class ReviewDao {
 		Object[] param = {reviewNo};
 		List<ReviewDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	//리뷰 좋아요 수 카운트
+	public void updateLikecount(int reviewNo, int count) {
+		String sql = "update review set review_like = ? where review_no = ?";
+		Object[] param = {count, reviewNo};
+		jdbcTemplate.update(sql, param);
+	}
+	
+	//리뷰 사진 첨부
+	public void connect(int reviewNo, int imgNo) {
+		String sql = "insert into review_img values(?,?)";
+		Object[] param = {reviewNo, imgNo};
+		jdbcTemplate.update(sql, param);
 	}
 
 }

@@ -41,6 +41,7 @@ public class ReviewRestController {
 		int count = reviewLikeDao.count(reviewLikeDto.getReviewNo());
 		
 		//게시글의 좋아요 개수를 업데이트
+		reviewDao.updateLikecount(reviewLikeDto.getReviewNo(), count);
 		
 		
 		return ReviewLikeVO.builder()

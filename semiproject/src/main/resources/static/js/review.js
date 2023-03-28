@@ -127,17 +127,15 @@ $(function(){
 							},
 							success:function(response){
 								console.log(response);
-//								console.log(reviewNo);
-								
-								
-						        if(response){
-						            $(html).find(".fa-heart").removeClass("fa-regular fa-solid").addClass("fa-solid");        
+								if(response){
+						            $likeButton.removeClass("fa-regular").addClass("fa-solid");
 						        }
 						        else{
-						            $(html).find(".fa-heart").removeClass("fa-regular fa-solid").addClass("fa-regular");
+						            $likeButton.removeClass("fa-solid").addClass("fa-regular");
 						        }
-								
 						        
+						        $likeButton.text(response.count); // 서버에서 받아온 count 값으로 갱신
+												        
 								
 							},
 							error:function(){
@@ -246,41 +244,56 @@ $(function(){
 		});
 	}
 	
-	function likeReview(){
-		//loadList();
-		var reviewNo = $(this).data("review-no");
-//		console.log(reviewNo);
-		console.log(this);
+function likeReview(){
+    var reviewNo = $(this).data("review-no");
+    var $likeButton = $(this); // 선택한 하트 엘리먼트
+
+    $.ajax({
+        url:"/rest/review/like",
+        method:"post",
+        data:{
+            reviewNo:reviewNo
+        },
+        success:function(response){
+			console.log($likeButton);
+			
+            if(response.result){
+                $likeButton.text(response.count);
+                $likeButton.removeClass("fa-regular").addClass("fa-solid");
+            }
+            else{
+                $likeButton.find(".heart-count").text(response.count);
+                $likeButton.removeClass("fa-solid").addClass("fa-regular");
+            }
+        },
+        error:function(){}
+    });
+}
+
+$(function(){
+	$("[name=attach]").change(function(){
+		if(files.length != 1) return;
+		
+		var fd = new FormData();
+		fd.append("attach", this.files[0]);
 		
 		$.ajax({
-			url:"/rest/review/like",
+			url:"/rest/img/upload",
 			method:"post",
-			data:{
-				reviewNo:reviewNo
-			},
+			data:fd,
+			processData:false,
+			contentType:false,
 			success:function(response){
-				$(".fa-heart").click(function(){
-					if(response.result){
-	//					console.log(this);
-						
-						$(".reviewLike").removeClass("fa-solid fa-regular")
-													.addClass("fa-solid");
-					}
-					else{
-						$(this).find("fa-heart").removeClass("fa-solid fa-regular")
-													.addClass("fa-regular");
-					}
-						
-					
-				});
-				
-				
-				
-				
+				var img = $("<img>").prop("src", "/rest/img/download/"+response.imgNo);
+				$(".target").append(img);
 			},
-			error:function(){}
+			error:function(){
+				console.error("오류 발생");
+			}
 			
 		});
-	}
+	});
+});
+
 	
 });
