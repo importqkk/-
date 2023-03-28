@@ -30,7 +30,7 @@ public class QaDao {
 			qaDto.setQaContent(rs.getString("qa_content"));
 			qaDto.setQaAnswer(rs.getString("qa_answer"));
 			qaDto.setQaHead(rs.getString("qa_head"));
-			qaDto.setQaSecret(rs.getInt("qa_secret"));
+			qaDto.setQaSecret(rs.getString("qa_secret"));
 			qaDto.setQaGroup(rs.getInt("qa_group"));
 			qaDto.setQaDate(rs.getDate("qa_date"));
 			qaDto.setQaRead(rs.getInt("qa_read"));
@@ -100,9 +100,7 @@ public class QaDao {
 			qaDto.getMemberId(), qaDto.getQaContent(),
 			qaDto.getQaAnswer(),qaDto.getQaHead(),
 			qaDto.getQaSecret(), qaDto.getQaGroup(),
-			qaDto.getQaParent(), qaDto.getQaDepth(),
-			qaDto.getQaDate(),
-			qaDto.getQaRead()
+			qaDto.getQaParent(), qaDto.getQaDepth()
 		};
 		jdbcTemplate.update(sql, param);
 	}
@@ -148,34 +146,34 @@ public class QaDao {
 		}
 	}
 	
-//	public List<QaDto> selectList(QaPaginationVO vo) {
-//		if(vo.isSearch()) {//검색
-//			String sql = "select * from ("
-//							+ "select rownum rn, TMP.* from ("
-//								+ "select * from qa "
-//								+ "where instr(#1, ?) > 0 "
-//								+ "connect by prior qa_no=qa_parent "
-//								+ "start with qa_parent is null "
-//								+ "order siblings by qa_group desc, qa_no asc"
-//							+ ")TMP"
-//						+ ") where rn between ? and ?";
-//			sql = sql.replace("#1", vo.getColumn());
-//			Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
-//			return jdbcTemplate.query(sql, mapper, param);
-//		}
-//		else {//목록
-//			String sql = "select * from ("
-//								+ "select rownum rn, TMP.* from ("
-//									+ "select * from qa "
-//									+ "connect by prior qa_no=qa_parent "
-//									+ "start with qa_parent is null "
-//									+ "order siblings by qa_group desc, qa_no asc"
-//								+ ")TMP"
-//							+ ") where rn between ? and ?";
-//			Object[] param = {vo.getBegin(), vo.getEnd()};
-//			return jdbcTemplate.query(sql, mapper, param);
-//		}
-//	}
+	public List<QaDto> selectList(QaPaginationVO vo) {
+		if(vo.isSearch()) {//검색
+			String sql = "select * from ("
+							+ "select rownum rn, TMP.* from ("
+								+ "select * from qa "
+								+ "where instr(#1, ?) > 0 "
+								+ "connect by prior qa_no=qa_parent "
+								+ "start with qa_parent is null "
+								+ "order siblings by qa_group desc, qa_no asc"
+							+ ")TMP"
+						+ ") where rn between ? and ?";
+			sql = sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+		else {//목록
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select * from qa "
+									+ "connect by prior qa_no=qa_parent "
+									+ "start with qa_parent is null "
+									+ "order siblings by qa_group desc, qa_no asc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] param = {vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+	}
 	
 	//댓글 개수 갱신
 	public void updateReplycount(int qaNo) {

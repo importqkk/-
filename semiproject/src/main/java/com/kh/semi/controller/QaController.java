@@ -1,12 +1,18 @@
 package com.kh.semi.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -72,11 +78,31 @@ public class QaController {
 	
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam int qaNo) {
+		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
 		return "/WEB-INF/views/qa/detail.jsp";
 	}
 	
+
+	@PostMapping("/detail")
+	public void detailPost(Model model, @RequestParam int qaNo,HttpServletResponse response) throws JSONException {
+		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
+		JSONObject jsonObj = new JSONObject();
+		QaDto qaDto = qaDao.selectOne(qaNo);
+		jsonObj.put("qaTitle", qaDto.getQaTitle() );
+		jsonObj.put("qaContent", qaDto.getQaContent());
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter writer;
+		try {
+			writer = response.getWriter();
+			writer.print(jsonObj);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 //	@GetMapping("/detail")
-//	public String detail(@RequestParam int qaNo,
+//	public String detail2(@RequestParam int qaNo,
 //							Model model, HttpSession session) {
 //		
 //		//사용자가 작성자인지 판정 후 전달(JSP)
@@ -88,9 +114,10 @@ public class QaController {
 //		model.addAttribute("owner",owner);
 //		
 //		String memberRole = (String)session.getAttribute("memberRole");
+//		boolean admin = memberRole != null && memberRole.equals("관리자");
+//		model.addAttribute("admin", admin);
 //		
-//		
-//		//조회수 증가
+////		//조회수 증가
 //		if(!owner) {
 //			Set<Integer>memory = (Set<Integer>)session.getAttribute("memory");
 //			if(memory == null) {
@@ -106,12 +133,8 @@ public class QaController {
 //		model.addAttribute("qaDto",qaDto);
 //		return"/WEB-INF/views/qa/detail.jsp";
 //	}
+//	
 	
-	@GetMapping("/detail/{qaNo}")
-	public String detail2(@PathVariable int qaNo, Model model) {
-		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
-		return "/WEB-INF/views/qa/detail.jsp";
-	}
 	
 	@GetMapping("/write")
 	public String write(@RequestParam(required = false)Integer qaParent,
