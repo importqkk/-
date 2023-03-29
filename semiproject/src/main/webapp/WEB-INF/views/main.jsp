@@ -44,6 +44,7 @@
     }
     .star {
         color: #776BFF;
+        font-size: 0.7em;
     }
     .item-box {
         background-color: #f8f8f8;
@@ -59,7 +60,7 @@
         width: 200px;
         height: 200px;
     }
-    .recommend-box > *,
+    .new-box > *,
     .best-box > * {
         flex-grow: 1;
     }
@@ -166,7 +167,7 @@
 		                <h1 class="c-b80 me-5">NEW</h1><h2 class="c-b80 me-5">in</h2><h1 class="me-10 c-p100">SEMI</h1>
 		                <span class="c-b80">이달의 신상품을 만나보세요!</span>
 		            </div>
- 		            <div class="row flex recommend-box">
+ 		            <div class="row flex new-box">
 		            	<c:forEach var="productInfoDto" items="${newProduct}" end="3">
 			                <a class="link item-box me-10" href="/product/detail?productNo=${productInfoDto.productNo}">
 			                    <div>
@@ -188,25 +189,49 @@
 		                            	원
 		                            </h3>
 			                    </div>
-			                    <div>
+			                    <div class="flex">
 			                    	<c:choose>
 			                    		<c:when test="${productInfoDto.reivewAVG >= '4.5'}">
-			                    			<span class="star">★★★★★</span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
 			                    		</c:when>
 			                    		<c:when test="${productInfoDto.reivewAVG >= '3.5'}">
-			                    			<span class="star">★★★★☆</span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
 			                    		</c:when>
 			                    		<c:when test="${productInfoDto.reivewAVG >= '2.5'}">
-			                    			<span class="star">★★★☆☆</span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
 			                    		</c:when>
 			                    		<c:when test="${productInfoDto.reivewAVG >= '1.5'}">
-			                    			<span class="star">★★☆☆☆</span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
 			                    		</c:when>
 			                    		<c:when test="${productInfoDto.reivewAVG >= '0.5'}">
-			                    			<span class="star">★☆☆☆☆</span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
 			                    		</c:when>
 			                    		<c:when test="${productInfoDto.reivewAVG < '0.5'}">
-			                    			<span class="star">☆☆☆☆☆</span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
 			                    		</c:when>
 			                    	</c:choose>
 			                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}</span>
@@ -245,29 +270,53 @@
 			                            	원
 			                            </h3>
 			                        </div>
-			                        <div>
-			                            <c:choose>
-				                    		<c:when test="${productInfoDto.reivewAVG >= '4.5'}">
-				                    			<span class="star">★★★★★</span>
-				                    		</c:when>
-				                    		<c:when test="${productInfoDto.reivewAVG >= '3.5'}">
-				                    			<span class="star">★★★★☆</span>
-				                    		</c:when>
-				                    		<c:when test="${productInfoDto.reivewAVG >= '2.5'}">
-				                    			<span class="star">★★★☆☆</span>
-				                    		</c:when>
-				                    		<c:when test="${productInfoDto.reivewAVG >= '1.5'}">
-				                    			<span class="star">★★☆☆☆</span>
-				                    		</c:when>
-				                    		<c:when test="${productInfoDto.reivewAVG >= '0.5'}">
-				                    			<span class="star">★☆☆☆☆</span>
-				                    		</c:when>
-				                    		<c:when test="${productInfoDto.reivewAVG < '0.5'}">
-				                    			<span class="star">☆☆☆☆☆</span>
-				                    		</c:when>
-				                    	</c:choose>
-				                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}</span>
-			                        </div>
+			                        <div class="flex">
+			                    	<c:choose>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '4.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '3.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '2.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '1.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '0.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG < '0.5'}">
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    	</c:choose>
+			                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}</span>
+			                    </div>
 			                    </a>
 			                </c:forEach>
 		                </div>
