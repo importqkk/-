@@ -92,9 +92,9 @@
         <c:forEach var="cartProductInfoDto" items="${itemInfo}">
 	        <div class="row-large flex cart-item">
 	            <div class="flex me-15">
- 	            	<c:choose>
-	            		<c:when test="${productImg != null}">
-	            			<img class="product-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productImg.imgNo}" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+  	            	<c:choose>
+	            		<c:when test="${cartProductInfoDto.imgNo != 0}">
+	            			<img class="product-img" alt="상품 대표 이미지" src="/img/download?imgNo=${cartProductInfoDto.imgNo}" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
  	            		</c:when>
 	            		<c:otherwise>
 	            			<img class="product-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
@@ -252,11 +252,9 @@
 	        </div>
 	    </c:forEach>
 <!-- ------------------------------------ 반복문 돌릴 부분 end ------------------------------------ -->
-
         <div class="row-large">
             <a class="form-btn medium neutral w-100" href="/">더 쇼핑하기</a>
         </div>
-
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
         <div class="row-large">
             <table class="table table-cart">
@@ -289,17 +287,13 @@
                         	<h2 class="final-price">
                         		<span><fmt:formatNumber pattern="#,##0" value="${total+3000}"></fmt:formatNumber></span>
                         	</h2>
-                        </td><!-- 바꿔야함 -->
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
-
         <div class="row">
-<!--             <div class="row">
-                <a class="form-btn medium neutral w-100 selected-btn" href="#">선택상품 결제하기</a>
-            </div> -->
             <div class="row">
                 <a class="form-btn medium positive w-100 all-btn" href="#">주문하기</a>
             </div>
