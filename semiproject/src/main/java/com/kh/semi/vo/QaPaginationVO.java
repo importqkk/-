@@ -7,7 +7,7 @@ public class QaPaginationVO {
 	private String column = "qaTitle";
 	private String keyword = "";
 	private int page = 1;
-	private int size = 1;
+	private int size = 10;
 	private int count;
 	private int blockSize = 10;
 	
@@ -69,7 +69,7 @@ public class QaPaginationVO {
 	}
 	//[이전]
 	public boolean isPrev() {
-		return getStartBlock() > getBlockSize();
+		return getStartBlock() > 1;
 	}
 	//[다음]
 	public boolean isNext() {
