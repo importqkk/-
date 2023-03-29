@@ -42,9 +42,15 @@
 	</div>
 	
 	<div class="row">
-		<button type="submit" class="form-btn positive w-100 medium">수정하기</button>
+		<button class="form-btn neutral w-20 medium">취소</button>
+        <button type="submit" class="form-btn positive w-75 medium ms-25">변경하기</button>
 	</div>
-	
+		<!-- 취소 버튼 클릭 이벤트 처리 -->
+	<script>
+		$('.form-btn.neutral').click(function(){
+  		window.location.href = '/member/mypage';
+		});
+	</script>
 	<c:if test="${param.mode == 'error'}">
 	<div class="row center">
 		<h3 style="color:red;">비밀번호가 일치하지 않습니다</h3>

@@ -53,12 +53,16 @@
 		</div>
               <div class="row">
             <label>이메일</label>
-            <input type="email" name="memberEmail" class="form-input w-100 medium light">
+            <input type="text" name="memberEmail" class="form-input w-100 medium light" placeholder="이메일 입력">
+        <div class="valid-message">사용 가능한 이메일 입니다</div>
+		<div class="invalid-message">올바른 이메일 형식을 입력해주세요</div>
+		<div class="invalid-message2">이미 사용중인 이메일입니다</div> 
           </div>
           <div class="row">
-              <label>휴대전화</label>
+              <label>전화번호</label>
               <input type="tel" name="memberPhone" placeholder="대시(-)를 제외하고 작성" class="form-input w-100 medium light">
-              <div class="invalid-message">올바른 휴대전화번호가 아닙니다</div>
+              <div class="valid-message">사용 가능한 전화번호입니다</div>
+              <div class="invalid-message">올바른 전화번호가 아닙니다</div>
           </div>
         <div class="row">
         	<label class="form-label w-100 mb-10">주소</label><br>

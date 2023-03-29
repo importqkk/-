@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 
 <style>
   .container-600 {
@@ -19,9 +19,16 @@
           <input type="text" name="memberId" required class="form-input w-100 medium light" placeholder="비밀번호 입력" >
           </div>
      		<div class="row">
-          <button class="form-btn neutral w-20 medium">취소</button>
-          <button class="form-btn positive w-75 medium ms-25">찾기</button>
-        </div>
+		<div class="row">
+		<button class="form-btn neutral w-20 medium">취소</button>
+        <button type="submit" class="form-btn positive w-75 medium ms-25">확인</button>
+		</div>
+				<!-- 취소 버튼 클릭 이벤트 처리 -->
+		<script>
+			$('.form-btn.neutral').click(function(){
+  			window.location.href = '/member/mypage';
+			});
+		</script>
         
         <c:if test="${param.mode == 'error'}">
           <div class="row center" style="font-size: 15px; color: red;">

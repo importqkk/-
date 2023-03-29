@@ -25,7 +25,7 @@ public class MemberDao {
 				+ "member_point, member_join, member_role,"
 				+ "agree_tos, agree_privacy, agree_promotion"
 			+ ") values("
-				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, '일반회원',?,?,?" 
+				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, 0, sysdate, '일반회원','Y','Y','Y'" 
 			+ ")";
 		Object[] param = {
 				memberDto.getMemberId(), 
@@ -37,7 +37,7 @@ public class MemberDao {
 				memberDto.getMemberPost(),
 				memberDto.getMemberBasicAddr(),
 				memberDto.getMemberDetailAddr(),
-				memberDto.getMemberPoint(),
+//				memberDto.getMemberPoint(),
 //				memberDto.getMemberJoin(), 
 //				memberDto.getMemberRole(),
 //				memberDto.getAgreeTos(), 
@@ -67,7 +67,7 @@ public class MemberDao {
 			return memberDto;
 		}
 	};
-	
+	//비동기
 	public MemberDto selectOne(String memberId) {
 		String sql = "select * from member where member_id = ?";
 		Object[] param = {memberId};
@@ -80,7 +80,12 @@ public class MemberDao {
 		List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
+	public MemberDto selectByEmail(String memberEmail) {
+		String sql = "select * from member where member_email = ?";
+		Object[] param = {memberEmail};
+		List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
 //	이메일로 아이디 찾기
 	public String findId(MemberDto memberDto) {
 		String sql = "select member_id from member "

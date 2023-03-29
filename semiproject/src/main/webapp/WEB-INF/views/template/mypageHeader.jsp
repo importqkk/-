@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
+<div class="container-1000">
+	<div class="flex">
+	<div class="w-20">
 <!-- <aside class="left"> -->
 	<ul>
 		<li>
@@ -13,7 +15,7 @@
 				<li><a href="${pageContext.request.contextPath}/member/password">비밀번호 변경</a></li>
 				<li><a href="${pageContext.request.contextPath}/review/list?type=member_id&keyword=${loginId}">상품리뷰</a></li>
 				<li><a href="${pageContext.request.contextPath}/qa/list?type=member_id&keyword=${loginId}">상품문의</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/exit">회원 탈퇴</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/delete">회원 탈퇴</a></li>
 			</ul>
 		</li>
 		<li>
@@ -24,4 +26,5 @@
 			</ul>
 		</li>
 	</ul>
+	</div>
 <!-- </aside> -->

@@ -5,6 +5,7 @@ $(function(){
 		memberNickValid:false,		//닉네임(형식+중복)
 		memberPwValid:false,		//비밀번호(형식)
 		memberPwReValid:false,		//비밀번호 확인(일치)
+		memberEmailValid:false,		//닉네임(형식+중복)
 		memberPhoneValid:false,		//전화번호(형식)
 		memberAddressValid:true,	//주소(애매한 입력)
 		isAllValid:function(){
@@ -13,6 +14,7 @@ $(function(){
 						&& this.memberNickValid
 						&& this.memberPwValid
 						&& this.memberPwReValid
+						&& this.memberEmailValid
 						&& this.memberPhoneValid
 						&& this.memberAddressValid;
 		}
@@ -131,7 +133,41 @@ $(function(){
 			},
 		});
 	});
-	
+	//이메일 검사
+		$("[name=memberEmail]").blur(function(){
+		var regex = /.+@.+/;
+		var target = $(this);
+		var memberEmail = target.val();
+		var isValid = regex.test(memberEmail);
+		
+		valid.memberEmailValid = isValid;
+		if(!isValid) {//형식 오류 -> invalid
+			target.removeClass("valid invalid invalid2")
+						.addClass("invalid");
+			return;
+		}
+		
+		$.ajax({
+			url:"/rest/member/memberEmail/"+memberEmail,
+			method:"get",
+			success:function(response){
+				if(response == "Y") {
+					valid.memberEmailValid = true;
+					target.removeClass("valid invalid invalid2")
+								.addClass("valid");
+				}
+				else {
+					valid.memberEmailValid = false;
+					target.removeClass("valid invalid invalid2")
+								.addClass("invalid2");
+				}
+			},
+			error:function(){
+				alert("통신 오류 발생");
+				valid.memberEmailValid = false;
+			},
+		});
+	});
 	//전화번호 검사
 	$("[name=memberPhone]").blur(function(){
 		var regex = /^01[016789][1-9][0-9]{6,7}$/;

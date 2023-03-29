@@ -5,8 +5,7 @@
 
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 
-	<<!-- div class="container-550 mt-50 mb-50"> -->
-	<div class="container-550 mt-50 mb-50">
+<div class="w-80">
 	<div class="row center">
 		<h1>${memberDto.memberNick} 님</h1>
 		<hr>
@@ -55,7 +54,9 @@
 			</tr>
 		</table>
 	</div>
-
+</div>
+</div>
+</div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 

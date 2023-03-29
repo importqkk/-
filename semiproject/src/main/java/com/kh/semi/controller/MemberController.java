@@ -183,13 +183,13 @@ public class MemberController {
 	 }
 	 
 //	 회원 탈퇴
-	 @GetMapping("/exit")
-	 public String exit(HttpSession session) {
-		 return "/WEB-INF/views/member/exit.jsp";
+	 @GetMapping("/delete")
+	 public String delete(HttpSession session) {
+		 return "/WEB-INF/views/member/delete.jsp";
 	 }
 	 
-	 @PostMapping("/exit")
-	 public String exit(
+	 @PostMapping("/delete")
+	 public String delete(
 			 	HttpSession session, 
 			 	@RequestParam String memberPw,
 			 	RedirectAttributes attr
@@ -200,21 +200,21 @@ public class MemberController {
 		
 		 if(!memberDto.getMemberPw().equals(memberPw)) {
 			 attr.addAttribute("mode", "error");
-			 return "redirect:exit";
+			 return "redirect:delete";
 		 }
 		 
 		
 		 memberDao.delete(memberId);
 		 
 		 session.removeAttribute("memberId");
-		 session.removeAttribute("memberLevel");
+		 session.removeAttribute("memberRole");
 		 
-		 return "redirect:exitFinish";
+		 return "redirect:deleteFinish";
 	 }
 	 
-	 @GetMapping("/exitFinish")
-	 public String exitFinish() {
-		 return "/WEB-INF/views/member/exitFinish.jsp";
+	 @GetMapping("/deleteFinish")
+	 public String deleteFinish() {
+		 return "/WEB-INF/views/member/deleteFinish.jsp";
 	 }
 	 
 }

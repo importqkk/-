@@ -18,20 +18,19 @@ public class MemberRestController {
 	@Autowired
 	private MemberDao memberDao;
 	
-	//사용가능하면(없으면) Y
-	//사용불가하면(있으면) N
 	@GetMapping("/memberId/{memberId}")
 	public String findId(@PathVariable String memberId) {
 		return memberDao.selectOne(memberId) == null ? "Y":"N";
 	}
 	
-	//사용가능하면(없으면) Y
-	//사용불가하면(있으면) N
 	@GetMapping("/memberNick/{memberNick}")
 	public String findNickname(@PathVariable String memberNick) {
 		return memberDao.selectByNickname(memberNick) == null ? "Y":"N";
 	}
-	
+	@GetMapping("/memberEmail/{memberEmail}")
+	public String findEmail(@PathVariable String memberEmail) {
+		return memberDao.selectByEmail(memberEmail) == null ? "Y":"N";
+	}
 }
 
 
