@@ -13,12 +13,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.semi.dao.CartDao;
 import com.kh.semi.dao.CartProductInfoDao;
 import com.kh.semi.dao.ProductDao;
-import com.kh.semi.dao.ProductImgDao;
-import com.kh.semi.dao.ProductWithImgDao;
 import com.kh.semi.dto.CartDto;
 import com.kh.semi.dto.CartProductInfoDto;
 import com.kh.semi.dto.ProductDto;
-import com.kh.semi.dto.ProductWIthImgDto;
 
 @Controller
 @RequestMapping("/cart")
@@ -30,10 +27,6 @@ public class CartController {
 	private CartProductInfoDao cartProductInfoDao;
 	@Autowired
 	private ProductDao productDao;
-	@Autowired
-	private ProductImgDao productImgDao;
-	@Autowired
-	private ProductWithImgDao productWithImgDao;
 	
 	/*
 		완료
@@ -48,7 +41,7 @@ public class CartController {
 		String memberId = (String)session.getAttribute("memberId");
 		cartDto.setMemberId(memberId);
 		cartProductInfoDto.setMemberId(memberId);
-		// 담으려는 수량 - 이 부분 서비스로 뺄까 고민중
+		// 담으려는 수량
 		int productCount = cartDto.getProductCount();
 		// 재고 수량
 		int productStock = productDao.selectStock(cartDto.getProductNo());
@@ -59,11 +52,12 @@ public class CartController {
 			if(isExist) {
 				cartDao.cartInsert(cartDto);
 			}
+			// 장바구니에 있는 상품인 경우 추가한 수량만큼 장바구니 상품 수량 플러스
 			else {
 				cartDao.cartPlus(cartDto);
 			}
 		}
-		// 담으려는 수량이 재고보다 많으면 에러
+		// 담으려는 수량이 재고보다 많으면 에러 (상품 상세 페이지에 감)
 		else {
 			attr.addAttribute("mode", "error");
 		}
@@ -80,13 +74,14 @@ public class CartController {
 		cartDao.cartDeleteItem(cartDto);
 		return "redirect:main";
 	}
+	
 	// 장바구니 상품 수량 변경
 	@PostMapping("/update")
 	public String update(@ModelAttribute CartDto cartDto, 
 			HttpSession session, RedirectAttributes attr) {
 		String memberId = (String)session.getAttribute("memberId");
 		cartDto.setMemberId(memberId);
-		// 담으려는 수량 - 이 부분 서비스로 뺄까 고민중
+		// 담으려는 수량
 		int productCount = cartDto.getProductCount();
 		// 재고 수량
 		ProductDto productDto = new ProductDto();
@@ -102,26 +97,16 @@ public class CartController {
 		return "redirect:cart";
 	}
 	
-	/*
-		진행중
-	*/
 	// 장바구니 페이지(list)
 	@GetMapping("/main")
-	public String cart(@ModelAttribute CartProductInfoDto cartProductInfoDto, 
-			@ModelAttribute CartDto cartDto,
+	public String cart(@ModelAttribute CartProductInfoDto cartProductInfoDto,
 			Model model, HttpSession session) {
 		String memberId = (String)session.getAttribute("memberId");
-		cartDto.setMemberId(memberId);
 		cartProductInfoDto.setMemberId(memberId);
-		List<CartDto> itemList = cartDao.cartList(cartDto.getMemberId());
 		List<CartProductInfoDto> itemInfo = cartProductInfoDao.cartItemInfo(memberId);
 		int cartCnt = cartDao.cartCnt(memberId);
-		int productNo = cartDto.getProductNo();
-		ProductWIthImgDto productImg = productWithImgDao.selectOne(productNo);
-		model.addAttribute("itemList", itemList);
 		model.addAttribute("itemInfo", itemInfo);
 		model.addAttribute("cartCnt", cartCnt);
-		model.addAttribute("productImg", productImg);
 		return "/WEB-INF/views/cart/cartMain.jsp";
 	}
 	
