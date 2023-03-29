@@ -10,5 +10,6 @@ public class CartProductInfoDto {
 
 	private String memberId, productBrand, productName;
 	private int productNo, productPrice, productStock, productCount;
+	private Integer imgNo;
 	
 }
