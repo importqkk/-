@@ -180,10 +180,10 @@
 		<!-- 다음 -->
 		<c:choose>
 			<c:when test="${vo.next}">
-				<a href="list?${vo.parameter}&page=${vo.nextPage}">&gt;</a>
+				<a class="disabled">&gt;</a>
 			</c:when>
 			<c:otherwise>
-				<a class="disabled">&gt;</a>
+				<a href="list?${vo.parameter}&page=${vo.nextPage}">&gt;</a>
 			</c:otherwise>
 		</c:choose>
 		

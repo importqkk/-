@@ -40,25 +40,24 @@ public class QaController {
 	@Autowired
 	private QaService qaService;
 	
-//	@GetMapping("/list")
-//	public String list(@ModelAttribute("vo") QaPaginationVO vo,
-//			Model model) {
-//		
-//		int totalCount = qaDao.selectCount(vo);
-//		vo.setCount(totalCount);
-//		
-//		// 공지사항 띄울시
-////		model.addAttribute("noticeList",qaDao.selectNoticeList(1,2));
-//		
-//		//게시글
-//		List<QaDto>list = qaDao.selectList(vo);
-//		model.addAttribute("list",list);
-//		
-//		return "/WEB-INF/views/qa/list.jsp";
-//	}
-//	
-	
 	@GetMapping("/list")
+	public String list(@ModelAttribute("vo") QaPaginationVO vo,
+			Model model) {
+		
+		int totalCount = qaDao.selectCount(vo);
+		vo.setCount(totalCount);
+		
+		// 공지사항 띄울시
+//		model.addAttribute("noticeList",qaDao.selectNoticeList(1,2));
+		
+		//게시글
+		List<QaDto>list = qaDao.selectList(vo);
+		model.addAttribute("list",list);
+		return "/WEB-INF/views/qa/list.jsp";
+	}
+	
+	
+	@PostMapping("/list")
 	public String QaList(Model model,
 			@RequestParam(required = false, defaultValue = "name")String column,
 			@RequestParam(required = false, defaultValue = "")String keyword) {

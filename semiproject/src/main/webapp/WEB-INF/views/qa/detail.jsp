@@ -57,7 +57,6 @@ $(function(){
 		        $(viewHtml).find(".delete-btn").click(function(){
 		            var choice = window.confirm("정말 삭제하시겠습니까?");
 		                        if(choice == false) return;
-	
 		                        //var no = $(this).parent().prev().prev().prev().text();
 		                        //var no = $(this).attr("data-no");
 		                        var no = $(this).data("no");//읽기만 가능 
@@ -109,14 +108,14 @@ $(function(){
             <button class="form-btn neutral cancel-btn ms-20">취소</button>
         </div>
     </script>
-    <!-- 표시용 템플릿 -->
+    <!-- 표시용 템플릿 취소 했는데 삭제가 됨-->
     <script type="text/template" id="view-template">
         <div class="view-panel right" style="min-height:150px;">
 			<div class="left font-h1">${qaDto.qaHead}</div>
 			<div class="left font-h1">${qaDto.qaTitle}</div>
 			<div class="contents left font-h2">${qaDto.qaContent}</div>
             <a class="form-btn neutral edit-btn">수정</a>
-            <a class="form-btn neutral ms-20" href="/qa/delete?qaNo=${qaDto.qaNo}">삭제</a>
+            <a class="form-btn neutral ms-20 delete-btn" href="/qa/delete?qaNo=${qaDto.qaNo}">삭제</a>
             <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
         </div>
     </script>

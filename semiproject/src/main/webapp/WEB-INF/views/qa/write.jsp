@@ -6,9 +6,11 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <script type="text/javascript">
-
-
+	$(function(){
+		
+	});
 </script>
+
 
 
 
@@ -33,12 +35,13 @@
 	<select name="qaHead" class="form-input medium light">
 		<!-- 없음을 선택하면 값이 비어서 전송되므로 DB에 null로 들어감 -->
 		<option value="">카테고리</option>
-		<c:if test="${sessionScope.memberrole=='관리자' }">
+		<c:if test="${sessionScope.memberRole=='관리자' }">
 		</c:if>
 		<option>상품문의</option>
 		<option>결제문의</option>
 		<option>기타문의</option>
 	</select>
+
 	
 	<!--  제목  -->
 	<c:choose>
