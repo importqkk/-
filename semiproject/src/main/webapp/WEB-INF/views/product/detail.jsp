@@ -42,6 +42,7 @@
 		</div>
 	</div>
 </script>
+	
     <div class="container-1000">
     	<div class="row">
     	</div>
@@ -77,15 +78,20 @@
 	                <button type="button" class="form-btn small neutral cancel-btn me-10">취소</button>
 	                <button type="button" class="form-btn small positive review-insert-btn">등록</button>
 	            </div> 
+	            <div class="row">
+	            	<div class="row target">
+	            	
+	            	</div>
+	            </div>
 	        </div>
 		</div>
         
         
         <div class="row review-list">
         	리뷰 목록 위치
-	        <div class="row target">
+<!-- 	        <div class="row target"> -->
 	     
-	        </div>
+<!-- 	        </div> -->
         </div>
     </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

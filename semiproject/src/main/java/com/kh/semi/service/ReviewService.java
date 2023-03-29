@@ -14,9 +14,10 @@ public class ReviewService {
 	@Autowired
 	private ReviewDao reviewDao;
 	
-	public int insert(ReviewDto reviewDto, List<Integer> imgNo) {
+	public int write(ReviewDto reviewDto, List<Integer> imgNo) {
 		int reviewNo = reviewDao.sequence();
 		reviewDto.setReviewNo(reviewNo);
+		reviewDao.insert(reviewDto);
 		
 		if(imgNo != null) {
 			for(int no : imgNo) {

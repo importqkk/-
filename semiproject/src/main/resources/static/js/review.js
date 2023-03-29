@@ -26,16 +26,53 @@ $(function(){
 });
 
 
+
+$(function(){
+    $("[name=attach]").change(function(){
+
+        if(this.files.length != 1) return;
+
+        var fd = new FormData();
+        fd.append("img", this.files[0]);
+
+        // 비동기적으로 파일 업로드
+        $.ajax({
+            url:"/rest/img/upload",
+            method:"post",
+            data:fd,
+            processData:false,
+            contentType:false,
+            success:function(response){
+                //이미지 번호 정보 생성
+                var input = $("<input>").attr("type", "hidden")
+                                        .attr("name", "imgNo")
+                                        .val(response.imgNo);
+                
+                
+                //미리보기
+                var reviewImage = $("<img>").attr("src", "/rest/img/download/"+response.imgNo);
+                $(".target").append(reviewImage);
+            },
+            error:function(){
+                console.error("오류 발생");
+            }
+        });
+    });
+});
+
 $(function(){
 	var params = new URLSearchParams(location.search);
 	var productNo = params.get("productNo");
+
 	
 	//리뷰 목록 불러오기
 	loadList();
 	
 	$(".review-insert-btn").click(function(){
+		
 		var content = $("[name=reviewContent]").val();
 		var starRating = $(".review-star .starR.on").last().attr("value");
+		
 //		var rating = $("[name=reviewStar]").val();
 //		console.log(content);
 //		console.log(productNo);
@@ -63,7 +100,7 @@ $(function(){
 				
 			},
 			error:function(){
-				alert("통신 오류 발생");
+				alert("등록 오류 발생");
 			}
 		});
 	});
@@ -262,38 +299,13 @@ function likeReview(){
                 $likeButton.removeClass("fa-regular").addClass("fa-solid");
             }
             else{
-                $likeButton.find(".heart-count").text(response.count);
+                $likeButton.text(response.count);
                 $likeButton.removeClass("fa-solid").addClass("fa-regular");
             }
         },
         error:function(){}
     });
 }
-
-$(function(){
-	$("[name=attach]").change(function(){
-		if(files.length != 1) return;
-		
-		var fd = new FormData();
-		fd.append("attach", this.files[0]);
-		
-		$.ajax({
-			url:"/rest/img/upload",
-			method:"post",
-			data:fd,
-			processData:false,
-			contentType:false,
-			success:function(response){
-				var img = $("<img>").prop("src", "/rest/img/download/"+response.imgNo);
-				$(".target").append(img);
-			},
-			error:function(){
-				console.error("오류 발생");
-			}
-			
-		});
-	});
-});
 
 	
 });
