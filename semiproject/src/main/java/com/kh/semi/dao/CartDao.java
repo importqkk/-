@@ -41,13 +41,6 @@ public class CartDao {
 		List<CartDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	// 이미 장바구니에 있는 상품인 경우 선택한 수량만큼 장바구니 수량 플러스
-	public boolean cartPlus(CartDto cartDto) {
-		String sql = "update cart set product_count=product_count+? where member_id=? and product_no=?";
-		Object[] param = {cartDto.getProductCount(), cartDto.getMemberId(), 
-						cartDto.getProductNo()};
-		return jdbcTemplate.update(sql, param) > 0;
-	}
 	
 	// 장바구니 조회(list)
 	public List<CartDto> cartList(String memberId) {
