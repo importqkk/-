@@ -182,7 +182,7 @@
 	            $(".item-form").attr("method", "post");
 	         });
 	         $(".buy-btn").click(function(){
-	            $(".item-form").attr("action", "/order/buy");
+	            $(".item-form").attr("action", "/order/detailbuy");
 	            $(".item-form").attr("method", "get");
 	         });
 	      });

@@ -337,7 +337,7 @@
                 <a class="form-btn medium neutral w-100 selected-btn" href="#">선택상품 결제하기</a>
             </div> -->
             <div class="row">
-                <a class="form-btn medium positive w-100 all-btn" href="#">주문하기</a>
+                <a class="form-btn medium positive w-100 all-btn" href="../order/buy">주문하기</a>
             </div>
         </div>
 

@@ -15,13 +15,13 @@ public class OrderDto {
 	private String orderBasicAddr;
 	private String orderDetailAddr; 
 	private String orderRequest;
+	private int orderUserPoint;
 	
 	
 	//session 읉 통해 가져올값
 	private String memberId;
 	
 	private String orderStat;
-	private int orderUserPoint;
 	private Date orderDate;
 	
 	

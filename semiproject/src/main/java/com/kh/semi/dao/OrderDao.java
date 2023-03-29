@@ -21,13 +21,15 @@ public class OrderDao {
 	public void insertOrder(OrderDto orderDto) {
 		String sql="insert into Order_(ORDER_NO,ORDER_RECEIVER,ORDER_POST,ORDER_BASIC_ADDR,ORDER_DETAIL_ADDR,ORDER_RECEIVER_PHONE,"
 				+ "ORDER_DATE,ORDER_REQUEST,ORDER_USERPOINT,ORDER_STAT,MEMBER_ID)"
-				+ "values('order_seq.nextval()',?,?,?,?,?,sysdate,?,?)";
+				+ "values(order_seq.nextval,?,?,?,?,?,sysdate,?,?,'결제완료',?)";
 		
-		Object[] param= {orderDto.getOrderNO(),orderDto.getOrderRecever(),orderDto.getOrderPost(),orderDto.getOrderBasicAddr(),
-				orderDto.getOrderDetailAddr(),orderDto.getOrderReceivePhone(),orderDto.getOrderDate(),orderDto.getOrderRequest(),orderDto.getOrderUserPoint(),orderDto.getOrderStat(),orderDto.getMemberId()
+		Object[] param= {orderDto.getOrderRecever(),orderDto.getOrderPost(),orderDto.getOrderBasicAddr(),
+				orderDto.getOrderDetailAddr(),orderDto.getOrderReceivePhone(),orderDto.getOrderRequest(),
+				orderDto.getOrderUserPoint(),orderDto.getMemberId()
 		};
 		
 		jdbcTemplate.update(sql,param);
+		
 	}
 	
 	//조회를 위한 rowmapper 
