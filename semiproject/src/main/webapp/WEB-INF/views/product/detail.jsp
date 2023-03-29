@@ -260,9 +260,14 @@
                         	</div>                                    
 	                    </div>
 	                    <%-- 재품 재고보다 담은 수량이 많을 경우(장바구니 버튼 클릭했을때 mode==error가 오면 --%>
-	                    <c:if test="${param.mode=='error'}">
+	                    <c:if test="${param.mode=='error2'}">
 	                    	<div class="row">
 	                    		<span>재고가 부족합니다. (남은 수량: ${productDto.productStock}개)</span>
+	                    	</div>
+	                    </c:if>
+	                    <c:if test="${param.mode=='error1'}">
+	                    	<div class="row">
+	                    		<span>이미 장바구니에 담긴 상품입니다.</span>
 	                    	</div>
 	                    </c:if>
 	                    <hr>
