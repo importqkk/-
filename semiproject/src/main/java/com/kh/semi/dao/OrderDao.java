@@ -65,14 +65,16 @@ public class OrderDao {
 		return list.isEmpty() ? null:list.get(0);
 	}
 
-	//상품 이미지 조회
-	public Integer productImg(int productNo) {
-		String sql = "select * from img where img_no = (select img_no from product_img where product_no=?)";
-		Object[] param = {productNo};
-		return jdbcTemplate.queryForObject(sql, Integer.class, param);
+	
+	
+	
+	//회원주소를 불러오기위한 dao
+	public OrderDto memberAddr(String memberId) {
+		String sql="select M.member_post,M.member_basic_addr,M.member_detail_addr from member M where member_Id=?";
+		Object[] param= {memberId};
+		List<OrderDto> list = jdbcTemplate.query(sql, mapper,param);
+		return list.isEmpty() ? null : list.get(0);
 	}
-	
-	
 	
 	
 	

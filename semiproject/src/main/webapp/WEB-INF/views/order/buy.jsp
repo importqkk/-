@@ -6,15 +6,17 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<style>
+	<style>
+	
     </style>
+    <!-- 우편주소 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/static/js/find-address.min.js"></script>
+	<!-- 우편주소 api -->
+	
+	
     <script type="text/javascript">
- 	
-    $(function(){// 페이지 로드됐을때
-    	$(".defalut-addr").click(function(){
-    		$("")
-    	})
-    }
+    
  
     </script>
     
@@ -22,17 +24,16 @@
 <body test>
  <div class="container-1000">
         <div class="flex">
-            <div class=" w-60 pt-20">
+            <div class=" w-70 pt-20">
                 <p><h2>주문상품</h2></p>
-                <h1 class="memberDto" style="display=none">${memberDto}</h1>
                 <div class="row flex">
                     <img src="https://picsum.photos/100/100" class="pe-20">
-                    <div class="row-medium flex">
-	                	
-	                </div>
+                    <label>${list}</label>
                 </div>
                 <div class="row left">
-                   	<h2>배송지</h2> <input type="checkbox" class="defalut-addr"> 
+                   	<div class="flex"> 
+                   	<h2 class="w-80">배송지</h2>
+                   	 주문자 정보 가져오기<input type="checkbox" class="post-check w-10"> </div> 
                     <div class="row">
                         <p>받는사람</p>
                         <input type="text" class="form-input light w-100 medium" id="orderReciver">
@@ -40,32 +41,33 @@
 
                     <div class="row">
                         <p>연락처</p>
-                        <input type="text" class="form-input light w-100 medium" name="orderReciverPhone">
+                        <input type="text" class="form-input light w-100 medium" id="orderReciverPhone">
                     </div>
 
                     <div class="row">
                         <p>주소</p>
-                        <input type="text" class="form-input light medium w-50" name="orderPost" placeholder="우편번호">
-                        <button class="form-btn medium positive">우편번호찾기</button>
+                        <input type="text" class="form-input light medium w-50" name="memberPost" placeholder="우편번호">
+                        <button class="form-btn medium positive find-address-btn">우편번호찾기</button>
                     </div>
 
                     <div class="row">
                         <p></p>
-                        <input type="text" class="form-input light medium w-100" name="orderBasicAddr" placeholder="기본주소" readonly>
+                        <input type="text" class="form-input light medium w-100" name="memberBasicAddr" placeholder="기본주소" readonly>
                     </div>
 
                     <div class="row">
-                        <input type="text" class="form-input light medium w-100" name="orderDetailAddr" placeholder="상세주소">
+                        <input type="text" class="form-input light medium w-100" name="memberDetailAddr" placeholder="상세주소">
                     </div>
 
                     <div class="row">
                         <p>배송요청사항</p>
-                        <input type="text" class="form-input light medium w-100" name="orderRequest">
+                        <input type="text" class="form-input light medium w-100" id="orderRequest">
                     </div>
                 </div>
                 </div>
 
-            </div>
+           
+            
             <div class="orderscroll w-30">
                 <div>
                     
@@ -108,10 +110,10 @@
                 </div>
             </div>
             
-           
+       </div>     
 
     </div>
-</div>
+
 
 </body>
 </html>

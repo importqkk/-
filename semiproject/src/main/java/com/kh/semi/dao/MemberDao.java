@@ -74,6 +74,7 @@ public class MemberDao {
 		List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
 	public MemberDto selectByNickname(String memberNick) {
 		String sql = "select * from member where member_nick = ?";
 		Object[] param = {memberNick};
@@ -90,6 +91,7 @@ public class MemberDao {
 			};
 		return jdbcTemplate.queryForObject(sql, String.class, param);
 	}
+	
 //	아이디와 이메일로 비밀번호 찾기
 	public String findPw(MemberDto memberDto) {
 		String sql = "select member_pw from member "
@@ -99,6 +101,7 @@ public class MemberDao {
 			};
 		return jdbcTemplate.queryForObject(sql, String.class, param);
 	}
+	
 //	비밀번호 변경 기능
 	public boolean changePassword(String memberId, String memberPw) {
 		String sql = "update member set member_pw = ? where member_id = ?";

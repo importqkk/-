@@ -14,13 +14,9 @@ import com.kh.semi.dto.OrderProductDto;
 
 @CrossOrigin(origins = {"*"})
 @RestController
-@RequestMapping("/rest/order")
+@RequestMapping("/rest")
 public class OrderRestController {
-
-	@Autowired
-	private OrderDao orderDao;
-	@Autowired
-	private OrderProductDao orderProductDao;
+	
 	
 	
 		
