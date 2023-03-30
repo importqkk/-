@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.kh.semi.dto.ProductDto;
+import com.kh.semi.vo.ProductListPaginationVo;
 
 @Repository
 public class ProductDao {
@@ -39,6 +40,7 @@ public class ProductDao {
 		return list.isEmpty() ? null:list.get(0);
 	}
 	
+	// 상품 등록
 	public int sequence() {
 		String sql = "select product_seq.nextval from dual";
 		return jdbcTemplate.queryForObject(sql, int.class);
@@ -51,6 +53,53 @@ public class ProductDao {
 				productDto.getProductDeliveryPrice(), productDto.getProductSellCount(),
 				productDto.getProductJoin()};
 		jdbcTemplate.update(sql, param);
+	}
+	
+	// 상품 삭제
+	public boolean delete(int productNo) {
+		String sql = "delete product where product_no=?";
+		Object[] param = {productNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	// 상품 목록
+	public List<ProductDto> list(ProductListPaginationVo vo) {
+		if(vo.isSearch()) {
+			String sql = "select * from ("
+							+ "select TMP.*, rownum RN from ("
+								+ "select * from product where instr(#1, ?) > 0 "
+								+ "order by product_no desc"
+							+ ")TMP"
+						+ ") where RN between ? and ?";
+			sql = sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+		else {
+			String sql = "select * from ("
+							+ "select TMP.*, rownum RN from ("
+								+ "select * from product "
+								+ "order by product_no desc"
+							+ ")TMP"
+						+ ") where RN between ? and ?";
+			Object[] param = {vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+	}
+	// 상품 개수
+	public int selectCount(ProductListPaginationVo vo) {
+		// 검색
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product where instr(#1, ?) > 0";
+			sql = sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+		}
+		// 목록
+		else {
+			String sql = "select count(*) from product";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
 	}
 	
 	// 상품 재고 불러오기
