@@ -11,6 +11,7 @@
     컬러팔렛트
     - 보라색
         - 100%: #776bff
+        - 60%: #ada6ff
         - 20%: #e4e1ff
         - 5%: #f8f8ff
 
@@ -495,10 +496,10 @@ input[type="checkbox"] {
     cursor: pointer;
   }
 
-input[type="checkbox"]:checked {
-  background: #776bff;
-  border: 2px solid #776bff;
-}
+  input[type="checkbox"]:checked {
+    background: #776bff;
+    border: 2px solid #776bff;
+  }
 
 /*
     글자 스타일
