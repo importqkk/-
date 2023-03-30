@@ -71,6 +71,9 @@
     .more-link:hover {
     	color: #22201e;
     }
+    .category-title {
+    	color: #776bff;
+    }
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -81,7 +84,7 @@
         function() {
             $(this).removeClass("fa-beat");
         });
-		$(".category-text").hover(function() {
+		$(".category-title").hover(function() {
 			$(this).prev(".fas").addClass("fa-beat");
 		},
 		function() {
@@ -124,55 +127,55 @@
 		            <div>
 		                <a class="link" href="#" data-tag="1">
 		                    <i class="fas fa-solid fa-bars"></i>
-		                    <h5 class="category-text">전체</h5>
+		                    <h5 class="category-title">전체</h5>
 		                </a>
 		            </div>
 		            <div>
 		                <a class="link" href="#" data-tag="2">
 		                    <i class="fas fa-light fa-face-smile"></i>
-		                    <h5 class="category-text">피부</h5>
+		                    <h5 class="category-title">피부</h5>
 		                </a>
 		            </div>
 		            <div>
 		                <a class="link" href="#" data-tag="3">
 		                    <i class="fas fa-light fa-weight-scale"></i>
-		                    <h5 class="category-text">다이이트</h5>
+		                    <h5 class="category-title">다이이트</h5>
 		                </a>
 		            </div>
 		            <div>
 		                <a class="link" href="#" data-tag="4">
 		                    <i class="fas fa-light fa-venus"></i>
-		                    <h5 class="category-text">여성</h5>	
+		                    <h5 class="category-title">여성</h5>	
 		                </a>
 		            </div>
 		            <div>
 		                <a class="link" href="#" data-tag="5">
 		                    <i class="fas fa-sharp fa-light fa-bolt-lightning"></i>
-		                    <h5 class="category-text">활력</h5>
+		                    <h5 class="category-title">활력</h5>
 		                </a>
 		            </div>
 		            <div>
 		                <a class="link" href="#" data-tag="6">
 		                    <i class="fas fa-thin fa-mars"></i>
-		                    <h5 class="category-text">남성</h5>
+		                    <h5 class="category-title">남성</h5>
 		                </a>
 		            </div>
 		            <div>
 		                <a class="link" href="#" data-tag="7">
 		                    <i class="fas fa-light fa-eye"></i>
-		                    <h5 class="category-text">눈</h5>
+		                    <h5 class="category-title">눈</h5>
 		                </a>
 		            </div>
 		            <div>
 		                <a class="link" href="#" data-tag="8">
 		                    <i class="fas fa-light fa-tooth"></i>
-		                    <h5 class="category-text">치아</h5>
+		                    <h5 class="category-title">치아</h5>
 		                </a>
 		            </div>
 		            <div>
 		                <a class="link" href="#">
 		                    <i class="fas fa-light fa-bone"></i>
-		                    <h5 class="category-text">관절/뼈</h5>
+		                    <h5 class="category-title">관절/뼈</h5>
 		                </a>
 		            </div>
 		        </div>
