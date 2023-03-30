@@ -46,30 +46,23 @@
         }
         
         .img-list{
-        	width: 250px;
+        	width: 200px;
         	height: 200px;
         }
         .star-13{
         	font-size: 13px;
         }
         
-        .flex.img-box{
+        .img-box{
         	margin: 10px; 
-        	width: 300px;
+        	width: 240px;
         	height: 400px;
          	background-color: #f1f1f1;  /* 배경색 */
         	border-radius: 0.5em; /* 끝부분 조정*/
         	align-items: center;
         }
        
-		/*이미지 배치 한행에 4개 */
-        .flex.img-box:nth-child(4n+1),
-		.flex.img-box:nth-child(4n+2),
-		.flex.img-box:nth-child(4n+3),
-		.flex.img-box:nth-child(4n+4) {
-    		flex-basis: calc(25% - 20px);
-		}
-		
+
 		.flex-wr{
 			display: flex;		
 			flex-wrap: wrap;
@@ -78,10 +71,14 @@
 		.flex-wr.center{
 			justify-content: center;
 		}
+		.flex-wr.left{
+			justify-content: right;
+		}
+		
 </style>
 </head>
 
-<body test>
+<body>
 	<div class="container-1200">
 		<div class="row">
 			<hr>
@@ -131,7 +128,7 @@
 <!---------------------여기부터는 이미지 들의 리스트 ------------------->
 		<!--이미지 리스트 구간-->
 		<div class="flex-wr center mb-20">
-		<c:forEach var="productDto" items="${list}">		
+		<c:forEach var="productDto" items="${list}" varStatus="status">		
 				<div class="img-box me-20 center">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
 					<br><br>
@@ -140,7 +137,7 @@
 					<br>
 					<h4 class="left ms-20">${productDto.productPrice}원</h4>
 					<br>
-					<div class="flex-wr left ">
+					<div class="flex-wr left ms-20">
 						<h4 class="fas fa-star font-purple star-13"></h4>
 						<h5 class="fas fa-star font-purple star-13"></h5>
 						<h6 class="fas fa-star font-purple star-13"></h6>
@@ -149,6 +146,7 @@
 						<h6 class="font-grey ms-20">150</h6>
 					</div>
 				</div>
+				<c:out value="${status.step}"/>
 		</c:forEach>
 		</div>		
 <%-- 		<c:forEach var="productDto" items="${list}"> --%>
