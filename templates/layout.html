@@ -15,6 +15,9 @@
     <link rel="stylesheet" type="text/css" href="css/test.css">
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- swiper cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <style>
         .logo {
             margin: 0;
@@ -65,10 +68,95 @@
             vertical-align: middle;
             margin-top: 30px;
         }
+        /* 메인 */
+        .swiper {
+            width: 100%;
+        }
+        .swiper img {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #776BFF !important;
+        }
+        .swiper-pagination-bullet {
+            opacity: 1;
+            background-color: #e4e1ff
+        }
+        .fas{
+			font-size: 40px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            color: #776BFF;
+		}
+        .fa-beat {
+            scale: 1;
+            animation-duration: 2s;
+        }
+        .flex.flex-auto-width > * {
+            flex-grow: 1;
+        }
+        h5, h3 {
+            margin: 0;
+        }
+        h1, h2, h4 {
+            margin: 0;
+            display: inline;
+        }
+        .star {
+            color: #776BFF;
+        }
+        .item-box {
+            background-color: #f8f8f8;
+            border-radius: 20px;
+            padding-left: 17px;
+            padding-right: 17px;
+            padding-bottom: 20px;
+        }
+        .item-box:hover {
+            background-color: #f8f8ff;
+        }
+        .item-img {
+            width: 200px;
+            height: 200px;
+        }
+        .recommend-box > *,
+        .best-box > * {
+            flex-grow: 1;
+        }
+        /* 사이드메뉴 */
+        .categories {
+            padding-bottom: 60px;
+        }
+        .category {
+            border-radius: 25px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+        .category:hover {
+            background-color: #f8f8ff;
+        }
+        .category-text {
+            color: #ada6ff;
+        }
+        .social-icon {
+            vertical-align: middle;
+        }
+        .link-social {
+            text-decoration: none;
+            color: #22201e;
+        }
+        .fa {
+            cursor: pointer;
+            font-size: 50px;
+            color: #ada6ff;
+            margin-bottom: 10px;
+        }
     </style>
     <script type="text/javascript">
         $(function() {
-            $(".side-menu").hide();
+            // 헤더 사이드메뉴
+            $(".side-menu").show();
             $(".close-btn").hide();
             $(".menu-btn").click(function() {
                 $(".menu-btn").hide();
@@ -80,7 +168,39 @@
                 $(".menu-btn").show();
                 $(".side-menu").hide();
             })
+            $(".category").hover(function() {
+                $(this).find("h3").css("color", "#776bff");
+                $(this).find(".fa").css("color", "#776bff");
+            },
+            function() {
+                $(this).find("h3").css("color", "");
+                $(this).find(".fa").css("color", "");
+            })
+            
+            // 메인
+            $(".fas").hover(function() {
+                $(this).addClass("fa-beat");
+                },
+                function() {
+                    $(this).removeClass("fa-beat");
+            });
         })
+        // 메인
+        window.addEventListener("load", function(){
+            var swiper = new Swiper('.swiper', {
+                direction: 'horizontal',
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'bullets',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 5000,
+                    pauseOnMouseEnter: true,
+                }
+            });
+        });
     </script>
     <title>SEMI</title>
 </head>
@@ -122,95 +242,331 @@
             </div>
         </header>
         <aside class="side-menu">
-            <div class="container-1000 flex">
-                <div class=""></div>
-                <div class="row w-30">
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">면역력</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">피부</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">활력</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">헤어</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">다이어트</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">위</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">안티에이징</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
+            <div class="container-1000">
+                <div class="flex right member-menu pt-30 pe-100 me-30 pb-60">
+                    <!-- 로그인 전 -->
+                    <div>
+                        <h4><a class="link pe-20" href="/member/login" style="border-right: 1px solid #22201e;">로그인</a></h4>
+                    </div>
+                    <div>
+                        <h4><a class="link ps-20" href="/member/join">회원가입</a></h4>
+                    </div>
+                    <!-- 로그인 후 -->
+                    <div>
+                        <h4><a class="link pe-20" href="/cart/main" style="border-right: 1px solid #22201e;">장바구니</a></h4>
+                    </div>
+                    <div>
+                        <h4><a class="link ps-20 pe-20" href="/member/mypage" style="border-right: 1px solid #22201e;">마이페이지</a></h4>
+                    </div>
+                    <div>
+                        <h4><a class="link ps-20" href="/member/logout">로그아웃</a></h4>
+                    </div>
                 </div>
-                <div class="w-70"></div>
+                <div class="flex center categories">
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="#">
+                                <i class="fa fa-solid fa-border-all"></i>
+                                <h3 class="category-text">전체</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="#">
+                                <i class="fa fa-light fa-face-smile"></i>
+                                <h3 class="category-text">피부</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="#">
+                                <i class="fa fa-light fa-weight-scale"></i>
+                                <h3 class="category-text">다이이트</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex center categories">
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="#">
+                                <i class="fa fa-light fa-venus"></i>
+                                <h3 class="category-text">여성</h3>	
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="#">
+                                <i class="fa fa-sharp fa-light fa-bolt-lightning"></i>
+                                <h3 class="category-text">활력</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="#">
+                                <i class="fa fa-thin fa-mars"></i>
+                                <h3 class="category-text">남성</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex center categories">
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="#">
+                                <i class="fa fa-light fa-eye"></i>
+                                <h3 class="category-text">눈</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="#">
+                                <i class="fa fa-light fa-tooth"></i>
+                                <h3 class="category-text">치아</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="#">
+                                <i class="fa fa-light fa-bone"></i>
+                                <h3 class="category-text">관절/뼈</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="flex ps-100 ms-30 w-50">
+                        <h2><a class="link" href="#">QnA</a></h2>
+                    </div>
+                    <div class="flex right pe-100 me-30 w-50">
+                        <a class="link-social" href="#">
+                            <i class="fa-brands fa-square-facebook custom-size social-icon me-10"></i>
+                        </a>
+                        <a class="link-social" href="#">
+                            <i class="fa-brands fa-instagram custom-size social-icon me-10"></i>
+                        </a>
+                        <a class="link-social" href="#">
+                            <img class="social-icon" width="23px" height="23px" src="./image/katalk.png">
+                        </a>
+                    </div>
+                </div>
             </div>
-            
         </aside>
         <section>
             <article>
-            <!---------------------------------------------------->
-
-            <!----------------------메인컨텐츠---------------------->
+            <!----------------------메인컨텐츠 start---------------------->
             <div class="container-1000">
-                <div class="row pt-10">
-                    Elit pellentesque habitant morbi tristique senectus et netus et malesuada. Iaculis eu non diam phasellus vestibulum. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Auctor eu augue ut lectus arcu bibendum. Vel quam elementum pulvinar etiam non quam. Elementum pulvinar etiam non quam lacus suspendisse faucibus. Fringilla ut morbi tincidunt augue interdum velit. Cursus in hac habitasse platea dictumst. Pharetra vel turpis nunc eget lorem dolor. Quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor. Nunc sed velit dignissim sodales ut. Tortor at auctor urna nunc id cursus metus. Faucibus turpis in eu mi. Diam in arcu cursus euismod quis viverra.
+                <!-- 이미지 슬라이드 start -->
+                <div class="row">
+                    <div class="swiper">
+                        <div class="swiper-wrapper center">
+                            <div class="swiper-slide"><img src="./image/mainDummy1.png"></div>
+                            <div class="swiper-slide"><img src="./image/mainDummy2.png"></div>
+                            <div class="swiper-slide"><img src="./image/mainDummy3.png"></div>
+                        </div>
+                        <div class="swiper-pagination center"></div>
+                    </div>
                 </div>
+                <!-- 이미지 슬라이드 end -->
+                <!-- 카테고리 버튼 start -->
+                <div class="flex center pt-40 flex-auto-width mb-40">
+                    <div>
+                        <a class="link" href="#">
+                            <i class="fas fa-solid fa-border-all"></i>
+                            <h5>전체</h5>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="link" href="#">
+                            <i class="fas fa-light fa-face-smile"></i>
+                            <h5>피부</h5>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="link" href="#">
+                            <i class="fas fa-light fa-weight-scale"></i>
+                            <h5>다이이트</h5>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="link" href="#">
+                            <i class="fas fa-light fa-venus"></i>
+                            <h5>여성</h5>	
+                        </a>
+                    </div>
+                    <div>
+                        <a class="link" href="#">
+                            <i class="fas fa-sharp fa-light fa-bolt-lightning"></i>
+                            <h5>활력</h5>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="link" href="#">
+                            <i class="fas fa-thin fa-mars"></i>
+                            <h5>남성</h5>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="link" href="#">
+                            <i class="fas fa-light fa-eye"></i>
+                            <h5>눈</h5>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="link" href="#">
+                            <i class="fas fa-light fa-tooth"></i>
+                            <h5>치아</h5>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="link" href="#">
+                            <i class="fas fa-light fa-bone"></i>
+                            <h5>뼈</h5>
+                        </a>
+                    </div>
+                </div>
+                <!-- 추천상품 목록 start -->
+                <div class="row pb-40">
+                    <div class="row">
+                        <h1 class="c-p100">SEMI</h1><h2 class="c-b80 me-5">'s</h2><h1 class="me-10 c-b80">PICK</h1>
+                        <span class="c-b80">이달의 semi 추천 상품을 만나보세요!</span>
+                    </div>
+                    <div class="row flex recommend-box">
+                        <a class="link item-box me-10" href="#">
+                            <div>
+                                <img class="item-img" src="./image/productDummy.png">
+                            </div>
+                            <div class="mb-20">
+                                <h4 class="c-b40">[브랜드명] </h4><h4>오메가 3</h4>
+                            </div>
+                            <div class="mb-10">
+                                <h3>15,000원</h3>
+                            </div>
+                            <div>
+                                <span class="star">★★★★</span><span class="star">☆</span><span class="ms-5 c-b40">150</span>
+                            </div>
+                        </a>
+                        <a class="link item-box me-10" href="#">
+                            <div>
+                                <img class="item-img" src="./image/productDummy.png">
+                            </div>
+                            <div class="mb-20">
+                                <h4 class="c-b40">[브랜드명] </h4><h4>오메가 3</h4>
+                            </div>
+                            <div class="mb-10">
+                                <h3>15,000원</h3>
+                            </div>
+                            <div>
+                                <span class="star">★★★★</span><span class="star">☆</span><span class="ms-5 c-b40">150</span>
+                            </div>
+                        </a>
+                        <a class="link item-box me-10" href="#">
+                            <div>
+                                <img class="item-img" src="./image/productDummy.png">
+                            </div>
+                            <div class="mb-20">
+                                <h4 class="c-b40">[브랜드명] </h4><h4>오메가 3</h4>
+                            </div>
+                            <div class="mb-10">
+                                <h3>15,000원</h3>
+                            </div>
+                            <div>
+                                <span class="star">★★★★</span><span class="star">☆</span><span class="ms-5 c-b40">150</span>
+                            </div>
+                        </a>
+                        <a class="link item-box" href="#">
+                            <div>
+                                <img class="item-img" src="./image/productDummy.png">
+                            </div>
+                            <div class="mb-20">
+                                <h4 class="c-b40">[브랜드명] </h4><h4>오메가 3</h4>
+                            </div>
+                            <div class="mb-10">
+                                <h3>15,000원</h3>
+                            </div>
+                            <div>
+                                <span class="star">★★★★</span><span class="star">☆</span><span class="ms-5 c-b40">150</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- 추천상품 목록 end -->
+                <!-- 인기상품 목록 start -->
+                <div class="row pb-40">
+                    <div class="row">
+                        <h1 class="c-b80 me-5">BEST</h1><h2 class="c-b80 me-5">in</h2><h1 class="me-10 c-p100">SEMI</h1>
+                        <span class="c-b80">이번 달 SEMI에서 가장 인기 있는 상품이에요.</span>
+                    </div>
+                    <div class="row">
+                        <div class="row flex best-box">
+                            <a class="link item-box me-10" href="#">
+                                <div>
+                                    <img class="item-img" src="./image/productDummy.png">
+                                </div>
+                                <div class="mb-20">
+                                    <h4 class="c-b40">[브랜드명] </h4><h4>오메가 3</h4>
+                                </div>
+                                <div class="mb-10">
+                                    <h3>15,000원</h3>
+                                </div>
+                                <div>
+                                    <span class="star">★★★★</span><span class="star">☆</span><span class="ms-5 c-b40">150</span>
+                                </div>
+                            </a>
+                            <a class="link item-box me-10" href="#">
+                                <div>
+                                    <img class="item-img" src="./image/productDummy.png">
+                                </div>
+                                <div class="mb-20">
+                                    <h4 class="c-b40">[브랜드명] </h4><h4>오메가 3</h4>
+                                </div>
+                                <div class="mb-10">
+                                    <h3>15,000원</h3>
+                                </div>
+                                <div>
+                                    <span class="star">★★★★</span><span class="star">☆</span><span class="ms-5 c-b40">150</span>
+                                </div>
+                            </a>
+                            <a class="link item-box me-10" href="#">
+                                <div>
+                                    <img class="item-img" src="./image/productDummy.png">
+                                </div>
+                                <div class="mb-20">
+                                    <h4 class="c-b40">[브랜드명] </h4><h4>오메가 3</h4>
+                                </div>
+                                <div class="mb-10">
+                                    <h3>15,000원</h3>
+                                </div>
+                                <div>
+                                    <span class="star">★★★★</span><span class="star">☆</span><span class="ms-5 c-b40">150</span>
+                                </div>
+                            </a>
+                            <a class="link item-box" href="#">
+                                <div>
+                                    <img class="item-img" src="./image/productDummy.png">
+                                </div>
+                                <div class="mb-20">
+                                    <h4 class="c-b40">[브랜드명] </h4><h4>오메가 3</h4>
+                                </div>
+                                <div class="mb-10">
+                                    <h3>15,000원</h3>
+                                </div>
+                                <div>
+                                    <span class="star">★★★★</span><span class="star">☆</span><span class="ms-5 c-b40">150</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 인기상품 목록 end -->
             </div>
-            <!---------------------------------------------------->
+            <!----------------------메인컨텐츠 end---------------------->
             </article>
         </section>
     </div>
@@ -221,13 +577,13 @@
                         <h1 class="c-p100">SEMI</h1>
                     </div>
                     <div class="w-50 right">
-                        <a class="link" href="#">
+                        <a class="link-social" href="#">
                             <i class="fa-brands fa-square-facebook custom-size social me-5"></i>
                         </a>
-                        <a class="link" href="#">
+                        <a class="link-social" href="#">
                             <i class="fa-brands fa-instagram custom-size social me-5"></i>
                         </a>
-                        <a class="link" href="#">
+                        <a class="link-social" href="#">
                             <img class="social" width="23px" height="23px" src="./image/katalk.png">
                         </a>
                     </div>

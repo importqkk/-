@@ -15,6 +15,7 @@ header {
     padding-top: 10px;
     padding-bottom: 10px;
     height: 95px;
+    z-index: 2;
 }
 
 footer{

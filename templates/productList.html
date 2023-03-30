@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <!-- font awsome 아이콘 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- tabler 아이콘 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+
+    </style>
+    <script type="text/javascript">
+
+    </script>
+    <title>SEMI 상품목록</title>
+</head>
+<body>
+    <div class="container-1000">
+        <div class="row">
+            <h1 class="mb-30">상품 목록</h1>
+        </div>
+        <div class="row flex">
+            <div class="row w-50">
+                <a class="form-btn small positive me-10">상품등록</a>
+                <a class="form-btn small neutral">상품 삭제</a>
+            </div>
+            <div class="row w-50 flex">
+                <select name="column" class="form-input small me-5">
+                    <option value="product_no">품번</option>
+                    <option value="product_name">상품명</option>
+                    <option value="product_brand">브랜드</option>
+                </select>
+                <input type="text" name="keyword" class="form-input small w-100 me-5">
+                <button type="submit" class="form-btn small positive w-20">검색</button>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-qna mb-30">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" class="all-check">
+                        </th>
+                        <th>품번</th>
+                        <th class="w-20">상품명</th>
+                        <th>브랜드</th>
+                        <th>가격</th>
+                        <th>재고</th>
+                        <th>판매량</th>
+                        <th class="w-15">입고일</th>
+                        <th class="w-10">관리</th>
+                    </tr>
+                </thead>
+                <tbody class="center">
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="all-check">
+                        </td>
+                        <td>1</td>
+                        <td>
+                            <a class="link" href="#">
+                                비타민A
+                            </a>
+                        </td>
+                        <td>필리</td>
+                        <td class="right">1000</td>
+                        <td class="right">100</td>
+                        <td class="right">33</td>
+                        <td>2023-03-03</td>
+                        <td>
+                            <a class="link">수정 </a>
+                            <span>| </span>
+                            <a class="link">삭제</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="all-check">
+                        </td>
+                        <td>1</td>
+                        <td>
+                            <a class="link" href="#">
+                                비타민A
+                            </a>
+                        </td>
+                        <td>필리</td>
+                        <td class="right">1000</td>
+                        <td class="right">100</td>
+                        <td class="right">33</td>
+                        <td>2023-03-03</td>
+                        <td>
+                            <a class="link" href="/edit">수정 </a>
+                            <span>| </span>
+                            <a class="link" href="/delete">삭제</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row center">
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#">&lt;</a>
+                <a href="#" class="on">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+                <a href="#">&gt;</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
