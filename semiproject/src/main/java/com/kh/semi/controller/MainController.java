@@ -18,18 +18,18 @@ public class MainController {
 	public String main(@ModelAttribute ProductInfoDto productInfoDto,
 			Model model) {
 		
-		/*List<CartProductInfoDto> itemInfo = cartProductInfoDao.cartItemInfo(memberId);
-		int cartCnt = cartDao.cartCnt(memberId);
-		model.addAttribute("itemInfo", itemInfo);
-		model.addAttribute("cartCnt", cartCnt);*/
+		// 전체 상품 (재고 많은 순)
+		List<ProductInfoDto> productList = productInfoDao.productList();
+		model.addAttribute("productList", productList);
 		
-		// 개별 상품 정보
 		// 최신상품 정렬
 		List<ProductInfoDto> newProduct = productInfoDao.newList();
 		model.addAttribute("newProduct", newProduct);
+		
 		// 베스트상품 정렬
 		List<ProductInfoDto> bestProduct = productInfoDao.bestList();
 		model.addAttribute("bestProduct", bestProduct);
+		
 		return "/WEB-INF/views/main.jsp";
 	}
 	
