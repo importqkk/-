@@ -189,9 +189,22 @@
 	         });
 	      });
        // 장바구니버튼, 주문 버튼 개별 경로처리--------------------------------
-       $(".cart-btn").click(function() {
-    	   
-       })
+       // 장바구니 상품 담기 처리
+		var params = new URLSearchParams(location.search);
+		var mode = params.get("mode");
+       //$(".cart-btn").click(function() {
+			if(mode == "error1") {
+				alert("이미 장바구니에 담긴 상품입니다.");
+				return false;
+			}
+			else if(mode == "error2") {
+				alert("재고가 부족합니다.");
+				return false;
+			}
+			else if(mode == "success") {
+				alert("장바구니에 상품을 담았습니다.")
+			}
+       //})
     });         
        
     </script>
@@ -259,17 +272,6 @@
 <!-- 							</button> -->
                         	</div>                                    
 	                    </div>
-	                    <%-- 재품 재고보다 담은 수량이 많을 경우(장바구니 버튼 클릭했을때 mode==error가 오면 --%>
-	                    <c:if test="${param.mode=='error2'}">
-	                    	<div class="row">
-	                    		<span>재고가 부족합니다. (남은 수량: ${productDto.productStock}개)</span>
-	                    	</div>
-	                    </c:if>
-	                    <c:if test="${param.mode=='error1'}">
-	                    	<div class="row">
-	                    		<span>이미 장바구니에 담긴 상품입니다.</span>
-	                    	</div>
-	                    </c:if>
 	                    <hr>
 	                </div>
 	                <div class="row">
@@ -283,9 +285,7 @@
 	                    <button class="w-49 form-btn small neutral cart-btn">장바구니</button>
 	                    <button class="w-49 form-btn small positive buy-btn">구매하기</button>
 	                </div>
-	                
 	            </div>
-	            
 	        </div>
 	    </form>
         
