@@ -114,7 +114,7 @@
 				                    </td>
 				                    <td>${productDto.productNo}</td>
 				                    <td>
-				                        <a class="link" href="#">
+				                        <a class="link" href="/product/detail?productNo=${productDto.productNo}">
 				                            ${productDto.productName}
 				                        </a>
 				                    </td>
