@@ -94,18 +94,24 @@
 	            <div class="flex me-15">
   	            	<c:choose>
 	            		<c:when test="${cartProductInfoDto.imgNo != 0}">
-	            			<img class="product-img" alt="상품 대표 이미지" src="/img/download?imgNo=${cartProductInfoDto.imgNo}" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
+		            			<img class="product-img" alt="상품 대표 이미지" src="/img/download?imgNo=${cartProductInfoDto.imgNo}" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+	 	            		</a>
  	            		</c:when>
 	            		<c:otherwise>
-	            			<img class="product-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
+	            				<img class="product-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+	            			</a>
 	            		</c:otherwise>
 	            	</c:choose>
 	            </div>
 	            <div class="w-100">
 	                <div class="row-medium flex">
 	                	<span hidden class="productNo">${cartProductInfoDto.productNo}</span> <%-- 상품번호(숨김) --%>
-	                    <h4 class="me-5 c-b80">[${cartProductInfoDto.productBrand}]</h4>	<%-- 브랜드명 --%>
-	                    <span class="c-b80">${cartProductInfoDto.productName}</span>	<%-- 상품명 --%>
+	                    <a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
+	                    	<h4 class="me-5 c-b80" style="display: inline;">[${cartProductInfoDto.productBrand}]</h4>	<%-- 브랜드명 --%>
+	                    	<span class="c-b80">${cartProductInfoDto.productName}</span>	<%-- 상품명 --%>
+	                    </a>
 	                </div>
 	                <div class="row">
 	                    <h4>
