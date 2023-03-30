@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.MemberDto;
+import com.kh.semi.dto.OrderDto;
 
 @Repository
 public class MemberDao {
@@ -133,6 +134,10 @@ public class MemberDao {
 		Object[] param = {memberId};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+	
+	
+	
+	//멤버 포인트조회
 	
 	
 }

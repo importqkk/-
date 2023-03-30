@@ -34,7 +34,7 @@ public class OrderDao {
 	}
 	
 	//조회를 위한 rowmapper 
-	RowMapper<OrderDto> mapper = (rs,idx) ->{
+	private RowMapper<OrderDto> mapper = (rs,idx) ->{
 		OrderDto dto=new OrderDto();
 		dto.setOrderNO(rs.getInt("ORDER_NO"));
 		dto.setOrderRecever(rs.getString("ORDER_RECEIVER"));
@@ -71,15 +71,9 @@ public class OrderDao {
 	
 	
 	
-	//회원주소를 불러오기위한 dao
-	public OrderDto memberAddr(String memberId) {
-		String sql="select M.member_post,M.member_basic_addr,M.member_detail_addr from member M where member_Id=?";
-		Object[] param= {memberId};
-		List<OrderDto> list = jdbcTemplate.query(sql, mapper,param);
-		return list.isEmpty() ? null : list.get(0);
-	}
 	
-	//주문번호불러오기 test
+	
+	//주문번호불러오기
 	public int orderNo(String memberId) {
 		String sql="select order_no from (select order_no from order_ where member_id=? order by order_no desc) where rownum<=1";
 		Object[] param= {memberId};

@@ -25,11 +25,9 @@ public class OrderProductDao {
 		Object[] param= {orderProductDto.getProductCount(),orderProductDto.getProductPrice(),orderProductDto.getProductNo(),orderProductDto.getOrderNo()};
 		
 		jdbcTemplate.update(sql,param);
-		
-		
 	}
 	//조회를 위한 rowmapper 
-			RowMapper<OrderProductDto> mapper = (rs,idx) ->{
+	private	RowMapper<OrderProductDto> mapper = (rs,idx) ->{
 				OrderProductDto dto=new OrderProductDto();
 				dto.setProductCount(rs.getInt("PRODUCT_COUNT"));
 				dto.setProductPrice(rs.getInt("PRODUCT_PRICE"));
@@ -48,12 +46,7 @@ public class OrderProductDao {
 	}
 	
 	
-	//상품 이미지 조회
-		public Integer productImg(int productNo) {
-			String sql = "select * from img where img_no = (select img_no from product_img where product_no=?)";
-			Object[] param = {productNo};
-			return jdbcTemplate.queryForObject(sql, Integer.class, param);
-		}
+	
 	
 		
 }

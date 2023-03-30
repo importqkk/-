@@ -1,25 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+-<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <html>
 <head>
-<meta charset="EUC-KR">
 <title>Insert title here</title>
 	<style>
 	
     </style>
-    <!-- ¿ìÆíÁÖ¼Ò api -->
+    <!-- ìš°íŽ¸ì£¼ì†Œ api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/static/js/find-address.min.js"></script>
-	<!-- ¿ìÆíÁÖ¼Ò api -->
+	<!-- ìš°íŽ¸ì£¼ì†Œ api -->
 	
 	<script type="text/javascript">
     $(function(){
 		
-        //ÁÖ¼Ò 
+        //ì£¼ì†Œ 
         $(".address-btn").click(function(){
                    
             new daum.Postcode({ 
@@ -43,7 +42,7 @@
     		});
  
         
-       //Ã¼Å©¹Ú½º ¼±ÅÃ½Ã
+       //ì²´í¬ë°•ìŠ¤ ì„ íƒì‹œ
 		var checkboxes = document.getElementsByName("option");
 		let prevChecked = null;
 	
@@ -65,57 +64,60 @@
     
 </head>
 <body test>
+
  <div class="container-1000">
   <form action="/order/buy" method="post">
         <div class="flex">
             <div class=" w-70 pt-20">
-                <p><h2>ÁÖ¹®»óÇ°</h2></p>
-            <c:forEach var="productInfoDao" items="${productInfo}" varStatus="status">
+                <p><h2>ì£¼ë¬¸ìƒí’ˆ</h2></p>
                 <div class="row flex">
                     	<img src="https://picsum.photos/100/100" class="pe-20">
-                		<input hidden type="number" name="productNo" value="${productInfoDao.productNo}">
-						<input hidden type="number" name="productPrice" value="${productInfoDao.productPrice}">
+            			<c:forEach var="productInfoDao" items="${productInfo}" varStatus="status">
+                			<input hidden type="number" name="productNo" value="${productInfoDao.productNo}">
+							<input hidden type="number" name="productPrice" value="${productInfoDao.productPrice}">
 						
 										
-						<label>»óÇ°ÀÌ¸§: ${productInfoDao.productName}</label>
-						<label>ºê·£µå¸í: ${productInfoDao.productBrand}</label>		
-						<label>»óÇ°°¡°Ý: ${productInfoDao.productPrice}</label>
-						
+							<label>ìƒí’ˆì´ë¦„: ${productInfoDao.productName}</label>
+							<label>ë¸Œëžœë“œëª…: ${productInfoDao.productBrand}</label>		
+							<label>ìƒí’ˆê°€ê²©: ${productInfoDao.productPrice}</label>
+			           	</c:forEach>
+			           	<c:set var="Count" value="${productCount}" scope="application" />
+			           	<input hidden type="number" name="productCount" value="${Count}">
+						<label>ìƒí’ˆìˆ˜ëŸ‰:${Count}</label>
 						
 						
                 </div>
-               </c:forEach>
                 <div class="row left">
                    	<div class="flex"> 
-                   	<h2 class="w-80">¹è¼ÛÁö</h2>
-                   	 ÁÖ¹®ÀÚ Á¤º¸ °¡Á®¿À±â<input type="checkbox" class="post-check w-10"> </div> 
+                   	<h2 class="w-80">ë°°ì†¡ì§€</h2>
+                   	 ì£¼ë¬¸ìž ì •ë³´ ê°€ì ¸ì˜¤ê¸°<input type="checkbox" class="post-check w-10"> </div> 
                     <div class="row">
-                        <p>¹Þ´Â»ç¶÷</p>
+                        <p>ë°›ëŠ”ì‚¬ëžŒ</p>
                         <input type="text" class="form-input light w-100 medium" name="orderRecever">
                     </div>
 
                     <div class="row">
-                        <p>¿¬¶ôÃ³</p>
+                        <p>ì—°ë½ì²˜</p>
                         <input type="text" class="form-input light w-100 medium" name="orderReceivePhone">
                     </div>
 
                     <div class="row">
-                        <p>ÁÖ¼Ò</p>
-                        <input type="text" class="form-input light medium w-50" name="orderPost" placeholder="¿ìÆí¹øÈ£">
-                        <button class="form-btn medium positive address-btn" type="button">¿ìÆí¹øÈ£Ã£±â</button>
+                        <p>ì£¼ì†Œ</p>
+                        <input type="text" class="form-input light medium w-50" name="orderPost" placeholder="ìš°íŽ¸ë²ˆí˜¸">
+                        <button class="form-btn medium positive address-btn" type="button">ìš°íŽ¸ë²ˆí˜¸ì°¾ê¸°</button>
                     </div>
 
                     <div class="row">
                         <p></p>
-                        <input type="text" class="form-input light medium w-100" name="orderBasicAddr" placeholder="±âº»ÁÖ¼Ò" readonly>
+                        <input type="text" class="form-input light medium w-100" name="orderBasicAddr" placeholder="ê¸°ë³¸ì£¼ì†Œ" readonly>
                     </div>
 
                     <div class="row">
-                        <input type="text" class="form-input light medium w-100" name="orderDetailAddr" placeholder="»ó¼¼ÁÖ¼Ò">
+                        <input type="text" class="form-input light medium w-100" name="orderDetailAddr" placeholder="ìƒì„¸ì£¼ì†Œ">
                     </div>
 
                     <div class="row">
-                        <p>¹è¼Û¿äÃ»»çÇ×</p>
+                        <p>ë°°ì†¡ìš”ì²­ì‚¬í•­</p>
                         <input type="text" class="form-input light medium w-100" id="orderRequest">
                     </div>
                 </div>
@@ -126,41 +128,41 @@
             <div class="orderscroll w-30">
                 <div>
                     
-                    <p><h2>°áÁ¦Á¤º¸</h2></p>
-                    <p><label>Àû¸³±Ý</label></p>
+                    <p><h2>ê²°ì œì •ë³´</h2></p>
+                    <p><label>ì ë¦½ê¸ˆ</label></p>
                     <input type="text" class="form-input medium light" name="orderUserPoint" value="0" min="0">
-                    <button class="form-btn positive medium" type="button">Àü¾×</button>
-                    <p class="right">º¸À¯ Àû¸³±Ý: <span>3000¿ø</span></p>
+                    <button class="form-btn positive medium" type="button">ì „ì•¡</button>
+                    <p class="right">ë³´ìœ  ì ë¦½ê¸ˆ: <span>3000ì›</span></p>
                     <div class="row abc">
-                        <label>Á¦Ç°±Ý¾×: <span>3000¿ø</span></label>
+                        <label>ì œí’ˆê¸ˆì•¡: <span>3000ì›</span></label>
                         <div>
-                            <label>¹è¼Ûºñ : <span class="right">1000</span></label>
+                            <label>ë°°ì†¡ë¹„ : <span class="right">1000</span></label>
                         </div>
                         <div> 
-                            <label>Àû¸³±Ý : <span class="right">1000¿ø</span></label>
+                            <label>ì ë¦½ê¸ˆ : <span class="right">1000ì›</span></label>
     
                         </div>
                         <div>
-                            <label>ÃÑ °áÁ¦±Ý¾× : <span class="right">0¿ø</span></label>
+                            <label>ì´ ê²°ì œê¸ˆì•¡ : <span class="right">0ì›</span></label>
                         </div>
                     </div>
-                    <h2>°áÁ¦¼ö´Ü</h2>
+                    <h2>ê²°ì œìˆ˜ë‹¨</h2>
                     <div>
-                        <input type="checkbox" name="option" > ½Å¿ë / Ã¼Å©Ä«µå
+                        <input type="checkbox" name="option" > ì‹ ìš© / ì²´í¬ì¹´ë“œ
                     </div>
     
                     <div>
-                        <input type="checkbox" name="option" > ¹«ÅëÀå ÀÔ±Ý
+                        <input type="checkbox" name="option" > ë¬´í†µìž¥ ìž…ê¸ˆ
                     </div>
                     <div>
-                        <input type="checkbox" name="option" > ¿¡½ºÅ©·Î (½Ç½Ã°£ °èÁÂÀÌÃ¼)
+                        <input type="checkbox" name="option" > ì—ìŠ¤í¬ë¡œ (ì‹¤ì‹œê°„ ê³„ì¢Œì´ì²´)
                     </div>
                     <div>
-                        <input type="checkbox" name="option" > ÈÞ´ëÆù °áÁ¦
+                        <input type="checkbox" name="option" > íœ´ëŒ€í° ê²°ì œ
                     </div>
     
                     <div>
-                        <button class="form-btn positive large w-100" type="submit" >°áÁ¦ÇÏ±â</button>
+                        <button class="form-btn positive large w-100" type="submit" >ê²°ì œí•˜ê¸°</button>
                     </div>
                 </div>
             </div>

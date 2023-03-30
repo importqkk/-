@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor @Builder
 public class ProductInfoDto {
 
-	private int productNo, productPrice, productSellCount, reivewCNT, imgNo;
+	private int productNo, productPrice, productSellCount, reivewCNT, imgNo,productCount;
 	private String productBrand, productName;
 	private float reivewAVG;
 	private Date productJoin;

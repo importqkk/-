@@ -75,12 +75,12 @@
                     <img src="https://picsum.photos/100/100" class="pe-20">
                 		<input hidden type="number" name="productNo" value="${cartinfo.productNo}">
 						<input hidden type="number" name="productCount" value="${cartinfo.productCount}">
-						<input hidden type="number" name="productPrice" value="productCount">
+						<input hidden type="number" name="productPrice" value="${cartinfo.productPrice}">
 						
 						<label>상품이름: ${cartinfo.productName}</label>
 						<label>브랜드명: ${cartinfo.productBrand}</label>		
 						<label>상품가격: ${cartinfo.productPrice}</label>
-						<label>상품수량: productCount</label>
+						<label>상품수량: ${cartinfo.productCount}</label>
 						
                 </div>
                </c:forEach>
