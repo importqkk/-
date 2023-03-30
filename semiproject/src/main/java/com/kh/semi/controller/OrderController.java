@@ -1,7 +1,5 @@
 package com.kh.semi.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +16,11 @@ import com.kh.semi.dao.CartProductInfoDao;
 import com.kh.semi.dao.OrderDao;
 import com.kh.semi.dao.OrderProductDao;
 import com.kh.semi.dao.ProductDao;
-import com.kh.semi.dto.CartProductInfoDto;
+import com.kh.semi.dao.ProductInfoDao;
 import com.kh.semi.dto.OrderDto;
 import com.kh.semi.dto.OrderProductDto;
+import com.kh.semi.dto.ProductDto;
+import com.kh.semi.dto.ProductInfoDto;
 
 @Controller
 @RequestMapping("/order")
@@ -32,9 +32,13 @@ public class OrderController {
 	private CartProductInfoDao cartProductInfoDao;
 	
 	@Autowired
-	private OrderDao orderDao;
-	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	private ProductInfoDao productInfoDao;
+	
+	
+	@Autowired
+	private OrderDao orderDao;
 	@Autowired
 	private OrderProductDao orderProductDao;
 
@@ -62,24 +66,37 @@ public class OrderController {
 			//멤버아이디
 			String memberId=(String)session.getAttribute("memberId");
 			//받은 값을 이용해 상품정보 불러옴
-			model.addAttribute("productInfo",productDao.selectOne(productNo));
-			//상품 이미지 불러와야함 (차라리 뷰로 묶을까?)
+			model.addAttribute("productInfo",productInfoDao.selectOne(productNo));
+			model.addAttribute(productCount);
+			
+			
 			//model.addAllAttributes();
 			
 			//확인용
-			System.out.println(productDao.selectOne(productNo));
+			System.out.println(productInfoDao.selectOne(productNo));
 			System.out.println(productNo);
 			System.out.println(productCount);
+			
 			return "/WEB-INF/views/order/detailbuy.jsp";
 		}
 	
 	@PostMapping("/buy")
-	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto orderProductDto,HttpSession session){
+	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto orderProductDto,HttpSession session,
+			@RequestParam int productNo ,@RequestParam int productCount,@RequestParam int productPrice){
 		//회원 아이디넣고
 		//결제버튼을 누르면 상품등록
 		String memberId=(String)session.getAttribute("memberId");
+		//주문번호-주문목록 생성
 		orderDto.setMemberId(memberId);
 		orderDao.insertOrder(orderDto);
+		
+	
+		//상품 주문 실행
+		orderProductDto.setProductCount(productCount);
+		orderProductDto.setProductPrice(productPrice);
+		orderProductDto.setProductNo(productNo);
+		orderProductDto.setOrderNo(orderDao.orderNo(memberId)); 
+		
 		orderProductDao.InsertOrderProduct(orderProductDto);
 		return "redirect:buyFinish";
 		

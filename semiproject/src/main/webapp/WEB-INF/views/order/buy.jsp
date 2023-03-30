@@ -13,59 +13,79 @@
     </style>
     <!-- 우편주소 api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="/static/js/find-address.min.js"></script>
 	<!-- 우편주소 api -->
 	
-	
-    <script>
-    window.addEventListener("load", function(){
-    	  document.querySelector(".address-btn")
-    	          .addEventListener("click", findAddress);
-
-    	  function findAddress() {
-    	      new daum.Postcode({
-    	          oncomplete: function(data) {
-    	              var addr = ''; 
-    	              var extraAddr = ''; 
-
-    	       			if (data.userSelectedType === 'R') { 
-    	                  addr = data.roadAddress;
-    	              } else {
-    	                  addr = data.jibunAddress;
-    	              }
-    	              
-    	              
-    	              document.querySelector("[name=orderPost]").value = data.zonecode;
-    	              document.querySelector("[name=orderBasicAddr]").value = addr;
-    	              document.querySelector("[name=orderDetailAddr]").focus();
-    	          }
-    	      }).open();
-    	  }
-    	  
-    	  
-    	});
+    <script type="text/javascript">
+    $(function(){
+		
+        //주소 
+        $(".address-btn").click(function(){
+                   
+            new daum.Postcode({ 
+                oncomplete: function(data) {
+                   
+                    var addr = ''; 
+                    var extraAddr = ''; 
+                   
+                    if (data.userSelectedType === 'R') { 
+                        addr = data.roadAddress;
+                    } else { 
+                        addr = data.jibunAddress;
+                    }
+                    
+                    document.querySelector("[name=orderPost]").value = data.zonecode;
+                    document.querySelector("[name=orderBasicAddr]").value = addr;
+                    document.querySelector("[name=orderDetailAddr]").focus();
+                }
+                }).open();
+        
+    		});
  
+        
+       //체크박스 선택시
+		var checkboxes = document.getElementsByName("option");
+		let prevChecked = null;
+	
+		for (let i = 0; i < checkboxes.length; i++) {
+		  checkboxes[i].addEventListener("click", function() {
+		    if (prevChecked !== null && prevChecked !== this) {
+		      prevChecked.checked = false;
+		    }
+		    if (this.checked) {
+		      prevChecked = this;
+		    } else {
+		      prevChecked = null;
+		    }
+		  });
+		}
+
+		var productCount= ${productCount};
     </script>
     
     
 </head>
 <body test>
  <div class="container-1000">
+  <form action="/order/buy" method="post">
         <div class="flex">
             <div class=" w-70 pt-20">
                 <p><h2>주문상품</h2></p>
-           <form action="/order/buy" method="post">
             <c:forEach var="cartinfo" items="${cartinfo}">
                 <div class="row flex">
                     <img src="https://picsum.photos/100/100" class="pe-20">
-						<label>${cartinfo.productBrand}</label>						
-						<label>${cartinfo.productName}</label>
-						<label>${cartinfo.productPrice}</label>
-						<label>${cartinfo.productCount}</label>
+                		<input hidden type="number" name="productNo" value="${cartinfo.productNo}">
+						<input hidden type="number" name="productCount" value="${cartinfo.productCount}">
+						<input hidden type="number" name="productPrice" value="productCount">
+						
+						<label>상품이름: ${cartinfo.productName}</label>
+						<label>브랜드명: ${cartinfo.productBrand}</label>		
+						<label>상품가격: ${cartinfo.productPrice}</label>
+						<label>상품수량: productCount</label>
 						
                 </div>
                </c:forEach>
                 <div class="row left">
+               
                    	<div class="flex"> 
                    	<h2 class="w-80">배송지</h2>
                    	 주문자 정보 가져오기<input type="checkbox" class="post-check w-10"> </div> 
@@ -126,17 +146,17 @@
                     </div>
                     <h2>결제수단</h2>
                     <div>
-                        <input type="checkbox"> 신용 / 체크카드
+                        <input type="checkbox" name="option" > 신용 / 체크카드
                     </div>
     
                     <div>
-                        <input type="checkbox"> 무통장 입금
+                        <input type="checkbox" name="option" > 무통장 입금
                     </div>
                     <div>
-                        <input type="checkbox"> 에스크로 (실시간 계좌이체)
+                        <input type="checkbox" name="option" > 에스크로 (실시간 계좌이체)
                     </div>
                     <div>
-                        <input type="checkbox"> 휴대폰 결제
+                        <input type="checkbox" name="option" > 휴대폰 결제
                     </div>
     
                     <div>

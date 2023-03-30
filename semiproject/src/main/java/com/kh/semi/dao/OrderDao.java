@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.OrderDto;
+import com.kh.semi.dto.ProductDto;
 
 
 
@@ -78,6 +79,12 @@ public class OrderDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//주문번호불러오기 test
+	public int orderNo(String memberId) {
+		String sql="select order_no from (select order_no from order_ where member_id=? order by order_no desc) where rownum<=1";
+		Object[] param= {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
 	
 	
 }

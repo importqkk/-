@@ -80,6 +80,7 @@
         	var qtySelector = $(this);
         	// 장바구니 하나의 상품의 개당 가격 * 개수
             var productValue = productCount * productPrice;
+        	
         	$.ajax({
         		url:"/rest/cart/",
         		method:"patch",
