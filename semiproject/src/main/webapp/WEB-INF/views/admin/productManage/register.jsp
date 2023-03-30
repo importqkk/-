@@ -16,7 +16,7 @@
 
 <div class="container-1000">
 	<form action="register" method="post" enctype="multipart/form-data">
-        <div class="row">
+        <div class="row pb-30 pt-30">
             <h1>상품 등록</h1>
         </div>
         <div class="row">
@@ -54,9 +54,13 @@
         </div>
         <div class="row">
             <label>대표이미지</label>
-            <input type="file" class="form-input medium w-100" name="img" accept=".png, .gif, .jpg">
+            <input type="file" class="form-input medium w-100" name="img1" accept=".png, .gif, .jpg">
         </div>
         <div class="row">
+            <label>상세이미지</label>
+            <input type="file" class="form-input medium w-100" name="img2" accept=".png, .gif, .jpg">
+        </div>
+        <div class="row pb-30">
         	<button type="submit" class="form-btn medium positive w-100">등록</button>
         </div>
     </form>
