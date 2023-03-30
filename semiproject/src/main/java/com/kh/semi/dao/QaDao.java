@@ -123,6 +123,7 @@ public class QaDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+	
 	//조회수
 	public boolean updateReadCount(int qaNo) {
 		String sql = "update qa ser qa_read = qa_read+1"

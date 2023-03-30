@@ -2,17 +2,16 @@ package com.kh.semi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -99,6 +100,25 @@ public class QaController {
 			e.printStackTrace();
 		}
 	}
+	
+//	// PUT 요청 처리
+//	@PutMapping("/qa/{qaNo}")
+//	public ResponseEntity<String> updateQa(
+//	        @PathVariable("qaNo") int qaNo,
+//	        @RequestBody String qaContent) {
+//
+//	    QaDto qaDto = new QaDto();
+//	    qaDto.setQaNo(qaNo);
+//	    qaDto.setQaContent(qaContent);
+//
+//	    int count = qaService.update(qaDto);
+//
+//	    if (count > 0) {
+//	        return ResponseEntity.ok("수정 성공");
+//	    } else {
+//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("수정 실패");
+//	    }
+//	}
 	
 //	@GetMapping("/detail")
 //	public String detail2(@RequestParam int qaNo,

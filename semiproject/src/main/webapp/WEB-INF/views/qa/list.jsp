@@ -5,6 +5,8 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
+
 <c:if test="${sessionScope.memberRole == '관리자'}">
 <script type="text/javascript">
 	function checkAll(){
@@ -34,6 +36,38 @@
 	}
 </script>
 </c:if>
+
+ <script>
+//     $(document).ready(function() {
+//         // 전체 선택 체크박스 클릭 시 개별 선택 체크박스 상태 변경
+//         $(".check-all").change(function() {
+//             $(".center").find("input[type='checkbox']").prop("checked", $(this).prop("checked"));
+//         });
+
+//         // 개별 선택 체크박스 클릭 시 전체 선택 체크박스 상태 변경
+//         $(".center").find("input[type='checkbox']").change(function() {
+//             if (!$(this).prop("checked")) {
+//                 $(".check-all").prop("checked", false);
+//             } else {
+//                 if ($(".center").find("input[type='checkbox']:not(:checked)").length == 0) {
+//                     $(".check-all").prop("checked", true);
+//                 }
+//             }
+//         });
+
+//         // 삭제 버튼 클릭 시 선택된 게시물 삭제
+//         $("button.negative").click(function() {
+//             var checked = $(".center").find("input[type='checkbox']:checked");
+//             if (checked.length == 0) {
+//                 alert("삭제할 게시물을 선택해주세요.");
+//                 return false;
+//             }
+//             return confirm("정말로 삭제하시겠습니까?");
+//         });
+//     });
+</script>
+
+
 
 <div class="container-1000">
     <div class="row left">
@@ -109,7 +143,7 @@
 						${qaDto.qaHead}
 						<!-- qaDepth만큼 띄어쓰기를 실시 -->
 						<c:forEach var="i" begin="1" end="${qaDto.qaDepth}">
-							&nbsp;&nbsp;
+							&nbsp;
 						</c:forEach>
 						<!-- qaDepth가 1 이상일 경우만 답글 표식을 추가 -->
 						<c:if test="${qaDto.qaDepth > 0}">
@@ -128,6 +162,21 @@
 					<td>${qaDto.qaDate}</td>
 					<td>${qaDto.qaRead}</td>
 				</tr>
+				
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/642513f64247f20fefe8c632/1gsodbvhg';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
 				</c:forEach>
             </tbody>
         </table>

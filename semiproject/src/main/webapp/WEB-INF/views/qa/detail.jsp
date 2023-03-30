@@ -33,8 +33,33 @@ $(function(){
 	            $(this).parents(".edit-panel").hide()
 	                        .next(".view-panel").show();
 	        });
+	        $(editHtml).find(".save-btn").click(function(){
+	            //this == 저장버튼
+	            var editedContent = $(this).parents(".edit-panel").find("textarea").val();
+	            $.ajax({
+	                url:"/qa/detail",
+	                type:"PUT",
+	                data:{
+	                    "qaNo": qaNo,
+	                    "qaContent": editedContent
+	                },
+	                dataType:"json",
+	                cache:false,
+	                success: function(data){
+	                    // 수정 성공했을 때 처리할 코드 작성
+	                    alert("수정되었습니다.");
+	                    $(this).parents(".edit-panel").hide().next(".view-panel").show().find(".contents").text(editedContent);
+	                }.bind(this),
+	                error: function(request,status,error){
+	                    // 수정 실패했을 때 처리할 코드 작성
+	                    alert("수정 실패");
+	                }
+	            });
+	            $(this).parents(".edit-panel").hide().next(".view-panel").show().find(".contents").text(editedContent);
+	        });
 	        $(".target").append(editHtml);
 
+	        
 	        var viewTemplate = $("#view-template").html();
 	        var viewHtml = $.parseHTML(viewTemplate);
 	        $(viewHtml).find(".contents").text(data.qaContent);
@@ -54,39 +79,34 @@ $(function(){
 	            $(this).parents(".view-panel").hide()
 	                        .prev(".edit-panel").show();
 		        });
+	        
+	        
 		        $(viewHtml).find(".delete-btn").click(function(){
 		            var choice = window.confirm("정말 삭제하시겠습니까?");
 		                        if(choice == false) return;
-		                        //var no = $(this).parent().prev().prev().prev().text();
-		                        //var no = $(this).attr("data-no");
-		                        var no = $(this).data("no");//읽기만 가능 
-		        });
-		        
-// 		        게시물 수정 코드...
-
-/*
-		        $(".edit-panel button[type='submit']").click(function() {
-		            var editedContent = $(this).siblings("textarea").val(); // textarea의 값 가져오기
-		            var qaNo = "${qaDto.qaNo}"; // 수정할 QA 글 번호
-		            $.ajax({
-		                url: "/qa/update",
-		                type: "POST",
-		                data: {
-		                    "qaNo": qaNo,
-		                    "qaContent": editedContent
-		                },
-		                success: function(data) {
-		                    // 수정이 성공적으로 완료되었을 때 처리할 코드 작성
-		                },
-		                error: function(xhr, status, error) {
-		                    // 수정이 실패했을 때 처리할 코드 작성
-		                }
-		            });
-		        });
-*/
-
+		                        
+		                        // a 태그 기본 동작 막기
+		    		            event.preventDefault();
+		    		            
+		    	// AJAX 요청으로 게시물 삭제하기
+		    	$.ajax({
+		    		   url: "/qa/delete",
+		    		   type: "GET",
+		    		   data: {
+		    		       "qaNo": qaNo
+		    		   },
+		    		   success: function(data) {
+		    		       // 삭제가 성공적으로 완료되었을 때 처리할 코드 작성
+		    		       alert("삭제되었습니다.");
+		    		       window.location.href="/qa/list";
+		    		   },
+		    		   error: function(xhr, status, error) {
+		    		       // 삭제가 실패했을 때 처리할 코드 작성
+		    		       alert("삭제 실패");
+		    		   }
+		     });	
+		 });
 		        $(".target").append(viewHtml);
-		    
 	
 		    	$(".edit-panel").hide();
 		},
@@ -95,7 +115,6 @@ $(function(){
 			}
 	 });//ajax end
 });
-
 </script>
     <!-- 편집용 템플릿 -->
     <script type="text/template" id="edit-template">
@@ -104,7 +123,7 @@ $(function(){
 			<div class="left font-h1">${qaDto.qaHead}</div>
 			<div class="left font-h1">${qaDto.qaTitle}</div>
             <textarea class="form-input large w-100 font-h2"></textarea></div>
-            <button type="submit" class="form-btn positive">저장</button>
+            <button type="submit" class="form-btn positive save-btn">저장</button>
             <button class="form-btn neutral cancel-btn ms-20">취소</button>
         </div>
     </script>
@@ -115,7 +134,7 @@ $(function(){
 			<div class="left font-h1">${qaDto.qaTitle}</div>
 			<div class="contents left font-h2">${qaDto.qaContent}</div>
             <a class="form-btn neutral edit-btn">수정</a>
-            <a class="form-btn neutral ms-20 delete-btn" href="/qa/delete?qaNo=${qaDto.qaNo}">삭제</a>
+            <a class="form-btn neutral ms-20 delete-btn">삭제</a>
             <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
         </div>
     </script>
@@ -125,6 +144,50 @@ $(function(){
         </div>
         <div class="row target">
         </div>
+        
+		<hr>
+        <br>
+        <!-- 댓글 작성란 -->
+	<div class="row">
+		
+		<div class="row">
+			<c:choose>
+				<c:when test="${sessionScope.memberId != null}">
+					<textarea name="replyContent" class="form-input w-100"
+							placeholder="댓글 내용을 작성하세요"></textarea>	
+				</c:when>
+				<c:otherwise>
+					<textarea name="replyContent" class="form-input w-100"
+							placeholder="로그인 후에 댓글 작성이 가능합니다" disabled></textarea>	
+				</c:otherwise>
+			</c:choose>
+			
+		</div>
+		<c:if test="${sessionScope.memberId != null}">		
+		<div class="row right">
+			<button type="button" class="form-btn positive reply-insert-btn">댓글 작성</button>
+		</div>
+		</c:if>
+
+	</div>
+	
+	
+	<div class="row right">
+		<a class="form-btn positive" href="/qa/write?qaParent=${qaDto.qaNo}">답글쓰기</a>
+		
+		<c:if test="${owner}">
+		<!-- 내가 작성한 글이라면 수정과 삭제 메뉴를 출력 -->
+		<a class="form-btn neutral" href="/qa/edit?qaNo=${qaDto.qaNo}">수정</a>
+		</c:if>
+		
+		<c:if test="${owner || admin}">
+		<!-- 파라미터 방식일 경우의 링크 -->
+		<a class="form-btn neutral" href="/qa/delete?qaNo=${qaDto.qaNo}">삭제</a>
+		<!-- 경로 변수 방식일 경우의 링크 -->
+	<%-- 				<a href="/qa/delete/${qaDto.qaNo}">삭제</a> --%>
+		</c:if>
+		<a class="form-btn neutral" href="/qa/list">목록보기</a>
+	</div>
     </div>
 
 
