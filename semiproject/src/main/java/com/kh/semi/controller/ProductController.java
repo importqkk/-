@@ -42,7 +42,6 @@ public class ProductController {
 						Model model) {
 		ProductDto productDto = productDao.selectOne(productNo);
 		model.addAttribute("productDto",productDto); 
-		
 		return "/WEB-INF/views/product/detail.jsp";
 	}
 	
