@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dto.ProductDto;
+import com.kh.semi.dto.ProductInfoDto;
 
 
 @Controller
@@ -24,8 +25,8 @@ public class ProductController {
 	@GetMapping("/detail")
 	public String list(@RequestParam int productNo,
 						Model model) {
-		ProductDto productDto = productDao.selectOne(productNo);
-		model.addAttribute("productDto",productDto); 
+		ProductInfoDto productInfoDto = productDao.selectOne(productNo);
+		model.addAttribute("productInfoDto",productInfoDto); 
 		
 		return "/WEB-INF/views/product/detail.jsp";
 	}

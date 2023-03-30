@@ -1,4 +1,4 @@
--<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -200,7 +200,7 @@
     </script>
 
 <body test>
-	<h6 class="productNo" style="display:none;">${productDto.productNo}</h6>
+	<h6 class="productNo" style="display:none;">${productInfoDto.productNo}</h6>
     <div class="container-1000">
     	<form class="two-form"> <!-- 장바구니, 구매하기 까지 감싼 form -->
         <hr>
@@ -214,16 +214,16 @@
             <!-- 상품 가격 부터 구매하기 버튼까지-->
             <div class="flex-remain"> 
                 <div class="row">
-                    <h5 class="font-grey oneLine">${productDto.productBrand}</h5>
-                    <h5 class="font-grey oneLine">${productDto.productName}</h5>
+                    <h5 class="font-grey oneLine">${productInfoDto.productBrand}</h5>
+                    <h5 class="font-grey oneLine">${productInfoDto.productName}</h5>
                  
                 </div>
                 <div class="row">
-                    <h2>${productDto.productName}</h2>
+                    <h2>${productInfoDto.productName}</h2>
                 </div>
                 <div class="row">
                     <br>
-                    <h3 class="oneLine product-price">${productDto.productPrice}</h3>
+                    <h3 class="oneLine product-price">${productInfoDto.productPrice}</h3>
                     <h3 class="oneLine">원</h3>
                     <br><br><br>
                     <h4 class="font-boldgrey oneLine">배송비</h4>
@@ -242,7 +242,7 @@
                     <hr>
                     <div class="flex">
                         <div class="w-70">
-                            <h5 class="font-boldgrey oneLine">${productDto.productName}</h5>
+                            <h5 class="font-boldgrey oneLine">${productInfoDto.productName}</h5>
                         </div>
                         <div class="flex-remain center">
 <!--                             <button class="w-100 form-btn small neutral center"> -->
@@ -266,7 +266,7 @@
                 </div>
                 <div class="row">
                     <h3 class="font-purple oneLine">총 금액&nbsp;</h3>
-                    <h3 class="oneLine total-price">${productDto.productPrice}</h3>
+                    <h3 class="oneLine total-price">${productInfoDto.productPrice}</h3>
                     <h3 class="oneLine">원</h3>
                 </div>
                 <div class="row center">
