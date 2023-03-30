@@ -48,9 +48,12 @@ public class CartController {
 		// 장바구니에 없는 상품인지 (없으면 true)
 		boolean isNew = cartDao.selectOne(cartDto) == null;
 		// 담으려는 수량이 재고보다 적거나 같을 때 장바구니에 추가
-		if(productCount <= productStock && isNew) {
+		if(productCount <= productStock && isNew && productCount <= 10) {
 			cartDao.cartInsert(cartDto);
 			attr.addAttribute("mode", "success");
+		}
+		else if(productCount > 10) {
+			attr.addAttribute("mode", "error3");
 		}
 		// 장바구니에 이미 있는 상품인 경우(상품 추가 안되고 문구 띄움)
 		else if(!isNew) {
@@ -104,8 +107,10 @@ public class CartController {
 		cartProductInfoDto.setMemberId(memberId);
 		List<CartProductInfoDto> itemInfo = cartProductInfoDao.cartItemInfo(memberId);
 		int cartCnt = cartDao.cartCnt(memberId);
+		int isEmpty = itemInfo.size();
 		model.addAttribute("itemInfo", itemInfo);
 		model.addAttribute("cartCnt", cartCnt);
+		model.addAttribute("isEmpty", isEmpty);
 		return "/WEB-INF/views/cart/cartMain.jsp";
 	}
 	
