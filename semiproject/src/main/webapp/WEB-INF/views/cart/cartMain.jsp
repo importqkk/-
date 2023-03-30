@@ -258,53 +258,64 @@
 	        </div>
 	    </c:forEach>
 <!-- ------------------------------------ 반복문 돌릴 부분 end ------------------------------------ -->
-        <div class="row-large">
-            <a class="form-btn medium neutral w-100" href="/">더 쇼핑하기</a>
-        </div>
+		<c:if test="${isEmpty == 0}">
+			<div class="center row-large">
+				<h3>장바구니에 담긴 상품이 없어요.</h3>
+			</div>
+			<div class="row-large">
+	            <a class="form-btn medium positive w-100" href="/">쇼핑하러 가기</a>
+	        </div>
+		</c:if>
+		<c:if test="${isEmpty > 0}">
+	        <div class="row-large">
+	            <a class="form-btn medium neutral w-100" href="/">더 쇼핑하기</a>
+	        </div>
+        </c:if>
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
-        <div class="row-large">
-            <table class="table table-cart">
-                <tbody class="center">
-                    <tr>
-                        <th class="w-30">총 제품 금액</th>
-                        <th></th>
-                        <th class="w-20">기본 배송비</th>
-                        <th></th>
-                        <th class="w-35">예상 결제 금액</th>
-                    </tr>
-                    <tr>
-                        <td>
-                        	<h2>
-                        		<span class="total-product-price">
-                        			<fmt:formatNumber pattern="#,##0" value="${total}"></fmt:formatNumber>
-                        		</span>
-                        	</h2>
-                        </td>
-                        <td>
-                        	<h2 class="plus c-b80">+</h2>
-                        </td>
-                        <td>
-                        	<h2 class="delevery-price">3,000</h2>
-                        </td>
-                        <td>
-                        	<h2 class="equals c-b80">=</h2>
-                        </td>
-                        <td>
-                        	<h2 class="final-price">
-                        		<span><fmt:formatNumber pattern="#,##0" value="${total+3000}"></fmt:formatNumber></span>
-                        	</h2>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+		<c:if test="${isEmpty > 0}">
+	        <div class="row-large">
+	            <table class="table table-cart">
+	                <tbody class="center">
+	                    <tr>
+	                        <th class="w-30">총 제품 금액</th>
+	                        <th></th>
+	                        <th class="w-20">기본 배송비</th>
+	                        <th></th>
+	                        <th class="w-35">예상 결제 금액</th>
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                        	<h2>
+	                        		<span class="total-product-price">
+	                        			<fmt:formatNumber pattern="#,##0" value="${total}"></fmt:formatNumber>
+	                        		</span>
+	                        	</h2>
+	                        </td>
+	                        <td>
+	                        	<h2 class="plus c-b80">+</h2>
+	                        </td>
+	                        <td>
+	                        	<h2 class="delevery-price">3,000</h2>
+	                        </td>
+	                        <td>
+	                        	<h2 class="equals c-b80">=</h2>
+	                        </td>
+	                        <td>
+	                        	<h2 class="final-price">
+	                        		<span><fmt:formatNumber pattern="#,##0" value="${total+3000}"></fmt:formatNumber></span>
+	                        	</h2>
+	                        </td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
-        <div class="row">
-            <div class="row">
-                <a class="form-btn medium positive w-100 all-btn" href="#">주문하기</a>
-            </div>
-        </div>
-
+	        <div class="row">
+	            <div class="row">
+	                <a class="form-btn medium positive w-100 all-btn" href="#">주문하기</a>
+	            </div>
+	        </div>
+		</c:if>
     </div>
 		
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
