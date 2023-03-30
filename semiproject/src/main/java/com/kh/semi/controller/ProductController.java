@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.semi.dao.BuyHistoryDao;
 import com.kh.semi.dao.ProductDao;
+import com.kh.semi.dto.BuyHistoryDto;
 import com.kh.semi.dto.ProductDto;
 
 @Controller
@@ -18,6 +21,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private BuyHistoryDao buyHistoryDao;
 	
 
 	@GetMapping("/list")
@@ -31,10 +37,19 @@ public class ProductController {
 	
 	@GetMapping("/detail")
 	public String detail(@RequestParam int productNo,
+						 @ModelAttribute BuyHistoryDto buyHistoryDto,
 							Model model,
 							HttpSession session) {
+				
+				
 		ProductDto productDto = productDao.selectOne(productNo);
 		model.addAttribute("productDto",productDto);
+		
+		String memberId = (String) session.getAttribute("memberId");
+		buyHistoryDao.selectBuy(memberId);
+		
+//		String buyer = 
+		
 		return "/WEB-INF/views/product/detail.jsp";
 		
 	}

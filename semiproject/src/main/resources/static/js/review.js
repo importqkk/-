@@ -44,10 +44,14 @@ $(function(){
             contentType:false,
             success:function(response){
                 //이미지 번호 정보 생성
+                var template  = $("#review-template").html();
+				var html = $.parseHTML(template);
+					
                 var input = $("<input>").attr("type", "hidden")
                                         .attr("name", "imgNo")
                                         .val(response.imgNo);
                 
+                $(html).find(".review-item").prepend(input);
                 
                 //미리보기
                 var reviewImage = $("<img>").attr("src", "/rest/img/download/"+response.imgNo);
@@ -153,6 +157,9 @@ $(function(){
 					var likeButton = $("<i>").addClass("fa-heart fa-regular")
 												.attr("data-review-no", response[i].reviewNo)
 												.click(likeReview);
+												
+//					var ImageReview = $("<img>").attr("src", "/rest/img/download/"+response.imgNo);
+//					$(html).find(".reviewContent").prepend(ImageReview);
 					
 					var reviewNo = response[i].reviewNo;
 											
