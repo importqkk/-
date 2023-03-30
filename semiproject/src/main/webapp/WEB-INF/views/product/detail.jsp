@@ -201,6 +201,10 @@
 				alert("재고가 부족합니다.");
 				return false;
 			}
+			else if(mode == "error3") {
+				alert("최대 10개까지 담을 수 있습니다.");
+				return false;
+			}
 			else if(mode == "success") {
 				alert("장바구니에 상품을 담았습니다.")
 			}
