@@ -25,9 +25,11 @@ public class ProductInfoDao {
 						.productPrice(rs.getInt("product_price"))
 						.productSellCount(rs.getInt("product_sell_count"))
 						.productJoin(rs.getDate("product_join"))
+						.productStock(rs.getInt("product_stock"))
 						.reivewAVG(rs.getFloat("avg"))
 						.reivewCNT(rs.getInt("cnt"))
 						.imgNo(rs.getInt("img_no"))
+						.tagNo(rs.getInt("tag_no"))
 					.build();
 		}
 	};
@@ -48,6 +50,12 @@ public class ProductInfoDao {
 	// 많이 팔린 순서대로 정렬하기
 	public List<ProductInfoDto> bestList() {
 		String sql = "select * from product_info order by product_sell_count desc, product_no desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	// 전체 상품 불러오기
+	public List<ProductInfoDto> productList() {
+		String sql = "select * from product_info order by product_stock desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
