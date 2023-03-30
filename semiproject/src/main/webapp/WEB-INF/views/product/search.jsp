@@ -140,35 +140,9 @@
 
 <body>
 	<div class="container-1200">
-		<div class="row">
-			<hr>
-			<h5 class="font-lightgrey"> <i class=" fa-solid fa-house"></i> > 면역력 어쩌구</h5>
-			
-		</div>
-		<div class="row">
-			<hr>
-		</div>
-		<div class="flex center">
-			<a class="w-5 me-50 fas fa-solid fa-bars" href="all"></a>		
-			<a class="w-5 me-50 fas fa-light fa-face-smile" href="tag1"></a>
-			<a class="w-5 me-50 fas fa-light fa-weight-scale" href="tag2"></a>
-			<a class="w-5 me-50 fas fa-light fa-venus" href="tag3"></a>	
-			<a class="w-5 me-50 fas fa-sharp fa-light fa-bolt-lightning" href="tag4"></a>
-			<a class="w-5 me-50 fas fa-thin fa-mars purple-box"></a>
-			<a class="w-5 me-50 fas fa-light fa-eye" href="tag6"></a>	
-			<a class="w-5 me-50 fas fa-light fa-tooth" href="tag7"></a>
-			<a class="w-5 me-50 fas fa-light fa-bone" href="tag8"></a>
-		</div>
-		<div class="flex center">
-			<h5 class="w-5 me-50">전체</h5>
-			<h5 class="w-5 me-50">피부</h5>
-			<h5 class="w-5 me-50">다이어트</h5>
-			<h5 class="w-5 me-50">여성</h5>
-			<h5 class="w-5 me-50">활력</h5>
-			<h5 class="w-5 me-50">남성</h5>
-			<h5 class="w-5 me-50">눈</h5>
-			<h5 class="w-5 me-50">치아</h5>
-			<h5 class="w-5 me-50">뼈</h5>
+		<br><br>
+		<div class="row center">
+			<h2 class="oneLine">총</h2><h2 class="oneLine font-purple"> ${searchCount}</h2><h2 class="oneLine">개의 검색결과</h2>
 		</div>
 		<div class="flex left grey-box">	
 			<div class="flex w-60 ">
@@ -181,7 +155,7 @@
 				<a class="w-9 a-font-lightgrey oneLine">높은가격순</a>
 			</div>
 			<div class="flex w-40 right">
-				<h5 class="w-30 me-10 font-lightgrey">${count}개의 제품</h5>
+				<h5 class="w-30 me-10 font-lightgrey">${searchCount}개의 제품</h5>
 			</div>
 		</div>	
 		<br>

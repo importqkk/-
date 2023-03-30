@@ -92,6 +92,7 @@
 			color: #776bff;
 		}
 		
+		
 </style>
 <script type="text/javascript">
 	// "none"
@@ -100,7 +101,7 @@
 			$(".a-font-purple").removeClass("a-font-purple").addClass("a-font-lightgrey"); // 보라글씨의 a-font-purple클래스를 지우고 a-font-lightgrey 클래스를 추가
 			$(this).removeClass("a-font-lightgrey") // 눌린 글씨의 a-font-ligtgrey 클래스를 제거
 			$(this).addClass("a-font-purple") // 눌린 글씨에 a-font-purple
-			if($(this).text()=="인기순")	
+			if($(this).text()=="인기순")	 // 인기순 정렬
 			{
 				console.log($(this));
 				$(".best").show();
@@ -109,14 +110,14 @@
 				$(".expensive").hide();
 				
 			}
-			else if($(this).text()=="최신순"){
+			else if($(this).text()=="최신순"){ // 최신순 정렬
 				console.log($(this));
 				$(".best").hide();
 				$(".new").show();
 				$(".cheap").hide();
 				$(".expensive").hide();
 			}
-			else if($(this).text()=="낮은가격순")
+			else if($(this).text()=="낮은가격순") // 낮은가격순 정렬
 			{
 				console.log($(this));
 				$(".best").hide();
@@ -124,7 +125,7 @@
 				$(".cheap").show();
 				$(".expensive").hide();
 			}
-			else{
+			else{								// 높은가격순 정렬
 				console.log($(this));
 				$(".best").hide();
 				$(".new").hide();
@@ -132,6 +133,29 @@
 				$(".expensive").show();
 			}
 		});	
+		
+		$(".img-box").click(function(){
+			var index = $(this).data('index');
+			var index1 = $(this).data('index1');
+			var index2 = $(this).data('index2');
+			var index3 = $(this).data('index3');
+			if(index!=null){
+				indexr = index;
+			}
+			if(index1!=null){
+				indexr = index1;
+			}
+			if(index2!=null){
+				indexr = index2;
+			}
+			if(index3!=null){
+				indexr = index3;
+			};
+			
+			console.log($(this).data('info'));
+//  			var productNo = $(".productNo").eq(indexr).text(); 
+//   			$(location).attr("href","/product/detail?productNo="+productNo);
+		});
 	})
 	
 </script>
@@ -181,7 +205,7 @@
 				<a class="w-9 a-font-lightgrey oneLine">높은가격순</a>
 			</div>
 			<div class="flex w-40 right">
-				<h5 class="w-30 me-10 font-lightgrey">100개의 제품</h5>
+				<h5 class="w-30 me-10 font-lightgrey">${count}개의 제품</h5>
 			</div>
 		</div>	
 		<br>
@@ -189,10 +213,9 @@
 		<!--인기상품 -->
 		<div class="flex-wr center mb-20 best">
 		<c:forEach var="productInfoDto" items="${bestList}" varStatus="status">		
-				<div class="img-box me-20 center">
+				<div class="img-box me-20 center" data-index="${status.index}" data-info="best">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
-					<br><br>
-					
+					<br><h5 class="productNo" style="display: none;">${productInfoDto.productNo}</h5>				
 					<h5 class="left ms-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
 					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>
@@ -206,16 +229,14 @@
 						<h6 class="font-grey ms-20">150</h6>
 					</div>
 				</div>
-				<c:out value="${status.step}"/>
 		</c:forEach>
 		</div>	
 		<!--최신상품 -->
 		<div class="flex-wr center mb-20 new" style="display: none;">
-		<c:forEach var="productInfoDto" items="${newList}" varStatus="status">		
-				<div class="img-box me-20 center">
+		<c:forEach var="productInfoDto" items="${newList}" varStatus="status1">		
+				<div class="img-box me-20 center" data-index1="${status1.index}" data-info="new">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
-					<br><br>
-					
+					<br><h5 class="productNo" style="display: none;">${productInfoDto.productNo}</h5>	
 					<h5 class="left ms-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
 					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>
@@ -229,16 +250,14 @@
 						<h6 class="font-grey ms-20">150</h6>
 					</div>
 				</div>
-				<c:out value="${status.step}"/>
 		</c:forEach>
 		</div>		
 		<!--낮은 가격순 -->
 		<div class="flex-wr center mb-20 cheap" style="display: none;">
-		<c:forEach var="productInfoDto" items="${cheapList}" varStatus="status">		
-				<div class="img-box me-20 center">
+		<c:forEach var="productInfoDto" items="${cheapList}" varStatus="status2">		
+				<div class="img-box me-20 center" data-index2="${status2.index}" data-info="cheap">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
-					<br><br>
-					
+					<br><h5 class="productNo" style="display: none;">${productInfoDto.productNo}</h5>	
 					<h5 class="left ms-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
 					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>
@@ -252,16 +271,14 @@
 						<h6 class="font-grey ms-20">150</h6>
 					</div>
 				</div>
-				<c:out value="${status.step}"/>
 		</c:forEach>
 		</div>	
 		<!--높은 가격순 -->
 		<div class="flex-wr center mb-20 expensive" style="display: none;">
-		<c:forEach var="productInfoDto" items="${expensiveList}" varStatus="status">		
-				<div class="img-box me-20 center">
+		<c:forEach var="productInfoDto" items="${expensiveList}" varStatus="status2">		
+				<div class="img-box me-20 center" data-index3="${status2.index}" data-info="expensive">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
-					<br><br>
-					
+					<br><h5 class="productNo" style="display: none;">${productInfoDto.productNo}</h5>	
 					<h5 class="left ms-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
 					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>
@@ -275,7 +292,6 @@
 						<h6 class="font-grey ms-20">150</h6>
 					</div>
 				</div>
-				<c:out value="${status.step}"/>
 		</c:forEach>
 		</div>		
 		

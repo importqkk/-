@@ -181,7 +181,7 @@
 				<a class="w-9 a-font-lightgrey oneLine">높은가격순</a>
 			</div>
 			<div class="flex w-40 right">
-				<h5 class="w-30 me-10 font-lightgrey">100개의 제품</h5>
+				<h5 class="w-30 me-10 font-lightgrey">${count}개의 제품</h5>
 			</div>
 		</div>	
 		<br>

@@ -36,14 +36,48 @@ public class ProductDao {
 	
 	
 	// 상품 번호로 상품 정보 불러오기
-		public ProductInfoDto selectOne(int productNo) {
+	public ProductInfoDto selectOne(int productNo) {
 			String sql = "select * from product_info where product_no=?";
 			Object[] param = {productNo};
 			List<ProductInfoDto> list = jdbcTemplate.query(sql,mapper,param);
 			return list.isEmpty() ? null:list.get(0);
 	}
 	
+	
+	
+	// 상품 검색
+	public String productCount(String keyword) {
+		String sql = "select count(*) from Product_info where instr(product_name,?) > 0 order by product_sell_count desc, product_no desc";
+		Object[] param = {keyword};
+		return jdbcTemplate.queryForObject(sql, String.class, param);
+	}	 
+	public List<ProductInfoDto> searchBest(String keyword){
+		String sql = "select * from Product_info where instr(product_name,?) > 0 order by product_sell_count desc, product_no desc";
+		Object[] param = {keyword}; 
+		return jdbcTemplate.query(sql, mapper,param);
+	}
+	public List<ProductInfoDto> searchNew(String keyword){
+		String sql = "select * from Product_info where instr(product_name,?) > 0 order by product_join desc, product_no desc";
+		Object[] param = {keyword}; 
+		return jdbcTemplate.query(sql, mapper,param);
+	}
+	public List<ProductInfoDto> searchCheap(String keyword){
+		String sql = "select * from Product_info where instr(product_name,?) > 0 order by product_price asc, product_no desc";
+		Object[] param = {keyword}; 
+		return jdbcTemplate.query(sql, mapper,param);
+	}
+	public List<ProductInfoDto> searchExpensive(String keyword){
+		String sql = "select * from Product_info where instr(product_name,?) > 0 order by product_price desc, product_no desc";
+		Object[] param = {keyword}; 
+		return jdbcTemplate.query(sql, mapper,param);
+	}
+		
+		
 	// 상품 전체 리스트 
+	public String allCount() {
+		String sql = "select count(*) from product";
+		return jdbcTemplate.queryForObject(sql, String.class);
+	}	
 	public List<ProductInfoDto> selectAll(){ // 전체
 		String sql = "select * from product_info";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql,mapper);
@@ -69,6 +103,10 @@ public class ProductDao {
 	
 	
 	// 태그1111111111111111111111111111111111111111111111111
+	public String tag1Count() {
+		String sql = "select count(*) from product_info where tag_no=1";
+		return jdbcTemplate.queryForObject(sql, String.class);
+	}	
 	public List<ProductInfoDto> bestTag1(){ // 1번 인기순 
 		String sql = "SELECT * from product_info where tag_no=1 order by product_sell_count desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);
@@ -96,6 +134,10 @@ public class ProductDao {
 	
 	
 	// 태그222222222222222222222222222222222222222222222222222
+	public String tag2Count() {
+		String sql = "select count(*) from product_info where tag_no=2";
+		return jdbcTemplate.queryForObject(sql, String.class);
+	}	
 	public List<ProductInfoDto> bestTag2(){ // 1번 인기순 
 		String sql = "SELECT * from product_info where tag_no=2 order by product_sell_count desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);
@@ -121,6 +163,11 @@ public class ProductDao {
 	
 	
 	// 태그333333333333333333333333333333333333333333333333333
+	public String tag3Count() {
+		String sql = "select count(*) from product_info where tag_no=3";
+		return jdbcTemplate.queryForObject(sql, String.class);
+	}
+	
 	public List<ProductInfoDto> bestTag3(){ // 1번 인기순 
 		String sql = "SELECT * from product_info where tag_no=3 order by product_sell_count desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);
@@ -146,6 +193,10 @@ public class ProductDao {
 	
 	
 	// 태그444444444444444444444444444444444444444444444444444
+	public String tag4Count() {
+		String sql = "select count(*) from product_info where tag_no=4";
+		return jdbcTemplate.queryForObject(sql, String.class);
+	}
 	public List<ProductInfoDto> bestTag4(){ // 1번 인기순 
 		String sql = "SELECT * from product_info where tag_no=4 order by product_sell_count desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);
@@ -171,6 +222,10 @@ public class ProductDao {
 	
 		
 	// 태그555555555555555555555555555555555555555555555555555555555
+	public String tag5Count() {
+		String sql = "select count(*) from product_info where tag_no=5";
+		return jdbcTemplate.queryForObject(sql, String.class);
+	}
 	public List<ProductInfoDto> bestTag5(){ // 1번 인기순 
 		String sql = "SELECT * from product_info where tag_no=5 order by product_sell_count desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);
@@ -197,6 +252,10 @@ public class ProductDao {
 
 	
 	// 66666666666666666666666666666666666666666666666666
+	public String tag6Count() {
+		String sql = "select count(*) from product_info where tag_no=6";
+		return jdbcTemplate.queryForObject(sql, String.class);
+	}
 	public List<ProductInfoDto> bestTag6(){ // 1번 인기순 
 		String sql = "SELECT * from product_info where tag_no=6 order by product_sell_count desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);
@@ -222,6 +281,10 @@ public class ProductDao {
 	
 	
 	// 7777777777777777777777777777777777777777777777777
+	public String tag7Count() {
+		String sql = "select count(*) from product_info where tag_no=7";
+		return jdbcTemplate.queryForObject(sql, String.class);
+	}
 	public List<ProductInfoDto> bestTag7(){ // 1번 인기순 
 		String sql = "SELECT * from product_info where tag_no=7 order by product_sell_count desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);
@@ -247,6 +310,10 @@ public class ProductDao {
 	
 	
 	// 888888888888888888888888888888888888888888888
+	public String tag8Count() {
+		String sql = "select count(*) from product_info where tag_no=8";
+		return jdbcTemplate.queryForObject(sql, String.class);
+	}
 	public List<ProductInfoDto> bestTag8(){ // 1번 인기순 
 		String sql = "SELECT * from product_info where tag_no=8 order by product_sell_count desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);

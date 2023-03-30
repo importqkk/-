@@ -16,16 +16,17 @@ import com.kh.semi.dto.ProductInfoDto;
 @RequestMapping("/categori") // 카테고리별 매핑 
 public class CategoriController {
 	
-//	// 전체 
+	// 전체 
 	@Autowired
 	private ProductDao productDao;
-	
-	@Autowired
-	private ProductTagDao productTagDao;
-	
+		
 	// 전체
 	@GetMapping("/all")
 	public String all(Model model) { 
+		
+		// 상품 수 
+		String count = productDao.allCount();
+		model.addAttribute("count",count);
 		// 상품 인기순 (판매량 제일 많은 순) 
 		List<ProductInfoDto> bestList = productDao.bestAll();
 		model.addAttribute("bestList",bestList); 
@@ -46,6 +47,9 @@ public class CategoriController {
 	@GetMapping("/tag1")
 	public String tag1(Model model) {
 		
+		// 상품 수 
+		String count = productDao.tag1Count();
+		model.addAttribute("count",count);
 		// 상품 인기순 (판매량 제일 많은 순) 
 		List<ProductInfoDto> bestList = productDao.bestTag1();
 		model.addAttribute("bestList",bestList); 
@@ -64,7 +68,10 @@ public class CategoriController {
 	// 태그 2번 다이어트
 	@GetMapping("/tag2")
 	public String tag2(Model model) {
-		
+
+		// 상품 수 
+		String count = productDao.tag2Count();
+		model.addAttribute("count",count);
 		// 상품 인기순 (판매량 제일 많은 순) 
 		List<ProductInfoDto> bestList = productDao.bestTag2();
 		model.addAttribute("bestList",bestList); 
@@ -82,7 +89,10 @@ public class CategoriController {
 	// 태그 3번 여성
 	@GetMapping("/tag3")
 	public String tag3(Model model) {
-		
+
+		// 상품 수 
+		String count = productDao.tag3Count();
+		model.addAttribute("count",count);
 		// 상품 인기순 (판매량 제일 많은 순) 
 		List<ProductInfoDto> bestList = productDao.bestTag3();
 		model.addAttribute("bestList",bestList); 
@@ -101,6 +111,9 @@ public class CategoriController {
 	@GetMapping("/tag4")
 	public String tag4(Model model) {
 		
+		// 상품 수 
+		String count = productDao.tag4Count();
+		model.addAttribute("count",count);
 		// 상품 인기순 (판매량 제일 많은 순) 
 		List<ProductInfoDto> bestList = productDao.bestTag4();
 		model.addAttribute("bestList",bestList); 
@@ -119,6 +132,9 @@ public class CategoriController {
 	@GetMapping("/tag5")
 	public String tag5(Model model) {
 		
+		// 상품 수 
+		String count = productDao.tag5Count();
+		model.addAttribute("count",count);
 		// 상품 인기순 (판매량 제일 많은 순) 
 		List<ProductInfoDto> bestList = productDao.bestTag5();
 		model.addAttribute("bestList",bestList); 
@@ -137,6 +153,9 @@ public class CategoriController {
 	@GetMapping("/tag6")
 	public String tag6(Model model) {
 		
+		// 상품 수 
+		String count = productDao.tag6Count();
+		model.addAttribute("count",count);
 		// 상품 인기순 (판매량 제일 많은 순) 
 		List<ProductInfoDto> bestList = productDao.bestTag6();
 		model.addAttribute("bestList",bestList); 
@@ -155,6 +174,9 @@ public class CategoriController {
 	@GetMapping("/tag7")
 	public String tag7(Model model) {
 		
+		// 상품 수 
+		String count = productDao.tag7Count();
+		model.addAttribute("count",count);
 		// 상품 인기순 (판매량 제일 많은 순) 
 		List<ProductInfoDto> bestList = productDao.bestTag7();
 		model.addAttribute("bestList",bestList); 
@@ -173,6 +195,9 @@ public class CategoriController {
 	@GetMapping("/tag8")
 	public String tag8(Model model) {
 		
+		// 상품 수 
+		String count = productDao.tag8Count();
+		model.addAttribute("count",count);
 		// 상품 인기순 (판매량 제일 많은 순) 
 		List<ProductInfoDto> bestList = productDao.bestTag8();
 		model.addAttribute("bestList",bestList); 
