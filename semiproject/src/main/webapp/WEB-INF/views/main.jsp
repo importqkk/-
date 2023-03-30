@@ -61,19 +61,34 @@
         height: 200px;
     }
     .new-box > *,
-    .best-box > * {
+    .best-box > *, 
+    .product-box > * {
         flex-grow: 1;
+    }
+    .more-link {
+    	cursor: pointer;
+    }
+    .more-link:hover {
+    	color: #22201e;
     }
 </style>
 <script type="text/javascript">
 	$(function() {
+		// 카테고리 hover 효과
 		$(".fas").hover(function() {
             $(this).addClass("fa-beat");
-            },
-            function() {
-                $(this).removeClass("fa-beat");
+        },
+        function() {
+            $(this).removeClass("fa-beat");
         });
+		$(".category-text").hover(function() {
+			$(this).prev(".fas").addClass("fa-beat");
+		},
+		function() {
+			$(this).prev(".fas").removeClass("fa-beat");
+		})
 	})
+	// swiper api
 	window.addEventListener("load", function(){
 		var swiper = new Swiper('.swiper', {
             direction: 'horizontal',
@@ -93,7 +108,7 @@
 		<!----------------------메인컨텐츠 start---------------------->
 		    <div class="container-1000">
 		        <!-- 이미지 슬라이드 start -->
-		        <div class="row">
+		        <div class="row pb-30">
 		            <div class="swiper">
 		                <div class="swiper-wrapper center">
 		                    <div class="swiper-slide"><img src="/static/image/mainDummy1.png"></div>
@@ -105,64 +120,65 @@
 		        </div>
 		        <!-- 이미지 슬라이드 end -->
 		        <!-- 카테고리 버튼 start -->
-		        <div class="flex center pt-40 flex-auto-width mb-40">
+		        <div class="flex center pt-40 flex-auto-width mb-70">
 		            <div>
-		                <a class="link" href="#">
+		                <a class="link" href="#" data-tag="1">
 		                    <i class="fas fa-solid fa-bars"></i>
-		                    <h5>전체</h5>
+		                    <h5 class="category-text">전체</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#">
+		                <a class="link" href="#" data-tag="2">
 		                    <i class="fas fa-light fa-face-smile"></i>
-		                    <h5>피부</h5>
+		                    <h5 class="category-text">피부</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#">
+		                <a class="link" href="#" data-tag="3">
 		                    <i class="fas fa-light fa-weight-scale"></i>
-		                    <h5>다이이트</h5>
+		                    <h5 class="category-text">다이이트</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#">
+		                <a class="link" href="#" data-tag="4">
 		                    <i class="fas fa-light fa-venus"></i>
-		                    <h5>여성</h5>	
+		                    <h5 class="category-text">여성</h5>	
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#">
+		                <a class="link" href="#" data-tag="5">
 		                    <i class="fas fa-sharp fa-light fa-bolt-lightning"></i>
-		                    <h5>활력</h5>
+		                    <h5 class="category-text">활력</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#">
+		                <a class="link" href="#" data-tag="6">
 		                    <i class="fas fa-thin fa-mars"></i>
-		                    <h5>남성</h5>
+		                    <h5 class="category-text">남성</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#">
+		                <a class="link" href="#" data-tag="7">
 		                    <i class="fas fa-light fa-eye"></i>
-		                    <h5>눈</h5>
+		                    <h5 class="category-text">눈</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#">
+		                <a class="link" href="#" data-tag="8">
 		                    <i class="fas fa-light fa-tooth"></i>
-		                    <h5>치아</h5>
+		                    <h5 class="category-text">치아</h5>
 		                </a>
 		            </div>
 		            <div>
 		                <a class="link" href="#">
 		                    <i class="fas fa-light fa-bone"></i>
-		                    <h5>뼈</h5>
+		                    <h5 class="category-text">관절/뼈</h5>
 		                </a>
 		            </div>
 		        </div>
-		        <!-- 추천상품 목록 start -->
-		        <div class="row pb-40">
+		        <!-- 카테고리 버튼 end -->
+		        <!-- 최신상품 목록 start -->
+		        <div class="row pb-70">
 		            <div class="row">
 		                <h1 class="c-b80 me-5">NEW</h1><h2 class="c-b80 me-5">in</h2><h1 class="me-10 c-p100">SEMI</h1>
 		                <span class="c-b80">이달의 신상품을 만나보세요!</span>
@@ -242,7 +258,7 @@
 		        </div>
 		        <!-- 추천상품 목록 end -->
 		        <!-- 인기상품 목록 start -->
-		        <div class="row pb-40">
+		        <div class="row pb-70">
 		            <div class="row">
 		                <h1 class="c-b80 me-5">BEST</h1><h2 class="c-b80 me-5">in</h2><h1 class="me-10 c-p100">SEMI</h1>
 		                <span class="c-b80">이번 달 SEMI에서 가장 인기 있는 상품이에요.</span>
@@ -323,6 +339,91 @@
 		            </div>
 		        </div>
 		        <!-- 인기상품 목록 end -->
+		        <!-- 전체 상품 리스트 start -->
+		        <div class="row pb-30">
+		        	<div class="row flex">
+		        		<div class="w-50">
+		        			<h1 class="c-b80 me-5">전체상품</h1>
+		        		</div>
+		                <div class="right pe-10 w-50">
+	                	<a class="more-link c-b40">더보기 ></a>
+	                </div>
+		            </div>
+		        	
+			        <div class="row flex product-box">
+		            	<c:forEach var="productInfoDto" items="${productList}" end="3">
+			                <a class="link item-box me-10" href="/product/detail?productNo=${productInfoDto.productNo}">
+			                    <div>
+			                    	<c:choose>
+					            		<c:when test="${productInfoDto.imgNo != 0}">
+					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.imgNo}">
+				 	            		</c:when>
+					            		<c:otherwise>
+					            			<img class="item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png">
+					            		</c:otherwise>
+					            	</c:choose>
+			                    </div>
+			                    <div class="mb-20">
+			                        <h4 class="c-b40">[${productInfoDto.productBrand}] </h4><h4>${productInfoDto.productName}</h4>
+			                    </div>
+			                    <div class="mb-10">
+			                        <h3>
+		                            	<fmt:formatNumber pattern="#,##0" value="${productInfoDto.productPrice}"></fmt:formatNumber>
+		                            	원
+		                            </h3>
+			                    </div>
+			                    <div class="flex">
+			                    	<c:choose>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '4.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '3.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '2.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '1.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG >= '0.5'}">
+			                    			<span class="star"><i class="fa-solid fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    		<c:when test="${productInfoDto.reivewAVG < '0.5'}">
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
+			                    		</c:when>
+			                    	</c:choose>
+			                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}</span>
+			                    </div>
+			                </a>
+			            </c:forEach>
+		            </div>
+		        </div>
+		        <!-- 전체 상품 리스트 end -->
 		    </div>
 		    <!----------------------메인컨텐츠 end---------------------->
 		
