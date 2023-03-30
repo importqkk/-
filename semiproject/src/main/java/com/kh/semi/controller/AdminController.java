@@ -124,4 +124,13 @@ public class AdminController {
 		return "redirect:list";
 	}
 	
+	// 선택 상품 삭제
+	@PostMapping("/productManage/deleteAll")
+	public String deleteAll(@RequestParam(value="productNo") List<Integer> list) {
+		for(int productNo : list) {
+			productDao.delete(productNo);
+		}
+		return "redirect:list";
+	}
+	
 }
