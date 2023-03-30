@@ -28,7 +28,7 @@
         </div>
         <c:if test="${param.mode == 'error'}">
           <div class="row center" style="font-size: 15px; color: red;">
-            <h3>일치하는 정보가 없습니다.</h3>
+            <h3>입력하신 정보와 일치하는 회원이 없습니다.</h3>
           </div>
         </c:if>
     </div>

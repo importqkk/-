@@ -2,6 +2,8 @@ package com.kh.semi.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.semi.component.RandomComponent;
 import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dto.MemberDto;
 
@@ -20,6 +23,13 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private RandomComponent RandomComponent;
+	@Autowired
+	private JavaMailSender sender;
+
+
+
 
 //	회원가입
 	@GetMapping("/join")
@@ -96,18 +106,37 @@ public class MemberController {
 	 }
 	 
 	 @PostMapping("/findPw")
-	 public String findPw(@ModelAttribute MemberDto memberDto, 
-			 Model model, RedirectAttributes attr) {
-		 try {
-			 String memberPw = memberDao.findPw(memberDto);
-			 model.addAttribute("findPw", memberPw);
-			 return "/WEB-INF/views/member/findPwResult.jsp";
-		 }
-		 catch(Exception e) {
-			 attr.addAttribute("mode", "error");
-			 return "redirect:findPw";
-		 }
-	 }
+	 public String findPW(RedirectAttributes attr,
+		@RequestParam String memberId,
+		@RequestParam String memberEmail) {
+//		String memberId = memberId;
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		// 이메일이 일치하지 않는다면
+		if(!memberDto.getMemberEmail().equals(memberEmail)) {
+			attr.addAttribute("mode", "error");
+			return "redirect:findPw";
+		}
+		// 이메일이 일치 시임시 비밀번호 생성
+		String temporaryPW = RandomComponent.generateString();
+		// 생성한 임시 비밀번호로 비밀번호 변경
+		memberDao.changePassword(memberId, temporaryPW);
+		// 임시 비밀번호를 회원 이메일로 전송
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(memberDto.getMemberEmail());
+		message.setSubject("[SEMI] 임시 비밀번호 발급");
+		message.setText("발급된 임시 비밀번호는 "+temporaryPW+" 입니다. 로그인 후 비밀번호를 반드시 변경해주시길 바랍니다.");
+		sender.send(message);
+		return "redirect:findPwResult";
+		}
+		@GetMapping("/findPwResult")
+		public String findPwResult() {
+			return "/WEB-INF/views/member/findPwResult.jsp";
+		}
+		
+	
+	
+	 
+	 
 //mypage
 	 @GetMapping("/mypage")
 	 public String mypage(HttpSession session, Model model) {
@@ -117,7 +146,7 @@ public class MemberController {
 		 return "/WEB-INF/views/member/mypage.jsp";
 	 }
 	
-//	 비밀번호 변경 기능
+	 //비밀번호 변경 기능
 	 @GetMapping("/password")
 	 public String password() {
 		 return "/WEB-INF/views/member/password.jsp";
@@ -145,6 +174,28 @@ public class MemberController {
 	 public String passwordFinish() {
 		 return "/WEB-INF/views/member/passwordFinish.jsp";
 	 }
+// 회원정보 수정 전 페이지
+	 @GetMapping("/pwVf")
+	 public String passwordVerify() {
+	     return "/WEB-INF/views/member/pwVf.jsp";
+	 }
+
+	 @PostMapping("/pwVf")
+	 public String verifyPassword(
+	         HttpSession session,
+	         @RequestParam String password,
+	         RedirectAttributes attr) {
+	     String memberId = (String)session.getAttribute("memberId");
+	     MemberDto memberDto = memberDao.selectOne(memberId);
+
+	     if(!memberDto.getMemberPw().equals(password)) {
+	         attr.addAttribute("mode", "error");
+	         return "redirect:pwVf";
+	     }
+	     
+	     return "redirect:edit";
+	 }
+
 	 
 //	 비밀번호를 제외한 나머지 개인정보 변경
 	 @GetMapping("/edit")
@@ -216,5 +267,6 @@ public class MemberController {
 	 public String deleteFinish() {
 		 return "/WEB-INF/views/member/deleteFinish.jsp";
 	 }
+	 
 	 
 }

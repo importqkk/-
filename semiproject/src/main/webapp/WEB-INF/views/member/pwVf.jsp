@@ -9,19 +9,23 @@
     margin-top: 100px;
   }
 </style>
-    <form action="findPw" method="post" autocomplete="off">
+<script type="text/javascript">
+	
+</script>
+    <form action="pwVf" method="post" autocomplete="off" class="pw-form">
     <div class="container-600">
         <div class="row center">  
             <h2>비밀번호 인증</h2>
             <h3>정보보호를 위해 비밀번호를 다시 인증합니다.</h3>
         </div>
         <div class="row">
-          <input type="text" name="memberId" required class="form-input w-100 medium light" placeholder="비밀번호 입력" >
+          <input type="password" name="password" required class="form-input w-100 medium light" placeholder="비밀번호 입력" >
           </div>
      		<div class="row">
 		<div class="row">
 		<button class="form-btn neutral w-20 medium">취소</button>
-        <button type="submit" class="form-btn positive w-75 medium ms-25">확인</button>
+        <button type="submit" class="form-btn positive w-75 medium ms-25 confirm-btn">확인</button>
+		
 		</div>
 				<!-- 취소 버튼 클릭 이벤트 처리 -->
 		<script>
