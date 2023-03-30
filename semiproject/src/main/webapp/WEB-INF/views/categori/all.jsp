@@ -46,7 +46,7 @@
         }
         
         .img-list{
-        	width: 200px;
+        	width: 250px;
         	height: 200px;
         }
         .star-13{
@@ -70,8 +70,13 @@
     		flex-basis: calc(25% - 20px);
 		}
 		
-		.flex{
+		.flex-wr{
+			display: flex;		
 			flex-wrap: wrap;
+		}
+		
+		.flex-wr.center{
+			justify-content: center;
 		}
 </style>
 </head>
@@ -125,17 +130,17 @@
 		<br>
 <!---------------------여기부터는 이미지 들의 리스트 ------------------->
 		<!--이미지 리스트 구간-->
-		<c:forEach var="productDto" items="${list}">
-			<div class="flex center mb-20">
+		<div class="flex-wr center mb-20">
+		<c:forEach var="productDto" items="${list}">		
 				<div class="img-box me-20 center">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
 					<br><br>
 					
-					<h5 class="left ms-20 font-grey">[${productDto.productBrand}] ${productDto.productName}원</h5>
+					<h5 class="left ms-20 font-grey">[${productDto.productBrand}] ${productDto.productName}</h5>
 					<br>
-					<h4 class="left ms-20">${productDto.productPrice}</h4>
+					<h4 class="left ms-20">${productDto.productPrice}원</h4>
 					<br>
-					<div class="flex left ms-20">
+					<div class="flex-wr left ">
 						<h4 class="fas fa-star font-purple star-13"></h4>
 						<h5 class="fas fa-star font-purple star-13"></h5>
 						<h6 class="fas fa-star font-purple star-13"></h6>
@@ -144,11 +149,11 @@
 						<h6 class="font-grey ms-20">150</h6>
 					</div>
 				</div>
-			</div>
-		</c:forEach>				
-		<c:forEach var="productDto" items="${list}">
-			<h5>${productDto.productName }</h5>
 		</c:forEach>
+		</div>		
+<%-- 		<c:forEach var="productDto" items="${list}"> --%>
+<%-- 			<h5>${productDto.productName }</h5> --%>
+<%-- 		</c:forEach> --%>
 		
 	</div>
 </body>
