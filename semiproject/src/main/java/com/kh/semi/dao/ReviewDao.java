@@ -60,11 +60,6 @@ public class ReviewDao {
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
-//	public List<ReviewDto> selectList(){
-//		String sql = "select * from review order by review_no desc";
-//		return jdbcTemplate.query(sql, mapper);
-//	}
-	
 	//리뷰 수정
 	public void update(ReviewDto reviewDto) {
 		String sql = "update review set review_content = ?, review_star = ? where review_no = ?";

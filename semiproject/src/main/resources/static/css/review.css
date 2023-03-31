@@ -48,3 +48,12 @@
         	font-size:0.7em;
         	color: gray;
         }
+        .review-item .changeText .text{
+        	font-size: 12px;
+        	color: gray;
+        	cursor: pointer;
+        }
+         .review-item .changeText .text:hover{
+        	color: #776BFF;
+        	cursor: pointer;
+        }

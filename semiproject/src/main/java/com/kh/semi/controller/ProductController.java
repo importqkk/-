@@ -37,7 +37,6 @@ public class ProductController {
 	
 	@GetMapping("/detail")
 	public String detail(@RequestParam int productNo,
-						 @ModelAttribute BuyHistoryDto buyHistoryDto,
 							Model model,
 							HttpSession session) {
 				
@@ -46,10 +45,11 @@ public class ProductController {
 		model.addAttribute("productDto",productDto);
 		
 		String memberId = (String) session.getAttribute("memberId");
-		buyHistoryDao.selectBuy(memberId);
-		
-//		String buyer = 
-		
+		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId);
+
+		boolean hasBuyHistory = buyHistoryDto != null && buyHistoryDto.getProductNo() == productNo;
+		model.addAttribute("hasBuyHistory", hasBuyHistory);
+
 		return "/WEB-INF/views/product/detail.jsp";
 		
 	}

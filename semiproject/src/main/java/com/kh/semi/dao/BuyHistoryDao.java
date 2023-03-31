@@ -21,8 +21,8 @@ public class BuyHistoryDao {
 		@Override
 		public BuyHistoryDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return BuyHistoryDto.builder()
-							.memberId(rs.getString("memberId"))
-							.productNo(rs.getInt("productNo"))
+							.memberId(rs.getString("member_id"))
+							.productNo(rs.getInt("product_no"))
 					.build();
 		}
 		
@@ -30,7 +30,7 @@ public class BuyHistoryDao {
 	};
 	
 	public BuyHistoryDto selectBuy(String memberId) {
-		String sql = "select*from buy_history where member_id = ?";
+		String sql = "select * from buy_history where member_id = ?";
 		Object[] param = {memberId};
 		List<BuyHistoryDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);

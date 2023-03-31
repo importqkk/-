@@ -7,23 +7,23 @@ $(function(){
         console.log(starRating); // 선택된 별점의 value 값 출력
     });
 });
-$(function(){
-      $(".review-content").hide();
-      $(".btn-panel").hide();
-      $(".review-star").hide();
-      $(".edit-btn").click(function(){
-      $(".view-panel").hide();
-      $(".review-content").show();
-      $(".btn-panel").show();
-      $(".review-star").show();
-    })
-      $(".cancel-btn").click(function(){
-      $(".view-panel").show();
-      $(".review-content").hide();
-      $(".btn-panel").hide();
-      $(".review-star").hide();
-    })
-});
+//$(function(){
+//      $(".review-content").hide();
+//      $(".btn-panel").hide();
+//      $(".review-star").hide();
+//      $(".edit-btn").click(function(){
+//      $(".view-panel").hide();
+//      $(".review-content").show();
+//      $(".btn-panel").show();
+//      $(".review-star").show();
+//    })
+//      $(".cancel-btn").click(function(){
+//      $(".view-panel").show();
+//      $(".review-content").hide();
+//      $(".btn-panel").hide();
+//      $(".review-star").hide();
+//    })
+//});
 
 
 
@@ -44,14 +44,10 @@ $(function(){
             contentType:false,
             success:function(response){
                 //이미지 번호 정보 생성
-                var template  = $("#review-template").html();
-				var html = $.parseHTML(template);
-					
                 var input = $("<input>").attr("type", "hidden")
                                         .attr("name", "imgNo")
                                         .val(response.imgNo);
                 
-                $(html).find(".review-item").prepend(input);
                 
                 //미리보기
                 var reviewImage = $("<img>").attr("src", "/rest/img/download/"+response.imgNo);
@@ -118,6 +114,7 @@ $(function(){
 			success:function(response){
 //				console.log(response);
 				
+				
 				for(var i=0; i < response.length; i++){
 					
 					
@@ -128,22 +125,41 @@ $(function(){
 					$(html).find(".reviewTime").text(response[i].reviewTime);
 					$(html).find(".reviewContent").text(response[i].reviewContent);
 					$(html).find(".reviewLike").text(response[i].reviewLike);
+					
+					if(memberId == response[i].memberId){
+						$(html).find(".edit-text")
+								.attr("data-review-no", response[i].reviewNo)
+							    .attr("data-review-content", response[i].reviewContent)
+							    .attr("data-review-star", response[i].reviewStar)
+							    .click(editReview);
+						$(html).find(".delete-text")
+								.attr("data-review-no", response[i].reviewNo)
+							    .click(deleteReview);
+							
+					}
 				
 					
 					
-					if(memberId == response[i].memberId){
-						var editButton  = $("<i>").addClass("fa-solid fa-edit")
-													.attr("data-review-no", response[i].reviewNo)
-													.attr("data-review-content", response[i].reviewContent)
-													.attr("data-review-star", response[i].reviewStar)
-													.click(editReview);
-						var deleteButton = $("<i>").addClass("fa-solid fa-trash")
-													.attr("data-review-no", response[i].reviewNo)
-													.click(deleteReview);
-						
-					 	$(html).find(".memberId").append(deleteButton)
-					 								.append(editButton);
-					}
+//						if (memberId == response[i].memberId) {
+//							  var editButton = $("<span>").text("수정")
+//							  	.addClass("click-text")
+//							    .attr("data-review-no", response[i].reviewNo)
+//							    .attr("data-review-content", response[i].reviewContent)
+//							    .attr("data-review-star", response[i].reviewStar)
+//							    .click(editReview);
+//							  
+//							  var deleteButton = $("<span>").text("삭제")
+//							  	.addClass("click-text")
+//							    .attr("data-review-no", response[i].reviewNo)
+//							    .click(deleteReview);
+//							  
+//							  $(html).find(".memberId").append(editButton)
+//							  						   .append(deleteButton);
+//							}
+//
+
+
+
 					
 						
 //					$(html).find(".reviewStar").empty(); // 이전에 채워진 별표 초기화
@@ -157,39 +173,35 @@ $(function(){
 					var likeButton = $("<i>").addClass("fa-heart fa-regular")
 												.attr("data-review-no", response[i].reviewNo)
 												.click(likeReview);
-												
-//					var ImageReview = $("<img>").attr("src", "/rest/img/download/"+response.imgNo);
-//					$(html).find(".reviewContent").prepend(ImageReview);
 					
 					var reviewNo = response[i].reviewNo;
-											
-						$.ajax({
-							url:"/rest/review/check",
-							method:"post",
-							data:{
-								reviewNo:reviewNo
-							},
-							success:function(response){
-								console.log(response);
-								if(response){
-						            $likeButton.removeClass("fa-regular").addClass("fa-solid");
-						        }
-						        else{
-						            $likeButton.removeClass("fa-solid").addClass("fa-regular");
-						        }
-						        
-						        $likeButton.text(response.count); // 서버에서 받아온 count 값으로 갱신
-												        
-								
-							},
-							error:function(){
-								alert("좋아요 체크 기능 오류");
-								
-							}
-							
-						});
+					console.log(reviewNo);
+					
+						(function(reviewNo) {
+							    $.ajax({
+							      url: "/rest/review/check",
+							      method: "post",
+							      data: {
+							        reviewNo: reviewNo
+							      },
+							      success: function(response) {
+//									    console.log(response);
+//										console.log(reviewNo); //83만 계속나옴 
+										
+										if (response) {
+		//									console.log(reviewNo);
+								            // reviewNo와 data-review-no가 일치하는 하트 버튼의 class를 변경
+								          $(`.review-list [data-review-no=${reviewNo}]`).removeClass("fa-regular").addClass("fa-solid");
+								        }
+							      },
+							      error: function() {
+							        alert("좋아요 체크 기능 오류");
+							      }
+							    });
+							  })(response[i].reviewNo); // 즉시 실행 함수로 클로저 생성
 												
-					$(html).find(".reviewLike").append(likeButton);
+					$(html).find(".reviewLike").prepend(likeButton);
+//					$(html).find(".reviewLike span").text("");
 						
 
 					$(".review-list").append(html);
@@ -248,10 +260,14 @@ $(function(){
 //        	var reviewStar = $(html).find('.starR.on').last().attr("value");
 //        	console.log(reviewStar)
     	});
-		 
-		
+    	
 		//등록창에 수정창 띄우기
 		$(".review-write").hide().after(html);
+		
+		
+    	$(".review[data-review-no=" + reviewNo + "]").hide();
+		 
+		
 		
 
 
@@ -278,6 +294,7 @@ $(function(){
 					});
 		$(".edit-panel").hide();
 		$(".review-write").show();
+		$(".review[data-review-no=" + reviewNo + "]").show();
 					
 			
 		});
@@ -287,9 +304,12 @@ $(function(){
 			$(".review-write").show();
 		});
 	}
+
+
 	
 function likeReview(){
     var reviewNo = $(this).data("review-no");
+    
     var $likeButton = $(this); // 선택한 하트 엘리먼트
 
     $.ajax({
@@ -300,14 +320,14 @@ function likeReview(){
         },
         success:function(response){
 			console.log($likeButton);
-			
+//			$likeButton.find(".heart-count").text(response.count);
             if(response.result){
-                $likeButton.text(response.count);
-                $likeButton.removeClass("fa-regular").addClass("fa-solid");
+				$likeButton.text(response.count);
+                $likeButton.removeClass("fa-regular fa-solid").addClass("fa-solid");
             }
             else{
-                $likeButton.text(response.count);
-                $likeButton.removeClass("fa-solid").addClass("fa-regular");
+				$likeButton.text(response.count);
+                $likeButton.removeClass("fa-regular fa-solid").addClass("fa-regular");
             }
         },
         error:function(){}

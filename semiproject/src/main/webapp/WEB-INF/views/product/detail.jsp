@@ -12,6 +12,10 @@
 	<div class="review-item">
 		<div class="memberId"></div>
 		<div class="reviewStar"></div> 
+		<div class="changeText">
+			<span class="text edit-text">수정</span>
+			<span class="text delete-text">삭제</span>
+		</div>
 		<div class="reviewTime"></div>
 		<div class="reviewContent"></div>
 		<div class="reviewLike">
@@ -42,6 +46,33 @@
 		</div>
 	</div>
 </script>
+<script>
+$(function(){
+    $(".review-content").hide();
+    $(".btn-panel").hide();
+    $(".review-star").hide();
+    $(".edit-btn").click(function(){
+      if (${hasBuyHistory}) {
+        $(".view-panel").hide();
+        $(".review-content").show();
+        $(".btn-panel").show();
+        $(".review-star").show();
+      } else if (${memberId == null}){
+    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
+      } else {
+        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
+      }
+      
+  })
+    $(".cancel-btn").click(function(){
+    $(".view-panel").show();
+    $(".review-content").hide();
+    $(".btn-panel").hide();
+    $(".review-star").hide();
+  })    
+});
+
+</script>
 	
     <div class="container-1000">
     	<div class="row">
@@ -58,13 +89,25 @@
 	            <i class="fa-regular fa-star starR" value="5"></i>
 	        </div>
 	        
-	       
-	        <!-- 리뷰 등록하기 버튼 -->
-	        <div class="view-panel center">
-	            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button>
-	        </div>
+			<c:choose>
+			    <c:when test="${hasBuyHistory}">
+			        <div class="view-panel center">
+			            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button>
+			        </div>
+			    </c:when>
+			    <c:otherwise>
+			        <div class="view-panel center">
+			            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button>
+			        </div>
+			    </c:otherwise>
+			</c:choose>
+
 	        
-	        
+<!-- 	         리뷰 등록하기 버튼 -->
+<!-- 	         <div class="view-panel center"> -->
+<!-- 	         	<button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button> -->
+<!-- 	         </div> -->
+	         
 	       
 	       <!-- 리뷰 작성창 -->
 	        <div class="row review-content">
@@ -77,7 +120,6 @@
 	                </label>
 	                <input type="file" id="chooseFile" name="attach" class="form-input w-10">
 	            </div>
-	          
 	            <div class="flex w-50 right">
 	                <button type="button" class="form-btn small neutral cancel-btn me-10">취소</button>
 	                <button type="button" class="form-btn small positive review-insert-btn">등록</button>
