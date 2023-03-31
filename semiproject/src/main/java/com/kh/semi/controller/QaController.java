@@ -101,24 +101,35 @@ public class QaController {
 		}
 	}
 	
-//	// PUT 요청 처리
-//	@PutMapping("/qa/{qaNo}")
-//	public ResponseEntity<String> updateQa(
-//	        @PathVariable("qaNo") int qaNo,
-//	        @RequestBody String qaContent) {
-//
-//	    QaDto qaDto = new QaDto();
-//	    qaDto.setQaNo(qaNo);
-//	    qaDto.setQaContent(qaContent);
-//
-//	    int count = qaService.update(qaDto);
-//
-//	    if (count > 0) {
-//	        return ResponseEntity.ok("수정 성공");
-//	    } else {
-//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("수정 실패");
-//	    }
-//	}
+	// PUT 요청 처리
+	@PutMapping("/update")
+	public ResponseEntity<String> updateQa(
+			@RequestParam("qaNo") int qaNo,
+			 @RequestParam("qaContent")String qaContent) {
+	    int count = qaService.updateQa(qaNo,qaContent);
+	    if (count > 0) {
+	        return ResponseEntity.ok("");
+	    } else {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("");
+	    }
+	}
+	
+	// PUT 요청 처리
+	@PutMapping("/repleWrite")
+	public ResponseEntity<String> repleWrite(
+			@RequestParam("qaNo") int qaNo,
+			 @RequestParam("replyContent")String replyContent) {
+		
+		
+	    int count = qaService.insertQaReple(qaNo,replyContent);
+	    
+	    if (count > 0) {
+	        return ResponseEntity.ok("");
+	    } else {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("");
+	    }
+	}
+	
 	
 //	@GetMapping("/detail")
 //	public String detail2(@RequestParam int qaNo,
@@ -159,6 +170,7 @@ public class QaController {
 	public String write(@RequestParam(required = false)Integer qaParent,
 								Model model) {
 		model.addAttribute("qaParent",qaParent);
+		
 		return"/WEB-INF/views/qa/write.jsp";
 	}
 	
@@ -175,6 +187,7 @@ public class QaController {
 		attr.addAttribute("qaNo",qaNo);
 		return "redirect:detail";
 	}
+	
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int qaNo) {

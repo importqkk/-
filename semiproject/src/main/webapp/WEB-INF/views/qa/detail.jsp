@@ -15,7 +15,7 @@ var memberId = "${qaDto.memberId}";
 
 <script type="text/javascript">
 $(function(){
-	let qaNo = "${qaDto.qaNo}";
+	var qaNo = "${qaDto.qaNo}";
 	
 	$.ajax({
 		url:"/qa/detail",
@@ -36,26 +36,27 @@ $(function(){
 	        $(editHtml).find(".save-btn").click(function(){
 	            //this == 저장버튼
 	            var editedContent = $(this).parents(".edit-panel").find("textarea").val();
+
 	            $.ajax({
-	                url:"/qa/detail",
+	                url:"/qa/update",
 	                type:"PUT",
 	                data:{
 	                    "qaNo": qaNo,
 	                    "qaContent": editedContent
 	                },
-	                dataType:"json",
+	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	                cache:false,
 	                success: function(data){
 	                    // 수정 성공했을 때 처리할 코드 작성
-	                    alert("수정되었습니다.");
-	                    $(this).parents(".edit-panel").hide().next(".view-panel").show().find(".contents").text(editedContent);
+	                    alert("수정사항이 저장되었습니다.");
+	                    $(this).parents(".edit-panel").hide().next(".view-panel").show()
+	                    			.find(".contents").text(editedContent);
 	                }.bind(this),
 	                error: function(request,status,error){
 	                    // 수정 실패했을 때 처리할 코드 작성
-	                    alert("수정 실패");
+	                    alert("수정실패");
 	                }
 	            });
-	            $(this).parents(".edit-panel").hide().next(".view-panel").show().find(".contents").text(editedContent);
 	        });
 	        $(".target").append(editHtml);
 
@@ -65,11 +66,6 @@ $(function(){
 	        $(viewHtml).find(".contents").text(data.qaContent);
 	        $(viewHtml).find(".edit-btn").click(function(){
 	            //this == 수정버튼
-
-	            //(+추가)
-	            //글자 유지하도록 처리
-	            //= 버튼앞에 .contents에 작성된 글자 불러와서
-	            //= .edit-panel에 있는 textarea에 설정
 	            var contents = $(this).prev(".contents").text();
 	            $(this).parents(".view-panel")
 	                    .prev(".edit-panel")
@@ -115,7 +111,35 @@ $(function(){
 			}
 	 });//ajax end
 });
+
+// 댓글 작성
+function fn_reple_write(){
+	var qaNo = "${qaDto.qaNo}";
+	alert(qaNo);
+	var replyContent = $("#replyContent").val();
+	
+	$.ajax({
+		   url: "/qa/repleWrite",
+		   type: "PUT",
+		   data: {
+		       "qaNo": qaNo,
+		       "replyContent" : replyContent
+		   },
+		   success: function(data) {
+			   alert("답글작성완료");
+			   
+		       window.location.href="/qa/list";
+		   },
+		   error: function(xhr, status, error) {
+		       // 삭제가 실패했을 때 처리할 코드 작성
+		       alert("답글 실패");
+		   }
+ });	
+}
 </script>
+
+
+
     <!-- 편집용 템플릿 -->
     <script type="text/template" id="edit-template">
         <div class="edit-panel right">
@@ -127,9 +151,10 @@ $(function(){
             <button class="form-btn neutral cancel-btn ms-20">취소</button>
         </div>
     </script>
-    <!-- 표시용 템플릿 취소 했는데 삭제가 됨-->
+    
+    <!-- 표시용 템플릿 -->
     <script type="text/template" id="view-template">
-        <div class="view-panel right" style="min-height:150px;">
+        <div class="view-panel right">
 			<div class="left font-h1">${qaDto.qaHead}</div>
 			<div class="left font-h1">${qaDto.qaTitle}</div>
 			<div class="contents left font-h2">${qaDto.qaContent}</div>
@@ -138,6 +163,9 @@ $(function(){
             <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
         </div>
     </script>
+    
+  
+    
 <div class="container-1000">
         <div class="row">
             <h1>Q&A 상세</h1>
@@ -147,47 +175,42 @@ $(function(){
         
 		<hr>
         <br>
+
+        
         <!-- 댓글 작성란 -->
 	<div class="row">
-		
+		<h3>문의 답글 작성</h3>
 		<div class="row">
+		
+					<textarea id="replyContent" name="replyContent" class="form-input large w-100 font-h2"
+							placeholder="댓글 내용을 작성하세요"></textarea>	
+		
 			<c:choose>
 				<c:when test="${sessionScope.memberId != null}">
-					<textarea name="replyContent" class="form-input w-100"
+					<textarea name="replyContent" class="form-input large w-100 font-h2"
 							placeholder="댓글 내용을 작성하세요"></textarea>	
 				</c:when>
 				<c:otherwise>
-					<textarea name="replyContent" class="form-input w-100"
-							placeholder="로그인 후에 댓글 작성이 가능합니다" disabled></textarea>	
+<!-- 					<textarea name="replyContent" class="form-input w-100" -->
+<!-- 							placeholder="로그인 후에 댓글 작성이 가능합니다" disabled></textarea>	 -->
 				</c:otherwise>
 			</c:choose>
 			
 		</div>
+		
+			
+		<div class="row right">
+			<button type="button" onclick="fn_reple_write();" class="form-btn positive reply-insert-btn">댓글 작성</button>
+		</div>
+		
 		<c:if test="${sessionScope.memberId != null}">		
 		<div class="row right">
 			<button type="button" class="form-btn positive reply-insert-btn">댓글 작성</button>
 		</div>
 		</c:if>
+	</div>
+	
 
-	</div>
-	
-	
-	<div class="row right">
-		<a class="form-btn positive" href="/qa/write?qaParent=${qaDto.qaNo}">답글쓰기</a>
-		
-		<c:if test="${owner}">
-		<!-- 내가 작성한 글이라면 수정과 삭제 메뉴를 출력 -->
-		<a class="form-btn neutral" href="/qa/edit?qaNo=${qaDto.qaNo}">수정</a>
-		</c:if>
-		
-		<c:if test="${owner || admin}">
-		<!-- 파라미터 방식일 경우의 링크 -->
-		<a class="form-btn neutral" href="/qa/delete?qaNo=${qaDto.qaNo}">삭제</a>
-		<!-- 경로 변수 방식일 경우의 링크 -->
-	<%-- 				<a href="/qa/delete/${qaDto.qaNo}">삭제</a> --%>
-		</c:if>
-		<a class="form-btn neutral" href="/qa/list">목록보기</a>
-	</div>
     </div>
 
 

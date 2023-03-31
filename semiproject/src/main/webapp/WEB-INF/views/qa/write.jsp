@@ -28,6 +28,7 @@
 <form action="write" method="post" onsubmit="return validateForm()">
 	<%--답글일 때는 정보가 한 개 더 전송되어야 한다(qaParent) --%>
 	<c:if test="${qaParent != null }">
+	
 	<input type ="hidden" name ="qaParent" value="${qaParent }">
 	</c:if> 
 	<select name="qaHead" id="qaHead" class="form-input medium light">
@@ -39,15 +40,19 @@
 		<option>결제문의</option>
 		<option>기타문의</option>
 	</select>
+	<c:if test="${not empty parentQaHead}">
+        <option selected>${parentQaHead}</option>
+    </c:if>
+</select>
 
-	
+
 	<!--  제목  -->
 	<c:choose>
 		<c:when test="${qaParent == null}">
 			<input type="text" name="qaTitle" class="form-input medium light hover"  required placeholder="제목을 입력해 주세요."><br><br>
 		</c:when>
 		<c:otherwise>
-			<input type="text" name="qaTitle"  class="form-input medium light hover"  required placeholder="제목을 입력해 주세요." value="RE: "><br><br>
+			<input type="text" name="qaTitle"  class="form-input medium light hover"  required placeholder="제목을 입력해 주세요." value="ㄴRE:  ${parentQaTitle}"><br><br>
 		</c:otherwise>
 	</c:choose>
 

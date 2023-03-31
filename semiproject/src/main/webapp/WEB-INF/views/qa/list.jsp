@@ -73,6 +73,9 @@
     <div class="row left">
         <h1>Q&A 게시판</h1>
     </div>
+    <div class="row center">
+    	<h4>욕설, 비방 글, 상업적인 게시글은 통보없이 삭제될 수 있고 이용에 제한이 생길 수 있습니다. </h4>
+    </div>
     
     <c:if test="${sessionScope.memberRole == '관리자'}">
     <form action="deleteAll" method="post" onsubmit="return formCheck();">
@@ -113,8 +116,8 @@
 					</c:if>
 					<td class="center">${qaDto.qaNo}</td>
 					<td class="center">${qaDto.qaHead}</td>
-					<td class="left">
-					<td>
+
+					<td class="center">
 					<a href="detail?qaNo=${qaDto.qaNo}" class="link">
 							${qaDto.qaTitle}
 						</a>
@@ -141,13 +144,9 @@
 					<td>${qaDto.qaNo}</td>
 					<td class="center">
 						${qaDto.qaHead}
-						<!-- qaDepth만큼 띄어쓰기를 실시 -->
-						<c:forEach var="i" begin="1" end="${qaDto.qaDepth}">
-							&nbsp;
-						</c:forEach>
 						<!-- qaDepth가 1 이상일 경우만 답글 표식을 추가 -->
 						<c:if test="${qaDto.qaDepth > 0}">
-							→
+
 						</c:if>
 					</td>
 					
