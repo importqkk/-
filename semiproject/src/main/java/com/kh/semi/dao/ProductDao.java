@@ -102,6 +102,20 @@ public class ProductDao {
 		}
 	}
 	
+	// 상품 수정
+	public boolean editInfo(ProductDto productDto) {
+		String sql = "update product set product_name=?, product_brand=?, product_price=?, "
+						+ "product_stock=?, product_content=?, product_delivery_price=?, "
+						+ "product_sell_count=?, product_join=? "
+					+ "where product_no=?";
+		Object[] param = {productDto.getProductName(), productDto.getProductBrand(),
+						productDto.getProductPrice(), productDto.getProductStock(),
+						productDto.getProductContent(), productDto.getProductDeliveryPrice(),
+						productDto.getProductSellCount(), productDto.getProductJoin(),
+						productDto.getProductNo()};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
 	// 상품 재고 불러오기
 	public int selectStock(int productNo) {
 		String sql = "select product_stock from product where product_no=?";
