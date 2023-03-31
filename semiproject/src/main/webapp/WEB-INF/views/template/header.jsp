@@ -126,9 +126,6 @@
             flex-grow: 1;
         }
         /* 사이드메뉴 */
-        .categories {
-            padding-bottom: 60px;
-        }
         .category {
             border-radius: 25px;
             padding-top: 25px;
@@ -149,7 +146,7 @@
         }
         .fa {
             cursor: pointer;
-            font-size: 50px;
+            font-size: 45px;
             color: #d3d2d2;
             margin-bottom: 10px;
         }
@@ -219,7 +216,7 @@
         </header>
         <aside class="side-menu">
             <div class="container-1000">
-                <div class="flex right member-menu pt-30 pe-100 me-30 pb-60">
+                <div class="flex right member-menu pt-30 pe-100 me-30 pb-20">
                     <!-- 로그인 전 -->
                     <c:if test="${sessionScope.memberId == null}">
                     	<div>
@@ -243,7 +240,7 @@
 	                    </div>
                     </c:if>
                 </div>
-                <div class="flex center categories">
+                <div class="flex center">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
                             <a class="link" href="#">
@@ -269,7 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex center categories">
+                <div class="flex center">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
                             <a class="link" href="#">
@@ -295,7 +292,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex center categories">
+                <div class="flex center mb-20">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
                             <a class="link" href="#">
