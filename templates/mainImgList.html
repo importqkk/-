@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <!-- font awsome 아이콘 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- tabler 아이콘 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        .upload-btn {
+            vertical-align: top;
+            height: 3.1em;
+            width: 8.7em;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function() {
+            // 체크박스 처리
+            $(".check-all").change(function() {
+                var isChecked = $(this).prop("checked");
+                $(".check-all, .check-unit").prop("checked", isChecked);
+            })
+            $(".check-unit").change(function() {
+                var checkboxCount = $(".check-unit").length;
+                var checkedCount = $(".check-unit:checked").length;
+                var isAllChecked = checkboxCount == checkedCount;
+                $(".check-all").prop("checked", isAllChecked);
+            })
+            // 선택 이미지 삭제버튼 경고창
+            $(".delete-btn").click(function() {
+                var checkedCount = $(".check-unit:checked").length;
+                if(checkedCount == 0) {
+                    alert("삭제할 이미지를 선택해주세요.");
+                    return false;
+                }
+                var result = confirm("이미지를 삭제하시겠습니까?");
+                if(!result) return false;
+            })
+            // 개별 이미지 삭제버튼 경고창
+            $(".single-delete-btn").click(function() {
+                var result = confirm("이미지를 삭제하시겠습니까?");
+                if(!result) return false;
+            })
+        })
+    </script>
+    <title>메인 이미지 리스트</title>
+</head>
+<body>
+    <div class="container-1000">
+        <div class="row pt-30 pb-20">
+            <h1>메인 이미지 리스트</h1>
+        </div>
+        <form action="deleteAll" method="post" class="delete-form">
+            <div class="row flex w-100">
+                <div class="row w-50">
+                    <button type="submit" class="form-btn small neutral delete-btn">이미지 삭제</button>
+                </div>
+                <div class="row w-50 right">
+                    <a class="form-btn small positive upload-btn" href="/admin/mainImg/upload">이미지 등록</a>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-qna mb-30">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" class="check-all">
+                            </th>
+                            <th class="w-5">번호</th>
+                            <th class="w-40">파일 이름</th>
+                            <th>파일 형식</th>
+                            <th>용량</th>
+                            <th class="w-20">관리</th>
+                        </tr>
+                    </thead>
+                    <tbody class="center">
+                        <c:forEach var="productDto" items="${list}">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="check-unit" name="productNo" value="${productDto.productNo}">
+                                </td>
+                                <td>1</td>
+                                <td>회원가입 이벤트 배너</td>
+                                <td>png</td>
+                                <td class="right">107kb</td>
+                                <td>
+                                    <a class="link single-delete-btn" href="/admin/mainImg/delete?mainNo=${}">삭제</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

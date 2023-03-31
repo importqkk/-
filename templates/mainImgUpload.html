@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <!-- font awsome 아이콘 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- tabler 아이콘 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/commons.css">
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        
+    </style>
+    <script type="text/javascript">
+        $(function() {
+            $(".upload-btn").click(function() {
+                var title = $(".title").val();
+                var img = $(".img").val();
+                if(!title.length) {
+                    alert("제목을 입력해주세요.");
+                    return false;
+                }
+                else if(!img.length) {
+                    alert("파일을 선택해주세요.");
+                    return false;
+                }
+            })
+        })
+    </script>
+    <title>메인 이미지 등록</title>
+</head>
+<body>
+    <div class="container-1000">
+        <div class="row pt-30 pb-20">
+            <h1>메인 이미지 등록</h1>
+        </div>
+        <div class="row">
+            <label class="ps-20">제목</label>
+            <input type="text" class="form-input medium w-100 title" name="mainTitle">
+        </div>
+        <div class="row">
+            <label class="ps-20">파일</label>
+            <input type="file" class="form-input medium w-100 img" name="img" accept="image/">
+        </div>
+        <div class="row">
+            <button type="submit" class="form-btn medium positive w-100 upload-btn">등록하기</button>
+        </div>
+    </div>
+</body>
+</html>
