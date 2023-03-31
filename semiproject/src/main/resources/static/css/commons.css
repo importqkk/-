@@ -504,7 +504,7 @@ input[type="checkbox"] {
     글자 스타일
 */
 /* 글자색 */
-.c-p100 {
+.c-p100, .font-purple {
     color: #776BFF;
 }
 .c-p20 {
