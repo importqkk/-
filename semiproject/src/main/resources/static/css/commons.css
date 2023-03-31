@@ -439,3 +439,11 @@
 .invalid, .invalid2, .invalid3 {
   border-color: red;
 }
+/* 비활성 상태 디자인 */
+.form-btn.positive[disabled],
+.form-btn.positive[disabled]:hover {
+    cursor: not-allowed;
+    background-color: #ada6ff;
+    border-color: #ada6ff;
+    filter:none;
+}

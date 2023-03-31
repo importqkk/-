@@ -4,34 +4,21 @@
 
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 
-<form action="delete" method="post" autocomplete="off">
-<script type="text/javascript">
-    $(function() {
-//         $(".leave").prop("disabled", true);
-//         $("[name=memberPw").on("input", function() {
-//             var isTyped = $("[name=memberPw").val().length > 0;
-//             if(isTyped) $(".leave").prop("disabled", false);
-//             else $(".leave").prop("disabled", true);
-//         })
-       	var params = new URLSearchParams(location.search);
-		var mode = params.get("mode");
-		if(mode == "error") {
-	        $(".leave").click(function() {
-	            if(!result) return false;
-	            else {
-	                var result = confirm("정말 탈퇴하시겠습니까?");
-	            	if(choice){
-	                    return true;
-	                }
-	                else{
-	                    return false;
-	                }
-	    		});
-	    	});
-
+<script>
+// $(function(){	
+//   $('#leave').click(function() {
+//     var confirmed = confirm('정말 탈퇴하시겠습니까?');
+//     if (confirmed) {
+//         return true;
+//     }
+//     else{
+//         return false;
+//     }
+// });
+// });
 
 </script>
-
+<form action="delete" method="post" autocomplete="off">
 <div class="container-500">
 	<div class="row center">
 		<h2>비밀번호 확인</h2>
@@ -44,7 +31,7 @@
 	
 	<div class="row">
 		<button class="form-btn neutral w-20 medium">취소</button>
-        <button type="submit" class="leave form-btn positive w-75 medium ms-25">탈퇴하기</button>
+        <button type="submit" id="leave" class="form-btn positive w-75 medium ms-25">탈퇴하기</button>
 	</div>
 		<!-- 취소 버튼 클릭 이벤트 처리 -->
 	<script>

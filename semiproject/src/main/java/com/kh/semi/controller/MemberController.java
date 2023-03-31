@@ -37,7 +37,14 @@ public class MemberController {
 		return "/WEB-INF/views/member/join.jsp";
 	}
 	 @PostMapping("/join")
-	 public String join(@ModelAttribute MemberDto memberDto) {
+	 public String join(@ModelAttribute MemberDto memberDto,
+			 			@RequestParam(name = "agreePromotion", required = false) String agreePromotion) {
+		if (agreePromotion == null) {
+		   memberDto.setAgreePromotion("N");
+		 }
+		else {
+		 memberDto.setAgreePromotion("Y");
+		}
 		 memberDao.insert(memberDto);
 		 return "redirect:joinFinish";
 	 }

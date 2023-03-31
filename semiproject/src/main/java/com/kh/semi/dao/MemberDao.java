@@ -25,7 +25,7 @@ public class MemberDao {
 				+ "member_point, member_join, member_role,"
 				+ "agree_tos, agree_privacy, agree_promotion"
 			+ ") values("
-				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, 0, sysdate, '일반회원','Y','Y','Y'" 
+				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, 0, sysdate, '일반회원', ?, ?, ?"
 			+ ")";
 		Object[] param = {
 				memberDto.getMemberId(), 
@@ -40,9 +40,9 @@ public class MemberDao {
 //				memberDto.getMemberPoint(),
 //				memberDto.getMemberJoin(), 
 //				memberDto.getMemberRole(),
-//				memberDto.getAgreeTos(), 
-//				memberDto.getAgreePrivacy(),
-//				memberDto.getAgreePromotion()
+				memberDto.getAgreeTos(), 
+				memberDto.getAgreePrivacy(),
+				memberDto.getAgreePromotion()
 			};
 			jdbcTemplate.update(sql, param);
 		}
