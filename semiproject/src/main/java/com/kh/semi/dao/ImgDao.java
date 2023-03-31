@@ -18,7 +18,6 @@ public class ImgDao {
 
 		@Override
 		public ImgDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			// TODO Auto-generated method stub
 			return ImgDto.builder()
 								.imgNo(rs.getInt("img_no"))
 								.imgName(rs.getString("img_Name"))
@@ -59,6 +58,13 @@ public class ImgDao {
 		String sql = "select * from img";
 		List<ImgDto> list = jdbcTemplate.query(sql, mapper);
 		return list;
+	}
+	
+	// 파일 삭제
+	public boolean delete(int imgNo) {
+		String sql = "delete img where img_no=?";
+		Object[] param = {imgNo};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
 }
