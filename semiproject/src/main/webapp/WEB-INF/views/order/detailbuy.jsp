@@ -72,14 +72,14 @@
                 <p><h2>주문상품</h2></p>
                 <div class="row flex">
                     	<img src="https://picsum.photos/100/100" class="pe-20">
-            			<c:forEach var="productInfoDao" items="${productInfo}" varStatus="status">
-                			<input hidden type="number" name="productNo" value="${productInfoDao.productNo}">
-							<input hidden type="number" name="productPrice" value="${productInfoDao.productPrice}">
+            			<c:forEach var="productInfo" items="${productInfo}" varStatus="status">
+                			<input hidden type="number" name="productNo" value="${productInfo.productNo}">
+							<input hidden type="number" name="productPrice" value="${productInfo.productPrice}">
 						
 										
-							<label>상품이름: ${productInfoDao.productName}</label>
-							<label>브랜드명: ${productInfoDao.productBrand}</label>		
-							<label>상품가격: ${productInfoDao.productPrice}</label>
+							<label>상품이름: ${productInfo.productName}</label>
+							<label>브랜드명: ${productInfo.productBrand}</label>		
+							<label>상품가격: ${productInfo.productPrice}</label>
 			           	</c:forEach>
 			           	<c:set var="Count" value="${productCount}" scope="application" />
 			           	<input hidden type="number" name="productCount" value="${Count}">

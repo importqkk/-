@@ -10,8 +10,9 @@ import com.kh.semi.dto.CartProductInfoDto;
 
 /*
 	장바구니 테이블에 있는 상품 번호로 아래 정보를 조회
-	- 장바구니 테이블에서 회원의 아이디
+	- 장바구니 테이블에서 회원의 아이디, 상품 개수
 	- 상품 테이블에서 상품의 번호, 브랜드, 이름, 가격, 재고
+	- 상품-대표이미지 테이블에서 이미지 번호
 */
 @Repository
 public class CartProductInfoDao {
@@ -30,23 +31,15 @@ public class CartProductInfoDao {
 						.productPrice(rs.getInt("product_price"))
 						.productStock(rs.getInt("product_stock"))
 						.productCount(rs.getInt("product_count"))
+						.imgNo(rs.getInt("img_no"))
 					.build();
 		}
 	};
-	
-//	public List<CartProductInfoDto> cartItemInfo(int productNo, String memberId) {
-//		String sql = "select * from cart_product_info "
-//					+ "where product_no=? and member_id=?";
-//		Object[] param = {productNo, memberId};
-//		return jdbcTemplate.query(sql, mapper, param);
-//	}
 	
 	public List<CartProductInfoDto> cartItemInfo(String memberId) {
 		String sql = "select * from cart_product_info where member_id=?";
 		Object[] param = {memberId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-	
-	
 	
 }

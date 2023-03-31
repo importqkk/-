@@ -1,8 +1,12 @@
 package com.kh.semi.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @NoArgsConstructor
+@AllArgsConstructor @Builder
 public class OrderProductDto {
 	//상품 DB에서 꺼내올값
 	private int productCount,productPrice,productNo,orderNo;

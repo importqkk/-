@@ -1,15 +1,13 @@
 package com.kh.semi.dao;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import com.kh.semi.dto.ProductDto;
+import com.kh.semi.vo.ProductListPaginationVo;
 
 @Repository
 public class ProductDao {
@@ -35,94 +33,80 @@ public class ProductDao {
 		}
 	};
 	
-	public ProductDto selectOne(int productNo) { // 상품 하나 선택 
+	public ProductDto selectOne(int productNo) {
 		String sql = "select * from product where product_no=?";
 		Object[] param = {productNo};
 		List<ProductDto> list = jdbcTemplate.query(sql,mapper,param);
 		return list.isEmpty() ? null:list.get(0);
 	}
 	
-	public List<ProductDto> selectAll(){ // 상품 전체 리스트
-		String sql = "select * from product";
-		List<ProductDto> list = jdbcTemplate.query(sql,mapper);
-		return list.isEmpty() ? null:list;
+	// 상품 등록
+	public int sequence() {
+		String sql = "select product_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
+	}
+	public void insert(ProductDto productDto) {
+		String sql = "insert into product values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		Object[] param = {productDto.getProductNo(), productDto.getProductName(),
+				productDto.getProductBrand(), productDto.getProductPrice(),
+				productDto.getProductStock(), productDto.getProductContent(),
+				productDto.getProductDeliveryPrice(), productDto.getProductSellCount(),
+				productDto.getProductJoin()};
+		jdbcTemplate.update(sql, param);
 	}
 	
-	
-	
-	public List<ProductDto> selectTag1(){ // 1번 태그 상품 리스트
-		String sql = "SELECT p.* "
-				+ "FROM product p "
-				+ "INNER JOIN product_tag pt ON p.product_no = pt.product_no "
-				+ "INNER JOIN tag t ON pt.tag_no = t.tag_no "
-				+ "WHERE t.tag_no = 1";
-		List<ProductDto> list = jdbcTemplate.query(sql, mapper);
-		return list.isEmpty() ? null:list;
-	}
-	public List<ProductDto> selectTag2(){// 2번 태그 상품 리스트
-		String sql = "SELECT p.* "
-				+ "FROM product p "
-				+ "INNER JOIN product_tag pt ON p.product_no = pt.product_no "
-				+ "INNER JOIN tag t ON pt.tag_no = t.tag_no "
-				+ "WHERE t.tag_no = 2";
-		List<ProductDto> list = jdbcTemplate.query(sql, mapper);
-		return list.isEmpty() ? null:list;
-	}
-	public List<ProductDto> selectTag3(){// 3번 태그 상품 리스트
-		String sql = "SELECT p.* "
-				+ "FROM product p "
-				+ "INNER JOIN product_tag pt ON p.product_no = pt.product_no "
-				+ "INNER JOIN tag t ON pt.tag_no = t.tag_no "
-				+ "WHERE t.tag_no = 3";
-		List<ProductDto> list = jdbcTemplate.query(sql, mapper);
-		return list.isEmpty() ? null:list;
-	}
-	public List<ProductDto> selectTag4(){// 4번 태그 상품 리스트
-		String sql = "SELECT p.* "
-				+ "FROM product p "
-				+ "INNER JOIN product_tag pt ON p.product_no = pt.product_no "
-				+ "INNER JOIN tag t ON pt.tag_no = t.tag_no "
-				+ "WHERE t.tag_no = 4";
-		List<ProductDto> list = jdbcTemplate.query(sql, mapper);
-		return list.isEmpty() ? null:list;
-	}
-	public List<ProductDto> selectTag5(){// 5번 태그 상품 리스트
-		String sql = "SELECT p.* "
-				+ "FROM product p "
-				+ "INNER JOIN product_tag pt ON p.product_no = pt.product_no "
-				+ "INNER JOIN tag t ON pt.tag_no = t.tag_no "
-				+ "WHERE t.tag_no = 5";
-		List<ProductDto> list = jdbcTemplate.query(sql, mapper);
-		return list.isEmpty() ? null:list;
-	}
-	public List<ProductDto> selectTag6(){// 6번 태그 상품 리스트
-		String sql = "SELECT p.* "
-				+ "FROM product p "
-				+ "INNER JOIN product_tag pt ON p.product_no = pt.product_no "
-				+ "INNER JOIN tag t ON pt.tag_no = t.tag_no "
-				+ "WHERE t.tag_no = 6";
-		List<ProductDto> list = jdbcTemplate.query(sql, mapper);
-		return list.isEmpty() ? null:list;
-	}
-	public List<ProductDto> selectTag7(){// 7번 태그 상품 리스트
-		String sql = "SELECT p.* "
-				+ "FROM product p "
-				+ "INNER JOIN product_tag pt ON p.product_no = pt.product_no "
-				+ "INNER JOIN tag t ON pt.tag_no = t.tag_no "
-				+ "WHERE t.tag_no = 7";
-		List<ProductDto> list = jdbcTemplate.query(sql, mapper);
-		return list.isEmpty() ? null:list;
-	}
-	public List<ProductDto> selectTag8(){// 8번 태그 상품 리스트
-		String sql = "SELECT p.* "
-				+ "FROM product p "
-				+ "INNER JOIN product_tag pt ON p.product_no = pt.product_no "
-				+ "INNER JOIN tag t ON pt.tag_no = t.tag_no "
-				+ "WHERE t.tag_no = 8";
-		List<ProductDto> list = jdbcTemplate.query(sql, mapper);
-		return list.isEmpty() ? null:list;
+	// 상품 삭제
+	public boolean delete(int productNo) {
+		String sql = "delete product where product_no=?";
+		Object[] param = {productNo};
+		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+	// 상품 목록
+	public List<ProductDto> list(ProductListPaginationVo vo) {
+		if(vo.isSearch()) {
+			String sql = "select * from ("
+							+ "select TMP.*, rownum RN from ("
+								+ "select * from product where instr(#1, ?) > 0 "
+								+ "order by product_no desc"
+							+ ")TMP"
+						+ ") where RN between ? and ?";
+			sql = sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+		else {
+			String sql = "select * from ("
+							+ "select TMP.*, rownum RN from ("
+								+ "select * from product "
+								+ "order by product_no desc"
+							+ ")TMP"
+						+ ") where RN between ? and ?";
+			Object[] param = {vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+	}
+	// 상품 개수
+	public int selectCount(ProductListPaginationVo vo) {
+		// 검색
+		if(vo.isSearch()) {
+			String sql = "select count(*) from product where instr(#1, ?) > 0";
+			sql = sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+		}
+		// 목록
+		else {
+			String sql = "select count(*) from product";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
 	
+	// 상품 재고 불러오기
+	public int selectStock(int productNo) {
+		String sql = "select product_stock from product where product_no=?";
+		Object[] param = {productNo};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
 	
 }

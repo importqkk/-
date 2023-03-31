@@ -2,21 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <html>
 <head>
-<meta charset="EUC-KR">
 <title>Insert title here</title>
 	<style>
 	
     </style>
     <!-- 우편주소 api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/static/js/find-address.min.js"></script>
 	<!-- 우편주소 api -->
 	
-    <script type="text/javascript">
-    $(function(){
+	<script type="text/javascript">
+$(function(){
 		
         //주소 
         $(".address-btn").click(function(){
@@ -58,8 +59,7 @@
 		    }
 		  });
 		}
-
-		var productCount= ${productCount};
+    });
     </script>
     
     
@@ -85,7 +85,6 @@
                 </div>
                </c:forEach>
                 <div class="row left">
-               
                    	<div class="flex"> 
                    	<h2 class="w-80">배송지</h2>
                    	 주문자 정보 가져오기<input type="checkbox" class="post-check w-10"> </div> 
