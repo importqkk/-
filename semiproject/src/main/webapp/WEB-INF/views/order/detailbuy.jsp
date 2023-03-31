@@ -66,7 +66,7 @@
 <body test>
 
  <div class="container-1000">
-  <form action="/order/buy" method="post">
+  		<form action="/order/buy" method="post">
         <div class="flex">
             <div class=" w-70 pt-20">
                 <p><h2>주문상품</h2></p>
@@ -168,7 +168,7 @@
             </div>
             
        </div>     
-	</form>
+			</form>
     </div>
 
 

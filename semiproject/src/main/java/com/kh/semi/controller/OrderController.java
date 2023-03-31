@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.convert.DtoInstantiatingConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,7 +59,9 @@ public class OrderController {
 		model.addAttribute("memberInfo",memberInfoDao.memberinfo(memberId));
 		//장바구니 리스트 불러옴
 		model.addAttribute("cartinfo",cartProductInfoDao.cartItemInfo(memberId));
-		System.out.println(cartProductInfoDao.cartItemInfo(memberId));
+		
+
+
 		
 		return "/WEB-INF/views/order/cartbuy.jsp";
 	}
@@ -70,9 +73,10 @@ public class OrderController {
 			//멤버아이디
 			String memberId=(String)session.getAttribute("memberId");
 			
-			//받은 값을 이용해 상품정보 불러옴
+			//model로 상품정보 보냄
 			model.addAttribute("productInfo",productInfoDao.selectOne(productNo));
 			model.addAttribute("Count",productCount);
+			
 			
 	
 			
@@ -80,31 +84,53 @@ public class OrderController {
 		}
 	
 	@PostMapping("/buy")
-	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto orderProductDto ,
-			HttpSession session){
-		
-
+	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto Dto, HttpSession session){
 		//회원 아이디넣고
-		//결제버튼을 누르면 상품등록
 		String memberId=(String)session.getAttribute("memberId");
-		//주문번호-주문목록 생성
+		//주문번호와 주문목록 생성
 		orderDto.setMemberId(memberId);
 		orderDao.insertOrder(orderDto);
 		
-		//카트 리스트내에있는 정보들을 가져와서 insert
-		orderProductDto.getProductCount();  
-		o
 		
 		//상품 주문 실행
-		//방금 주문한 번호를 불러오고
 		
+		//방금 주문한 번호를 불러오고
 		int no=orderDao.orderNo(memberId);
-		for(OrderProductDto dto : list) {
-		orderProductDto.setOrderNo(no);
-		orderProductDao.InsertOrderProduct(orderProductDto);
+		//장바구니에서 주문시 카트 리스트내에있는 정보들을 가져와서 insert
+		if(Dto.getProductNo()==0) {
+			List<CartProductInfoDto> list = cartProductInfoDao.cartItemInfo(memberId);
+			for (CartProductInfoDto Info : list) {
+				
+				Dto.setOrderNo(no);
+				Dto.setProductNo(Info.getProductNo());
+				Dto.setProductCount(Info.getProductCount());
+				Dto.setProductPrice(Info.getProductPrice());
+				orderProductDao.InsertOrderProduct(Dto);
+				
+				
+//				productDao.increaseSellCount(Info.getProductCount(), Info.getProductNo()); //상품판매수량 +
+//				productDao.decreaseStock(Info.getProductCount(), Info.getProductNo()); //상품재고 -
+			}
+			//카트삭제
+			cartDao.cartDeleteAll(memberId);
+			return "redirect:buyFinish";
+		}//상세페이지에서 주문시 model을 받아서 insert
+		else  {
+			Dto.setOrderNo(no);
+			orderProductDao.InsertOrderProduct(Dto);
+			System.out.println(Dto.getOrderNo());
+			System.out.println(Dto.getProductNo());
+			System.out.println(Dto.getProductPrice());
+			
+//			productDao.increaseSellCount(Dto.getProductCount(), Dto.getProductNo()); //상품판매수량 +
+//			productDao.decreaseStock(Dto.getProductCount(), Dto.getProductNo()); //상품재고 -
+			return "redirect:buyFinish";
+
 		}
 		
-		return "redirect:buyFinish";
+//		return "redirect:buyFinish";
+		
+		
 	}
 	
 		
@@ -112,7 +138,7 @@ public class OrderController {
 	//등록완료!
 	 @GetMapping("/buyFinish")
 	 public String joinFinish() { 
-	
+		 
 		 return "/WEB-INF/views/order/buyFinish.jsp";
 		 
 	 }
