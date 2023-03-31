@@ -5,18 +5,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.kh.semi.dao.MainImgDao;
 import com.kh.semi.dao.ProductInfoDao;
+import com.kh.semi.dto.MainImgConnectDto;
 import com.kh.semi.dto.ProductInfoDto;
 
 @Controller
 public class MainController {
 
 	@Autowired
+	private MainImgDao mainImgDao;
+	@Autowired
 	private ProductInfoDao productInfoDao;
 	
 	@RequestMapping("/")
 	public String main(@ModelAttribute ProductInfoDto productInfoDto,
+			@ModelAttribute MainImgConnectDto mainImgConnectDto,
 			Model model) {
+		
+		// 메인 이미지
+		List<MainImgConnectDto> mainImgList = mainImgDao.mainImgList();
+		model.addAttribute("mainImgList", mainImgList);
 		
 		// 전체 상품 (재고 많은 순)
 		List<ProductInfoDto> productList = productInfoDao.productList();
