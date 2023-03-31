@@ -17,169 +17,330 @@
 	    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
 	    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
 	    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
-	    <!-- font awesome cdn -->
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-f9q3yD8+iyf0zvJolTO0+QGd/U8rFyV7vUTd/h5u5lJxRZJz8sRkpA7MUzFGAG+AsTJ16ULbL3qT/ZHxT+XQVQ=="/>
 	    <!-- jquery cdn -->
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	    <style>
-	        .custom-size {
-	            font-size: 25px;
-	        }
-	        .menu-btn,
-	        .close-btn {
-	            cursor: pointer;
-	        }
-	        .close-btn {
-	            font-size: 45px;
-	        }
-	        .fa-chevron-right {
-	            margin-top: 10px;
-	        }
-	        .row.large {
-	            margin: 20px 0px;
-	        }
-	        .menu-item {
-	            padding-top: 10px;
-	            padding-bottom: 10px;
-	            padding-left: 20px;
-	            border-radius: 100px;
-	            cursor: pointer;
-	        }
-	        .menu-item:hover {
-	            background-color: #f8f8ff;
-	        }
-	        .social {
-	            vertical-align: middle;
-	            margin-top: 12px;
-	        }
-	    </style>
-	    <script type="text/javascript">
-	        $(function() {
-	            $(".side-menu").hide();
-	            $(".close-btn").hide();
-	            $(".menu-btn").click(function() {
-	                $(".menu-btn").hide();
-	                $(".close-btn").show();
-	                $(".side-menu").show();
-	            })
-	            $(".close-btn").click(function() {
-	                $(".close-btn").hide();
-	                $(".menu-btn").show();
-	                $(".side-menu").hide();
-	            })
-	        })
-	    </script>
-	    <title>SEMI</title>
-	</head>
-	<body>
+    <style>
+       .logo {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            /* font-size: 100%;
+            font: inherit; */
+            font-family: inherit;
+            vertical-align: baseline;
+        }
+        .search-box {
+            margin-top: 8px;
+        }
+        .custom-size {
+            font-size: 25px;
+        }
+        .menu-btn,
+        .close-btn {
+            font-size: 40px;
+            margin-top: 3px;
+            cursor: pointer;
+        }
+        .close-btn {
+            font-size: 53px;
+        }
+        .fa-chevron-right {
+            margin-top: 10px;
+        }
+        .row.large {
+            margin: 20px 0px;
+        }
+        .menu-item {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            border-radius: 100px;
+            cursor: pointer;
+        }
+        .menu-item:hover {
+            background-color: #f8f8ff;
+        }
+        .fa-cart-shopping,
+        .fa-user {
+            margin-top: 12px;
+            font-size: 30px;
+        }
+        .social {
+            vertical-align: middle;
+            margin-top: 30px;
+        }h
+        /* 메인 */
+        .swiper {
+            width: 100%;
+        }
+        .swiper img {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #776BFF !important;
+        }
+        .swiper-pagination-bullet {
+            opacity: 1;
+            background-color: #e4e1ff
+        }
+        .fas{
+			font-size: 40px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            color: #776BFF;
+		}
+        .fa-beat {
+            scale: 1;
+            animation-duration: 2s;
+        }
+        .flex.flex-auto-width > * {
+            flex-grow: 1;
+        }
+        h5, h3 {
+            margin: 0;
+        }
+        h1, h2, h4 {
+            margin: 0;
+            display: inline;
+        }
+        .star {
+            color: #776BFF;
+        }
+        .item-box {
+            background-color: #f8f8f8;
+            border-radius: 20px;
+            padding-left: 17px;
+            padding-right: 17px;
+            padding-bottom: 20px;
+        }
+        .item-box:hover {
+            background-color: #f8f8ff;
+        }
+        .item-img {
+            width: 200px;
+            height: 200px;
+        }
+        .recommend-box > *,
+        .best-box > * {
+            flex-grow: 1;
+        }
+        /* 사이드메뉴 */
+        .categories {
+            padding-bottom: 60px;
+        }
+        .category {
+            border-radius: 25px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+        .category:hover {
+            background-color: #f8f8ff;
+        }
+        .category-text {
+            color: #d3d2d2;
+        }
+        .social-icon {
+            vertical-align: middle;
+        }
+        .link-social {
+            text-decoration: none;
+            color: #22201e;
+        }
+        .fa {
+            cursor: pointer;
+            font-size: 50px;
+            color: #d3d2d2;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function() {
+            $(".side-menu").hide();
+            $(".close-btn").hide();
+            $(".menu-btn").click(function() {
+                $(".menu-btn").hide();
+                $(".close-btn").show();
+                $(".side-menu").show();
+            })
+            $(".close-btn").click(function() {
+                $(".close-btn").hide();
+                $(".menu-btn").show();
+                $(".side-menu").hide();
+            })
+            $(".category").hover(function() {
+                $(this).find("h3").css("color", "#776bff");
+                $(this).find(".fa").css("color", "#776bff");
+            },
+            function() {
+                $(this).find("h3").css("color", "");
+                $(this).find(".fa").css("color", "");
+            })
+        })
+    </script>
+    <title>SEMI</title>
+</head>
+<body>
     <main>
         <div id="wrapper">
         <header style="border-bottom: 0.5px solid #72706f;">
             <div class="container-1000">
                 <div class="flex">
                     <div class="flex w-25">
-                        <div class="w-15">
-                            <i class="fa-solid fa-bars fa-2x font-purple mt-20 menu-btn"></i>
-                            <i class="fa-solid fa-xmark fa-2x font-purple mt-15 close-btn"></i>
+                        <div class="w-20">
+                            <i class="fa-solid fa-bars fa-2x c-p100 menu-btn"></i>
+                            <i class="fa-solid fa-xmark fa-2x c-p100 close-btn"></i>
                         </div>
                         <div class="w-100 center">
-                                <h1 style="font-size: 50px;">
-                                    <a class="link font-purple" href="#">SEMI</a>
-                                </h1>
+                            <h1 class="c-p100 logo" style="font-size: 50px;">
+                                <a class="link" style="color: #776BFF;" href="/">SEMI</a>
+                            </h1>
                         </div>
                     </div>
-                    <div class="center w-50">
-                        <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
+                    <div class="center w-60">
+						<!--검색창-->
+                    	<form action="/product/search?" method="get"> 
+                        <div class="search-box">
+                            <input name="keyword" class="search-input w-100">
+                            <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                        </form>
                     </div>
-                    <div class="right w-25">
-                        <a class="link" href="#">
-                            <i class="fa-solid fa-cart-shopping custom-size font-purple pe-30 mt-25"></i>
+                    <!-- <div class="center w-50">
+                        <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
+                    </div> -->
+                    <div class="right w-15">
+                        <a class="link" href="/cart/main">
+                            <i class="fa-solid fa-cart-shopping c-p100 pe-30"></i>
                         </a>
                         <a class="link" href="#">
-                            <i class="fa-solid fa-user custom-size font-purple mt-25"></i>
+                            <i class="fa-solid fa-user c-p100"></i>
                         </a>
                     </div>
                 </div>
             </div>
         </header>
         <aside class="side-menu">
-            <div class="container-1000 flex">
-                <div class=""></div>
-                <div class="row w-30">
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">면역력</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">피부</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">활력</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">헤어</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">다이어트</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">위</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="link" href="#">
-                        <div class="row large flex menu-item">
-                            <div class="w-85">
-                                <div class="font-h2">안티에이징</div>
-                            </div>
-                            <div class="w-15 right pe-20">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </a>
+            <div class="container-1000">
+                <div class="flex right member-menu pt-30 pe-100 me-30 pb-60">
+                    <!-- 로그인 전 -->
+                    <c:if test="${sessionScope.memberId == null}">
+                    	<div>
+	                        <h4><a class="link pe-20" href="/member/login" style="border-right: 1px solid #22201e;">로그인</a></h4>
+	                    </div>
+	                    <div>
+	                        <h4><a class="link ps-20" href="/member/join">회원가입</a></h4>
+	                    </div>
+                    </c:if>
+                    
+                    <!-- 로그인 후 -->
+                    <c:if test="${sessionScope.memberId != null}">
+	                    <div>
+	                        <h4><a class="link pe-20" href="/cart/main" style="border-right: 1px solid #22201e;">장바구니</a></h4>
+	                    </div>
+	                    <div>
+	                        <h4><a class="link ps-20 pe-20" href="/member/mypage" style="border-right: 1px solid #22201e;">마이페이지</a></h4>
+	                    </div>
+	                    <div>
+	                        <h4><a class="link ps-20" href="/member/logout">로그아웃</a></h4>
+	                    </div>
+                    </c:if>
                 </div>
-                <div class="w-70"></div>
+                <div class="flex center categories">
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="/categori/all">
+                                <i class="fa fa-solid fa-border-all"></i>
+                                <h3 class="category-text">전체</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="/categori/tag1">
+                                <i class="fa fa-light fa-face-smile"></i>
+                                <h3 class="category-text">피부</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="/categori/tag2">
+                                <i class="fa fa-light fa-weight-scale"></i>
+                                <h3 class="category-text">다이이트</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex center categories">
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="/categori/tag3">
+                                <i class="fa fa-light fa-venus"></i>
+                                <h3 class="category-text">여성</h3>	
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="/categori/tag4">
+                                <i class="fa fa-sharp fa-light fa-bolt-lightning"></i>
+                                <h3 class="category-text">활력</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="/categori/tag5">
+                                <i class="fa fa-thin fa-mars"></i>
+                                <h3 class="category-text">남성</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex center categories">
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="/categori/tag6">
+                                <i class="fa fa-light fa-eye"></i>
+                                <h3 class="category-text">눈</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="/categori/tag7">
+                                <i class="fa fa-light fa-tooth"></i>
+                                <h3 class="category-text">치아</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-33 flex center">
+                        <div class="w-40 category">
+                            <a class="link" href="/categori/tag8">
+                                <i class="fa fa-light fa-bone"></i>
+                                <h3 class="category-text">관절/뼈</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="flex ps-100 ms-30 w-50">
+                        <h2><a class="link" href="#">QnA</a></h2>
+                    </div>
+                    <div class="flex right pe-100 me-30 w-50">
+                        <a class="link-social" href="#">
+                            <i class="fa-brands fa-square-facebook custom-size social-icon me-10"></i>
+                        </a>
+                        <a class="link-social" href="#">
+                            <i class="fa-brands fa-instagram custom-size social-icon me-10"></i>
+                        </a>
+                        <a class="link-social" href="#">
+                            <img class="social-icon" width="23px" height="23px" src="/static/image/katalk.png">
+                        </a>
+                    </div>
+                </div>
             </div>
-            
         </aside>
         <section>
             <article>

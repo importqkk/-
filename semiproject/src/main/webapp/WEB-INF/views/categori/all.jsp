@@ -79,17 +79,20 @@
 			color: #d0ccff;
 			font-size:13px;
 			font-weight:bolder;
+			cursor:pointer;
 			
 		}
 		.a-font-lightgrey{
 			color: #afafaf;
 			font-size:13px;
 			font-weight:bolder;
+			cursor:pointer;
 		}
 		
 		a.fas{
 			text-decoration: none;
 			color: #776bff;
+			cursor:pointer;
 		}
 		
 		
@@ -135,26 +138,27 @@
 		});	
 		
 		$(".img-box").click(function(){
-			var index = $(this).data('index');
-			var index1 = $(this).data('index1');
-			var index2 = $(this).data('index2');
-			var index3 = $(this).data('index3');
-			if(index!=null){
+			var index = $(this).data('index'); // best로 정렬한 순서에서 클릭된 위치의 index 반환
+			var index1 = $(this).data('index1'); // new로 정렬한 순서에서 클릭된 위치의 index 반환
+			var index2 = $(this).data('index2'); // cheap로 정렬한 순서에서 클릭된 위치의 index 반환
+			var index3 = $(this).data('index3'); // expensive로 정렬한 순서에서 클릭된 위치의 index 반환
+			if(index!=null){ // best가 
 				indexr = index;
+				var productNo = $(".productNoBest").eq(indexr).text();
 			}
-			if(index1!=null){
+			if(index1!=null){ // new
 				indexr = index1;
+				var productNo = $(".productNoNew").eq(indexr).text();
 			}
-			if(index2!=null){
+			if(index2!=null){ // cheap
 				indexr = index2;
+				var productNo = $(".productNoCheap").eq(indexr).text();
 			}
-			if(index3!=null){
+			if(index3!=null){ // expensive
 				indexr = index3;
-			};
-			
-			console.log($(this).data('info'));
-//  			var productNo = $(".productNo").eq(indexr).text(); 
-//   			$(location).attr("href","/product/detail?productNo="+productNo);
+				var productNo = $(".productNoExpensive").eq(indexr).text();
+			}; 			 
+  			$(location).attr("href","/product/detail?productNo="+productNo);
 		});
 	})
 	
@@ -215,7 +219,7 @@
 		<c:forEach var="productInfoDto" items="${bestList}" varStatus="status">		
 				<div class="img-box me-20 center" data-index="${status.index}" data-info="best">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
-					<br><h5 class="productNo" style="display: none;">${productInfoDto.productNo}</h5>				
+					<br><h5 class="productNoBest" style="display: none;">${productInfoDto.productNo}</h5>				
 					<h5 class="left ms-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
 					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>
@@ -236,8 +240,8 @@
 		<c:forEach var="productInfoDto" items="${newList}" varStatus="status1">		
 				<div class="img-box me-20 center" data-index1="${status1.index}" data-info="new">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
-					<br><h5 class="productNo" style="display: none;">${productInfoDto.productNo}</h5>	
-					<h5 class="left ms-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
+					<br><h5 class="productNoNew" style="display: none;">${productInfoDto.productNo}</h5>	
+					<h5 class="left ms-20 me-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
 					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>
 					<br>
@@ -257,7 +261,7 @@
 		<c:forEach var="productInfoDto" items="${cheapList}" varStatus="status2">		
 				<div class="img-box me-20 center" data-index2="${status2.index}" data-info="cheap">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
-					<br><h5 class="productNo" style="display: none;">${productInfoDto.productNo}</h5>	
+					<br><h5 class="productNoCheap" style="display: none;">${productInfoDto.productNo}</h5>	
 					<h5 class="left ms-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
 					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>
@@ -278,7 +282,7 @@
 		<c:forEach var="productInfoDto" items="${expensiveList}" varStatus="status2">		
 				<div class="img-box me-20 center" data-index3="${status2.index}" data-info="expensive">
 					<img src="/static/image/basic_img.jpg" class="img-list center mt-20">
-					<br><h5 class="productNo" style="display: none;">${productInfoDto.productNo}</h5>	
+					<br><h5 class="productNoExpensive" style="display: none;">${productInfoDto.productNo}</h5>	
 					<h5 class="left ms-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
 					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>

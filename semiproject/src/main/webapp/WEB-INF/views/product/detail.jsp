@@ -79,14 +79,7 @@
             border-radius:50px;
             margin-bottom: 15px;
         }
-
-        .font-white{
-            color: white;
-            -webkit-text-stroke: 2px #776BFF; /* 텍스트 테두리 색 지정 */
-			
-
-        }
-        
+       
         /* 상세 이미지 초기 설정*/
 		.detail-img-initial {
 			  position: relative;
@@ -122,15 +115,28 @@
 			font-weight: bold;
 		}
 		
-		.up-10{
+		.font-white{
+            color: white;
+            -webkit-text-stroke: 1.5px #776BFF; /* 텍스트 테두리 색 지정 */
+			font-size:18px;
+			font-weight:bolder;
+        }
+        
+		.font-purple{
+			color:  #776BFF;
+			font-size:18px;
+			font-weight:bolder;
 			
 		}
-		
+		.font-lightgrey{
+			color: #afafaf;
+			font-size:13px;
+			font-weight:bolder;
+		}
     </style>
     <script type="text/javascript">
-    $(function(){
-    	
-    	
+ 	// 페이지 로드--------------
+    $(function(){    	
     	// 이미지 높이 조절---------------------------------------------------   	
     	// 초기상태에서 클리되었을때 
    		$(".show-detail").click(function(){
@@ -158,12 +164,13 @@
    		// 이미지 높이 조절----------------------------------------------------
     	
     	
-   		
-   		
-   		
+	
     	// 상품 개당 가격 조절 ajax-------------------------------------
      	var productPrice = $(".product-price").text();
-
+   		$(".product-price").text(parseInt(productPrice).toLocaleString());
+     	var number = $(".productCount").val();
+     	$(".total-price").text((number*productPrice+3000).toLocaleString());
+     	
     	$(".productCount").on('change',function(){
     		
     		 var number = $(this).val();
@@ -186,21 +193,39 @@
                  }
          	});
     	});
+    	//-------------------------------------------------------------
     	
     	
     	
+    	// 별 다섯개 짜리로 구성된 평점을 표시하는 별--------------
+    	var avg = $('.avg').text();
+    	var ratings = $('.rating');
+    	ratings.each(function(idx,rating){
+    		var stars = $(rating).find('.fa');
+        	stars.each(function(index,star){
+        		console.log(index);
+        		if (index+1 <= avg){ // 별이 있는 구간
+        			$(star).removeClass('font-white').addClass('font-purple');
+        		}
+        		else{    			 // 빈별 구간 
+        			$(star).removeClass('font-purple').addClass('font-white');
+        		}        		
+        	});
+    	});    	
     	
-    	// 상품 가격 조절 ajax-------------------------------------------
+    	// 별 다서색--------------------------------
     	
     	
-    	// 스크롤을 해당하는 곳으로 옮기고 10만큼 올리는 예제 
-    	// $("scrollTarget")
+    	
     });	   	
-    	
+    // 페이지 로드--------------
     </script>
 
-<body test>
+<body>
+	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display:none;">${productInfoDto.productNo}</h6>
+	<h6 class="avg" style="display:none;">${reviewAvg}</h6>
+	<!--  -->
     <div class="container-1000">
     	<form class="two-form"> <!-- 장바구니, 구매하기 까지 감싼 form -->
         <hr>
@@ -216,7 +241,6 @@
                 <div class="row">
                     <h5 class="font-grey oneLine">${productInfoDto.productBrand}</h5>
                     <h5 class="font-grey oneLine">${productInfoDto.productName}</h5>
-                 
                 </div>
                 <div class="row">
                     <h2>${productInfoDto.productName}</h2>
@@ -229,14 +253,14 @@
                     <h4 class="font-boldgrey oneLine">배송비</h4>
                     &nbsp;
                     <h4 class="oneLine">3,000원</h4><br>
-                    <h5 class="fas fa-star font-purple "></h5>
-                    <h5 class="fas fa-star font-purple "></h5>
-                    <h5 class="fas fa-star font-purple "></h5>
-                    <h5 class="fas fa-star font-purple "></h5>
-                    <h5 class="fas fa-star font-purple "></h5>
-                    <h6 class="font-boldgrey oneLine"> 150개의 후기</h6>
-
-                    
+                    <div class="rating">
+	                    <span class="fa fa-star font-white"></span>
+	                    <span class="fa fa-star font-white"></span>
+	                    <span class="fa fa-star font-white"></span>
+	                    <span class="fa fa-star font-white"></span>
+	                    <span class="fa fa-star font-white"></span>
+                    </div>
+                    <h6 class="font-boldgrey oneLine"> ${reviewCount}개의 후기</h6>
                 </div>
                 <div class="row">
                     <hr>
@@ -285,16 +309,13 @@
         <div class="flex"> 
             <div class="flex-content w-33 center">
                 <a class="fs-20 font-black" href="#scrollTargetDetailImage">제품상세정보</a>
-                
             </div>
             <div class="flex-content w-33 center">
                 <a class="fs-20 oneLine font-black" href="#scrollTargetReview">후기</a>
-                <h3 class="fs-20 oneLine font-black">(150)</h3>
-               
+                <h3 class="fs-20 oneLine font-grey">(${reviewCount})</h3>
             </div>
             <div class="flex-content w-33 center">
                 <a class="fs-20 font-black" href="#scrollTargetPurchaseGuide">상품구매안내</a>
-                
             </div>
         </div>
     </div>
@@ -321,21 +342,18 @@
     </div>
 
 
-
-
     <!-- 제품상세정보, 후기, 상품구매안내 -->
     <div class="container-1000 ">
         <div class="flex"> 
             <div class="flex-content w-33 center">
-                <h3>제품상세정보</h3>
+                <a class="fs-20 font-black" href="#scrollTargetDetailImage">제품상세정보</a>
             </div>
             <div class="flex-content w-33 center">
-                <h3 class="oneLine">후기</h3>
-                <h3 class="oneLine font-grey">(150)</h3>
+                <a class="fs-20 oneLine font-black" href="#scrollTargetReview">후기</a>
+                <h3 class="fs-20 oneLine font-grey">(${reviewCount})</h3>
             </div>
             <div class="flex-content w-33 center">
-                <h3>상품구매안내</h3>
-                
+                <a class="fs-20 font-black" href="#scrollTargetPurchaseGuide">상품구매안내</a>
             </div>
         </div>
     </div>
@@ -348,13 +366,15 @@
     <div class="container-1000 flex">
         <div class="w-40 center">
             <div class="star-box">
-                <h4 class="font-purple oneLine">4.0</h4>
-                <h4 class="font-lightgrey oneLine">&nbsp/ 5</h4><br>
-                <h4 class="fas fa-star font-purple "></h4>
-                <h4 class="fas fa-star font-purple "></h4>
-                <h4 class="fas fa-star font-purple "></h4>
-                <h4 class="fas fa-star font-purple "></h4>
-                <h4 class="fas fa-star font-purple "></h4>
+                <h4 class="font-purple oneLine">${reviewAvg}</h4>
+                <h4 class="font-lightgrey oneLine">&nbsp;/ 5</h4><br>
+                    <div class="rating">
+	                    <span class="fa fa-star font-white"></span>
+	                    <span class="fa fa-star font-white"></span>
+	                    <span class="fa fa-star font-white"></span>
+	                    <span class="fa fa-star font-white"></span>
+	                    <span class="fa fa-star font-white"></span>
+                    </div>
             </div>
         </div>
         <div class="w-65 flex ms-10 ">
@@ -365,7 +385,6 @@
                 <h5 class="font-boldgrey chart-font">보통이에요</h5>
                 <h5 class="font-boldgrey chart-font">그저 그래요</h5>
                 <h5 class="font-boldgrey chart-font">별로에요</h5>
-                
             </div>
             <!-- 차트 -->
             <div class="w-75">
@@ -391,8 +410,7 @@
     <!-- 리뷰 작성하기  -->
     <div class="container-1000">
         <div class="row center">
-            <div class="font-warning left">제품 구매 이력 있을 시에만 나타남</div>
-            <button class="form-btn w-95  neutral small">리뷰 작성하기</button>
+            <button class="form-btn w-95 neutral small">리뷰 작성하기</button>
         </div>
         <div class="flex">
             <div class="w-75"></div>
@@ -444,7 +462,6 @@
                         <div class="fas fa-star font-purple "></div>
                         <div class="fas fa-star font-white "></div>
                         <div class="font-boldgrey oneLine">좋아요</div>
-
                     </div>
                     <div class="flex-remain right font-boldgrey">
                         2022-02-26
@@ -455,7 +472,6 @@
                     부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요
                     부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요
                     부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요
-
                 </div>
             </div>
         </div>
@@ -463,29 +479,33 @@
         <!-- 리뷰 칸 -->
 
         <div class="row center">
-            <div class="font-warning left">리뷰 개수 3개 이상일때만 보임</div>
+
             <button class="form-btn w-95 positive small">리뷰 모두 보기</button>
         </div>
         
 
         <div class="container-1000 ">
             <div class="flex"> 
-                <div class="flex-content w-33 center">
-                    <h3>제품상세정보</h3>
-                    
-                </div>
-                <div class="flex-content w-33 center">
-                    <h3 class="oneLine">후기</h3>
-                    <h3 class="oneLine font-grey">(150)</h3>
-                   
-                </div>
-                <div class="flex-content w-33 center">
-                    <h3>상품구매안내</h3>
-                </div>
+	             <div class="flex-content w-33 center">
+	                <a class="fs-20 font-black" href="#scrollTargetDetailImage">제품상세정보</a>
+	            </div>
+	            <div class="flex-content w-33 center">
+	                <a class="fs-20 oneLine font-black" href="#scrollTargetReview">후기</a>
+	                <h3 class="fs-20 oneLine font-grey">(${reviewCount})</h3>
+	            </div>
+	            <div class="flex-content w-33 center">
+	                <a class="fs-20 font-black" href="#scrollTargetPurchaseGuide">상품구매안내</a>
+	            </div>
             </div>
         </div>
+        <div class="container-1000 flex">
+        <hr class="w-30">
+        <hr class="w-30">
+        <hr class="w-30">
+    	</div>
 
         <div class="container-1000" >
+        	<br>
             <div class="row">
                 <h3 class="font-boldgrey" id="scrollTargetPurchaseGuide">배송안내</h3>
                 <br>
@@ -499,6 +519,7 @@
                 	<li>배송 과정 중 기상 악화 혹은 도로교통 상황에 따라 부득이하게 지연 배송이 발생될 수 있습니다</li>                	
                 </ul>
             </div>
+            <br>
             
             <div class="row">
                 <h3 class="font-boldgrey">반품 및 교환 안내</h3>
@@ -513,6 +534,7 @@
                 	<li>반품완료 및 교환회수 완료는 택배기사가 고객님께 반품/교환 상품을 인계받은(수거) 날로부터 약 3~5일 소요됩니다. (영업일 기준)</li>                	
                 </ul>
             </div>
+            <br>
             
             <div class="row">
                 <h3 class="font-boldgrey">주문취소 안내</h3>
@@ -528,6 +550,7 @@
                 	<li>주문 시 사용하였던 쿠폰 및 포인트는 유효기간이 지나지 않은 경우 복원됩니다.</li>                         	
                 </ul>
             </div>
+            <br>
             
             <div class="row">
                 <h3 class="font-boldgrey">전자상거래 등에서 소비자보호에 관한 법률에 따라 다음의 경우 청약철회가 제한될 수 있습니다.</h3>
@@ -545,6 +568,7 @@
 					<li>기타 상품상세페이지에 반품/교환이 불가하다고 안내되어 있는 경우</li>                         	
                 </ul>
             </div>
+            <br>
         </div>
     
     </div>
