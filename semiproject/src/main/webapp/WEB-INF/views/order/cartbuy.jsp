@@ -66,17 +66,14 @@ $(function(){
 </head>
 <body test>
  <div class="container-1000">
-  <form action="/order/buy" method="post">
+  		<form name="product" action="/order/buy" method="post">
         <div class="flex">
             <div class=" w-70 pt-20">
                 <p><h2>주문상품</h2></p>
             <c:forEach var="cartinfo" items="${cartinfo}">
                 <div class="row flex">
                     <img src="https://picsum.photos/100/100" class="pe-20">
-                		<input hidden type="number" name="productNo" value="${cartinfo.productNo}">
-						<input hidden type="number" name="productCount" value="${cartinfo.productCount}">
-						<input hidden type="number" name="productPrice" value="${cartinfo.productPrice}">
-						
+                								
 						<label>상품이름: ${cartinfo.productName}</label>
 						<label>브랜드명: ${cartinfo.productBrand}</label>		
 						<label>상품가격: ${cartinfo.productPrice}</label>
@@ -84,7 +81,9 @@ $(function(){
 						
                 </div>
                </c:forEach>
+         
                 <div class="row left">
+         
                    	<div class="flex"> 
                    	<h2 class="w-80">배송지</h2>
                    	 주문자 정보 가져오기<input type="checkbox" class="post-check w-10"> </div> 
@@ -117,12 +116,12 @@ $(function(){
                         <p>배송요청사항</p>
                         <input type="text" class="form-input light medium w-100" id="orderRequest">
                     </div>
+				
                 </div>
                 </div>
-
            
-            
             <div class="orderscroll w-30">
+          		
                 <div>
                     
                     <p><h2>결제정보</h2></p>
@@ -157,7 +156,7 @@ $(function(){
                     <div>
                         <input type="checkbox" name="option" > 휴대폰 결제
                     </div>
-    
+    		
                     <div>
                         <button class="form-btn positive large w-100" type="submit" >결제하기</button>
                     </div>
@@ -165,7 +164,8 @@ $(function(){
             </div>
             
        </div>     
-	</form>
+                </form>
+	
     </div>
 
 
