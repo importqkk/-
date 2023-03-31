@@ -46,12 +46,16 @@
         color: #776BFF;
         font-size: 0.7em;
     }
-    .item-box {
-        background-color: #f8f8f8;
-        border-radius: 20px;
-        padding-left: 17px;
-        padding-right: 17px;
-        padding-bottom: 20px;
+    .item-box {       
+        padding-top:10px;
+        width: 235px;
+        height: 400px;
+        background-color: #f8f8f8;  /* 배경색 */
+        border-radius: 20px; /* 끝부분 조정*/
+        align-items: center;
+    }
+    .item-box:not(:last-child) {
+    	margin-right: 10px;
     }
     .item-box:hover {
         background-color: #f8f8ff;
@@ -74,6 +78,16 @@
     .category-title {
     	color: #776bff;
     }
+    /*.text-wrap {
+    	word-warp: break-word;
+    }*/
+    .flex-wr {
+		display: flex;		
+		flex-wrap: wrap;
+	}
+	.item-title {
+		min-height: 80px;
+	}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -114,9 +128,11 @@
 		        <div class="row pb-30">
 		            <div class="swiper">
 		                <div class="swiper-wrapper center">
-		                    <div class="swiper-slide"><img src="/static/image/mainDummy1.png"></div>
-		                    <div class="swiper-slide"><img src="/static/image/mainDummy2.png"></div>
-		                    <div class="swiper-slide"><img src="/static/image/mainDummy3.png"></div>
+		                	<c:forEach var="mainImgConnectDto" items="${mainImgList}">
+		                    	<div class="swiper-slide">
+	                    			<img alt="메인 슬라이드 이미지" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
+		                    	</div>
+	                    	</c:forEach>
 		                </div>
 		                <div class="swiper-pagination center"></div>
 		            </div>
@@ -186,9 +202,9 @@
 		                <h1 class="c-b80 me-5">NEW</h1><h2 class="c-b80 me-5">in</h2><h1 class="me-10 c-p100">SEMI</h1>
 		                <span class="c-b80">이달의 신상품을 만나보세요!</span>
 		            </div>
- 		            <div class="row flex new-box">
+ 		            <div class="row flex new-box flex-wr">
 		            	<c:forEach var="productInfoDto" items="${newProduct}" end="3">
-			                <a class="link item-box me-10" href="/product/detail?productNo=${productInfoDto.productNo}">
+			                <a class="link item-box" href="/product/detail?productNo=${productInfoDto.productNo}">
 			                    <div>
 			                    	<c:choose>
 					            		<c:when test="${productInfoDto.imgNo != 0}">
@@ -199,10 +215,10 @@
 					            		</c:otherwise>
 					            	</c:choose>
 			                    </div>
-			                    <div class="mb-20">
+			                    <div class="mb-10 text-wrap item-title">
 			                        <h4 class="c-b40">[${productInfoDto.productBrand}] </h4><h4>${productInfoDto.productName}</h4>
 			                    </div>
-			                    <div class="mb-10">
+			                    <div class="mb-5">
 			                        <h3>
 		                            	<fmt:formatNumber pattern="#,##0" value="${productInfoDto.productPrice}"></fmt:formatNumber>
 		                            	원
@@ -267,9 +283,9 @@
 		                <span class="c-b80">이번 달 SEMI에서 가장 인기 있는 상품이에요.</span>
 		            </div>
 		            <div class="row">
-		                <div class="row flex best-box">
+		                <div class="row flex best-box flex-wr">
 		                	<c:forEach var="productInfoDto" items="${bestProduct}" end="3">
-			                    <a class="link item-box me-10" href="/product/detail?productNo=${productInfoDto.productNo}">
+			                    <a class="link item-box" href="/product/detail?productNo=${productInfoDto.productNo}">
 			                        <div>
 			                            <c:choose>
 						            		<c:when test="${productInfoDto.imgNo != 0}">
@@ -280,10 +296,10 @@
 						            		</c:otherwise>
 						            	</c:choose>
 			                        </div>
-			                        <div class="mb-20">
+			                        <div class="mb-10 item-title">
 			                            <h4 class="c-b40">[${productInfoDto.productBrand}] </h4><h4>${productInfoDto.productName}</h4>
 			                        </div>
-			                        <div class="mb-10">
+			                        <div class="mb-5">
 			                            <h3>
 			                            	<fmt:formatNumber pattern="#,##0" value="${productInfoDto.productPrice}"></fmt:formatNumber>
 			                            	원
@@ -353,9 +369,9 @@
 	                </div>
 		            </div>
 		        	
-			        <div class="row flex product-box">
+			        <div class="row flex product-box flex-wr">
 		            	<c:forEach var="productInfoDto" items="${productList}" end="3">
-			                <a class="link item-box me-10" href="/product/detail?productNo=${productInfoDto.productNo}">
+			                <a class="link item-box" href="/product/detail?productNo=${productInfoDto.productNo}">
 			                    <div>
 			                    	<c:choose>
 					            		<c:when test="${productInfoDto.imgNo != 0}">
@@ -366,10 +382,10 @@
 					            		</c:otherwise>
 					            	</c:choose>
 			                    </div>
-			                    <div class="mb-20">
+			                    <div class="mb-10 item-title">
 			                        <h4 class="c-b40">[${productInfoDto.productBrand}] </h4><h4>${productInfoDto.productName}</h4>
 			                    </div>
-			                    <div class="mb-10">
+			                    <div class="mb-5">
 			                        <h3>
 		                            	<fmt:formatNumber pattern="#,##0" value="${productInfoDto.productPrice}"></fmt:formatNumber>
 		                            	원
