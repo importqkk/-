@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -46,13 +47,14 @@
         }
 
         .star-box{ /*별점 박스*/
-            width: 100%;
-            height: 85%;
+            width: 400px;
+            height: 110px;
             background-color: #F5F5f5;
-            border-radius: 25%;
+            border-radius: 1em;
             justify-content: center;
-            align-items: center;
-            text-align: center;
+			align-items: center;
+			flex-direction: column; /* 이 부분은 수평 중앙 정렬을 위해 필요합니다 */
+			text-align: center; /* 이 부분은 수평 중앙 정렬을 위해 필요합니다 */
             font-weight: bold;  
         }
 
@@ -105,6 +107,30 @@
 			margin: 0 auto;
 		}
 		
+		
+        /* 리뷰 초기 설정*/
+		.review-initial {
+			  position: relative;
+			  overflow: hidden;
+			  height: 100px; /* 보여질 높이 설정 */
+		}
+		.review-click {
+			  position: relative;
+			  top: 0; 
+			  left: 0;
+			  width:100%;
+			  height: auto;
+		}
+		/*리뷰 펼치기 */
+		.show-review{
+			display:block;
+			margin: 0 auto;
+		}
+		.hide-review{
+			display:none;
+			margin: 0 auto;
+		}
+		
 		.disc{
 			list-style-type : disc;
 		}
@@ -121,7 +147,6 @@
 			font-size:18px;
 			font-weight:bolder;
         }
-        
 		.font-purple{
 			color:  #776BFF;
 			font-size:18px;
@@ -133,6 +158,10 @@
 			font-size:13px;
 			font-weight:bolder;
 		}
+		fs-18{
+			font-size:18px;
+		}
+		
     </style>
     <script type="text/javascript">
  	// 페이지 로드--------------
@@ -164,6 +193,29 @@
    		// 이미지 높이 조절----------------------------------------------------
     	
     	
+   		// 리뷰 높이 조절----------------------------------------------
+   		$(".show-review").click(function(){
+   			// 리뷰를 전부 펼침
+   			$(".review-initial").addClass("review-click");
+   			$(".review-click").removeClass("review-initial");
+   			
+   			// 버튼은 접기로 바꿈
+   			$(".show-review").css("display","none");
+   			$(".hide-review").css("display","block");
+   		});
+   		
+   		$(".hide-review").click(function(){
+   			// 리뷰를 전부 펼침
+   			$(".review-click").addClass("review-initial");
+   			$(".review-initial").removeClass("review-click");
+   			
+   			// 버튼은 접기로 바꿈
+   			$(".show-review").css("display","block");
+   			$(".hide-review").css("display","none");
+   		});
+   		// 리뷰 높이 조절----------------------------------------------
+   		
+   		
 	
     	// 상품 개당 가격 조절 ajax-------------------------------------
      	var productPrice = $(".product-price").text();
@@ -221,7 +273,7 @@
     // 페이지 로드--------------
     </script>
 
-<body>
+<body test>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display:none;">${productInfoDto.productNo}</h6>
 	<h6 class="avg" style="display:none;">${reviewAvg}</h6>
@@ -366,8 +418,9 @@
     <div class="container-1000 flex">
         <div class="w-40 center">
             <div class="star-box">
+            	<br>
                 <h4 class="font-purple oneLine">${reviewAvg}</h4>
-                <h4 class="font-lightgrey oneLine">&nbsp;/ 5</h4><br>
+                <h4 class="font-grey fs-18 oneLine">&nbsp;/ 5</h4><br>
                     <div class="rating">
 	                    <span class="fa fa-star font-white"></span>
 	                    <span class="fa fa-star font-white"></span>
@@ -422,9 +475,10 @@
         <!-- 리뷰 칸 -->
 
         <div class="container-1000"> 
-            <div class="row left" id="scrollTargetReview"> <!-- 상품 리뷰 안내 -->
+            <div class="row left review-initial" id="scrollTargetReview"> <!-- 상품 리뷰 안내 -->
                 <!-- 리뷰 예시 1-->
-                <h2>testa***</h2>
+               <c:forEach var="reviewList" items="${reviewList}" varStatus="status">
+                <h2>${reviewList.memberId}</h2>
                 <div class="flex">
                     <div class="w-80">
                         <div class="fas fa-star font-purple "></div>
@@ -433,54 +487,27 @@
                         <div class="fas fa-star font-purple "></div>
                         <div class="fas fa-star font-purple "></div>
                         <div class="font-boldgrey oneLine">아주 좋아요</div>
-
                     </div>
                     <div class="flex-remain  font-boldgrey flex">
                         <div class="w-20 font-purple">수정</div>
                         <div class="w-5 font-grey">|</div>
                         <div class="w-30 font-grey">삭제</div>
                         <div class="flex-remain">
-                        2022-02-25</div>
+                        ${reviewList.reviewTime}</div>
                     </div>
                 </div>
                 <div class="row font-boldgrey">
-                    사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.
-                    사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.
-                    사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.
-                    사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.
-                    사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.
-                    사용해보니 좋아요 강추합니다.사용해보니 좋아요 강추합니다.
-                    
+                    ${reviewList.reviewContent}
                 </div>
-                <!-- 리뷰 예시 1-->
-                <h2>testb***</h2>
-                <div class="flex">
-                    <div class="w-80">
-                        <div class="fas fa-star font-purple "></div>
-                        <div class="fas fa-star font-purple "></div>
-                        <div class="fas fa-star font-purple "></div>
-                        <div class="fas fa-star font-purple "></div>
-                        <div class="fas fa-star font-white "></div>
-                        <div class="font-boldgrey oneLine">좋아요</div>
-                    </div>
-                    <div class="flex-remain right font-boldgrey">
-                        2022-02-26
-                    </div>
-                </div>
-                <div class="row font-boldgrey">
-                    부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요
-                    부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요
-                    부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요
-                    부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요부모님 사드렸는데, 드시고 슈퍼맨, 원더우먼이 되셨어요
-                </div>
+                </c:forEach>
             </div>
         </div>
 
         <!-- 리뷰 칸 -->
 
         <div class="row center">
-
-            <button class="form-btn w-95 positive small">리뷰 모두 보기</button>
+            <button class="form-btn w-95 positive small show-review">리뷰 모두 보기</button>
+            <button class="form-btn w-95 neutral small hide-review">리뷰 접기</button>
         </div>
         
 
