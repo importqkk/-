@@ -48,7 +48,7 @@ public class CartDao {
 		Object[] param = {memberId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-	// 상품 이미지 조회 (테스트 필요)
+	// 상품 이미지 조회
 	public Integer cartImg(int productNo) {
 		String sql = "select * from product_with_img where product_no=?";
 		Object[] param = {productNo};
