@@ -31,15 +31,11 @@
 <script type="text/javascript">
     $(function() {
         // 아무 상품도 선택하지 않고 선택상품 결제 버튼 누르면 경고창 뜨게 하기
-        $(".selected-btn").click(function() {
-            var checkItem = $(".check-item:checked").length;
-            if(checkItem < 1) alert("구매하실 상품을 한 개 이상 선택해주세요.");
-        })
         $(".qty-selector").on("input", function() {
         	var quantity = $(this).val();
         	if(quantity > 10) {
         		alert ("최소 1개, 최대 10개까지 구매할 수 있습니다.");
-        		$(".all-btn, .selected-btn").click(function() {
+        		$(".order-btn").click(function() {
         			alert ("상품을 1개 이상, 10개 이하로 담아주세요.");
         			return false;
         		});
@@ -95,12 +91,12 @@
   	            	<c:choose>
 	            		<c:when test="${cartProductInfoDto.imgNo != 0}">
 	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
-		            			<img class="product-img" alt="상품 대표 이미지" src="/img/download?imgNo=${cartProductInfoDto.imgNo}" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+		            			<img class="product-img" alt="상품 대표 이미지" src="/img/download?imgNo=${cartProductInfoDto.imgNo}" width="130" height="130">
 	 	            		</a>
  	            		</c:when>
 	            		<c:otherwise>
 	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
-	            				<img class="product-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+	            				<img class="product-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
 	            			</a>
 	            		</c:otherwise>
 	            	</c:choose>
@@ -312,7 +308,7 @@
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
 	        <div class="row">
 	            <div class="row">
-	                <a class="form-btn medium positive w-100 all-btn" href="#">주문하기</a>
+	                <a class="form-btn medium positive w-100 order-btn" href="#">주문하기</a>
 	            </div>
 	        </div>
 		</c:if>
