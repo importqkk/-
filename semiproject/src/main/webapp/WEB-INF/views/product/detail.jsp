@@ -273,7 +273,7 @@
     // 페이지 로드--------------
     </script>
 
-<body test>
+<body>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display:none;">${productInfoDto.productNo}</h6>
 	<h6 class="avg" style="display:none;">${reviewAvg}</h6>
@@ -305,7 +305,7 @@
                     <h4 class="font-boldgrey oneLine">배송비</h4>
                     &nbsp;
                     <h4 class="oneLine">3,000원</h4><br>
-                    <div class="rating">
+                    <div class="rating oneLine">
 	                    <span class="fa fa-star font-white"></span>
 	                    <span class="fa fa-star font-white"></span>
 	                    <span class="fa fa-star font-white"></span>

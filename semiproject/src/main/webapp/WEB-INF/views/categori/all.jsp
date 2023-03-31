@@ -222,8 +222,9 @@
 					<br><h5 class="productNoBest" style="display: none;">${productInfoDto.productNo}</h5>				
 					<h5 class="left ms-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
-					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>
-					<br>
+					<div class="row left">
+						<h4 class="ms-20">${productInfoDto.productPrice}원</h4>
+					</div>
 					<div class="flex left ms-20">
 						<h4 class="fas fa-star font-purple star-13"></h4>
 						<h5 class="fas fa-star font-purple star-13"></h5>
@@ -243,16 +244,17 @@
 					<br><h5 class="productNoNew" style="display: none;">${productInfoDto.productNo}</h5>	
 					<h5 class="left ms-20 me-20 font-grey">[${productInfoDto.productBrand}] ${productInfoDto.productName}</h5>
 					<br>
-					<h4 class="left ms-20">${productInfoDto.productPrice}원</h4>
+					<h4 class="left">${productInfoDto.productPrice}원</h4>
 					<br>
-					<div class="flex left ms-20">
+					<div class="flex left ms-20 oneLine">
 						<h4 class="fas fa-star font-purple star-13"></h4>
 						<h5 class="fas fa-star font-purple star-13"></h5>
 						<h6 class="fas fa-star font-purple star-13"></h6>
 						<h6 class="fas fa-star font-purple star-13"></h6>
 						<h6 class="fas fa-star font-purple star-13"></h6>
-						<h6 class="font-grey ms-20">150</h6>
+
 					</div>
+					<h6 class="font-grey ms-20 oneLine">150</h6>
 				</div>
 		</c:forEach>
 		</div>		
