@@ -14,6 +14,7 @@
     .swiper img {
         width: 100%;
         height: 100%;
+     	min-height: 519px;   
     }
     .swiper-pagination-bullet-active {
         background-color: #776BFF !important;
@@ -63,6 +64,7 @@
     .item-img {
         width: 200px;
         height: 200px;
+        min-height: 200px;
     }
     .new-box > *,
     .best-box > *, 
@@ -88,6 +90,18 @@
 	.item-title {
 		min-height: 80px;
 	}
+    .product-name {
+        /*
+            말줄임표 3종세트
+            (전제조건) 폭이 확정적이어야 한다
+            - overflow는 넘치는 화면에 대한 처리를 설정
+            - white-space는 넘치는 항목에 대한 개행 처리를 설정
+            - text-overflow는 글자가 넘칠 경우의 처리를 설정
+        */
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
+    }
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -130,7 +144,7 @@
 		                <div class="swiper-wrapper center">
 		                	<c:forEach var="mainImgConnectDto" items="${mainImgList}">
 		                    	<div class="swiper-slide">
-	                    			<img alt="메인 슬라이드 이미지" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
+	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
 		                    	</div>
 	                    	</c:forEach>
 		                </div>
@@ -215,8 +229,9 @@
 					            		</c:otherwise>
 					            	</c:choose>
 			                    </div>
-			                    <div class="mb-10 text-wrap item-title">
-			                        <h4 class="c-b40">[${productInfoDto.productBrand}] </h4><h4>${productInfoDto.productName}</h4>
+			                    <div class="mb-10 text-wrap item-title product-name">
+			                        <h4 class="c-b40" title="${productInfoDto.productBrand}">[${productInfoDto.productBrand}] </h4>
+			                        <h4 title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 			                    </div>
 			                    <div class="mb-5">
 			                        <h3>
@@ -296,8 +311,9 @@
 						            		</c:otherwise>
 						            	</c:choose>
 			                        </div>
-			                        <div class="mb-10 item-title">
-			                            <h4 class="c-b40">[${productInfoDto.productBrand}] </h4><h4>${productInfoDto.productName}</h4>
+			                        <div class="mb-10 item-title product-name">
+			                        	<h4 class="c-b40" title="${productInfoDto.productBrand}">[${productInfoDto.productBrand}] </h4>
+			                        	<h4 title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 			                        </div>
 			                        <div class="mb-5">
 			                            <h3>
@@ -382,8 +398,9 @@
 					            		</c:otherwise>
 					            	</c:choose>
 			                    </div>
-			                    <div class="mb-10 item-title">
-			                        <h4 class="c-b40">[${productInfoDto.productBrand}] </h4><h4>${productInfoDto.productName}</h4>
+			                    <div class="mb-10 item-title product-name">
+			                       	<h4 class="c-b40" title="${productInfoDto.productBrand}">[${productInfoDto.productBrand}] </h4>
+		                        	<h4 title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 			                    </div>
 			                    <div class="mb-5">
 			                        <h3>
