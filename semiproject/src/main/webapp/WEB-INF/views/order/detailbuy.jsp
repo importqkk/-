@@ -4,21 +4,35 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <html>
 <head>
 <title>Insert title here</title>
 	<style>
 	
     </style>
+
+<c:set var="name" value="${requestScope.name}" />
+<c:set var="amount" value="${requestScope.amount}" />
+<c:set var="buyer_email" value="${requestScope.buyer_email}" />
+<c:set var="buyer_name" value="${requestScope.buyer_name}" />
+<c:set var="buyer_tel" value="${requestScope.buyer_tel}" />
+<c:set var="buyer_addr" value="${requestScope.buyer_addr}" />
+<c:set var="buyer_postcode" value="${requestScope.buyer_postcode}" />
     <!-- 우편주소 api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/static/js/find-address.min.js"></script>
 	<!-- 우편주소 api -->
 	
 	<script type="text/javascript">
+	$(function( ){
+        $(".pop-btn").click(function(){
+            window.open("popup",  "popupNo1", "width=460, height=500")        
+        });
+    });
     $(function(){
 		
-        //주소 
+        //주소api
         $(".address-btn").click(function(){
                    
             new daum.Postcode({ 
@@ -61,6 +75,36 @@
     });
     </script>
     
+    <script>
+   		<script src="https://cdn.iamport.kr/v1/iamport.js">
+   	</script>
+   	<script>
+    	const IMP = window.IMP; // 생략 가능
+    	IMP.init("imp07065242"); // 예: imp00000000a
+	    function requestPay() {
+	        IMP.request_pay({
+	          pg: "kakaopay",
+	          pay_method: "kakopay",
+	          merchant_uid: "ORD20180131-0000011",   // 주문번호
+	          name: "노르웨이 회전 의자",         //상품명
+	          amount: 64900,                         // 가격
+	          buyer_email: "gildong@gmail.com",    //구매자 이메일
+	          buyer_name: "홍길동",                 //구매자 이름
+	          buyer_tel: "010-4242-4242",                //구매자 번호
+	          buyer_addr: "서울특별시 강남구 신사동",           //구매자 주소
+	          buyer_postcode: "01181"                   //구매자 우편번호
+	        }, function (rsp) { // callback함수
+	          if (rsp.success) {
+	        	  if (rsp.success) {
+	                    console.log(rsp);
+	          } else {
+	            // 결제 실패 시 로직
+	        	  console.log(rsp);
+	          }
+	        });
+	      }
+   	</script>
+   
     
 </head>
 <body test>
@@ -73,8 +117,9 @@
                 <div class="row flex">
                     	<img src="https://picsum.photos/100/100" class="pe-20">
             			<c:forEach var="productInfo" items="${productInfo}" varStatus="status">
-                			<input hidden type="number" name="productNo" value="${productInfo.productNo}">
-							<input hidden type="number" name="productPrice" value="${productInfo.productPrice}">
+                			<input  type="hidden" name="productNo" value="${productInfo.productNo}">
+							<input  type="hidden" name="productPrice" value="${productInfo.productPrice}">
+			           		<input  type="hidden" name="productCount" value="${Count}">
 						
 										
 							<label>상품이름: ${productInfo.productName}</label>
@@ -82,7 +127,6 @@
 							<label>상품가격: ${productInfo.productPrice}</label>
 			           	</c:forEach>
 			           	<c:set var="Count" value="${productCount}" scope="application" />
-			           	<input hidden type="number" name="productCount" value="${Count}">
 						<label>상품수량:${Count}</label>
 						
 						
@@ -90,6 +134,7 @@
                 <div class="row left">
                    	<div class="flex"> 
                    	<h2 class="w-80">배송지</h2>
+                   	<button class="pop-btn" type="button">버튼</button>
                    	 주문자 정보 가져오기<input type="checkbox" class="post-check w-10"> </div> 
                     <div class="row">
                         <p>받는사람</p>
@@ -162,7 +207,7 @@
                     </div>
     
                     <div>
-                        <button class="form-btn positive large w-100" type="submit" >결제하기</button>
+                        <button class="form-btn positive large w-100 " type="submit" >결제하기</button>
                     </div>
                 </div>
             </div>

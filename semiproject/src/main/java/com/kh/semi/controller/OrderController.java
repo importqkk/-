@@ -1,5 +1,9 @@
 package com.kh.semi.controller;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.CartDao;
@@ -84,18 +89,19 @@ public class OrderController {
 		}
 	
 	@PostMapping("/buy")
-	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto Dto, HttpSession session){
+	public String buy(@ModelAttribute OrderDto orderDto,@ModelAttribute OrderProductDto Dto, HttpSession session,Model model){
 		//회원 아이디넣고
 		String memberId=(String)session.getAttribute("memberId");
 		//주문번호와 주문목록 생성
 		orderDto.setMemberId(memberId);
 		orderDao.insertOrder(orderDto);
 		
-		
+		System.out.println(Dto);
 		//상품 주문 실행
 		
 		//방금 주문한 번호를 불러오고
 		int no=orderDao.orderNo(memberId);
+
 		//장바구니에서 주문시 카트 리스트내에있는 정보들을 가져와서 insert
 		if(Dto.getProductNo()==0) {
 			List<CartProductInfoDto> list = cartProductInfoDao.cartItemInfo(memberId);
@@ -107,10 +113,14 @@ public class OrderController {
 				Dto.setProductPrice(Info.getProductPrice());
 				orderProductDao.InsertOrderProduct(Dto);
 				
+				productDao.increaseSellCount(Dto.getProductCount(), Dto.getProductNo()); //상품판매수량 +
+				productDao.decreaseStock(Dto.getProductCount(), Dto.getProductNo()); //상품재고 -
+
 				
-//				productDao.increaseSellCount(Info.getProductCount(), Info.getProductNo()); //상품판매수량 +
-//				productDao.decreaseStock(Info.getProductCount(), Info.getProductNo()); //상품재고 -
+				
 			}
+			model.addAttribute("orderInfo",orderDto);
+			model.addAttribute("orderProduct",Dto);
 			//카트삭제
 			cartDao.cartDeleteAll(memberId);
 			return "redirect:buyFinish";
@@ -118,17 +128,14 @@ public class OrderController {
 		else  {
 			Dto.setOrderNo(no);
 			orderProductDao.InsertOrderProduct(Dto);
-			System.out.println(Dto.getOrderNo());
-			System.out.println(Dto.getProductNo());
-			System.out.println(Dto.getProductPrice());
 			
-//			productDao.increaseSellCount(Dto.getProductCount(), Dto.getProductNo()); //상품판매수량 +
-//			productDao.decreaseStock(Dto.getProductCount(), Dto.getProductNo()); //상품재고 -
+			productDao.increaseSellCount(Dto.getProductCount(), Dto.getProductNo()); //상품판매수량 +
+			productDao.decreaseStock(Dto.getProductCount(), Dto.getProductNo()); //상품재고 -
 			return "redirect:buyFinish";
 
 		}
 		
-//		return "redirect:buyFinish";
+
 		
 		
 	}
@@ -142,5 +149,18 @@ public class OrderController {
 		 return "/WEB-INF/views/order/buyFinish.jsp";
 		 
 	 }
+	 
 	
+	
+	 
+	 @GetMapping("/popup")
+	 public String popup() {
+		 return "/WEB-INF/views/order/pop.jsp";
+	 }
+	 
+	 
+	 @GetMapping("/popInsert")
+	 public String popInsert() {
+		 return "/WEB-INF/views/order/popInsert.jsp";
+	 }
 }
