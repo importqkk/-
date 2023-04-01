@@ -10,6 +10,9 @@
 		height: 3.1em;
 		width: 7.2em;
 	}
+	.qty-selector {
+		width: 100px;
+	}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -52,21 +55,21 @@
 	        <div class="flex">
 	        	<c:choose>
 	        		<c:when test="${vo.column == 'product_brand'}">
-	        			<select name="column" class="form-input small me-5">
+	        			<select name="column" class="form-input small me-5 qty-selector">
 			            	<option value="product_name">상품명</option>
 			                <option value="product_no">품번</option>
 			                <option value="product_brand" selected>브랜드</option>
 			            </select>
 		            </c:when>
 		            <c:when test="${vo.column == 'product_no'}">
-			            <select name="column" class="form-input small me-5">
+			            <select name="column" class="form-input small me-5 qty-selector">
 			            	<option value="product_name">상품명</option>
 			                <option value="product_no" selected>품번</option>
 			                <option value="product_brand">브랜드</option>
 			            </select>
 		            </c:when>
 		            <c:otherwise>
-			            <select name="column" class="form-input small me-5">
+			            <select name="column" class="form-input small me-5 qty-selector">
 			            	<option value="product_name" selected>상품명</option>
 			                <option value="product_no">품번</option>
 			                <option value="product_brand">브랜드</option>
@@ -93,16 +96,16 @@
 	        		<table class="table table-qna mb-30">
 			            <thead>
 			                <tr>
-			                    <th>
+			                    <th class="w-5">
 			                        <input type="checkbox" class="check-all">
 			                    </th>
-			                    <th>품번</th>
-			                    <th class="w-20">상품명</th>
+			                    <th class="w-5">품번</th>
+			                    <th class="w-25">상품명</th>
 			                    <th>브랜드</th>
 			                    <th>가격</th>
 			                    <th>재고</th>
 			                    <th>판매량</th>
-			                    <th class="w-15">입고일</th>
+			                    <th>입고일</th>
 			                    <th class="w-10">관리</th>
 			                </tr>
 			            </thead>
@@ -112,23 +115,23 @@
 				                    <td>
 				                        <input type="checkbox" class="check-unit" name="productNo" value="${productDto.productNo}">
 				                    </td>
-				                    <td>${productDto.productNo}</td>
+				                    <td title="${productDto.productNo}">${productDto.productNo}</td>
 				                    <td>
-				                        <a class="link" href="/product/detail?productNo=${productDto.productNo}">
+				                        <a class="link" href="/product/detail?productNo=${productDto.productNo}" title="${productDto.productName}">
 				                            ${productDto.productName}
 				                        </a>
 				                    </td>
-				                    <td>${productDto.productBrand}</td>
-				                    <td class="right">
+				                    <td title="${productDto.productBrand}">${productDto.productBrand}</td>
+				                    <td class="right" title="${productDto.productPrice}">
 				                    	<fmt:formatNumber pattern="#,##0" value="${productDto.productPrice}"></fmt:formatNumber>
 				                    </td>
-				                    <td class="right">
+				                    <td class="right" title="${productDto.productStock}">
 				                    	<fmt:formatNumber pattern="#,##0" value="${productDto.productStock}"></fmt:formatNumber>
 				                    </td>
-				                    <td class="right">
+				                    <td class="right" title="${productDto.productSellCount}">
 				                    	<fmt:formatNumber pattern="#,##0" value="${productDto.productSellCount}"></fmt:formatNumber>
 				                    </td>
-				                    <td>${productDto.productJoin}</td>
+				                    <td title="${productDto.productJoin}">${productDto.productJoin}</td>
 				                    <td>
 				                        <a class="link" href="/admin/productManage/edit?productNo=${productDto.productNo}">수정 </a>
 				                        <span>| </span>
