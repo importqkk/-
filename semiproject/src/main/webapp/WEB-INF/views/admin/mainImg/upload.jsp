@@ -4,9 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<!-- 메인 이미지 정보 유효성 검사 -->
+<script src="/static/js/main-img-checker.js"></script>
 <style>
-	
+	label, .invalid-message {
+		padding-left: 20px
+	}
 </style>
+
 <script type="text/javascript">
 	$(function() {
 	    $(".upload-btn").click(function() {
@@ -29,17 +34,19 @@
 </script>
 
 <div class="container-1000">
-	<form action="upload" method="post" enctype="multipart/form-data">
+	<form action="upload" method="post" enctype="multipart/form-data" class="upload-form" autocomplete="off">
 	    <div class="row pt-30 pb-20">
 	        <h1>메인 이미지 등록</h1>
 	    </div>
 	    <div class="row">
-	        <label class="ps-20">제목</label>
+	        <label>제목</label>
 	        <input type="text" class="form-input medium w-100" name="mainTitle">
+	        <div class="invalid-message">제목을 1자 이상, 100자 이하로 입력해주세요.</div>
 	    </div>
 	    <div class="row">
-	        <label class="ps-20">파일</label>
+	        <label>파일</label>
 	        <input type="file" class="form-input medium w-100" name="img" accept=".png, .gif, .jpg">
+	    	<div class="invalid-message">등록할 수 있는 용량을 초과하는 파일입니다.</div>
 	    </div>
 	    <div class="row">
 	        <button type="submit" class="form-btn medium positive w-100 upload-btn">등록하기</button>
