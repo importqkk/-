@@ -239,6 +239,7 @@
 .pt-5 {padding-top: 5px;}
 .pt-10 {padding-top: 10px;}
 .pt-20 {padding-top: 20px;}
+.pt-25 {padding-top: 25px;}
 .pt-30 {padding-top: 30px;}
 .pt-40 {padding-top: 40px;}
 .pt-50 {padding-top: 50px;}
@@ -556,6 +557,9 @@ input[type="checkbox"] {
     - 장바구니에서 쓰이는 표
         - 메인클래스 table을 붙이고 그 뒤에 서브클래스 table-cart를 지정해주시면 됩니다.
 */
+.table {
+	table-layout: fixed;
+}
 .table > thead > tr > th,
 .table > thead > tr > td,
 .table > tbody > tr > th,
@@ -563,6 +567,9 @@ input[type="checkbox"] {
 .table > tfoot > tr > th,
 .table > tfoot > tr > td {
     padding: 0.5em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .table.table-qna > thead {
     border-bottom: 1.5px solid #4e4d4b;
@@ -708,4 +715,42 @@ input[type="checkbox"] {
 .qty-stepper-small > .plus:hover:not(.disabled) {
     background-color: #f8f8ff;
     cursor: pointer;
+}
+.qty-selector {
+	    padding-top: 5px;
+	    padding-bottom: 5px;
+	    text-align: center;
+	    border: 2px solid #776bff;
+	    border-radius: 100px;
+	    outline: none;
+	    appearance: none;
+	    background:url('/static/image/down-arrow.png') no-repeat 88% 55%/11px auto;
+	}
+
+/*
+    통과, 오류메세지 스타일
+*/
+.valid-message {
+    color: #776bff;
+    display: none;
+    font-size: small;
+}
+.valid ~ .valid-message {
+    display: block;
+}
+.invalid-message,
+.invalid-message1,
+.invalid-message2 {
+    color: #FF4848;
+    display: none;
+    font-size: small;
+}
+.invalid ~ .invalid-message {
+    display: block;
+}
+.invalid1 ~ .invalid-message1 {
+    display: block;
+}
+.invalid2 ~ .invalid-message2 {
+    display: block;
 }
