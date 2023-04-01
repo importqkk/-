@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor @Builder
 public class DetailImgDto {
 
-	private int productNo, imgNo;
+	private int productNo;
+	private Integer imgNo;
 	
 }
