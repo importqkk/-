@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 public class ProductImgDto {
 
 	private int productNo;
-	private int imgNo;
+	private Integer imgNo;
 	
 }
