@@ -60,10 +60,18 @@
         .menu-item:hover {
             background-color: #f8f8ff;
         }
+        .fa-wrench,
         .fa-cart-shopping,
-        .fa-user {
+        .fa-user,
+        .fa-right-to-bracket {
             margin-top: 12px;
-            font-size: 30px;
+            font-size: 25px;
+            text-align: center;
+        }
+        .header-menu-text {
+        	font-size: 0.67em;
+        	display: block;
+        	text-align: center;
         }
         .social {
             vertical-align: middle;
@@ -194,7 +202,7 @@
                             </h1>
                         </div>
                     </div>
-                    <div class="center w-60">
+                    <div class="center w-55">
                         <div class="search-box">
                             <input class="search-input w-100">
                             <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -203,13 +211,49 @@
                     <!-- <div class="center w-50">
                         <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
                     </div> -->
-                    <div class="right w-15">
-                        <a class="link" href="/cart/main">
-                            <i class="fa-solid fa-cart-shopping c-p100 pe-30"></i>
-                        </a>
-                        <a class="link" href="#">
-                            <i class="fa-solid fa-user c-p100"></i>
-                        </a>
+                    <div class="right w-20 flex">
+                    	<%-- <c:if test="${sessionScope.memberLevel == 'admin'}"> --%>
+                    		<div class="me-15 center">
+                    			<a class="link" href="/admin" title="관리자 메인">
+	                            	<i class="fa-solid fa-wrench c-p100"></i>
+	                            	<span class="header-menu-text">관리</span>
+	                        	</a>
+                    		</div>
+                        <%-- </c:if> --%>
+                        <%-- <c:if test="${sessionScope.memberId != null}"> --%>
+	                        <div class="me-15 center">
+		                        <a class="link" href="/cart/main" title="장바구니">
+		                            <i class="fa-solid fa-cart-shopping c-p100"></i>
+		                            <span class="header-menu-text">장바구니</span>
+		                        </a>
+	                        </div>
+	                        <!-- <div class="me-15 center">
+		                        <a class="link" href="/member/join" title="마이페이지">
+		                            <i class="fa-solid fa-user c-p100"></i>
+		                            <span class="header-menu-text">마이페이지</span>
+		                        </a>
+	                        </div> -->
+	                        <!-- <div class="center">
+		                        <a class="link" href="/member/login" title="로그아웃">
+		                            <i class="fa-solid fa-right-from-bracket c-p100"></i>
+		                            <span class="header-menu-text">로그아웃</span>
+		                        </a>
+	                        </div> -->
+                        <%-- </c:if> --%>
+                        <%-- <c:if test="${sessionScope.memberId == null}"> --%>
+	                        <div class="me-15 center">
+		                        <a class="link" href="/member/join" title="회원가입">
+		                            <i class="fa-solid fa-user c-p100"></i>
+		                            <span class="header-menu-text">회원가입</span>
+		                        </a>
+	                        </div>
+	                        <div class="center">
+		                        <a class="link" href="/member/login" title="로그인">
+		                            <i class="fa-solid fa-right-to-bracket c-p100"></i>
+		                            <span class="header-menu-text center">로그인</span>
+		                        </a>
+	                        </div>
+                        <%-- </c:if> --%>
                     </div>
                 </div>
             </div>
