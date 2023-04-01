@@ -2,9 +2,7 @@ package com.kh.semi.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-
 import javax.annotation.PostConstruct;
-
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -13,17 +11,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.kh.semi.configuration.FileUploadProperties;
 import com.kh.semi.dao.ImgDao;
 import com.kh.semi.dto.ImgDto;
-import com.kh.semi.dto.ProductDto;
 
 //@CrossOrigin
 @RestController
