@@ -51,6 +51,12 @@ public class AdminController {
 		dir = new File(fileUploadProperties.getPath());
 	}
 	
+	// 관리자 메인
+	@GetMapping
+	public String adminMain() {
+		return "/WEB-INF/views/admin/main.jsp";
+	}
+	
 	// 상품 등록
 	@GetMapping("/productManage/register")
 	public String register() {
