@@ -25,9 +25,12 @@ public class ProductInfoDao {
 						.productPrice(rs.getInt("product_price"))
 						.productSellCount(rs.getInt("product_sell_count"))
 						.productJoin(rs.getDate("product_join"))
+						.productStock(rs.getInt("product_stock"))
 						.reivewAVG(rs.getFloat("avg"))
 						.reivewCNT(rs.getInt("cnt"))
-						.imgNo(rs.getInt("img_no"))
+						.productImgNo(rs.getInt("product_img_no"))
+						.tagNo(rs.getInt("tag_no"))
+						.detailImgNo(rs.getInt("detail_img_no"))
 					.build();
 		}
 	};
@@ -49,6 +52,20 @@ public class ProductInfoDao {
 	public List<ProductInfoDto> bestList() {
 		String sql = "select * from product_info order by product_sell_count desc, product_no desc";
 		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	// 전체 상품 불러오기
+	public List<ProductInfoDto> productList() {
+		String sql = "select * from product_info order by product_stock desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	// 이미지 조회
+	public ProductInfoDto selectOneForImg(int productNo) {
+		String sql = "select * from product_info where product_no = ?";
+		Object[] param = {productNo};
+		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 }

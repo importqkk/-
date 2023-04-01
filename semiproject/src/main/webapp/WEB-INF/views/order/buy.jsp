@@ -114,9 +114,10 @@
         <div class="flex">
             <div class=" w-70 pt-20">
                 <p><h2>주문상품</h2></p>
+         <c:if test="${not empty productInfo}">
+   			<c:forEach var="productInfo" items="${productInfo}" varStatus="status">
                 <div class="row flex">
                     	<img src="https://picsum.photos/100/100" class="pe-20">
-            			<c:forEach var="productInfo" items="${productInfo}" varStatus="status">
                 			<input  type="hidden" name="productNo" value="${productInfo.productNo}">
 							<input  type="hidden" name="productPrice" value="${productInfo.productPrice}">
 			           		<input  type="hidden" name="productCount" value="${Count}">
@@ -125,12 +126,26 @@
 							<label>상품이름: ${productInfo.productName}</label>
 							<label>브랜드명: ${productInfo.productBrand}</label>		
 							<label>상품가격: ${productInfo.productPrice}</label>
-			           	</c:forEach>
 			           	<c:set var="Count" value="${productCount}" scope="application" />
 						<label>상품수량:${Count}</label>
 						
 						
                 </div>
+           	</c:forEach>
+         </c:if>
+         <c:if test="${not empty cartinfo}">
+            <c:forEach var="cartinfo" items="${cartinfo}">
+                <div class="row flex">
+                    <img src="https://picsum.photos/100/100" class="pe-20">
+                								
+						<label>상품이름: ${cartinfo.productName}</label>
+						<label>브랜드명: ${cartinfo.productBrand}</label>		
+						<label>상품가격: ${cartinfo.productPrice}</label>
+						<label>상품수량: ${cartinfo.productCount}</label>
+						
+                </div>
+               </c:forEach>
+         </c:if>
                 <div class="row left">
                    	<div class="flex"> 
                    	<h2 class="w-80">배송지</h2>
@@ -163,7 +178,7 @@
 
                     <div class="row">
                         <p>배송요청사항</p>
-                        <input type="text" class="form-input light medium w-100" id="orderRequest">
+                        <input type="text" class="form-input light medium w-100" name="orderRequest">
                     </div>
                 </div>
                 </div>

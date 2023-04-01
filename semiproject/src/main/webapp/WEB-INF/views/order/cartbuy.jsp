@@ -70,6 +70,7 @@ $(function(){
         <div class="flex">
             <div class=" w-70 pt-20">
                 <p><h2>주문상품</h2></p>
+         <c:if test="${cartinfo}">
             <c:forEach var="cartinfo" items="${cartinfo}">
                 <div class="row flex">
                     <img src="https://picsum.photos/100/100" class="pe-20">
@@ -81,7 +82,7 @@ $(function(){
 						
                 </div>
                </c:forEach>
-         
+         </c:if>
                 <div class="row left">
          
                    	<div class="flex"> 

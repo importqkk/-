@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+-<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<meta charset="EUC-KR">
 <title>Insert title here</title>
 <style>
         
@@ -22,7 +23,7 @@
         $(function( ){
             $("#request").on("change", function(){
                 var selectedValue = $(this).val();
-                // ¼±ÅÃµÈ °ªÀÌ "etc"ÀÎ °æ¿ì, ÅØ½ºÆ® ¿µ¿ªÀ» ³ªÅ¸³À´Ï´Ù.
+                // ì„ íƒëœ ê°’ì´ "etc"ì¸ ê²½ìš°, í…ìŠ¤íŠ¸ ì˜ì—­ì„ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤.
                 if(selectedValue === "etc"){
                     $("#etc-text").show();
                 }else{
@@ -37,39 +38,42 @@
     <div>
         <div>
             <div>
-                <h2>½Å±Ô¹è¼ÛÁö</h2>
+                <h2>ì‹ ê·œë°°ì†¡ì§€</h2>
               </div>
         </div>
+       <form action="/order/popInsert" method="post">
         <div>
-            <div><label>¼ö·ÉÀÎ</label> <input type="text"></div>
+            <div><label>ìˆ˜ë ¹ì¸</label> <input type="text" name="memberName"></div>
             <div>
-                <label>ÈÞ´ëÀüÈ­</label> <input type="text">
+                <label>íœ´ëŒ€ì „í™”</label> <input type="text" name="memberPhone">
             </div>
 
             <div>
-                <label>ÁÖ¼Ò</label>
-                <input type="text"> <button>°Ë»ö</button>
+                <label>ì£¼ì†Œ</label>
+                <input type="text" name="memberPost"> <button>ê²€ìƒ‰</button>
             </div>
             <div>
-                <input type="text">
+                <input type="text" name="memberBasicAddr">
             </div>
             <div>
-                <input type="text">
+                <input type="text" name="memberDetailAddr">
             </div>
 
             <div>
-                ¿äÃ»»çÇ×
-                <select name="request" id="request">
-                    <option value="ºÎÀç ½Ã °æºñ½Ç¿¡ ¸Ã°ÜÁÖ¼¼¿ä">ºÎÀç ½Ã °æºñ½Ç¿¡ ¸Ã°ÜÁÖ¼¼¿ä</option>
-                    <option value="ºÎÀç ½Ã ÅÃ¹èÇÔ¿¡ ³Ö¾îÁÖ¼¼¿ä">ºÎÀç ½Ã ÅÃ¹èÇÔ¿¡ ³Ö¾îÁÖ¼¼¿ä</option>
-                    <option value="ºÎÀç ½Ã Áý ¾Õ¿¡ ³öÁÖ¼¼¿ä">ºÎÀç ½Ã Áý ¾Õ¿¡ ³öÁÖ¼¼¿ä</option>
-                    <option value="¹è¼Û Àü ¿¬¶ô ¹Ù¶ø´Ï´Ù">¹è¼Û Àü ¿¬¶ô ¹Ù¶ø´Ï´Ù</option>
-                    <option value="ÆÄ¼ÕÀÇ À§ÇèÀÌ ÀÖ´Â »óÇ°ÀÔ´Ï´Ù. ¹è¼Û ½Ã ÁÖÀÇÇØ ÁÖ¼¼¿ä.">ÆÄ¼ÕÀÇ À§ÇèÀÌ ÀÖ´Â »óÇ°ÀÔ´Ï´Ù. ¹è¼Û ½Ã ÁÖÀÇÇØ ÁÖ¼¼¿ä.</option>
-                    <option value="etc">Á÷Á¢ÀÔ·Â</option>
+                ìš”ì²­ì‚¬í•­
+                <select name="orderRequest" id="orderRequest">
+                    <option value="ë¶€ìž¬ ì‹œ ê²½ë¹„ì‹¤ì— ë§¡ê²¨ì£¼ì„¸ìš”">ë¶€ìž¬ ì‹œ ê²½ë¹„ì‹¤ì— ë§¡ê²¨ì£¼ì„¸ìš”</option>
+                    <option value="ë¶€ìž¬ ì‹œ íƒë°°í•¨ì— ë„£ì–´ì£¼ì„¸ìš”">ë¶€ìž¬ ì‹œ íƒë°°í•¨ì— ë„£ì–´ì£¼ì„¸ìš”</option>
+                    <option value="ë¶€ìž¬ ì‹œ ì§‘ ì•žì— ë†”ì£¼ì„¸ìš”">ë¶€ìž¬ ì‹œ ì§‘ ì•žì— ë†”ì£¼ì„¸ìš”</option>
+                    <option value="ë°°ì†¡ ì „ ì—°ë½ ë°”ëžë‹ˆë‹¤">ë°°ì†¡ ì „ ì—°ë½ ë°”ëžë‹ˆë‹¤</option>
+                    <option value="íŒŒì†ì˜ ìœ„í—˜ì´ ìžˆëŠ” ìƒí’ˆìž…ë‹ˆë‹¤. ë°°ì†¡ ì‹œ ì£¼ì˜í•´ ì£¼ì„¸ìš”.">íŒŒì†ì˜ ìœ„í—˜ì´ ìžˆëŠ” ìƒí’ˆìž…ë‹ˆë‹¤. ë°°ì†¡ ì‹œ ì£¼ì˜í•´ ì£¼ì„¸ìš”.</option>
+                    <option value="etc">ì§ì ‘ìž…ë ¥</option>
                     <textarea name="etc-text" id="etc-text" cols="57" rows="5" style="display:none"></textarea>
                 </select>
             </div>
+            <button class="btn" type="submit">ë“±ë¡í•˜ê¸°</button>
         </div>
+        </form>
     </div>
 </body>
 </html>

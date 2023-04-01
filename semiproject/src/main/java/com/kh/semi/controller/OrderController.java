@@ -1,17 +1,13 @@
 package com.kh.semi.controller;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.convert.DtoInstantiatingConverter;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.CartDao;
 import com.kh.semi.dao.CartProductInfoDao;
@@ -31,6 +25,7 @@ import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ProductInfoDao;
 import com.kh.semi.dto.CartProductInfoDto;
 import com.kh.semi.dto.MemberDto;
+import com.kh.semi.dto.MemberInfoDto;
 import com.kh.semi.dto.OrderDto;
 import com.kh.semi.dto.OrderProductDto;
 
@@ -54,38 +49,33 @@ public class OrderController {
 	private OrderProductDao orderProductDao;
 
 
-	//장바구니에서 주문페이지
-	@GetMapping("/cartbuy")
-	public String cartbuy(Model model,HttpSession session,@ModelAttribute MemberDto memberDto) {
-		//멤버아이디 세팅
-		String memberId=(String)session.getAttribute("memberId");
-		
-		//주소불러옴
-		model.addAttribute("memberInfo",memberInfoDao.memberinfo(memberId));
-		//장바구니 리스트 불러옴
-		model.addAttribute("cartinfo",cartProductInfoDao.cartItemInfo(memberId));
-		
 
-
-		
-		return "/WEB-INF/views/order/cartbuy.jsp";
-	}
 	
-	//상세페이지에서 주문페이지
-		@GetMapping("/detailbuy")
-		public String detailbuy(Model model,HttpSession session,@RequestParam int productNo,@RequestParam int productCount) {
-			System.out.println(productCount);
-			//멤버아이디
+	//주문페이지
+		@GetMapping("/buy")
+		public String buy(HttpSession session, Model model,@RequestParam(required=false) Integer productNo,@RequestParam(required=false) Integer productCount) {
 			String memberId=(String)session.getAttribute("memberId");
+			//카트에서 오면 
+			if(productNo==null || productCount==null) {
+				
+				model.addAttribute("cartinfo",cartProductInfoDao.cartItemInfo(memberId));
+				return "/WEB-INF/views/order/buy.jsp";
+
+			//상세에서 오면
+			}else {
+				int no=productNo.intValue();
+				int Count=productCount.intValue();
+				model.addAttribute("productInfo",productInfoDao.selectOne(no));
+				model.addAttribute("Count",Count);
+				return "/WEB-INF/views/order/buy.jsp";
 			
-			//model로 상품정보 보냄
-			model.addAttribute("productInfo",productInfoDao.selectOne(productNo));
-			model.addAttribute("Count",productCount);
+			}
 			
 			
+			
+
 	
 			
-			return "/WEB-INF/views/order/detailbuy.jsp";
 		}
 	
 	@PostMapping("/buy")
@@ -96,7 +86,7 @@ public class OrderController {
 		orderDto.setMemberId(memberId);
 		orderDao.insertOrder(orderDto);
 		
-		System.out.println(Dto);
+		
 		//상품 주문 실행
 		
 		//방금 주문한 번호를 불러오고
@@ -149,18 +139,42 @@ public class OrderController {
 		 return "/WEB-INF/views/order/buyFinish.jsp";
 		 
 	 }
-	 
-	
 	
 	 
+	 //팝업창 실패 ..?
+	 
+	 
+	 //기본주소지- 멤버회원 테이블내에있는 주소지임
+	 //주소정보 - 회원이 저장한 모든주소
+	
+	 //배송지 보여주는 팝업
 	 @GetMapping("/popup")
-	 public String popup() {
+	 public String popup(HttpSession session,Model model) {
+		 String memberId=(String)session.getAttribute("memberId");
+		 System.out.println(memberId);
+		 //기본주소지를 보여줌
+
+//		 
+//		 //회원 저장한 모든주소를 보여줌
+
+		 model.addAttribute("allInfo",memberInfoDao.addrInfo(memberId)); 
 		 return "/WEB-INF/views/order/pop.jsp";
 	 }
 	 
 	 
+	 //신규 배송지 넣는 팝업 
 	 @GetMapping("/popInsert")
 	 public String popInsert() {
+		 
 		 return "/WEB-INF/views/order/popInsert.jsp";
+	 }
+	 
+	 @PostMapping("/popInsert")
+	 public String popInsert(HttpSession session,Model model,@ModelAttribute MemberInfoDto memberInfoDto) {
+		 String memberId=(String)session.getAttribute("memberId");
+		 //아이디 배치후 주소추가 실행
+		 memberInfoDto.setMemberId(memberId);
+		 memberInfoDao.addinsert(memberInfoDto);
+		 return "redirect:popup";
 	 }
 }
