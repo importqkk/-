@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<!-- 상품 수량 수정 비동기처리 스크립트 -->
+<script src="/static/js/cart-product-count-process.js"></script>
 		
 <style>
     h1, h2, h3, h4, span {
@@ -17,69 +19,12 @@
     .check-btn, .fa-xmark {
         cursor: pointer;
     }
-    .qty-selector {
-	    padding-top: 5px;
-	    padding-bottom: 5px;
-	    text-align: center;
-	    border: 2px solid #776bff;
-	    border-radius: 100px;
-	    outline: none;
-	    appearance: none;
-	    background:url('/static/image/down-arrow.png') no-repeat 88% 55%/11px auto;
-	}
 </style>
 <script type="text/javascript">
-    $(function() {
-        // 아무 상품도 선택하지 않고 선택상품 결제 버튼 누르면 경고창 뜨게 하기
-        $(".qty-selector").on("input", function() {
-        	var quantity = $(this).val();
-        	if(quantity > 10) {
-        		alert ("최소 1개, 최대 10개까지 구매할 수 있습니다.");
-        		$(".order-btn").click(function() {
-        			alert ("상품을 1개 이상, 10개 이하로 담아주세요.");
-        			return false;
-        		});
-        	}
-        })
-        
-        $(".qty-selector").on("input", function() {
-        	// 수량
-        	var productCount = $(this).val();
-        	// 상품번호
-        	var productNo = $(this).parent().prev().prev().find(".productNo").text();
-        	// 상품 가격
-        	var productPrice = $(this).parent().prev().find(".productPrice").text();
-        	// 수량선택창
-        	var qtySelector = $(this);
-        	// 장바구니 하나의 상품의 개당 가격 * 개수
-            var productValue = productCount * productPrice;
-        	$.ajax({
-        		url:"/rest/cart/",
-        		method:"patch",
-        		data: {
-        			productNo: productNo,
-        			productCount: productCount,
-        			productPrice: productPrice
-        		},
-        		success: function(response) {
-        			var totalProductPrice = 0;
-        			for(var i=0; i<response.length; i++) {
-        				totalProductPrice += response[i].productCount * response[i].productPrice;
-        			}
-        			$(".total-product-price").text(totalProductPrice.toLocaleString());
-        			$(".final-price").text((totalProductPrice+3000).toLocaleString());
-        		},
-        		error: function() {
-					alert("시스템 오류가 발생했습니다. 잠시 후 다시 시도해주세요.\n같은 문제가 지속적으로 발생할 경우 QnA 게시판에 문의 남겨주세요.")
-				}
-        	})
-        })
-        
-    });
+
 </script>
 
-    <div class="container-1000 mt-40">
-
+    <div class="container-1000">
         <div class="row-large flex">
             <h1 class="me-15">장바구니</h1>
             <h1 class="c-p100">${cartCnt}</h1> <%-- 상품 총 수량(상품별 개수X, 상품 종류 개수O) --%>
@@ -104,6 +49,7 @@
 	            <div class="w-100">
 	                <div class="row-medium flex">
 	                	<span hidden class="productNo">${cartProductInfoDto.productNo}</span> <%-- 상품번호(숨김) --%>
+	                	<span hidden class="productStock">${cartProductInfoDto.productStock}</span> <%-- 재고(숨김) --%>
 	                    <a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
 	                    	<h4 class="me-5 c-b80" style="display: inline;">[${cartProductInfoDto.productBrand}]</h4>	<%-- 브랜드명 --%>
 	                    	<span class="c-b80">${cartProductInfoDto.productName}</span>	<%-- 상품명 --%>
@@ -117,132 +63,553 @@
 	                    </h4>
 	                </div>
 	                <!------------ 수량조절 ------------>
-	                <div>
-	                    <select class="w-10 qty-selector">
-	                    	<c:choose>
-	                    		<c:when test="${cartProductInfoDto.productCount == '1'}">
-			                        <option selected>1</option>
-			                        <option>2</option>
-			                        <option>3</option>
-			                        <option>4</option>
-			                        <option>5</option>
-			                        <option>6</option>
-			                        <option>7</option>
-			                        <option>8</option>
-			                        <option>9</option>
-			                        <option>10</option>
-			                    </c:when>
-			                    <c:when test="${cartProductInfoDto.productCount == '2'}">
-			                        <option>1</option>
-			                        <option selected>2</option>
-			                        <option>3</option>
-			                        <option>4</option>
-			                        <option>5</option>
-			                        <option>6</option>
-			                        <option>7</option>
-			                        <option>8</option>
-			                        <option>9</option>
-			                        <option>10</option>
-			                    </c:when>
-			                    <c:when test="${cartProductInfoDto.productCount == '3'}">
-			                        <option>1</option>
-			                        <option>2</option>
-			                        <option selected>3</option>
-			                        <option>4</option>
-			                        <option>5</option>
-			                        <option>6</option>
-			                        <option>7</option>
-			                        <option>8</option>
-			                        <option>9</option>
-			                        <option>10</option>
-			                    </c:when>
-			                    <c:when test="${cartProductInfoDto.productCount == '4'}">
-			                        <option>1</option>
-			                        <option>2</option>
-			                        <option>3</option>
-			                        <option selected>4</option>
-			                        <option>5</option>
-			                        <option>6</option>
-			                        <option>7</option>
-			                        <option>8</option>
-			                        <option>9</option>
-			                        <option>10</option>
-			                    </c:when>
-			                    <c:when test="${cartProductInfoDto.productCount == '5'}">
-			                        <option>1</option>
-			                        <option>2</option>
-			                        <option>3</option>
-			                        <option>4</option>
-			                        <option selected>5</option>
-			                        <option>6</option>
-			                        <option>7</option>
-			                        <option>8</option>
-			                        <option>9</option>
-			                        <option>10</option>
-			                    </c:when>
-			                    <c:when test="${cartProductInfoDto.productCount == '6'}">
-			                        <option>1</option>
-			                        <option>2</option>
-			                        <option>3</option>
-			                        <option>4</option>
-			                        <option>5</option>
-			                        <option selected>6</option>
-			                        <option>7</option>
-			                        <option>8</option>
-			                        <option>9</option>
-			                        <option>10</option>
-			                    </c:when>
-			                    <c:when test="${cartProductInfoDto.productCount == '7'}">
-			                        <option>1</option>
-			                        <option>2</option>
-			                        <option>3</option>
-			                        <option>4</option>
-			                        <option>5</option>
-			                        <option>6</option>
-			                        <option selected>7</option>
-			                        <option>8</option>
-			                        <option>9</option>
-			                        <option>10</option>
-			                    </c:when>
-			                    <c:when test="${cartProductInfoDto.productCount == '8'}">
-			                        <option>1</option>
-			                        <option>2</option>
-			                        <option>3</option>
-			                        <option>4</option>
-			                        <option>5</option>
-			                        <option>6</option>
-			                        <option>7</option>
-			                        <option selected>8</option>
-			                        <option>9</option>
-			                        <option>10</option>
-			                    </c:when>
-			                    <c:when test="${cartProductInfoDto.productCount == '9'}">
-			                        <option>1</option>
-			                        <option>2</option>
-			                        <option>3</option>
-			                        <option>4</option>
-			                        <option>5</option>
-			                        <option>6</option>
-			                        <option>7</option>
-			                        <option>8</option>
-			                        <option selected>9</option>
-			                        <option>10</option>
-			                    </c:when>
-			                    <c:when test="${cartProductInfoDto.productCount == '10'}">
-			                    	<option>1</option>
-			                        <option>2</option>
-			                        <option>3</option>
-			                        <option>4</option>
-			                        <option>5</option>
-			                        <option>6</option>
-			                        <option>7</option>
-			                        <option>8</option>
-			                        <option>9</option>
-			                        <option selected>10</option>
-			                    </c:when>
-		                    </c:choose>
-	                    </select>
-	                </div>
+	                <c:choose>
+	                	<c:when test="${cartProductInfoDto.productStock <= 0}">
+	                		<h4 class="c-p100">품절된 상품입니다.</h4>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<div>
+			                    <select class="w-10 qty-selector">
+			                    	<c:choose>
+			                    		<c:when test="${cartProductInfoDto.productStock == 0}">
+			                    			<option selected>0</option>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock == 1}">
+			                    			<option selected>1</option>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock == 2}">
+			                    			<c:choose>
+			                    				<c:when test="${cartProductInfoDto.productCount == '1'}">
+			                    					<option selected>1</option>
+					                        		<option>2</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '2'}">
+			                    					<option>1</option>
+					                        		<option selected>2</option>
+			                    				</c:when>
+			                    			</c:choose>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock == 3}">
+			                    			<c:choose>
+			                    				<c:when test="${cartProductInfoDto.productCount == '1'}">
+			                    					<option selected>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '2'}">
+			                    					<option>1</option>
+					                        		<option selected>2</option>
+					                        		<option>3</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '3'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option selected>3</option>
+			                    				</c:when>
+			                    			</c:choose>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock == 4}">
+			                    			<c:choose>
+			                    				<c:when test="${cartProductInfoDto.productCount == '1'}">
+			                    					<option selected>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '2'}">
+			                    					<option>1</option>
+					                        		<option selected>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '3'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option selected>3</option>
+					                        		<option>4</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '4'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option selected>4</option>
+			                    				</c:when>
+			                    			</c:choose>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock == 5}">
+			                    			<c:choose>
+			                    				<c:when test="${cartProductInfoDto.productCount == '1'}">
+			                    					<option selected>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '2'}">
+			                    					<option>1</option>
+					                        		<option selected>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '3'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option selected>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '4'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option selected>4</option>
+					                        		<option>5</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '5'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option selected>5</option>
+			                    				</c:when>
+			                    			</c:choose>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock == 6}">
+			                    			<c:choose>
+			                    				<c:when test="${cartProductInfoDto.productCount == '1'}">
+			                    					<option selected>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '2'}">
+			                    					<option>1</option>
+					                        		<option selected>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '3'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option selected>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '4'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option selected>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '5'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option selected>5</option>
+					                        		<option>6</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '6'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option selected>6</option>
+			                    				</c:when>
+			                    			</c:choose>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock == 7}">
+			                    			<c:choose>
+			                    				<c:when test="${cartProductInfoDto.productCount == '1'}">
+			                    					<option selected>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '2'}">
+			                    					<option>1</option>
+					                        		<option selected>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '3'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option selected>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '4'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option selected>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '5'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option selected>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '6'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option selected>6</option>
+					                        		<option>7</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '7'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option selected>7</option>
+			                    				</c:when>
+			                    			</c:choose>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock == 8}">
+			                    			<c:choose>
+			                    				<c:when test="${cartProductInfoDto.productCount == '1'}">
+			                    					<option selected>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '2'}">
+			                    					<option>1</option>
+					                        		<option selected>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '3'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option selected>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '4'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option selected>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '5'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option selected>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '6'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option selected>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '7'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option selected>7</option>
+					                        		<option>8</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '8'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option selected>8</option>
+			                    				</c:when>
+			                    			</c:choose>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock == 9}">
+			                    			<c:choose>
+			                    				<c:when test="${cartProductInfoDto.productCount == '1'}">
+			                    					<option selected>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '2'}">
+			                    					<option>1</option>
+					                        		<option selected>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '3'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option selected>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '4'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option selected>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '5'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option selected>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '6'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option selected>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '7'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option selected>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '8'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option selected>8</option>
+					                        		<option>9</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '9'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option selected>9</option>
+			                    				</c:when>
+			                    			</c:choose>
+			                    		</c:when>
+			                    		<c:when test="${cartProductInfoDto.productStock >= 10}">
+			                    			<c:choose>
+			                    				<c:when test="${cartProductInfoDto.productCount == '1'}">
+			                    					<option selected>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+					                        		<option>10</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '2'}">
+			                    					<option>1</option>
+					                        		<option selected>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+					                        		<option>10</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '3'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option selected>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+					                        		<option>10</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '4'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option selected>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+					                        		<option>10</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '5'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option selected>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+					                        		<option>10</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '6'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option selected>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+					                        		<option>10</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '7'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option selected>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+					                        		<option>10</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '8'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option selected>8</option>
+					                        		<option>9</option>
+					                        		<option>10</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '9'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option selected>9</option>
+					                        		<option>10</option>
+			                    				</c:when>
+			                    				<c:when test="${cartProductInfoDto.productCount == '10'}">
+			                    					<option>1</option>
+					                        		<option>2</option>
+					                        		<option>3</option>
+					                        		<option>4</option>
+					                        		<option>5</option>
+					                        		<option>6</option>
+					                        		<option>7</option>
+					                        		<option>8</option>
+					                        		<option>9</option>
+					                        		<option selected>10</option>
+			                    				</c:when>
+			                    			</c:choose>
+			                    		</c:when>
+			                    	</c:choose>
+			                    </select>
+		                    </div>
+	                	</c:otherwise>
+	                </c:choose>
 	                <c:set var="total" value="${total + cartProductInfoDto.productPrice * cartProductInfoDto.productCount}"></c:set>
 	            </div>
 	            <!------------ 상품 삭제할 x 아이콘 ------------>
