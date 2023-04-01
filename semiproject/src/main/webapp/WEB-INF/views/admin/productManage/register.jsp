@@ -11,13 +11,30 @@
 <script src="/static/js/product-register-checker.js"></script>
 <style>
 	label, .invalid-message {
-		padding-left: 20px
+		padding-left: 20px;
+	}
+	textarea {
+		min-height: 200px;
+		resize: none;
+		border-radius: 25px;
+		outline: none;
+	    padding-left: 1.3em;
+	    padding-right: 1.3em;
+	    border-color: #776BFF;
+	    font-size: 15px;
+	    padding-top: 1em;
+	    padding-bottom: 1em;
+	    border-width: 2px;
+	    border-style: solid;
 	}
 </style>
+<script type="text/javascript">
+	
+</script>
 
 <div class="container-1000">
 	<form action="register" method="post" enctype="multipart/form-data" class="register-form" autocomplete="off">
-        <div class="row pb-30 pt-30">
+        <div class="row pb-30">
             <h1>상품 등록</h1>
         </div>
         <div class="row">
@@ -40,11 +57,6 @@
             <label>재고</label>
             <input type="text" class="form-input medium w-100" name="productStock">
             <div class="invalid-message">0에서 2,100,000,000 이하의 숫자를 입력해주세요.</div>
-        </div>
-        <div class="row">
-            <label>상품 설명</label>
-            <input type="text" class="form-input medium w-100" name="productContent">
-            <div class="invalid-message">상품 설명은 1자 이상, 1,000자 이하로 입력할 수 있습니다.</div>
         </div>
         <div class="row">
             <label>배송비</label>
@@ -71,11 +83,15 @@
             <input type="file" class="form-input medium w-100" name="img2" accept=".png, .gif, .jpg">
             <div class="invalid-message">등록할 수 있는 용량을 초과하는 파일입니다.</div>
         </div>
+        <div class="row">
+            <label class="w-100">상품 설명</label>
+            <textarea class="w-100" name="productContent"></textarea>
+            <div class="invalid-message">상품 설명은 1자 이상, 1,000자 이하로 입력할 수 있습니다.</div>
+        </div>
         <div class="row pb-30">
         	<button type="submit" class="form-btn medium positive w-100 register-btn">등록</button>
         </div>
     </form>
 </div>
-<hr>
 		
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
