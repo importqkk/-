@@ -28,8 +28,9 @@ public class ProductInfoDao {
 						.productStock(rs.getInt("product_stock"))
 						.reivewAVG(rs.getFloat("avg"))
 						.reivewCNT(rs.getInt("cnt"))
-						.imgNo(rs.getInt("img_no"))
+						.productImgNo(rs.getInt("product_img_no"))
 						.tagNo(rs.getInt("tag_no"))
+						.detailImgNo(rs.getInt("detail_img_no"))
 					.build();
 		}
 	};
@@ -57,6 +58,14 @@ public class ProductInfoDao {
 	public List<ProductInfoDto> productList() {
 		String sql = "select * from product_info order by product_stock desc";
 		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	// 이미지 조회
+	public ProductInfoDto selectOneForImg(int productNo) {
+		String sql = "select * from product_info where product_no = ?";
+		Object[] param = {productNo};
+		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 }
