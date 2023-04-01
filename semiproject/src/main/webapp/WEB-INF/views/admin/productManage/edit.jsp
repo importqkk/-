@@ -15,6 +15,20 @@
 	label, .invalid-message {
 		padding-left: 20px
 	}
+	textarea {
+		min-height: 200px;
+		resize: none;
+		border-radius: 25px;
+		outline: none;
+	    padding-left: 1.3em;
+	    padding-right: 1.3em;
+	    border-color: #776BFF;
+	    font-size: 15px;
+	    padding-top: 1em;
+	    padding-bottom: 1em;
+	    border-width: 2px;
+	    border-style: solid;
+	}
 </style>
 
 <script type="text/javascript">
@@ -53,11 +67,6 @@
         	<div class="invalid-message">0에서 2,100,000,000 이하의 숫자를 입력해주세요.</div>
         </div>
         <div class="row">
-            <label>상품 설명</label>
-            <input type="text" class="form-input medium w-100" name="productContent" value="${productDto.productContent}">
-        	<div class="invalid-message">상품 설명은 1자 이상, 1,000자 이하로 입력할 수 있습니다.</div>
-        </div>
-        <div class="row">
             <label>배송비</label>
             <input type="text" class="form-input medium w-100" name="productDeliveryPrice" value="${productDto.productDeliveryPrice}">
         	<div class="invalid-message">0에서 2,100,000,000 이하의 숫자를 입력해주세요.</div>
@@ -87,6 +96,11 @@
             	<fmt:formatNumber pattern="#,##0" value="${img2Dto.imgSize/1024}"></fmt:formatNumber>kb
             </span>
         	<div class="invalid-message">등록할 수 있는 용량을 초과하는 파일입니다.</div>
+        </div>
+        <div class="row">
+            <label class="w-100">상품 설명</label>
+            <textarea class="w-100" name="productContent">${productDto.productContent}</textarea>
+            <div class="invalid-message">상품 설명은 1자 이상, 1,000자 이하로 입력할 수 있습니다.</div>
         </div>
         <div class="row">
         	<button type="submit" class="form-btn medium positive w-100">수정하기</button>
