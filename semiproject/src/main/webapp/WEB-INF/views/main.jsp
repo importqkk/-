@@ -222,7 +222,7 @@
 			                    <div>
 			                    	<c:choose>
 					            		<c:when test="${productInfoDto.imgNo != 0}">
-					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.imgNo}">
+					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 				 	            		</c:when>
 					            		<c:otherwise>
 					            			<img class="item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png">
@@ -304,7 +304,7 @@
 			                        <div>
 			                            <c:choose>
 						            		<c:when test="${productInfoDto.imgNo != 0}">
-						            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.imgNo}">
+						            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 					 	            		</c:when>
 						            		<c:otherwise>
 						            			<img class="item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png">
@@ -391,7 +391,7 @@
 			                    <div>
 			                    	<c:choose>
 					            		<c:when test="${productInfoDto.imgNo != 0}">
-					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.imgNo}">
+					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 				 	            		</c:when>
 					            		<c:otherwise>
 					            			<img class="item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png">
