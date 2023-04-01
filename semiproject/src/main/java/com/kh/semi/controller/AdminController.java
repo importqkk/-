@@ -19,6 +19,7 @@ import com.kh.semi.dao.ImgDao;
 import com.kh.semi.dao.MainImgDao;
 import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ProductImgDao;
+import com.kh.semi.dao.ProductInfoDao;
 import com.kh.semi.dto.DetailImgDto;
 import com.kh.semi.dto.ImgDto;
 import com.kh.semi.dto.MainImgDto;
@@ -36,6 +37,8 @@ public class AdminController {
 	private ImgDao imgDao;
 	@Autowired
 	private ProductImgDao productImgDao;
+	@Autowired
+	private ProductInfoDao productInfoDao;
 	@Autowired
 	private DetailImgDao detailImgDao;
 	@Autowired
@@ -105,7 +108,7 @@ public class AdminController {
 	}
 	@GetMapping("/productManage/registerFinish")
 	public String registerFinish() {
-		return "/WEB-INF/views/admin/productManage/registerFinish.jsp";
+		return "redirect:list";
 	}
 	
 	// 상품 목록
@@ -121,9 +124,13 @@ public class AdminController {
 	
 	// 상품 삭제
 	@GetMapping("/productManage/delete")
-	public String delete(@RequestParam int productNo) {
-		imgDao.delete(productImgDao.selectOne(productNo).getImgNo());
-		imgDao.delete(detailImgDao.selectOne(productNo).getImgNo());
+	public String delete(@RequestParam(value="productNo") int productNo) {
+		if(productInfoDao.selectOneForImg(productNo).getProductImgNo() != null) {
+			imgDao.delete(productInfoDao.selectOneForImg(productNo).getProductImgNo());
+		}
+		if(productInfoDao.selectOneForImg(productNo).getDetailImgNo() != null) {
+			imgDao.delete(productInfoDao.selectOneForImg(productNo).getDetailImgNo());
+		}
 		productDao.delete(productNo);
 		return "redirect:list";
 	}
@@ -131,8 +138,12 @@ public class AdminController {
 	@PostMapping("/productManage/deleteAll")
 	public String deleteAll(@RequestParam(value="productNo") List<Integer> list) {
 		for(int productNo : list) {
-			imgDao.delete(productImgDao.selectOne(productNo).getImgNo());
-			imgDao.delete(detailImgDao.selectOne(productNo).getImgNo());
+			if(productInfoDao.selectOneForImg(productNo).getProductImgNo() != null) {
+				imgDao.delete(productInfoDao.selectOneForImg(productNo).getProductImgNo());
+			}
+			if(productInfoDao.selectOneForImg(productNo).getDetailImgNo() != null) {
+				imgDao.delete(productInfoDao.selectOneForImg(productNo).getDetailImgNo());
+			}
 			productDao.delete(productNo);
 		}
 		return "redirect:list";
@@ -145,10 +156,10 @@ public class AdminController {
 		// [1] 이전 상품 정보 불러오기
 		model.addAttribute("productDto", productDao.selectOne(productNo));
 		// [2-1] 이전 대표 이미지 정보 불러오기
-		int imgNo1 = productImgDao.selectOne(productNo).getImgNo();
+		int imgNo1 = productInfoDao.selectOneForImg(productNo).getProductImgNo();
 		model.addAttribute("img1Dto", imgDao.selectOne(imgNo1));
 		// [2-2] 이전 상세 이미지 정보 불러오기
-		int imgNo2 = detailImgDao.selectOne(productNo).getImgNo();
+		int imgNo2 = productInfoDao.selectOneForImg(productNo).getDetailImgNo();
 		model.addAttribute("img2Dto", imgDao.selectOne(imgNo2));
 		return "/WEB-INF/views/admin/productManage/edit.jsp";
 	}
@@ -161,9 +172,9 @@ public class AdminController {
 		// [4-1] 대표 이미지를 새로 업로드했으면
 		if(!img1.isEmpty()) {
 			// [4-1-1] 이전 대표 이미지 삭제
-			int imgNo1 = productImgDao.selectOne(productDto.getProductNo()).getImgNo();
-			// [4-1-2] 신규 대표 이미지 업로드
+			int imgNo1 = productInfoDao.selectOneForImg(productDto.getProductNo()).getProductImgNo();
 			imgDao.delete(imgNo1);
+			// [4-1-2] 신규 대표 이미지 업로드
 			// 대표사진 번호 뽑기
 			imgNo1 = imgDao.sequence();
 			// 대표사진 파일 이름 설정
@@ -186,7 +197,7 @@ public class AdminController {
 		// [4-2] 상세 이미지를 새로 업로드했으면
 		if(!img2.isEmpty()) {
 			// [4-2-1] 이전 상세 이미지 삭제
-			int imgNo2 = detailImgDao.selectOne(productDto.getProductNo()).getImgNo();
+			int imgNo2 = productInfoDao.selectOneForImg(productDto.getProductNo()).getDetailImgNo();
 			imgDao.delete(imgNo2);
 			// [4-2-2] 신규 상세 이미지 업로드
 			// 상세사진 번호 뽑기
