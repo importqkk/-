@@ -27,16 +27,16 @@ public class QaDao {
 			qaDto.setQaNo(rs.getInt("qa_no"));
 			qaDto.setQaTitle(rs.getString("qa_title"));
 			qaDto.setMemberId(rs.getString("member_id"));
-			qaDto.setQaContent(rs.getString("content"));
+			qaDto.setQaContent(rs.getString("qa_content"));
 			qaDto.setQaAnswer(rs.getString("qa_answer"));
 			qaDto.setQaHead(rs.getString("qa_head"));
-			qaDto.setQaSecret(rs.getInt("qa_secret"));
+			qaDto.setQaSecret(rs.getString("qa_secret"));
 			qaDto.setQaGroup(rs.getInt("qa_group"));
-			qaDto.setQaTime(rs.getDate("qa_time"));
-			qaDto.setProductNo(rs.getInt("product_no"));
+			qaDto.setQaDate(rs.getDate("qa_date"));
 			qaDto.setQaRead(rs.getInt("qa_read"));
 			
-			qaDto.setQaParent(rs.getInt("qa_parent"));
+			qaDto.setQaParent(rs.getObject("qa_parent") == null ? 
+					null : rs.getInt("qa_parent"));
 			qaDto.setQaDepth(rs.getInt("qa_depth"));
 			return qaDto;
 		}
@@ -55,9 +55,9 @@ public class QaDao {
 //		}
 	
 	public List<QaDto>selectList(){
-		String sql = "select*from qa"
-				+ "connect by prior qa_no=qa_parent"
-				+ "start with qa_parent is null"
+		String sql = "select * from qa "
+				+ "connect by prior qa_no=qa_parent "
+				+ "start with qa_parent is null "
 				+ "order siblings by qa_group desc, qa_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
@@ -91,16 +91,16 @@ public class QaDao {
 	//이 기능은 새글 답글 관계없이 동일하게 구현
 	public void insert(QaDto qaDto) {
 		String sql = "insert into qa("
-				+ "qa_no, qa_title, member_id, qa_content, "
-				+ "qa_answer, qa_head, qa_secret, qa_time, "
-				+ "qa_group, qa_parent, qa_depth, product_no, qa_read) "
-				+ "values(?,?,?,?,?,?,?,sysdate,?,?,?,?,0)";
+				+ "qa_no, qa_title, member_id, qa_content, qa_answer,"
+				+ "qa_head, qa_secret, qa_group, qa_parent, qa_depth,"
+				+ "qa_date, qa_read)"
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, 0)";
 		Object[] param = {
-			qaDto.getQaNo(), qaDto.getMemberId(),
-			qaDto.getQaTitle(), qaDto.getQaContent(),
-			qaDto.getQaHead(), qaDto.getQaGroup(),
-			qaDto.getQaParent(), qaDto.getQaDepth(),
-			qaDto.getProductNo(), qaDto.getQaRead()
+			qaDto.getQaNo(), qaDto.getQaTitle(),
+			qaDto.getMemberId(), qaDto.getQaContent(),
+			qaDto.getQaAnswer(),qaDto.getQaHead(),
+			qaDto.getQaSecret(), qaDto.getQaGroup(),
+			qaDto.getQaParent(), qaDto.getQaDepth()
 		};
 		jdbcTemplate.update(sql, param);
 	}
@@ -112,16 +112,16 @@ public class QaDao {
 	}
 	
 	//게시글 수정
-	public boolean update(QaDto qaDto) {
+	public int update(QaDto qaDto) {
 		String sql = "update qa "
-						+ "set qa_head=?, qa_title=?, qa_content=? "
+						+ "set  qa_content=? "
 						+ "where qa_no = ?";
 		Object[] param = {
-			qaDto.getQaHead(), qaDto.getQaTitle(),
 			qaDto.getQaContent(), qaDto.getQaNo()
 		};
-		return jdbcTemplate.update(sql, param) > 0;
+		return jdbcTemplate.update(sql, param) ;
 	}
+	
 	
 	//조회수
 	public boolean updateReadCount(int qaNo) {
@@ -175,7 +175,24 @@ public class QaDao {
 		}
 	}
 	
-	//댓글 개수 갱신기능
+	//이 기능은 새글 답글 관계없이 동일하게 구현
+	public void insertQaReple(QaDto qaDto) {
+		String sql = "insert into qa("
+				+ "qa_no, qa_title, member_id, qa_content, qa_answer,"
+				+ "qa_head, qa_secret, qa_group, qa_parent, qa_depth,"
+				+ "qa_date, qa_read)"
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, 0)";
+		Object[] param = {
+			qaDto.getQaNo(), qaDto.getQaTitle(),
+			qaDto.getMemberId(), qaDto.getQaContent(),
+			qaDto.getQaAnswer(),qaDto.getQaHead(),
+			qaDto.getQaSecret(), qaDto.getQaGroup(),
+			qaDto.getQaParent(), qaDto.getQaDepth()
+		};
+		jdbcTemplate.update(sql, param);
+	}
+	
+	//댓글 개수 갱신
 	public void updateReplycount(int qaNo) {
 		String sql = "update qa "
 						+ "set qa_reply = ("
@@ -186,12 +203,12 @@ public class QaDao {
 		jdbcTemplate.update(sql, param);
 	}
 
-	 //첨부파일
-	public void connect(int qaNo, int attachmentNo) {
-		String sql = "insert into qa_attachment values(?, ?)";
-		Object[] param = {qaNo, attachmentNo};
-		jdbcTemplate.update(sql, param);
-	}
+//	 //첨부파일
+//	public void connect(int qaNo, int attachmentNo) {
+//		String sql = "insert into qa_attachment values(?, ?)";
+//		Object[] param = {qaNo, attachmentNo};
+//		jdbcTemplate.update(sql, param);
+//	}
 	
 	
 }

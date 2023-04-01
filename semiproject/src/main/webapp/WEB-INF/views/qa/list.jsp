@@ -5,6 +5,8 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+
+
 <c:if test="${sessionScope.memberRole == '관리자'}">
 <script type="text/javascript">
 	function checkAll(){
@@ -35,9 +37,44 @@
 </script>
 </c:if>
 
+ <script>
+//     $(document).ready(function() {
+//         // 전체 선택 체크박스 클릭 시 개별 선택 체크박스 상태 변경
+//         $(".check-all").change(function() {
+//             $(".center").find("input[type='checkbox']").prop("checked", $(this).prop("checked"));
+//         });
+
+//         // 개별 선택 체크박스 클릭 시 전체 선택 체크박스 상태 변경
+//         $(".center").find("input[type='checkbox']").change(function() {
+//             if (!$(this).prop("checked")) {
+//                 $(".check-all").prop("checked", false);
+//             } else {
+//                 if ($(".center").find("input[type='checkbox']:not(:checked)").length == 0) {
+//                     $(".check-all").prop("checked", true);
+//                 }
+//             }
+//         });
+
+//         // 삭제 버튼 클릭 시 선택된 게시물 삭제
+//         $("button.negative").click(function() {
+//             var checked = $(".center").find("input[type='checkbox']:checked");
+//             if (checked.length == 0) {
+//                 alert("삭제할 게시물을 선택해주세요.");
+//                 return false;
+//             }
+//             return confirm("정말로 삭제하시겠습니까?");
+//         });
+//     });
+</script>
+
+
+
 <div class="container-1000">
-    <div class="row center">
+    <div class="row left">
         <h1>Q&A 게시판</h1>
+    </div>
+    <div class="row center">
+    	<h4>욕설, 비방 글, 상업적인 게시글은 통보없이 삭제될 수 있고 이용에 제한이 생길 수 있습니다. </h4>
     </div>
     
     <c:if test="${sessionScope.memberRole == '관리자'}">
@@ -47,11 +84,12 @@
     	<c:if test="${sessionScope.memberRole == '관리자'}">
     	<button type="submit" class="form-btn negative">삭제</button>
     	</c:if>
-        <a href="write" class="form-btn positive">글쓰기</a>
+        <a href="write" class="form-btn neutral">글쓰기</a>
     </div>
     <div class="row">
         <table class="table table-border">
             <thead>
+            
                 <tr>
                 	<c:if test="${sessionScope.memberRole == '관리자'}">
                 	<!-- 전체 선택 체크박스를 배치 -->
@@ -68,36 +106,26 @@
                     <th class="w-10">조회수</th>
                 </tr>
             </thead>
+            <hr>
             <tbody class="center">
-            
             	<!-- 공지사항을 출력 -->
 				<c:forEach var="qaDto" items="${noticeList}">
 				<tr style="background-color:#eee">
 					<c:if test="${sessionScope.memberRole == '관리자'}">
 					<td></td>
 					</c:if>
-					<td>${qaDto.qaNo}</td>
-					<td class="left">
-						<!-- 제목을 누르면 상세로 이동 -->
-						<a href="detail?qaNo=${qaDto.qaNo}" class="link">
-							
-							<c:if test="${qaDto.qaHead != null}">
-								<!-- 말머리가 있으면 출력 -->
-								[${qaDto.qaHead}]
-							</c:if>
-							
+					<td class="center">${qaDto.qaNo}</td>
+					<td class="center">${qaDto.qaHead}</td>
+
+					<td class="center">
+					<a href="detail?qaNo=${qaDto.qaNo}" class="link">
 							${qaDto.qaTitle}
-							
-							<c:if test="${qaDto.qaReply > 0}">
-								<!-- 댓글이 있으면 개수 출력 -->
-								[${qaDto.qaReply}]
-							</c:if>
 						</a>
 					</td>
 					<td class="left">${qaDto.memberId}</td>
 					
 					<%-- DTO에 만든 가상의 Getter 메소드를 불러 처리 --%>
-					<td>${qaDto.qaTimeAuto}</td>
+					<td>${qaDto.qaDate}</td>
 					<td>${qaDto.qaRead}</td>
 				</tr>
 				</c:forEach>
@@ -114,35 +142,40 @@
 					</c:if>
 					
 					<td>${qaDto.qaNo}</td>
-					<td class="left">
-						<!-- qaDepth만큼 띄어쓰기를 실시 -->
-						<c:forEach var="i" begin="1" end="${qaDto.qaDepth}">
-							&nbsp;&nbsp;
-						</c:forEach>
+					<td class="center">
+						${qaDto.qaHead}
 						<!-- qaDepth가 1 이상일 경우만 답글 표식을 추가 -->
 						<c:if test="${qaDto.qaDepth > 0}">
-							→
+
 						</c:if>
+					</td>
 					
-						<!-- 제목을 누르면 상세로 이동 -->
-						<a href="detail?qaNo=${qaDto.qaNo}" class="link">
-							
-							<c:if test="${qaDto.qaHead != null}">
-								<!-- 말머리가 있으면 출력 -->
-								[${qaDto.qaHead}]
-							</c:if>
-							
+					<td>
+					<a href="detail?qaNo=${qaDto.qaNo}" class="link">
 							${qaDto.qaTitle}
 						</a>
 					</td>
 					<td class="left">${qaDto.memberId}</td>
 					
 					<%-- DTO에 만든 가상의 Getter 메소드를 불러 처리 --%>
-					<td>${qaDto.qaTimeAuto}</td>
-					
+					<td>${qaDto.qaDate}</td>
 					<td>${qaDto.qaRead}</td>
-					<td>${qaDto.qaLike}</td>
 				</tr>
+				
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/642513f64247f20fefe8c632/1gsodbvhg';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
 				</c:forEach>
             </tbody>
         </table>
@@ -151,14 +184,14 @@
     	<c:if test="${sessionScope.memberRole == '관리자'}">
     	<button type="submit" class="form-btn negative">삭제</button>
     	</c:if>
-        <a href="write" class="form-btn positive">글쓰기</a>
+        <a href="write" class="form-btn neutral">글쓰기</a>
     </div>
     
     <c:if test="${sessionScope.memberRole == '관리자'}">
     </form>
     </c:if>
     
-    <div class="row pagination">
+    <div class="row pagination center">
     
     	<!-- 처음 -->
     	<c:choose>
@@ -223,7 +256,7 @@
 						<option value="qa_title">제목</option>
 						<option value="qa_content" selected>내용</option>
 						<option value="member_id">작성자</option>
-						<option value="qa_head">말머리</option>
+						<option value="qa_head">카테고리</option>
 					</select>
 				</c:when>
 				<c:when test="${vo.column == 'member_id'}">
@@ -231,7 +264,7 @@
 						<option value="qa_title">제목</option>
 						<option value="qa_content">내용</option>
 						<option value="member_id" selected>작성자</option>
-						<option value="qa_head">말머리</option>
+						<option value="qa_head">카테고리</option>
 					</select>
 				</c:when>
 				<c:when test="${vo.column == 'qa_head'}">
@@ -239,7 +272,7 @@
 						<option value="qa_title">제목</option>
 						<option value="qa_content">내용</option>
 						<option value="member_id">작성자</option>
-						<option value="qa_head" selected>말머리</option>
+						<option value="qa_head" selected>카테고리</option>
 					</select>
 				</c:when>
 				<c:otherwise>
@@ -247,7 +280,7 @@
 						<option value="qa_title" selected>제목</option>
 						<option value="qa_content">내용</option>
 						<option value="member_id">작성자</option>
-						<option value="qa_head">말머리</option>
+						<option value="qa_head">카테고리</option>
 					</select>
 				</c:otherwise>
 			</c:choose>
