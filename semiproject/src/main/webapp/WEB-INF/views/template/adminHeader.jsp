@@ -344,7 +344,9 @@
         	<div class="admin-menu w-20">
                 <div class="flex-box flex-vertical">
                     <div class="p-10">
-                        <h2 class="c-p100">관리자 메뉴</h2>
+                        <a class="link" href="/admin">
+                        	<h2 class="c-p100">관리자 메뉴</h2>
+                        </a>
                     </div>
                     <div class="p-10">
                         <a href="#" class="link">회원 목록</a>
