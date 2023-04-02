@@ -2,8 +2,8 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="defaiutInfo" value="${defaiutInfo}" scope="application" />
-
+<c:set var="defaiutInfo" value="${defaiutInfo}" scope="page" />
+<c:set var="count" value="0" scope="page"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,13 @@
 		//추가버튼 클릭시 팝업하나더띄움
 		$(function( ){
 	        $(".insert-btn").click(function(){
-	            window.open("popInsert",  "popupNo1", "width=460, height=500");       
+	        	if(count>=3){
+	        		
+	        		console.log(maxSize);
+	        		 alert("최대 저장가능 주소지는 4개입니다.");
+	        	}else{	
+	            	window.open("popInsert",  "popupNo1", "width=460, height=500");
+	        	}
 	        });
 	        //버튼 클릭시 해당 행들의 값을 부모창으로 넘김
 	        $(".btn").click(function() {
@@ -46,6 +52,7 @@
 
 </head>
 <body>
+
     <div>
         <div>
             <div>
@@ -60,7 +67,6 @@
 	     <c:forEach var="allInfo" items="${allInfo}" varStatus="loop">
 	        	<div style="border: 1px solid black; width: 500px; padding: 10px;">
 	            	<div>
-	            		
 	            		<h2>${allInfo.memberName} 님의 배송지</h2> 
 	            		수령인: <span id="orderRecever${loop.index}">${allInfo.memberName}</span>
 	            	</div>
@@ -80,7 +86,6 @@
 		            <div>
 		                <button class="btn" type="button" data-index="${loop.index}">선택</button>
 		            </div>
-		            
 		        </div>
   		</c:forEach>
 	</form>

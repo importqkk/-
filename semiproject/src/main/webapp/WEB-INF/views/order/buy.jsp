@@ -9,7 +9,88 @@
 <head>
 <title>Insert title here</title>
 	<style>
-	
+		.flex {
+            display: flex;
+
+            justify-content: space-between;
+        }
+        .flex2{
+            display: flex;
+        }
+        
+        .order {
+                
+                text-align: center;
+                border-width: 1px;
+                border-color: rgb(119,107,255);
+                background-color: rgb(248, 248, 255);
+                border-style: solid;
+                width: auto;
+                height: 240px;
+                border-radius: 1em;
+            }
+        
+        .form-btn.small2 {
+                display: inline;
+                font-size: 13px;
+                padding: 0.55em;
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+                border-width: 2px;
+                border-style: solid;
+                height:30px
+        }
+
+        .form-input.small2 {
+            font-size: 13px;
+            padding-top: 0.75em;
+            padding-bottom: 0.75em;
+            border-width: 0.1px;
+            border-style: solid;
+        }
+        h3 {
+            line-height: 2;
+            display: inline;
+        }   
+        .ps-110{
+            padding-left: 110px;
+        }
+        .ps-120{
+            padding-left: 120px;
+        }
+        .ps-130{
+            padding-left: 130px;
+        }
+        .form-input {
+            outline: none;
+            border-radius: 50px;
+            padding-left: 1.3em;
+            padding-right: 1em;
+            border-color: #776BFF;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td:first-child {
+            text-align: left;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        td:last-child {
+            text-align: right;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        
+        .info div {
+            margin-bottom: 20px; /* 세로 간격 조정 */
+        }
     </style>
 
 <c:set var="name" value="${requestScope.name}" />
@@ -28,7 +109,7 @@
 	//팝업생성
 	$(function( ){
         $(".pop-btn").click(function(){
-            window.open("popup",  "popupNo", "width=570, height=750")        
+            window.open("popup",  "popupNo", "width=570, height=970")        
         });
     });
 	
@@ -56,7 +137,7 @@
                 }).open();
         
     		});
- 
+ 		$(".")
         
        //체크박스 선택시
 		var checkboxes = document.getElementsByName("option");
@@ -113,133 +194,158 @@
 </head>
 <body>
 <!-- align-items: center; -->
- <div class="container-1000">
- 		<h1>주문/결제</h1>
-  		<form action="/order/buy" method="post">
-        <div class="flex">
-            <div class=" w-70">
-                <p><h2>주문상품</h2></p>
-         <!-- 상품상세에서 온거면 -->
-         <c:if test="${not empty productInfo}">
-   			<c:forEach var="productInfo" items="${productInfo}" varStatus="status">
-                <div class="row flex">
-                    	<img src="https://picsum.photos/100/100" class="">
-                			<input  type="hidden" name="productNo" value="${productInfo.productNo}">
-							<input  type="hidden" name="productPrice" value="${productInfo.productPrice}">
-			           		<input  type="hidden" name="productCount" value="${Count}">
-						
-										
-							<label>상품이름: ${productInfo.productName}</label>
-							<label>브랜드명: ${productInfo.productBrand}</label>		
-							<label>상품가격: ${productInfo.productPrice}</label>
-			           	<c:set var="Count" value="${productCount}" scope="application" />
-						<label>상품수량:${Count}</label>
-						
-						
-                </div>
-           	</c:forEach>
-         </c:if>
-         <!-- 카트에서 온거면 -->
-         <c:if test="${not empty cartinfo}">
-            <c:forEach var="cartinfo" items="${cartinfo}">
-                <div class="row flex">
+<div class="container-1000">
+    <h1>주문/결제</h1>
+     <form action="/order/buy" method="post">
+   <div class="flex">
+       <div class=" w-70 pe-70">
+           <p><h2>주문상품</h2></p>
+    <!-- 상품상세에서 온거면 -->
+        <c:if test="${not empty productInfo}">
+            <c:forEach var="productInfo" items="${productInfo}" varStatus="status">
+            <div class="row flex2">
                     <img src="https://picsum.photos/100/100" class="pe-20">
-                								
-						<label>상품이름: ${cartinfo.productName}</label>
-						<label>브랜드명: ${cartinfo.productBrand}</label>		
-						<label>상품가격: ${cartinfo.productPrice}</label>
-						<label>상품수량: ${cartinfo.productCount}</label>
-						
-                </div>
-               </c:forEach>
-         </c:if>
-         
-         <!-- 배송지부분 -->
-                <div class="row left">
-                   	<div class="flex"> 
-                   	<h2 class="w-20">배송지</h2>
-                   	<button class="pop-btn form-btn neutral small" type="button">배송지 불러오기</button> 
-                   	 </div> 
-                    <div class="row">
-                        <p>받는사람</p>
-                        <input type="text" class="form-input light w-100 medium" name="orderRecever">
-                    </div>
-
-                    <div class="row">
-                        <p>연락처</p>
-                        <input type="text" class="form-input light w-100 medium" name="orderReceivePhone">
-                    </div>
-
-                    <div class="row">
-                        <p>주소</p>
-                        <input type="text" class="form-input light medium w-50" name="orderPost" placeholder="우편번호">
-                        <button class="form-btn medium positive address-btn" type="button">우편번호찾기</button>
-                    </div>
-
-                    <div class="row">
-                        <p></p>
-                        <input type="text" class="form-input light medium w-100" name="orderBasicAddr" placeholder="기본주소" readonly>
-                    </div>
-
-                    <div class="row">
-                        <input type="text" class="form-input light medium w-100" name="orderDetailAddr" placeholder="상세주소">
-                    </div>
-
-                    <div class="row">
-                        <p>배송요청사항</p>
-                        <input type="text" class="form-input light medium w-100" name="orderRequest">
-                    </div>
-                </div>
-                </div>
-
-           <!--  결제정보부분 -->
-           
-            <!-- orderscroll - 주문상품이 많아질경우 스크롤을 내릴때 결제정보창이 따라가는 기능 -->
-            <div class="orderscroll w-30">
-                <div>
+                        <input  type="hidden" name="productNo" value="${productInfo.productNo}">
+                        <input  type="hidden" name="productPrice" value="${productInfo.productPrice}">
+                        <input  type="hidden" name="productCount" value="${Count}">
                     
-                    <p><h2>결제정보</h2></p>
-                    <p><label>적립금</label></p>
-                    <input type="text" class="form-input medium light" name="orderUserPoint" value="0">
-                    <button class="form-btn positive medium" type="button">전액</button>
-                    <p class="right">보유 적립금: <span>3000원</span></p>
-                    <div class="row abc">
-                        <label>제품금액: <span>3000원</span></label>
+                    <div class="left info">
                         <div>
-                            <label>배송비 : <span>1000</span></label>
+                            <label>[브랜드명] </label> <label>${productInfo.productName}</label>
                         </div>
-                        <div> 
-                            <label>적립금 : <span>1000원</span></label>
-    
-                        </div>
+                        
+                        <label>상품가격: ${productInfo.productPrice}</label>
+                        <c:set var="Count" value="${productCount}" scope="page" />
                         <div>
-                            <label>총 결제금액 : <span>0원</span></label>
+                                <label>상품수량:${Count}</label>
                         </div>
-                    </div>
-                    <h2>결제수단</h2>
-                    <div>
-                        <input type="checkbox" name="option" > 신용 / 체크카드
-                    </div>
-    
-                    <div>
-                        <input type="checkbox" name="option" > 무통장 입금
-                    </div>
-                    <div>
-                        <input type="checkbox" name="option" > 에스크로 (실시간 계좌이체)
-                    </div>
-                    <div>
-                        <input type="checkbox" name="option" > 휴대폰 결제
-                    </div>
-    
-                    <div>
-                        <button class="form-btn positive large w-100 " type="submit" >결제하기</button>
-                    </div>
-                </div>
+                    </div>   
+                    
             </div>
-            
-       </div>     
-			</form>
-    </div>
+            </c:forEach>
+        </c:if>
+    <!-- 카트에서 온거면 -->
+        <c:if test="${not empty cartinfo}">
+        <c:forEach var="cartinfo" items="${cartinfo}">
+            <div class="row flex2">
+                <img src="https://picsum.photos/100/100" class="pe-20">
+                                        
+                
+                <div class="left info">
+                        <div>
+                            <label>[브랜드명]:${cartinfo.productBrand} </label> <label>${cartinfo.productName}</label>
+                        </div>
+                        
+                        <label>상품가격: 500</label>
+                        <c:set var="Count" value="${productCount}" scope="page" />
+                        <div>
+                                <label>상품수량:${Count}</label>
+                        </div>
+                </div>
+                    
+            </div>
+            </c:forEach>
+        </c:if>
+    
+    <!-- 배송지부분 -->
+           <div class="row left">
+                <div class="row">
+                    <h2>배송지</h2>
+                    <button class="pop-btn form-btn small2 neutral" type="button">배송지 불러오기</button> 
+               </div>
+               <div class="row">
+                   <p>받는사람</p>
+                   <input type="text" class="form-input light w-100 medium" name="orderRecever">
+               </div>
+
+               <div class="row">
+                   <p>연락처</p>
+                   <input type="text" class="form-input light w-100 medium" name="orderReceivePhone">
+               </div>
+
+               <div class="row">
+                   <p>주소</p>
+                   <input type="text" class="form-input light medium w-50" name="orderPost" placeholder="우편번호">
+                   <button class="form-btn medium positive address-btn" type="button">우편번호찾기</button>
+               </div>
+
+               <div class="row">
+                   <p></p>
+                   <input type="text" class="form-input light medium w-100" name="orderBasicAddr" placeholder="기본주소" readonly>
+               </div>
+
+               <div class="row">
+                   <input type="text" class="form-input light medium w-100" name="orderDetailAddr" placeholder="상세주소">
+               </div>
+
+               <div class="row">
+                   <p>배송요청사항</p>
+                   <input type="text" class="form-input light medium w-100" name="orderRequest">
+               </div>
+           </div>
+           </div>
+
+      <!-- orderscroll - 주문상품이 많아질경우 스크롤을 내릴때 결제정보창이 따라가는 기능 -->
+       <div class="orderscroll w-30">
+           <div>
+               
+               <p><h2>결제정보</h2></p>
+               <p><label>적립금</label></p>
+                    <input type="text" class="form-input small2 light" name="orderUserPoint" value="0">
+                    <button class="form-btn positive medium" type="button">적용</button>
+               <p class="right">보유 적립금: <span>3000원</span></p>
+
+
+               <div class="row order">
+                <div class="pt-30">
+                    <table>
+                        <tr>
+                          <td>제품금액:</td>
+                          <td>3000원</td>
+                        </tr>
+                        <tr>
+                          <td>배송비:</td>
+                          <td>0000원</td>
+                        </tr>
+                        <tr>
+                          <td>적립금:</td>
+                          <td>3000원</td>
+                        </tr>
+                        <tr>
+                          <td>총 결제금액:</td>
+                          <td>0원</td>
+                        </tr>
+                    </table>
+                </div>
+                  
+            </div>
+
+
+               <h2>결제수단</h2>
+                <div>
+                        <div>
+                            <input type="checkbox" name="option" > 신용 / 체크카드
+                        </div>
+
+                        <div>
+                            <input type="checkbox" name="option" > 무통장 입금
+                        </div>
+                        <div>
+                            <input type="checkbox" name="option" > 에스크로 (실시간 계좌이체)
+                        </div>
+                        <div>
+                            <input type="checkbox" name="option" > 휴대폰 결제
+                        </div>
+                </div>
+               <div>
+                   <button class="form-btn positive large w-100 mt-30" type="submit" >결제하기</button>
+               </div>
+           </div>
+       </div>
+       
+  </div>     
+       </form>
+</div>
 
 
 </body>
