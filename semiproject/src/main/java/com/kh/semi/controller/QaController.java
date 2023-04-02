@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.QaDao;
 import com.kh.semi.dto.QaDto;
+import com.kh.semi.dto.TestDto;
 import com.kh.semi.service.QaService;
 import com.kh.semi.vo.QaPaginationVO;
 
@@ -57,6 +58,18 @@ public class QaController {
 		return "/WEB-INF/views/qa/list.jsp";
 	}
 	
+
+	@GetMapping("/test")
+	public String Test(Model model) {
+		TestDto test = new TestDto();
+		String aa = "testuser8";
+		
+		test = qaService.testdo(aa);
+		
+
+		model.addAttribute("hi",test);
+		return "/WEB-INF/views/qa/test.jsp";
+	}
 	
 	@PostMapping("/list")
 	public String QaList(Model model,
@@ -78,18 +91,31 @@ public class QaController {
 	
 	@GetMapping("/detail")
 	public String detail(Model model, @RequestParam int qaNo) {
+		boolean cnt = qaDao.updateReadCount(qaNo);
 		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
 		return "/WEB-INF/views/qa/detail.jsp";
 	}
 	
 
 	@PostMapping("/detail")
-	public void detailPost(Model model, @RequestParam int qaNo,HttpServletResponse response) throws JSONException {
-		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
+	public void detailPost(Model model, @RequestParam int qaGroup,HttpServletResponse response) throws JSONException {
+	
+	//	model.addAttribute("qaDto",qaDao.selectOne(qaNo));
 		JSONObject jsonObj = new JSONObject();
-		QaDto qaDto = qaDao.selectOne(qaNo);
-		jsonObj.put("qaTitle", qaDto.getQaTitle() );
-		jsonObj.put("qaContent", qaDto.getQaContent());
+		 List<QaDto> list = qaDao.selectGroup(qaGroup);
+		
+		 //질문
+		QaDto qa = list.get(0);		
+		jsonObj.put("qaTitle", qa.getQaTitle() );
+		jsonObj.put("qaContent", qa.getQaContent());
+		jsonObj.put("qaHead", qa.getQaHead());
+		jsonObj.put("qaDepth", qa.getQaDepth());
+		
+		if(list.size() > 1) {
+			 QaDto qaAnswer = list.get(1);
+			 jsonObj.put("qaAnswer", qaAnswer.getQaAnswer());
+			 jsonObj.put("qaAnswerTitle", qaAnswer.getQaTitle());
+		}
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter writer;
 		try {

@@ -15,12 +15,12 @@ var memberId = "${qaDto.memberId}";
 
 <script type="text/javascript">
 $(function(){
-	var qaNo = "${qaDto.qaNo}";
+	var qaGroup = "${qaDto.qaGroup}";
 	
 	$.ajax({
 		url:"/qa/detail",
 		type:"POST",
-		data:{"qaNo": qaNo},
+		data:{"qaGroup": qaGroup},
 		dataType:"json",
 		cache:false,
 		success: function(data){
@@ -60,10 +60,21 @@ $(function(){
 	        });
 	        $(".target").append(editHtml);
 
-	        
+			if(! isEmpty(data.qaAnswer)){
+		        var viewTemplateAnswer = $("#view-template-answer").html();
+		        var viewHtmlAnswer = $.parseHTML(viewTemplateAnswer);
+		        $(viewHtmlAnswer).find(".title").text(data.qaAnswerTitle);
+		        $(viewHtmlAnswer).find(".contents").text(data.qaAnswer);
+		        $(".targetAnswer").append(viewHtmlAnswer);
+		        $(".repleDiv").hide();
+			}
+			
 	        var viewTemplate = $("#view-template").html();
 	        var viewHtml = $.parseHTML(viewTemplate);
+	        $(viewHtml).find(".head").text(data.qaHead);
+	        $(viewHtml).find(".title").text(data.qaTitle);
 	        $(viewHtml).find(".contents").text(data.qaContent);
+	        
 	        $(viewHtml).find(".edit-btn").click(function(){
 	            //this == 수정버튼
 	            var contents = $(this).prev(".contents").text();
@@ -112,10 +123,21 @@ $(function(){
 	 });//ajax end
 });
 
+/**
+ * 문자열이 빈 문자열인지 체크하여 결과값을 리턴한다. 
+ * @param str		: 체크할 문자열
+ */
+function isEmpty(str){
+	
+	if(typeof str == "undefined" || str == null || str == "")
+		return true;
+	else
+		return false ;
+}
+
 // 댓글 작성
 function fn_reple_write(){
 	var qaNo = "${qaDto.qaNo}";
-	alert(qaNo);
 	var replyContent = $("#replyContent").val();
 	
 	$.ajax({
@@ -155,12 +177,20 @@ function fn_reple_write(){
     <!-- 표시용 템플릿 -->
     <script type="text/template" id="view-template">
         <div class="view-panel right">
-			<div class="left font-h1">${qaDto.qaHead}</div>
-			<div class="left font-h1">${qaDto.qaTitle}</div>
-			<div class="contents left font-h2">${qaDto.qaContent}</div>
+			<div class="left font-h1 head"></div>
+			<div class="left font-h1 title"></div>
+			<div class="contents left font-h2"></div>
             <a class="form-btn neutral edit-btn">수정</a>
             <a class="form-btn neutral ms-20 delete-btn">삭제</a>
             <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
+        </div>
+    </script>
+    
+        <!-- 표시용 템플릿 -->
+    <script type="text/template" id="view-template-answer">
+        <div class="view-panel right">
+			<div class="left font-h1 title"></div>
+			<div class="contents left font-h2"></div>
         </div>
     </script>
     
@@ -173,12 +203,14 @@ function fn_reple_write(){
         <div class="row target">
         </div>
         
+        <div class="row targetAnswer">
+        </div>
 		<hr>
         <br>
 
         
         <!-- 댓글 작성란 -->
-	<div class="row">
+	<div class="row repleDiv">
 		<h3>문의 답글 작성</h3>
 		<div class="row">
 		

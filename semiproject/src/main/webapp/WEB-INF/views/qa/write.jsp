@@ -9,6 +9,22 @@
 	$(function(){
 		
 	});
+
+    function validateForm() {
+      var qaHead = document.getElementById("qaHead");
+      if (qaHead.value == "") {
+        alert("카테고리를 선택해주세요.");
+        return false;
+      }
+      
+      
+		if($('#qaSecretChk').is(':checked')){
+			$("#qaSecret").val("Y");
+		}else{
+			$("#qaSecret").val("N");
+		}
+      return true;
+    }
 </script>
 
 
@@ -61,22 +77,16 @@
 	<div class="row right">
             <input type="checkbox"  id="qaSecretChk">
             
-            <input type="hidden"  name="qaSecret" value="N">
+            <input type="hidden"  id="qaSecret" name="qaSecret" value="N">
             <span class="c-p100 font-h3">비밀글</span>
             
-	<button type="submit" class="form-btn positive medium ms-20 me-20 font-h3">등록</button>
+	<button onclick=""  type="submit" class="form-btn positive medium ms-20 me-20 font-h3">등록</button>
 	<a href="/qa/list"class="form-btn nuetral medium font-h3">취소</a>
 	</div>
 	
 	<script>
-     function validateForm() {
-       var qaHead = document.getElementById("qaHead");
-       if (qaHead.value == "") {
-         alert("카테고리를 선택해주세요.");
-         return false;
-       }
-       return true;
-     }
+     
+     
 	</script>
 
 </form>
