@@ -12,6 +12,7 @@
 	}
 	.qty-selector {
 		width: 100px;
+		text-align: left;
 	}
 </style>
 <script type="text/javascript">
@@ -46,8 +47,10 @@
 </script>
 
 <div class="container-1000">
-    <div class="row pt-30 pb-20">
-        <h1>상품 목록</h1>
+    <div class="row pb-20">
+        <a class="link" href="/admin/productManage/list">
+        	<h1>상품 목록</h1>
+        </a>
     </div>
     <div class="row flex w-100">
     	<!-- 검색창 start -->
@@ -76,7 +79,7 @@
 			            </select>
 		            </c:otherwise>
 		        </c:choose>
-	            <input type="text" name="keyword" class="form-input small w-40 me-5" placeholder="검색어를 입력하세요." value="${vo.keyword}" required>
+	            <input type="text" name="keyword" class="form-input small w-35 me-5" placeholder="검색어를 입력하세요." value="${vo.keyword}" required>
 	            <button type="submit" class="form-btn small positive">검색</button>
 	        </div>
 	    </form>
@@ -90,7 +93,7 @@
 	    <div class="row">
 	    	<c:choose>
 	        	<c:when test="${list.isEmpty()}">
-	        		<h3 class="mt-50 mb-50">검색 결과가 없습니다.</h3>
+	        		<h3 class="mt-50 mb-50 center c-p100">검색 결과가 없습니다.</h3>
 	        	</c:when>
 	        	<c:otherwise>
 	        		<table class="table table-qna mb-30">
@@ -100,12 +103,12 @@
 			                        <input type="checkbox" class="check-all">
 			                    </th>
 			                    <th class="w-5">품번</th>
-			                    <th class="w-25">상품명</th>
-			                    <th>브랜드</th>
+			                    <th class="w-30">상품명</th>
+			                    <!-- <th>카테고리</th> -->
 			                    <th>가격</th>
 			                    <th>재고</th>
 			                    <th>판매량</th>
-			                    <th>입고일</th>
+			                    <th>출시일</th>
 			                    <th class="w-10">관리</th>
 			                </tr>
 			            </thead>
@@ -116,12 +119,12 @@
 				                        <input type="checkbox" class="check-unit" name="productNo" value="${productDto.productNo}">
 				                    </td>
 				                    <td title="${productDto.productNo}">${productDto.productNo}</td>
-				                    <td>
-				                        <a class="link" href="/product/detail?productNo=${productDto.productNo}" title="${productDto.productName}">
-				                            ${productDto.productName}
+				                    <td style="text-align: left">
+				                        <a class="link" href="/product/detail?productNo=${productDto.productNo}" title="[${productDto.productBrand}] ${productDto.productName}">
+				                            [${productDto.productBrand}] ${productDto.productName}
 				                        </a>
 				                    </td>
-				                    <td title="${productDto.productBrand}">${productDto.productBrand}</td>
+				                    <!-- <td>${tagTitle}</td> -->
 				                    <td class="right" title="${productDto.productPrice}">
 				                    	<fmt:formatNumber pattern="#,##0" value="${productDto.productPrice}"></fmt:formatNumber>
 				                    </td>
@@ -145,7 +148,7 @@
 	        </c:choose>
 	    </div>
 	    </form>
-    <div class="row center pb-20">
+    <div class="row center">
         <!-- 페이지 네비 (vo에 있는 데이터를 기반으로 구현) -->
 		<div class="row pagination mb-40">
 			<!-- << (첫페이지로) -->
