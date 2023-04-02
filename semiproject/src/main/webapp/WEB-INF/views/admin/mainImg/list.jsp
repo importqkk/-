@@ -43,20 +43,18 @@
 </script>
 
 <div class="container-1000">
-        <div class="row pt-30 pb-20">
+        <div class="row pb-20">
             <h1>메인 이미지 리스트</h1>
         </div>
         <form action="mainImgDeleteAll" method="post" class="delete-form">
-            <div class="row flex w-100">
-                <div class="row w-50">
+            <div class="row w-100">
+                <div class="row right">
                     <button type="submit" class="form-btn small neutral delete-btn">이미지 삭제</button>
-                </div>
-                <div class="row w-50 right">
                     <a class="form-btn small positive upload-btn" href="/admin/mainImg/upload">이미지 등록</a>
                 </div>
             </div>
             <div class="row">
-                <table class="table table-qna mb-30">
+                <table class="table table-qna">
                     <thead>
                         <tr>
                             <th>
