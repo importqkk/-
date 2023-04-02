@@ -466,13 +466,15 @@ a.form-btn.neutral {
 }
 .search-input {
     color: #22201e;
-    font-size: 20px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    font-size: 16px;
+    margin-top: 17px;
+    margin-bottom: 17px;
     margin-left: 25px;
     border: none;
     outline: none;
     background: none;
+    height: 18.4px;
+    line-height: 18.4px;
 }
 .search-btn {
     font-size: 23px;
@@ -494,12 +496,29 @@ input[type="checkbox"] {
     border: 2px solid #776bff;
     appearance: none;
     cursor: pointer;
-  }
+}
 
-  input[type="checkbox"]:checked {
-    background: #776bff;
+input[type="checkbox"]:checked {
+  background: #776bff;
+  border: 2px solid #776bff;
+}
+
+/*
+	라디오 디자인
+*/
+input[type="radio"] {
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
     border: 2px solid #776bff;
-  }
+    appearance: none;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked {
+  background: #776bff;
+  border: 2px solid #776bff;
+}
 
 /*
     글자 스타일
@@ -717,15 +736,15 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 .qty-selector {
-	    padding-top: 5px;
-	    padding-bottom: 5px;
-	    text-align: center;
-	    border: 2px solid #776bff;
-	    border-radius: 100px;
-	    outline: none;
-	    appearance: none;
-	    background:url('/static/image/down-arrow.png') no-repeat 88% 55%/11px auto;
-	}
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    border: 2px solid #776bff;
+    border-radius: 100px;
+    outline: none;
+    appearance: none;
+    background:url('/static/image/down-arrow.png') no-repeat 88% 55%/11px auto;
+}
 
 /*
     통과, 오류메세지 스타일
