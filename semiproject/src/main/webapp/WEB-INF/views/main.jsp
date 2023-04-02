@@ -14,7 +14,7 @@
     .swiper img {
         width: 100%;
         height: 100%;
-     	min-height: 519px;   
+     	min-height: 520px;   
     }
     .swiper-pagination-bullet-active {
         background-color: #776BFF !important;
