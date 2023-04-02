@@ -12,13 +12,14 @@ $(function(){
 		productDeliveryPriceValid:true,
 		productSellCountValid: true,
 		productJoinValid: true,
+		tagNoValid: true,
 		/*img1Valid: true,
 		img2Valid: true,*/
 		isAllValid:function() {
 			return this.productNameValid && this.productBrandValid 
 			&& this.productContentValid && this.productPriceValid 
 			&& this.productStockValid && this.productDeliveryPriceValid 
-			&& this.productSellCountValid && this.productJoinValid
+			&& this.productSellCountValid && this.productJoinValid && this.tagNoValid
 			/*&& this.img1Valid && this.img2Valid*/;
 		}
 	}
@@ -74,6 +75,14 @@ $(function(){
 		valid.productJoinValid = isValid;
 		$(this).removeClass("valid invalid").addClass(isValid ? "valid" : "invalid");
 	})
+	// 태그 검사
+	$("[name=tagNo]").click(function() {
+	    var isValid = $(this).val() > 0 && $(this).val() <= 8;
+	    valid.tagNoValid = isValid;
+	    $(this).removeClass("valid invalid").addClass(isValid ? "valid" : "invalid");
+	    var hasInvalidChild = $(this).parent().parent().find(".invalid").length > 0;
+	    $(this).parent().parent().removeClass("valid invalid").addClass(hasInvalidChild ? "invalid" : "valid");
+	});
 	/*// 대표이미지 크기 검사
 	$("[name=img1]").blur(function() {
 		var isValid = $(this).val().length <= 9223372036854775807 && $(this).val().length > 0;
