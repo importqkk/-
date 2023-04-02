@@ -2,7 +2,10 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <c:set var="defaiutInfo" value="${defaiutInfo}" scope="page" />
+<c:set var="listSize" value="${fn:length(allInfo)}" />
 <c:set var="count" value="0" scope="page"/>
 <!DOCTYPE html>
 <html>
@@ -17,14 +20,9 @@
 	//팝업창메인
 		//추가버튼 클릭시 팝업하나더띄움
 		$(function( ){
-	        $(".insert-btn").click(function(){
-	        	//if써야함
-	        		//alert("최대 저장가능 주소지는 4개입니다.");
-	        	  	window.open("popInsert",  "popupNo1", "width=460, height=500");
-	        	
-	        });
+	        
 	        //버튼 클릭시 해당 행들의 값을 부모창으로 넘김
-	        $(".btn").click(function() {
+	        $(".select-btn").click(function() {
 	            //인덱스 값을 받아서 저장후
 	            var index = $(this).data("index");
 	            //해당 인덱스값들을 이름에 넣어서 불러옴
@@ -39,12 +37,33 @@
 	            window.close(); // 팝업창 닫기
 	          });
 
-	       
+	       $(".delete-btn").click(function(){
+	    	   var index = $(this).data("index");
+	    	   var item = ${allInfo};
+	    	   
+	    	   item.splice(index, 1);
+	       });
 	    });  
+	
+	$(function(){
+		
+	})
         
     </script>
     <script type="text/javascript">
-   
+
+    	    $(document).ready(function(){
+    	        $(".insert-btn").click(function(){
+    	            var size = ${listSize};
+    	            if(size == 4){
+    	                alert("최대 저장 가능 주소지는 4개입니다.");
+    	            } else {
+    	                window.open("popInsert", "popupNo1", "width=460, height=500");
+    	            }
+    	            console.log(${listSize});
+    	        });
+    	    });
+
 	</script>
 
 </head>
@@ -54,7 +73,9 @@
         <div>
             <div>
                 <h2 style="display: inline-block;">배송지 변경</h2>
-                <button class="insert-btn" style="display: inline-block;">신규 배송지 등록</button>
+                <button class="form-btn insert-btn" style="display: inline-block;">신규 배송지 등록</button>
+                ${listSize}
+                
               </div>
         </div>
        	 
@@ -81,7 +102,8 @@
 		            </div>
 		            
 		            <div>
-		                <button class="btn" type="button" data-index="${loop.index}">선택</button>
+		                <button class="select-btn" type="button" data-index="${loop.index}">선택</button>
+		                <button class="delete-btn" type="button" data-index="${loop.index}">삭제</button>
 		            </div>
 		        </div>
   		</c:forEach>

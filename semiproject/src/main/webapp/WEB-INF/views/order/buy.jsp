@@ -93,7 +93,7 @@
         }
     </style>
 
-<c:set var="price" value="${productInfo.productPrice}" />
+
 
     <!-- 우편주소 api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
