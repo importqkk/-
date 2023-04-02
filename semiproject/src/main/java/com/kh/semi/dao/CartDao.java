@@ -78,7 +78,4 @@ public class CartDao {
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
-	// 장바구니에 있는 상품 개수 갱신 기능
-	// 금액 정보 업데이트 기능
-	
 }
