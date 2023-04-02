@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.semi.dao.CartDao;
 import com.kh.semi.dao.CartProductInfoDao;
+import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.MemberInfoDao;
 import com.kh.semi.dao.OrderDao;
 import com.kh.semi.dao.OrderProductDao;
@@ -34,20 +35,23 @@ import com.kh.semi.dto.OrderProductDto;
 public class OrderController {
 	@Autowired
 	private MemberInfoDao memberInfoDao;
+	@Autowired
+	private MemberDao memberDao;
 
 	@Autowired
 	private CartDao cartDao;
 	@Autowired
 	private CartProductInfoDao cartProductInfoDao;
+	
 	@Autowired
 	private ProductDao productDao;
 	@Autowired
 	private ProductInfoDao productInfoDao;
+	
 	@Autowired
 	private OrderDao orderDao;
 	@Autowired
 	private OrderProductDao orderProductDao;
-
 
 
 	
@@ -55,8 +59,15 @@ public class OrderController {
 		@GetMapping("/buy")
 		public String buy(HttpSession session, Model model,@RequestParam(required=false) Integer productNo,@RequestParam(required=false) Integer productCount) {
 			String memberId=(String)session.getAttribute("memberId");
+			int point= memberDao.point(memberId);
+			//포인트
+			model.addAttribute("point",point);
+			
 			//카트에서 오면 
 			if(productNo==null || productCount==null) {
+				
+				CartProductInfoDto  dto=new CartProductInfoDto();
+				System.out.println(dto.getProductCount());
 				
 				model.addAttribute("cartinfo",cartProductInfoDao.cartItemInfo(memberId));
 				return "/WEB-INF/views/order/buy.jsp";
@@ -65,8 +76,14 @@ public class OrderController {
 			}else {
 				int no=productNo.intValue();
 				int Count=productCount.intValue();
+				int price=productInfoDao.orderPrice(no);
 				model.addAttribute("productInfo",productInfoDao.selectOne(no));
+				model.addAttribute(price);
 				model.addAttribute("Count",Count);
+				;
+				
+				
+				
 				return "/WEB-INF/views/order/buy.jsp";
 			
 			}

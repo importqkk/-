@@ -68,4 +68,11 @@ public class ProductInfoDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//상품가격조회
+	public int orderPrice(int productNo) {
+		String sql="select product_price from product where product_no=?";
+		Object[] param= {productNo};
+		return jdbcTemplate.queryForObject(sql,int.class ,param);
+	}
+	
 }

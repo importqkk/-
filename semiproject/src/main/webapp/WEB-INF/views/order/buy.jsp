@@ -93,13 +93,8 @@
         }
     </style>
 
-<c:set var="name" value="${requestScope.name}" />
-<c:set var="amount" value="${requestScope.amount}" />
-<c:set var="buyer_email" value="${requestScope.buyer_email}" />
-<c:set var="buyer_name" value="${requestScope.buyer_name}" />
-<c:set var="buyer_tel" value="${requestScope.buyer_tel}" />
-<c:set var="buyer_addr" value="${requestScope.buyer_addr}" />
-<c:set var="buyer_postcode" value="${requestScope.buyer_postcode}" />
+<c:set var="price" value="${productInfo.productPrice}" />
+
     <!-- 우편주소 api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/static/js/find-address.min.js"></script>
@@ -137,8 +132,9 @@
                 }).open();
         
     		});
- 		$(".")
         
+        
+      
        //체크박스 선택시
 		var checkboxes = document.getElementsByName("option");
 		let prevChecked = null;
@@ -157,6 +153,26 @@
 		}
     });
     </script>
+    
+    <script type="text/javascript">
+    //포인트적용
+    $(function(){
+		$(".apply").click(function(){
+			  var usePoint = $("input[name='orderUserPoint']").val();
+			  var point=${point};
+			  
+			if(usePoint > point){
+				alert("보유 적립금 이상으로 입력할 수 없습니다.")
+				
+			}else{
+				var total= point-usePoint;
+				$("span").text(total + "원");
+				$("table tr:nth-child(3) td:nth-child(2)").text("-"+ usePoint + "원");
+			}
+		});
+    });
+    </script>
+    
     <script>
     
 	//결제api 진행중    
@@ -236,10 +252,9 @@
                             <label>[브랜드명]:${cartinfo.productBrand} </label> <label>${cartinfo.productName}</label>
                         </div>
                         
-                        <label>상품가격: 500</label>
-                        <c:set var="Count" value="${productCount}" scope="page" />
+                        <label>상품가격: ${cartinfo.productPrice}</label>
                         <div>
-                                <label>상품수량:${Count}</label>
+                                <label>상품수량:${cartinfo.productCount}</label>
                         </div>
                 </div>
                     
@@ -285,15 +300,15 @@
            </div>
            </div>
 
-      <!-- orderscroll - 주문상품이 많아질경우 스크롤을 내릴때 결제정보창이 따라가는 기능 -->
-       <div class="orderscroll w-30">
+      <!-- 결제정보 -->
+       <div class="w-30">
+       <c:set var="payment" value="${cartinfo}" scope="page" />
            <div>
-               
                <p><h2>결제정보</h2></p>
                <p><label>적립금</label></p>
                     <input type="text" class="form-input small2 light" name="orderUserPoint" value="0">
-                    <button class="form-btn positive medium" type="button">적용</button>
-               <p class="right">보유 적립금: <span>3000원</span></p>
+                    <button class="form-btn positive medium apply" type="button">적용</button>
+               <p class="right">적용가능한 적립금: <span>${point}원</span></p>
 
 
                <div class="row order">
@@ -301,19 +316,20 @@
                     <table>
                         <tr>
                           <td>제품금액:</td>
-                          <td>3000원</td>
+                          <td></td>
+                          
                         </tr>
                         <tr>
                           <td>배송비:</td>
-                          <td>0000원</td>
+                          <td>3,000원</td>
                         </tr>
                         <tr>
                           <td>적립금:</td>
-                          <td>3000원</td>
+                          <td>0원</td>
                         </tr>
                         <tr>
                           <td>총 결제금액:</td>
-                          <td>0원</td>
+                          <td>원</td>
                         </tr>
                     </table>
                 </div>

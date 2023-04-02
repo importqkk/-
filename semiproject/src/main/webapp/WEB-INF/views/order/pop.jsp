@@ -18,13 +18,10 @@
 		//추가버튼 클릭시 팝업하나더띄움
 		$(function( ){
 	        $(".insert-btn").click(function(){
-	        	if(count>=3){
-	        		
-	        		console.log(maxSize);
-	        		 alert("최대 저장가능 주소지는 4개입니다.");
-	        	}else{	
-	            	window.open("popInsert",  "popupNo1", "width=460, height=500");
-	        	}
+	        	//if써야함
+	        		//alert("최대 저장가능 주소지는 4개입니다.");
+	        	  	window.open("popInsert",  "popupNo1", "width=460, height=500");
+	        	
 	        });
 	        //버튼 클릭시 해당 행들의 값을 부모창으로 넘김
 	        $(".btn").click(function() {

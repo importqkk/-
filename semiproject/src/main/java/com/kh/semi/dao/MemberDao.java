@@ -138,6 +138,11 @@ public class MemberDao {
 	
 	
 	//멤버 포인트조회
+	public int point(String memberId) {
+		String sql="select member_point from member where member_id= ? ";
+		Object[] param= {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
 	
 	
 }
