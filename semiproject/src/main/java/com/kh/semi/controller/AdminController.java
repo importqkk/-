@@ -20,11 +20,15 @@ import com.kh.semi.dao.MainImgDao;
 import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ProductImgDao;
 import com.kh.semi.dao.ProductInfoDao;
+import com.kh.semi.dao.ProductTagDao;
+import com.kh.semi.dao.TagDao;
 import com.kh.semi.dto.DetailImgDto;
 import com.kh.semi.dto.ImgDto;
 import com.kh.semi.dto.MainImgDto;
 import com.kh.semi.dto.ProductDto;
 import com.kh.semi.dto.ProductImgDto;
+import com.kh.semi.dto.ProductTagDto;
+import com.kh.semi.dto.TagDto;
 import com.kh.semi.vo.ProductListPaginationVo;
 
 @Controller
@@ -33,6 +37,10 @@ public class AdminController {
 
 	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	private ProductTagDao productTagDao;
+	@Autowired
+	private TagDao tagDao;
 	@Autowired
 	private ImgDao imgDao;
 	@Autowired
@@ -63,12 +71,21 @@ public class AdminController {
 		return "/WEB-INF/views/admin/productManage/register.jsp";
 	}
 	@PostMapping("/productManage/register")
-	public String register(ProductDto productDto, MultipartFile img1, MultipartFile img2) 
+	public String register(@ModelAttribute ProductDto productDto, 
+			@ModelAttribute ProductTagDto productTagDto,
+			@RequestParam(required=false) int tagNo,
+			MultipartFile img1, MultipartFile img2) 
 			throws IllegalStateException, IOException {
 		// 상품 정보 등록
 		int productNo = productDao.sequence();
 		productDto.setProductNo(productNo);
 		productDao.insert(productDto);
+		// 태그 연결
+		if(tagNo > 0 && tagNo <= 8) {
+			productTagDto.setProductNo(productNo);
+			productTagDto.setTagNo(tagNo);
+			productTagDao.insert(productTagDto);
+		}
 		// 상품 대표이미지 저장 및 등록
 		if(!img1.isEmpty()) {
 			// 대표사진 번호 뽑기
@@ -120,11 +137,17 @@ public class AdminController {
 	// 상품 목록
 	@GetMapping("/productManage/list")
 	public String list(Model model,
-			@ModelAttribute("vo") ProductListPaginationVo vo) {
+			@ModelAttribute("vo") ProductListPaginationVo vo/*,
+			@ModelAttribute ProductDto productDto,
+			@ModelAttribute ProductTagDto productTagDto,
+			@ModelAttribute TagDto tagDto*/) {
 		int totalCount = productDao.selectCount(vo);
 		vo.setCount(totalCount);
 		List<ProductDto> list = productDao.list(vo);
 		model.addAttribute("list", list);
+		/*int productNo = productDto.getProductNo();
+		int tagNo = productTagDao.selectOne(productNo).getTagNo();
+		model.addAttribute("tagTitle", tagDao.selectOne(tagNo));*/
 		return "/WEB-INF/views/admin/productManage/list.jsp";
 	}
 	
@@ -161,26 +184,36 @@ public class AdminController {
 			@RequestParam int productNo) {
 		// [1] 이전 상품 정보 불러오기
 		model.addAttribute("productDto", productDao.selectOne(productNo));
-		// [2-1] 이전 대표 이미지 정보 불러오기
+		// [2] 이전 태그 정보 불러오기
+		model.addAttribute("productTagDto", productTagDao.selectOne(productNo));
+		// [3-1] 이전 대표 이미지 정보 불러오기
 		int imgNo1 = productInfoDao.selectOneForImg(productNo).getProductImgNo();
 		model.addAttribute("img1Dto", imgDao.selectOne(imgNo1));
-		// [2-2] 이전 상세 이미지 정보 불러오기
+		// [3-2] 이전 상세 이미지 정보 불러오기
 		int imgNo2 = productInfoDao.selectOneForImg(productNo).getDetailImgNo();
 		model.addAttribute("img2Dto", imgDao.selectOne(imgNo2));
 		return "/WEB-INF/views/admin/productManage/edit.jsp";
 	}
 	@PostMapping("/productManage/edit")
 	public String edit(@ModelAttribute ProductDto productDto,
+			@ModelAttribute ProductTagDto productTagDto,
+			@RequestParam(required=false) int tagNo,
 			RedirectAttributes attr,
 			MultipartFile img1, MultipartFile img2) throws IllegalStateException, IOException {
-		// [3] 상품 정보 수정
+		// [4] 상품 정보 수정
 		productDao.editInfo(productDto);
-		// [4-1] 대표 이미지를 새로 업로드했으면
+		// [5] 태그 정보 수정
+		if(tagNo > 0 && tagNo <= 8) {
+			productTagDto.setProductNo(productDto.getProductNo());
+			productTagDto.setTagNo(tagNo);
+			productTagDao.edit(productTagDto);
+		}
+		// [6-1] 대표 이미지를 새로 업로드했으면
 		if(!img1.isEmpty()) {
-			// [4-1-1] 이전 대표 이미지 삭제
+			// [6-1-1] 이전 대표 이미지 삭제
 			int imgNo1 = productInfoDao.selectOneForImg(productDto.getProductNo()).getProductImgNo();
 			imgDao.delete(imgNo1);
-			// [4-1-2] 신규 대표 이미지 업로드
+			// [6-1-2] 신규 대표 이미지 업로드
 			// 대표사진 번호 뽑기
 			imgNo1 = imgDao.sequence();
 			// 대표사진 파일 이름 설정
@@ -200,12 +233,12 @@ public class AdminController {
 					.build());
 
 		}
-		// [4-2] 상세 이미지를 새로 업로드했으면
+		// [6-2] 상세 이미지를 새로 업로드했으면
 		if(!img2.isEmpty()) {
-			// [4-2-1] 이전 상세 이미지 삭제
+			// [6-2-1] 이전 상세 이미지 삭제
 			int imgNo2 = productInfoDao.selectOneForImg(productDto.getProductNo()).getDetailImgNo();
 			imgDao.delete(imgNo2);
-			// [4-2-2] 신규 상세 이미지 업로드
+			// [6-2-2] 신규 상세 이미지 업로드
 			// 상세사진 번호 뽑기
 			imgNo2 = imgDao.sequence();
 			// 상세사진 파일 이름 설정
