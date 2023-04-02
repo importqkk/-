@@ -6,6 +6,10 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<!-- 우편주소 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/static/js/find-address.min.js"></script>
+	<!-- 우편주소 api -->
 <title>Insert title here</title>
 <style>
         
@@ -19,17 +23,40 @@
     </style>
     <script type="text/javascript">
            
-        
+        // option이 etc이면 textarea 선택
         $(function( ){
             $("#request").on("change", function(){
                 var selectedValue = $(this).val();
-                // 선택된 값이 "etc"인 경우, 텍스트 영역을 나타냅니다.
+            
                 if(selectedValue === "etc"){
                     $("#etc-text").show();
                 }else{
                     $("#etc-text").hide();
                  }
             });
+            
+            
+            $(".address-btn").click(function(){
+                
+                new daum.Postcode({ 
+                    oncomplete: function(data) {
+                       
+                        var addr = ''; 
+                        var extraAddr = ''; 
+                       
+                        if (data.userSelectedType === 'R') { 
+                            addr = data.roadAddress;
+                        } else { 
+                            addr = data.jibunAddress;
+                        }
+                        
+                        document.querySelector("[name=memberPost]").value = data.zonecode;
+                        document.querySelector("[name=memberBasicAddr]").value = addr;
+                        document.querySelector("[name=memberDetailAddr]").focus();
+                    }
+                    }).open();
+            
+        		});
         });
     </script>
 
@@ -41,6 +68,7 @@
                 <h2>신규배송지</h2>
               </div>
         </div>
+        <!-- 방법을 모르겠어서 form으로 보냄 .. -->
        <form action="/order/popInsert" method="post">
         <div>
             <div><label>수령인</label> <input type="text" name="memberName"></div>
@@ -50,7 +78,7 @@
 
             <div>
                 <label>주소</label>
-                <input type="text" name="memberPost"> <button>검색</button>
+                <input type="text" name="memberPost"> <button class="address-btn" type="button">검색</button>
             </div>
             <div>
                 <input type="text" name="memberBasicAddr">

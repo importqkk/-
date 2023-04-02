@@ -25,14 +25,16 @@
 	<!-- 우편주소 api -->
 	
 	<script type="text/javascript">
+	//팝업생성
 	$(function( ){
         $(".pop-btn").click(function(){
-            window.open("popup",  "popupNo1", "width=460, height=500")        
+            window.open("popup",  "popupNo", "width=570, height=750")        
         });
     });
+	
+     //주소api
     $(function(){
 		
-        //주소api
         $(".address-btn").click(function(){
                    
             new daum.Postcode({ 
@@ -74,10 +76,12 @@
 		}
     });
     </script>
-    
     <script>
+    
+	//결제api 진행중    
    		<script src="https://cdn.iamport.kr/v1/iamport.js">
    	</script>
+
    	<script>
     	const IMP = window.IMP; // 생략 가능
     	IMP.init("imp07065242"); // 예: imp00000000a
@@ -107,17 +111,19 @@
    
     
 </head>
-<body test>
-
+<body>
+<!-- align-items: center; -->
  <div class="container-1000">
+ 		<h1>주문/결제</h1>
   		<form action="/order/buy" method="post">
         <div class="flex">
-            <div class=" w-70 pt-20">
+            <div class=" w-70">
                 <p><h2>주문상품</h2></p>
+         <!-- 상품상세에서 온거면 -->
          <c:if test="${not empty productInfo}">
    			<c:forEach var="productInfo" items="${productInfo}" varStatus="status">
                 <div class="row flex">
-                    	<img src="https://picsum.photos/100/100" class="pe-20">
+                    	<img src="https://picsum.photos/100/100" class="">
                 			<input  type="hidden" name="productNo" value="${productInfo.productNo}">
 							<input  type="hidden" name="productPrice" value="${productInfo.productPrice}">
 			           		<input  type="hidden" name="productCount" value="${Count}">
@@ -133,6 +139,7 @@
                 </div>
            	</c:forEach>
          </c:if>
+         <!-- 카트에서 온거면 -->
          <c:if test="${not empty cartinfo}">
             <c:forEach var="cartinfo" items="${cartinfo}">
                 <div class="row flex">
@@ -146,11 +153,13 @@
                 </div>
                </c:forEach>
          </c:if>
+         
+         <!-- 배송지부분 -->
                 <div class="row left">
                    	<div class="flex"> 
-                   	<h2 class="w-80">배송지</h2>
-                   	<button class="pop-btn" type="button">버튼</button>
-                   	 주문자 정보 가져오기<input type="checkbox" class="post-check w-10"> </div> 
+                   	<h2 class="w-20">배송지</h2>
+                   	<button class="pop-btn form-btn neutral small" type="button">배송지 불러오기</button> 
+                   	 </div> 
                     <div class="row">
                         <p>받는사람</p>
                         <input type="text" class="form-input light w-100 medium" name="orderRecever">
@@ -183,27 +192,28 @@
                 </div>
                 </div>
 
+           <!--  결제정보부분 -->
            
-            
+            <!-- orderscroll - 주문상품이 많아질경우 스크롤을 내릴때 결제정보창이 따라가는 기능 -->
             <div class="orderscroll w-30">
                 <div>
                     
                     <p><h2>결제정보</h2></p>
                     <p><label>적립금</label></p>
-                    <input type="text" class="form-input medium light" name="orderUserPoint" value="0" min="0">
+                    <input type="text" class="form-input medium light" name="orderUserPoint" value="0">
                     <button class="form-btn positive medium" type="button">전액</button>
                     <p class="right">보유 적립금: <span>3000원</span></p>
                     <div class="row abc">
                         <label>제품금액: <span>3000원</span></label>
                         <div>
-                            <label>배송비 : <span class="right">1000</span></label>
+                            <label>배송비 : <span>1000</span></label>
                         </div>
                         <div> 
-                            <label>적립금 : <span class="right">1000원</span></label>
+                            <label>적립금 : <span>1000원</span></label>
     
                         </div>
                         <div>
-                            <label>총 결제금액 : <span class="right">0원</span></label>
+                            <label>총 결제금액 : <span>0원</span></label>
                         </div>
                     </div>
                     <h2>결제수단</h2>

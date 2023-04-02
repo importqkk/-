@@ -141,7 +141,7 @@ public class OrderController {
 	 }
 	
 	 
-	 //팝업창 실패 ..?
+	 //팝업창 성공???
 	 
 	 
 	 //기본주소지- 멤버회원 테이블내에있는 주소지임
@@ -176,5 +176,13 @@ public class OrderController {
 		 memberInfoDto.setMemberId(memberId);
 		 memberInfoDao.addinsert(memberInfoDto);
 		 return "redirect:popup";
+	 }
+	 
+	 //회원의 구매목록 조회
+	 @GetMapping("/myList")
+	 public String myList(HttpSession session) {
+		 String memberId=(String)session.getAttribute("memberId");
+		 
+		 return "/WEB-INF/views/order/myList.jsp";
 	 }
 }

@@ -3,32 +3,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="defaiutInfo" value="${defaiutInfo}" scope="application" />
+
 <!DOCTYPE html>
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>배송지관리 팝업</title>
 	<style>
     </style>
 	<script type="text/javascript">
+	
+	//팝업창메인
+		//추가버튼 클릭시 팝업하나더띄움
 		$(function( ){
 	        $(".insert-btn").click(function(){
 	            window.open("popInsert",  "popupNo1", "width=460, height=500");       
 	        });
-	        
+	        //버튼 클릭시 해당 행들의 값을 부모창으로 넘김
 	        $(".btn").click(function() {
-	            // form 데이터 추가 로직 (앞서 설명한 내용)
-				opener.document.getElementsByName('orderRecever')[0].value = $('input[name="orderRecever"]').val();
-				opener.document.getElementsByName('orderReceivePhone')[0].value = $('input[name="orderReceivePhone"]').val();
-				opener.document.getElementsByName('orderPost')[0].value = $('input[name="orderPost"]').val();
-				opener.document.getElementsByName('orderBasicAddr')[0].value = $('input[name="orderBasicAddr"]').val();
-				opener.document.getElementsByName('orderDetailAddr')[0].value = $('input[name="orderDetailAddr"]').val();
-				opener.document.getElementsByName('orderRequest')[0].value = $('input[name="orderRequest"]').val();
+	            //인덱스 값을 받아서 저장후
+	            var index = $(this).data("index");
+	            //해당 인덱스값들을 이름에 넣어서 불러옴
+				opener.document.getElementsByName('orderRecever')[0].value = $('span#orderRecever'+index).text();
+				opener.document.getElementsByName('orderReceivePhone')[0].value = $('span#orderReceivePhone'+index).text();
+				opener.document.getElementsByName('orderPost')[0].value = $('span#orderPost'+index).text();
+				opener.document.getElementsByName('orderBasicAddr')[0].value = $('span#orderBasicAddr'+index).text();
+				opener.document.getElementsByName('orderDetailAddr')[0].value = $('span#orderDetailAddr'+index).text();
+				opener.document.getElementsByName('orderRequest')[0].value = $('span#orderRequest'+index).text();
 	            
 	            
 	            window.close(); // 팝업창 닫기
 	          });
+
 	       
 	    });  
         
@@ -50,29 +57,30 @@
 	        
 	        
 	   <form id="myForm" action="/order/buy" method="get">
-	     <c:forEach var="allInfo" items="${allInfo}">
+	     <c:forEach var="allInfo" items="${allInfo}" varStatus="loop">
 	        	<div style="border: 1px solid black; width: 500px; padding: 10px;">
 	            	<div>
-	            		<input type="text" name="orderRecever" readonly style="border: none;" value="${allInfo.memberName}" >
+	            		
+	            		<h2>${allInfo.memberName} 님의 배송지</h2> 
+	            		수령인: <span id="orderRecever${loop.index}">${allInfo.memberName}</span>
 	            	</div>
+	            	
 		            <div>
-		            	<input type="text" name="orderReceivePhone" readonly style="border: none;" value="${allInfo.memberPhone}">
-		                
+		            	전화번호: <span id="orderReceivePhone${loop.index}">${allInfo.memberPhone}</span>
 		            </div>
+		            
 		            <div>
-		           		<input type="text" name="orderPost" readonly style="border: none;" value="${allInfo.memberPhone}">
-		           		<input type="text" name="orderBasicAddr" readonly style="border: none;" value="${allInfo.memberBasicAddr}">
-		           		<input type="text" name="orderDetailAddr" readonly style="border: none;" value="${allInfo.memberDetailAddr}">
-		           		
-		           	 
-		                
+		           		주소:(<span id="orderPost${loop.index}">${allInfo.memberPost}</span>)	     <span id="orderBasicAddr${loop.index}">${allInfo.memberBasicAddr}</span>  	<span id="orderDetailAddr${loop.index}">${allInfo.memberDetailAddr}</span>		           
 		            </div>
+		            
 		            <div>
-		           		 <input type="text" name="orderRequest" readonly style="border: none;" value="${allInfo.orderRequest}">
+		           		 <span id="orderRequest${loop.index}">${allInfo.orderRequest}</span>
 		            </div>
+		            
 		            <div>
-		                <button class="btn" type="button">선택</button>
+		                <button class="btn" type="button" data-index="${loop.index}">선택</button>
 		            </div>
+		            
 		        </div>
   		</c:forEach>
 	</form>
