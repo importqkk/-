@@ -29,6 +29,19 @@
 	    border-width: 2px;
 	    border-style: solid;
 	}
+	.category-label {
+		padding: 0;
+		flex-grow: 1;
+		display: flex;
+    	align-items: center;
+    	justify-content: center;
+	}
+	.category-label > label {
+		padding-left: 5px;
+	}
+	.category-title:not(:last-child) {
+		margin-right: 60px;
+	}
 </style>
 
 <script type="text/javascript">
@@ -42,7 +55,7 @@
 
 <div class="container-1000">
 	<form action="edit" method="post" enctype="multipart/form-data" class="edit-form" autocomplete="off">
-        <div class="row pb-30 pt-30">
+        <div class="row pb-20">
             <h1>상품 정보 수정</h1>
         </div>
         <div class="row">
@@ -55,6 +68,138 @@
             <label>브랜드</label>
             <input type="text" class="form-input medium w-100" name="productBrand" value="${productDto.productBrand}">
         	<div class="invalid-message">브랜드명은 한글, 영어, 숫자, 특수문자를 포함한 1~10자입니다.</div>
+        </div>
+        <div class="row pb-5">
+            <div class="w-100 ps-20">카테고리</div>
+           		<c:choose>
+           			<c:when test="${productTagDto.tagNo == null}">
+           				<div class="w-100 category-label invalid">
+			            	<div class="category-label flex">
+	            				<input type="radio" id="tag1" name="tagNo" value=1><label class="category-title" for="tag1">피부</label>
+							    <input type="radio" id="tag2" name="tagNo" value=2><label class="category-title" for="tag2">다이어트</label>
+							    <input type="radio" id="tag3" name="tagNo" value=3><label class="category-title" for="tag3">여성</label>
+							    <input type="radio" id="tag4" name="tagNo" value=4><label class="category-title" for="tag4">활력</label>
+							    <input type="radio" id="tag5" name="tagNo" value=5><label class="category-title" for="tag5">남성</label>
+							    <input type="radio" id="tag6" name="tagNo" value=6><label class="category-title" for="tag6">눈</label>
+							    <input type="radio" id="tag7" name="tagNo" value=7><label class="category-title" for="tag7">치아</label>
+							    <input type="radio" id="tag8" name="tagNo" value=8><label class="category-title" for="tag8">관절/뼈</label>
+							</div>
+						</div>
+           			</c:when>
+           			<c:when test="${productTagDto.tagNo == 1}">
+           				<div class="w-100 category-label">
+			            	<div class="category-label flex">
+	            				<input type="radio" id="tag1" name="tagNo" value=1 checked><label class="category-title" for="tag1">피부</label>
+							    <input type="radio" id="tag2" name="tagNo" value=2><label class="category-title" for="tag2">다이어트</label>
+							    <input type="radio" id="tag3" name="tagNo" value=3><label class="category-title" for="tag3">여성</label>
+							    <input type="radio" id="tag4" name="tagNo" value=4><label class="category-title" for="tag4">활력</label>
+							    <input type="radio" id="tag5" name="tagNo" value=5><label class="category-title" for="tag5">남성</label>
+							    <input type="radio" id="tag6" name="tagNo" value=6><label class="category-title" for="tag6">눈</label>
+							    <input type="radio" id="tag7" name="tagNo" value=7><label class="category-title" for="tag7">치아</label>
+							    <input type="radio" id="tag8" name="tagNo" value=8><label class="category-title" for="tag8">관절/뼈</label>
+							</div>
+						</div>
+           			</c:when>
+           			<c:when test="${productTagDto.tagNo == 2}">
+           				<div class="w-100 category-label">
+			            	<div class="category-label flex">
+	            				<input type="radio" id="tag1" name="tagNo" value=1><label class="category-title" for="tag1">피부</label>
+							    <input type="radio" id="tag2" name="tagNo" value=2 checked><label class="category-title" for="tag2">다이어트</label>
+							    <input type="radio" id="tag3" name="tagNo" value=3><label class="category-title" for="tag3">여성</label>
+							    <input type="radio" id="tag4" name="tagNo" value=4><label class="category-title" for="tag4">활력</label>
+							    <input type="radio" id="tag5" name="tagNo" value=5><label class="category-title" for="tag5">남성</label>
+							    <input type="radio" id="tag6" name="tagNo" value=6><label class="category-title" for="tag6">눈</label>
+							    <input type="radio" id="tag7" name="tagNo" value=7><label class="category-title" for="tag7">치아</label>
+							    <input type="radio" id="tag8" name="tagNo" value=8><label class="category-title" for="tag8">관절/뼈</label>
+							</div>
+						</div>
+           			</c:when>
+           			<c:when test="${productTagDto.tagNo == 3}">
+           				<div class="w-100 category-label">
+			            	<div class="category-label flex">
+	            				<input type="radio" id="tag1" name="tagNo" value=1><label class="category-title" for="tag1">피부</label>
+							    <input type="radio" id="tag2" name="tagNo" value=2><label class="category-title" for="tag2">다이어트</label>
+							    <input type="radio" id="tag3" name="tagNo" value=3 checked><label class="category-title" for="tag3">여성</label>
+							    <input type="radio" id="tag4" name="tagNo" value=4><label class="category-title" for="tag4">활력</label>
+							    <input type="radio" id="tag5" name="tagNo" value=5><label class="category-title" for="tag5">남성</label>
+							    <input type="radio" id="tag6" name="tagNo" value=6><label class="category-title" for="tag6">눈</label>
+							    <input type="radio" id="tag7" name="tagNo" value=7><label class="category-title" for="tag7">치아</label>
+							    <input type="radio" id="tag8" name="tagNo" value=8><label class="category-title" for="tag8">관절/뼈</label>
+							</div>
+						</div>
+           			</c:when>
+           			<c:when test="${productTagDto.tagNo == 4}">
+           				<div class="w-100 category-label">
+			            	<div class="category-label flex">
+	            				<input type="radio" id="tag1" name="tagNo" value=1><label class="category-title" for="tag1">피부</label>
+							    <input type="radio" id="tag2" name="tagNo" value=2><label class="category-title" for="tag2">다이어트</label>
+							    <input type="radio" id="tag3" name="tagNo" value=3><label class="category-title" for="tag3">여성</label>
+							    <input type="radio" id="tag4" name="tagNo" value=4 checked><label class="category-title" for="tag4">활력</label>
+							    <input type="radio" id="tag5" name="tagNo" value=5><label class="category-title" for="tag5">남성</label>
+							    <input type="radio" id="tag6" name="tagNo" value=6><label class="category-title" for="tag6">눈</label>
+							    <input type="radio" id="tag7" name="tagNo" value=7><label class="category-title" for="tag7">치아</label>
+							    <input type="radio" id="tag8" name="tagNo" value=8><label class="category-title" for="tag8">관절/뼈</label>
+							</div>
+						</div>
+           			</c:when>
+           			<c:when test="${productTagDto.tagNo == 5}">
+           				<div class="w-100 category-label">
+			            	<div class="category-label flex">
+	            				<input type="radio" id="tag1" name="tagNo" value=1><label class="category-title" for="tag1">피부</label>
+							    <input type="radio" id="tag2" name="tagNo" value=2><label class="category-title" for="tag2">다이어트</label>
+							    <input type="radio" id="tag3" name="tagNo" value=3><label class="category-title" for="tag3">여성</label>
+							    <input type="radio" id="tag4" name="tagNo" value=4><label class="category-title" for="tag4">활력</label>
+							    <input type="radio" id="tag5" name="tagNo" value=5 checked><label class="category-title" for="tag5">남성</label>
+							    <input type="radio" id="tag6" name="tagNo" value=6><label class="category-title" for="tag6">눈</label>
+							    <input type="radio" id="tag7" name="tagNo" value=7><label class="category-title" for="tag7">치아</label>
+							    <input type="radio" id="tag8" name="tagNo" value=8><label class="category-title" for="tag8">관절/뼈</label>
+							</div>
+						</div>
+           			</c:when>
+           			<c:when test="${productTagDto.tagNo == 6}">
+           				<div class="w-100 category-label">
+			            	<div class="category-label flex">
+	            				<input type="radio" id="tag1" name="tagNo" value=1><label class="category-title" for="tag1">피부</label>
+							    <input type="radio" id="tag2" name="tagNo" value=2><label class="category-title" for="tag2">다이어트</label>
+							    <input type="radio" id="tag3" name="tagNo" value=3><label class="category-title" for="tag3">여성</label>
+							    <input type="radio" id="tag4" name="tagNo" value=4><label class="category-title" for="tag4">활력</label>
+							    <input type="radio" id="tag5" name="tagNo" value=5><label class="category-title" for="tag5">남성</label>
+							    <input type="radio" id="tag6" name="tagNo" value=6 checked><label class="category-title" for="tag6">눈</label>
+							    <input type="radio" id="tag7" name="tagNo" value=7><label class="category-title" for="tag7">치아</label>
+							    <input type="radio" id="tag8" name="tagNo" value=8><label class="category-title" for="tag8">관절/뼈</label>
+							</div>
+						</div>
+           			</c:when>
+           			<c:when test="${productTagDto.tagNo == 7}">
+           				<div class="w-100 category-label">
+			            	<div class="category-label flex">
+	            				<input type="radio" id="tag1" name="tagNo" value=1><label class="category-title" for="tag1">피부</label>
+							    <input type="radio" id="tag2" name="tagNo" value=2><label class="category-title" for="tag2">다이어트</label>
+							    <input type="radio" id="tag3" name="tagNo" value=3><label class="category-title" for="tag3">여성</label>
+							    <input type="radio" id="tag4" name="tagNo" value=4><label class="category-title" for="tag4">활력</label>
+							    <input type="radio" id="tag5" name="tagNo" value=5><label class="category-title" for="tag5">남성</label>
+							    <input type="radio" id="tag6" name="tagNo" value=6><label class="category-title" for="tag6">눈</label>
+							    <input type="radio" id="tag7" name="tagNo" value=7 checked><label class="category-title" for="tag7">치아</label>
+							    <input type="radio" id="tag8" name="tagNo" value=8><label class="category-title" for="tag8">관절/뼈</label>
+							</div>
+						</div>
+           			</c:when>
+           			<c:when test="${productTagDto.tagNo == 8}">
+           				<div class="w-100 category-label">
+			            	<div class="category-label flex">
+	            				<input type="radio" id="tag1" name="tagNo" value=1><label class="category-title" for="tag1">피부</label>
+							    <input type="radio" id="tag2" name="tagNo" value=2><label class="category-title" for="tag2">다이어트</label>
+							    <input type="radio" id="tag3" name="tagNo" value=3><label class="category-title" for="tag3">여성</label>
+							    <input type="radio" id="tag4" name="tagNo" value=4><label class="category-title" for="tag4">활력</label>
+							    <input type="radio" id="tag5" name="tagNo" value=5><label class="category-title" for="tag5">남성</label>
+							    <input type="radio" id="tag6" name="tagNo" value=6><label class="category-title" for="tag6">눈</label>
+							    <input type="radio" id="tag7" name="tagNo" value=7><label class="category-title" for="tag7">치아</label>
+							    <input type="radio" id="tag8" name="tagNo" value=8 checked><label class="category-title" for="tag8">관절/뼈</label>
+							</div>
+						</div>
+           			</c:when>
+           		</c:choose>
+            <div class="invalid-message pt-10">올바른 카테고리를 1개 선택해주세요.</div>
         </div>
         <div class="row">
             <label>가격</label>
@@ -105,7 +250,7 @@
         <div class="row">
         	<button type="submit" class="form-btn medium positive w-100">수정하기</button>
         </div>
-        <div class="row pb-30">
+        <div class="row">
         	<a class="form-btn medium neutral w-100 back-btn" href="/admin/productManage/list">돌아가기</a>
         </div>
     </form>
