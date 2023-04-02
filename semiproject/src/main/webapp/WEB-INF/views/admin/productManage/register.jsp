@@ -27,14 +27,32 @@
 	    border-width: 2px;
 	    border-style: solid;
 	}
+	.category-label {
+		padding: 0;
+		flex-grow: 1;
+		display: flex;
+    	align-items: center;
+    	justify-content: center;
+	}
+	.category-label > label {
+		padding-left: 5px;
+	}
+	.category-title:not(:last-child) {
+		margin-right: 60px;
+	}
 </style>
 <script type="text/javascript">
-	
+	$(function() {
+		$(".back-btn").click(function() {
+			var result = confirm("되돌아가면 수정하던 내용이 저장되지 않습니다.\n정말 돌아가시겠습니까?");
+			if(!result) return false;
+		})
+	})
 </script>
 
 <div class="container-1000">
 	<form action="register" method="post" enctype="multipart/form-data" class="register-form" autocomplete="off">
-        <div class="row pb-30">
+        <div class="row pb-20">
             <h1>상품 등록</h1>
         </div>
         <div class="row">
@@ -47,6 +65,22 @@
             <label>브랜드</label>
             <input type="text" class="form-input medium w-100" name="productBrand">
             <div class="invalid-message">브랜드명은 한글, 영어, 숫자, 특수문자를 포함한 1~10자입니다.</div>
+        </div>
+        <div class="row pb-5">
+            <div class="w-100 ps-20">카테고리</div>
+            <div class="w-100 category-label invalid">
+            	 <div class="category-label flex">
+				     <input type="radio" id="tag1" name="tagNo" value=1><label class="category-title" for="tag1">피부</label>
+				     <input type="radio" id="tag2" name="tagNo" value=2><label class="category-title" for="tag2">다이어트</label>
+				     <input type="radio" id="tag3" name="tagNo" value=3><label class="category-title" for="tag3">여성</label>
+				     <input type="radio" id="tag4" name="tagNo" value=4><label class="category-title" for="tag4">활력</label>
+				     <input type="radio" id="tag5" name="tagNo" value=5><label class="category-title" for="tag5">남성</label>
+				     <input type="radio" id="tag6" name="tagNo" value=6><label class="category-title" for="tag6">눈</label>
+				     <input type="radio" id="tag7" name="tagNo" value=7><label class="category-title" for="tag7">치아</label>
+				     <input type="radio" id="tag8" name="tagNo" value=8><label class="category-title" for="tag8">관절/뼈</label>
+				</div>
+			</div>
+            <div class="invalid-message pt-10">올바른 카테고리를 1개 선택해주세요.</div>
         </div>
         <div class="row">
             <label>가격</label>
@@ -88,8 +122,11 @@
             <textarea class="w-100" name="productContent"></textarea>
             <div class="invalid-message">상품 설명은 1자 이상, 1,000자 이하로 입력할 수 있습니다.</div>
         </div>
-        <div class="row pb-30">
-        	<button type="submit" class="form-btn medium positive w-100 register-btn">등록</button>
+        <div class="row">
+        	<button type="submit" class="form-btn medium positive w-100 register-btn">등록하기</button>
+        </div>
+        <div class="row">
+        	<a class="form-btn medium neutral w-100 back-btn" href="/admin/productManage/list">돌아가기</a>
         </div>
     </form>
 </div>
