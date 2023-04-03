@@ -26,7 +26,7 @@
 		<div class="reviewContent"></div>
 		<div class="reviewLike">
 			<span class="heart-count">${reviewDto.reviewLike}</span>
-		<div>
+		</div>
 	</div>
 </script>
 
@@ -48,7 +48,7 @@
 			<div class="flex w-50 right">
                 <button type="button" class="form-btn small neutral review-cancel-btn me-10">취소</button>
                 <button type="button" class="form-btn small positive review-edit-btn">수정</button>
-            	</div> 
+            </div>  
 		</div>
 	</div>
 </script>

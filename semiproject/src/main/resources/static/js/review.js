@@ -202,8 +202,8 @@ function editReview(){
 		}
 		
 		$editPanel.find('.reviewStar .starR').click(function () {
-        	$(this).parent().children('.starR').removeClass('on').removeClass('fa-solid');
-        	$(this).addClass('fa-solid').addClass('on').prevAll('.starR').addClass('on').addClass('fa-solid');
+        	$(this).parent().children('.starR').removeClass('on').removeClass('fa-solid').addClass('fa-regular');
+        	$(this).addClass('fa-solid').addClass('on').prevAll('.starR').addClass('on').addClass('fa-solid'); 
     	});
     	
 		$editPanel.show();
