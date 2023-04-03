@@ -110,12 +110,12 @@
         <div class="row">
             <label>대표이미지</label>
             <input type="file" class="form-input medium w-100" name="img1" accept=".png, .gif, .jpg">
-            <div class="invalid-message">등록할 수 있는 용량을 초과하는 파일입니다.</div>
+            <div class="invalid-message">1mb 이하의 이미지만 업로드할 수 있습니다.</div>
         </div>
         <div class="row">
             <label>상세이미지</label>
             <input type="file" class="form-input medium w-100" name="img2" accept=".png, .gif, .jpg">
-            <div class="invalid-message">등록할 수 있는 용량을 초과하는 파일입니다.</div>
+            <div class="invalid-message">1mb 이하의 이미지만 업로드할 수 있습니다.</div>
         </div>
         <div class="row">
             <label class="w-100">상품 설명</label>

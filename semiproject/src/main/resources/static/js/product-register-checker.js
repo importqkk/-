@@ -5,7 +5,6 @@ $(function(){
 	var valid = {
 		productNameValid:false,
 		productBrandValid:false,
-		/*productTypeValid:false,*/
 		productContentValid:false,
 		productPriceValid:false,
 		productStockValid:false,
@@ -13,14 +12,14 @@ $(function(){
 		productSellCountValid: false,
 		productJoinValid: false,
 		tagNoValid: false,
-		/*img1Valid: false,
-		img2Valid: false,*/
+		img1Valid: false,
+		img2Valid: false,
 		isAllValid:function() {
 			return this.productNameValid && this.productBrandValid 
 			&& this.productContentValid && this.productPriceValid 
 			&& this.productStockValid && this.productDeliveryPriceValid 
 			&& this.productSellCountValid && this.productJoinValid && this.tagNoValid
-			/*&& this.img1Valid && this.img2Valid*/;
+			&& this.img1Valid && this.img2Valid;
 		}
 	}
 	
@@ -83,18 +82,30 @@ $(function(){
 	    var hasInvalidChild = $(this).parent().parent().find(".invalid").length > 0;
 	    $(this).parent().parent().removeClass("valid invalid").addClass(hasInvalidChild ? "invalid" : "valid");
 	});
-	/*// 대표이미지 크기 검사
-	$("[name=img1]").blur(function() {
-		var isValid = $(this).val().length <= 9223372036854775807 && $(this).val().length > 0;
-		valid.img1Valid = isValid;
-		$(this).removeClass("valid invalid").addClass(isValid ? "valid" : "invalid");
-	})
+	// 대표이미지 크기 검사
+	$("[name=img1]").change(function() {
+	    var file = this.files[0];
+	    var reader = new FileReader();
+	    reader.onload = function(event) {
+	        var fileSize = event.target.result.length;
+	        var isValid = fileSize <= 1048576 && fileSize > 0;
+	        valid.img1Valid = isValid;
+	        $("[name=img1]").removeClass("valid invalid").addClass(isValid ? "valid" : "invalid");
+	    };
+	    reader.readAsBinaryString(file);
+	});
 	// 상세이미지 크기 검사
-	$("[name=img2]").blur(function() {
-		var isValid = $(this).val().length <= 9223372036854775807 && $(this).val().length > 0;
-		valid.img2Valid = isValid;
-		$(this).removeClass("valid invalid").addClass(isValid ? "valid" : "invalid");
-	})*/
+	$("[name=img2]").change(function() {
+	    var file = this.files[0];
+	    var reader = new FileReader();
+	    reader.onload = function(event) {
+	        var fileSize = event.target.result.length;
+	        var isValid = fileSize <= 1048576 && fileSize > 0;
+	        valid.img2Valid = isValid;
+	        $("[name=img2]").removeClass("valid invalid").addClass(isValid ? "valid" : "invalid");
+	    };
+	    reader.readAsBinaryString(file);
+	});
 	
 	// form 검사
 	$(".register-form").submit(function(e) {

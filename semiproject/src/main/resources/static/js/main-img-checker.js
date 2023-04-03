@@ -4,10 +4,10 @@ $(function(){
 
 	var valid = {
 		mainTitleValid:false,
-		/*imgValid: false,*/
+		imgValid: false,
 		isAllValid:function() {
 			return this.mainTitleValid
-			/*&& this.img1Valid*/;
+			&& this.img1Valid;
 		}
 	}
 	
@@ -17,12 +17,19 @@ $(function(){
 		valid.mainTitleValid = isValid;
 		$(this).removeClass("valid invalid").addClass(isValid ? "valid" : "invalid");
 	})
-	/*// 메인 이미지 크기 검사
-	$("[name=img]").blur(function() {
-		var isValid = $(this).val().length <= 9223372036854775807 && $(this).val().length > 0;
-		valid.imgValid = isValid;
-		$(this).removeClass("valid invalid").addClass(isValid ? "valid" : "invalid");
-	})*/
+	// 메인 이미지 크기 검사
+	$("[name=img]").change(function() {
+	    var file = this.files[0];
+	    var reader = new FileReader();
+	    reader.onload = function(event) {
+	        var fileSize = event.target.result.length;
+	        var isValid = fileSize <= 1048576 && fileSize > 0;
+	        valid.imgValid = isValid;
+	        $("[name=img]").removeClass("valid invalid").addClass(isValid ? "valid" : "invalid");
+	    };
+	    reader.readAsBinaryString(file);
+	});
+
 	
 	// form 검사
 	$(".upload-form").submit(function(e) {

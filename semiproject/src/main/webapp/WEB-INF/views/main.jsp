@@ -142,6 +142,13 @@
 		        <div class="row pb-30">
 		            <div class="swiper">
 		                <div class="swiper-wrapper center">
+		                	<c:if test="${mainImgList == null}">
+		                		<div class="swiper-slide">
+	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
+	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
+	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
+		                    	</div>
+		                	</c:if>
 		                	<c:forEach var="mainImgConnectDto" items="${mainImgList}">
 		                    	<div class="swiper-slide">
 	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
@@ -221,7 +228,7 @@
 			                <a class="link item-box" href="/product/detail?productNo=${productInfoDto.productNo}">
 			                    <div>
 			                    	<c:choose>
-					            		<c:when test="${productInfoDto.imgNo != 0}">
+					            		<c:when test="${productInfoDto.productImgNo != 0}">
 					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 				 	            		</c:when>
 					            		<c:otherwise>
@@ -303,7 +310,7 @@
 			                    <a class="link item-box" href="/product/detail?productNo=${productInfoDto.productNo}">
 			                        <div>
 			                            <c:choose>
-						            		<c:when test="${productInfoDto.imgNo != 0}">
+						            		<c:when test="${productInfoDto.productImgNo != 0}">
 						            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 					 	            		</c:when>
 						            		<c:otherwise>
@@ -390,7 +397,7 @@
 			                <a class="link item-box" href="/product/detail?productNo=${productInfoDto.productNo}">
 			                    <div>
 			                    	<c:choose>
-					            		<c:when test="${productInfoDto.imgNo != 0}">
+					            		<c:when test="${productInfoDto.productImgNo != 0}">
 					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 				 	            		</c:when>
 					            		<c:otherwise>

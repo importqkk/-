@@ -52,7 +52,7 @@
 	    <div class="row pb-20">
 	        <label>파일</label>
 	        <input type="file" class="form-input medium w-100" name="img" accept=".png, .gif, .jpg">
-	    	<div class="invalid-message">등록할 수 있는 용량을 초과하는 파일입니다.</div>
+	    	<div class="invalid-message">1mb 이하의 이미지만 업로드할 수 있습니다.</div>
 	    </div>
 	    <div class="row">
 	        <button type="submit" class="form-btn medium positive w-100 upload-btn">등록하기</button>

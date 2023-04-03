@@ -227,20 +227,30 @@
         	<div class="invalid-message">등록일은 yyyy-mm-dd 형식으로 입력할 수 있습니다.</div>
         </div>
         <div class="row">
-            <label class="w-100">대표이미지</label>
+            <label class="w-100 flex">
+            	<div class="w-50">
+            		대표이미지
+            	</div>
+            	<div class="w-50 right pe-20">
+            		기존 파일: ${img1Dto.imgName} / 
+            		<fmt:formatNumber pattern="#,##0" value="${img1Dto.imgSize/1024}"></fmt:formatNumber>kb
+            	</div>
+            </label>
             <input type="file" class="form-input medium w-100" name="img1" accept=".png, .gif, .jpg">
-            <span class="pe-20 flex right">기존 파일: ${img1Dto.imgName} / 
-            	<fmt:formatNumber pattern="#,##0" value="${img1Dto.imgSize/1024}"></fmt:formatNumber>kb
-            </span>
-        	<div class="invalid-message">등록할 수 있는 용량을 초과하는 파일입니다.</div>
+        	<div class="invalid-message">1mb 이하의 이미지만 업로드할 수 있습니다.</div>
         </div>
         <div class="row">
-            <label class="w-100">상세이미지</label>
+            <label class="w-100 flex">
+            	<div class="w-50">
+	            	상세이미지
+	            </div>
+	            <div class="w-50 right pe-20">
+	            	기존 파일: ${img2Dto.imgName} / 
+            		<fmt:formatNumber pattern="#,##0" value="${img2Dto.imgSize/1024}"></fmt:formatNumber>kb
+	            </div>
+	        </label>
             <input type="file" class="form-input medium w-100" name="img2" accept=".png, .gif, .jpg">
-            <span class="pe-20 flex right">기존 파일: ${img2Dto.imgName} / 
-            	<fmt:formatNumber pattern="#,##0" value="${img2Dto.imgSize/1024}"></fmt:formatNumber>kb
-            </span>
-        	<div class="invalid-message">등록할 수 있는 용량을 초과하는 파일입니다.</div>
+        	<div class="invalid-message">1mb 이하의 이미지만 업로드할 수 있습니다.</div>
         </div>
         <div class="row">
             <label class="w-100">상품 설명</label>
