@@ -888,7 +888,7 @@ input[type="checkbox"] {
   뒤에 있는 실패메세지(.invalid-message)를 표시 
 */
 .invalid ~ .invalid-message {
-  display: block;
+  display: block;  
 }
 .invalid2 ~ .invalid-message2 {
   display: block;
