@@ -1,7 +1,5 @@
-	package com.kh.semi.dto;
-
+package com.kh.semi.dto;
 import java.sql.Date;
-
 import lombok.Data;
 
 @Data
@@ -21,6 +19,5 @@ public class MemberDto {
 	private String agreeTos;	
 	private String agreePrivacy;	
 	private String agreePromotion;	
-	
 	
 }
