@@ -67,8 +67,13 @@ public class ProductController {
 		ReviewDto reviewDto = reviewDao.selectOne(memberId, productNo);
 		model.addAttribute("reviewDto",reviewDto);
 		
+		boolean hasBuyHistory = buyHistoryDto != null && buyHistoryDto.getProductNo() == productNo;
+		model.addAttribute("hasBuyHistory", hasBuyHistory);
+		
 		return "/WEB-INF/views/product/detail.jsp";
 	}
+	
+	
 	
 	// 상품 검색 결과 페이지
 	@GetMapping("/search")
