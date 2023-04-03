@@ -38,8 +38,6 @@ public class MainController {
 		// 베스트상품 정렬
 		List<ProductInfoDto> bestProduct = productInfoDao.bestList();
 		model.addAttribute("bestProduct", bestProduct);
-		
 		return "/WEB-INF/views/main.jsp";
 	}
-	
 }

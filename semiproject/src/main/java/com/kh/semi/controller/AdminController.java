@@ -183,7 +183,7 @@ public class AdminController {
 	public String edit(Model model, 
 			@RequestParam int productNo) {
 		// [1] 이전 상품 정보 불러오기
-		model.addAttribute("productDto", productDao.selectOne(productNo));
+		model.addAttribute("productDto", productDao.selectOneInfo(productNo));
 		// [2] 이전 태그 정보 불러오기
 		model.addAttribute("productTagDto", productTagDao.selectOne(productNo));
 		// [3-1] 이전 대표 이미지 정보 불러오기

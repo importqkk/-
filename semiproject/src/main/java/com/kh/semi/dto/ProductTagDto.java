@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 public class ProductTagDto {
 
 	private int productNo, tagNo;
-	
+
 }

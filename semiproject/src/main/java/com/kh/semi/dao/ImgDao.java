@@ -66,5 +66,4 @@ public class ImgDao {
 		Object[] param = {imgNo};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
-	
 }

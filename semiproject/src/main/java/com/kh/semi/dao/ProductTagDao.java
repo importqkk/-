@@ -2,7 +2,6 @@ package com.kh.semi.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -39,13 +38,6 @@ public class ProductTagDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
-	// 삭제 (delete on cascade라 필요 없나?)
-//	public boolean delete(ProductTagDto productTagDto) {
-//		String sql = "delete product_tag where product_no=?, and tag_no=?";
-//		Object[] param = {productTagDto.getProductNo(), productTagDto.getTagNo()};
-//		return jdbcTemplate.update(sql, param) > 0;
-//	}
-	
 	// 조회
 	public ProductTagDto selectOne(int productNo) {
 		String sql = "select * from product_tag where product_no=?";
@@ -53,5 +45,4 @@ public class ProductTagDao {
 		List<ProductTagDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
 }

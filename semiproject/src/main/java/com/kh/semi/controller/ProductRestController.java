@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest")
 public class ProductRestController {
-   
-   private String number = "1"; 
-   
-   @PostMapping("/number")
-   public Map<String, Object> changeNumber(@RequestBody Map<String, String> data) {
-      String newNumber = data.get("number");
-      number = newNumber;      
-      Map<String, Object> resultMap = new HashMap<>();
-      resultMap.put("number", number);
-      return resultMap;
-   }
+	
+	private String number = "1"; 
+	
+	@PostMapping("/number")
+	public Map<String, Object> changeNumber(@RequestBody Map<String, String> data) {
+		String newNumber = data.get("number");
+		number = newNumber;		
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("number", number);
+		return resultMap;
+	}
 }
