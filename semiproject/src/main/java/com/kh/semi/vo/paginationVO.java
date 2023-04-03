@@ -72,14 +72,5 @@ public class paginationVO {
 	public int getNextPage() {
 		return getFinishBlock() + 1;
 	}
-//	//현재 페이지 번호
-//	private int pageNum;
-//	
-//	//페이지 표시 개수
-//	private int amount;
-//	
-//	//상품 번호
-//	private int productNo;
-	
 
 }

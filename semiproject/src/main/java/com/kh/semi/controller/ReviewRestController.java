@@ -105,19 +105,5 @@ public class ReviewRestController {
 		return reviewLikeDao.check(reviewLikeDto);
 	}
 	
-	@PostMapping("/reviewCountCheck")
-	public boolean check(HttpSession session,
-						@ModelAttribute ReviewDto reviewDto) {
-		String memberId = (String) session.getAttribute("memberId");
-		int productNo = (int) session.getAttribute("productNo");
-		
-		if(productNo == reviewDto.getProductNo()) {
-			reviewDto.setMemberId(memberId);
-			reviewDto.setProductNo(productNo);
-			return reviewDao.reviewCheck(reviewDto);
-		} else {
-			return false;
-		}
-	}
 
 }

@@ -36,11 +36,6 @@ public class ReviewController {
 	                   Model model,
 	                   HttpSession session) {
 	    String memberId = (String) session.getAttribute("memberId");
-//	    ReviewDto reviewDto = reviewDao.selectOne(memberId);
-//	    int productNo = reviewDto.getProductNo();
-//	    
-//	    ProductDto productDto = productDao.selectOne(productNo);
-//	    model.addAttribute("productDto",productDto);
 	    
 	    int totalCount = reviewDao.selectCount(vo, memberId);
 	    vo.setCount(totalCount);

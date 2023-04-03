@@ -101,51 +101,23 @@ $(function(){
 	            <i class="fa-regular fa-star starR" value="4"></i>
 	            <i class="fa-regular fa-star starR" value="5"></i>
 	        </div>
-	        
-<%-- 			<c:choose> --%>
-<%-- 			    <c:when test="${hasBuyHistory}"> --%>
-<!-- 			        <div class="view-panel center"> -->
-<!-- 			            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button> -->
-<!-- 			        </div> -->
-<%-- 			    </c:when> --%>
-<%-- 			    <c:otherwise> --%>
-<!-- 			        <div class="view-panel center"> -->
-<!-- 			            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button> -->
-<!-- 			        </div> -->
-<%-- 			    </c:otherwise> --%>
-<%-- 			</c:choose> --%>
 
-						<div class="view-panel center">
-							<button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button>
-					    </div>
+			<!-- 리뷰 작성하기 창 -->
+			<div class="view-panel center">
+					<button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button>
+			</div>
 
-	        
-<!-- 	         리뷰 등록하기 버튼 -->
-<!-- 	         <div class="view-panel center"> -->
-<!-- 	         	<button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button> -->
-<!-- 	         </div> -->
-	         
-	       
 	       <!-- 리뷰 작성창 -->
 	        <div class="row review-content">
 	            <textarea name="reviewContent" class="form-input w-100 semi-round" style="min-height:100px"></textarea>
 	        </div>
 	        <div class="flex w-100 btn-panel">
 	            <div class="w-50">
-	                <label class="input-file-button" for="chooseFile">
-	                    사진등록
-	                </label>
-	                <input type="file" id="chooseFile" name="attach" class="form-input w-10">
 	            </div>
 	            <div class="flex w-50 right">
 	                <button type="button" class="form-btn small neutral cancel-btn me-10">취소</button>
 	                <button type="button" class="form-btn small positive review-insert-btn">등록</button>
 	            </div> 
-	            <div class="row">
-	            	<div class="row target">
-	            	
-	            	</div>
-	            </div>
 	        </div>
 		</div>
         

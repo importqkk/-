@@ -7,102 +7,23 @@ $(function(){
         console.log(starRating); // 선택된 별점의 value 값 출력
     });
 });
-//$(function(){
-//      $(".review-content").hide();
-//      $(".btn-panel").hide();
-//      $(".review-star").hide();
-//      $(".edit-btn").click(function(){
-//      $(".view-panel").hide();
-//      $(".review-content").show();
-//      $(".btn-panel").show();
-//      $(".review-star").show();
-//    })
-//      $(".cancel-btn").click(function(){
-//      $(".view-panel").show();
-//      $(".review-content").hide();
-//      $(".btn-panel").hide();
-//      $(".review-star").hide();
-//    })
-//});
-
-//function loadReviews(page) {
-//    $.ajax({
-//        url: '/reviews',
-//        type: 'GET',
-//        data: {page: page},
-//        dataType: 'html',
-//        success: function(data) {
-//            $('#review-list').html(data);
-//        }
-//    });
-//}
-//
-//$(document).on('click', '.pagination-link', function() {
-//    var page = $(this).data('page');
-//    loadReviews(page);
-//});
-
-
-
-
-
-
 $(function(){
-    $("[name=attach]").change(function(){
-
-        if(this.files.length != 1) return;
-
-        var fd = new FormData();
-        fd.append("img", this.files[0]);
-
-        // 비동기적으로 파일 업로드
-        $.ajax({
-            url:"/rest/img/upload",
-            method:"post",
-            data:fd,
-            processData:false,
-            contentType:false,
-            success:function(response){
-                //이미지 번호 정보 생성
-                var input = $("<input>").attr("type", "hidden")
-                                        .attr("name", "imgNo")
-                                        .val(response.imgNo);
-                
-                
-                //미리보기
-                var reviewImage = $("<img>").attr("src", "/rest/img/download/"+response.imgNo);
-                $(".target").append(reviewImage);
-            },
-            error:function(){
-                console.error("오류 발생");
-            }
-        });
-    });
+      $(".review-content").hide();
+      $(".btn-panel").hide();
+      $(".review-star").hide();
+      $(".edit-btn").click(function(){
+      $(".view-panel").hide();
+      $(".review-content").show();
+      $(".btn-panel").show();
+      $(".review-star").show();
+    })
+      $(".cancel-btn").click(function(){
+      $(".view-panel").show();
+      $(".review-content").hide();
+      $(".btn-panel").hide();
+      $(".review-star").hide();
+    })
 });
-
-//function checkReview() {
-//  $.ajax({
-//    url: "/rest/review/reviewCountCheck",
-//    type: "POST",
-//    success: function(response) {
-//      if (response) {
-//        // 리뷰가 존재하는 경우, 메시지를 띄워준다.
-//        alert("이미 작성된 리뷰가 있습니다. 리뷰는 1회만 작성 가능합니다.");
-//      } else {
-//        // 리뷰가 존재하지 않는 경우, 리뷰 작성 페이지로 이동한다.
-//         $(".view-panel").hide();
-//	     $(".review-content").show();
-//         $(".btn-panel").show();
-//         $(".review-star").show();
-//      }
-//    },
-//    error: function(error) {
-//      console.log(error);
-//    }
-//  });
-//}
-
-
 
 
 $(function(){
@@ -142,7 +63,6 @@ $(function(){
 			    $(".review-star").hide();
 			    $(".view-panel").show();
 			    location.reload();
-				
 			},
 			error:function(){
 				alert("등록 오류 발생");
