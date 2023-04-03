@@ -38,7 +38,6 @@
         .menu-btn,
         .close-btn {
             font-size: 40px;
-            margin-top: 3px;
             cursor: pointer;
         }
         .close-btn {
@@ -58,7 +57,11 @@
             cursor: pointer;
         }
         .menu-item:hover {
-            background-color: #f8f8ff;
+        	padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            border-radius: 100px;
+            cursor: pointer;
         }
         .fa-cart-shopping,
         .fa-user {
@@ -175,6 +178,7 @@
             function() {
                 $(this).find("h3").css("color", "");
                 $(this).find(".fa").css("color", "");
+
             })
         })
     </script>
@@ -190,11 +194,18 @@
                         <div class="w-20">
                             <i class="fa-solid fa-bars fa-2x c-p100 menu-btn"></i>
                             <i class="fa-solid fa-xmark fa-2x c-p100 close-btn"></i>
+
+                            <i class="fa-solid fa-bars fa-2x c-p100 mt-15 menu-btn"></i>
+                            <i class="fa-solid fa-xmark fa-2x c-p100 mt-10 close-btn"></i>
+
                         </div>
                         <div class="w-100 center">
                             <h1 class="c-p100 logo" style="font-size: 50px;">
                                 <a class="link" style="color: #776BFF;" href="/">SEMI</a>
                             </h1>
+                                <h1 class="c-p100 logo" style="font-size: 50px;">
+                                    <a class="link" style="color: #776BFF;" href="#">SEMI</a>
+                                </h1>
                         </div>
                     </div>
                     <div class="center w-60">
@@ -205,6 +216,10 @@
                             <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         </form>
+                        <div class="search-box">
+                            <input class="search-input w-100">
+                            <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
                     </div>
                     <!-- <div class="center w-50">
                         <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
@@ -212,9 +227,15 @@
                     <div class="right w-15">
                         <a class="link" href="/cart/main">
                             <i class="fa-solid fa-cart-shopping c-p100 pe-30"></i>
+                        <a class="link" href="#">
+                            <i class="fa-solid fa-cart-shopping custom-size c-p100 pe-30 mt-25"></i>
+
                         </a>
                         <a class="link" href="#">
                             <i class="fa-solid fa-user c-p100"></i>
+                        <a class="link" href="/member/login"> 
+                            <i class="fa-solid fa-user custom-size c-p100 mt-25"></i>
+
                         </a>
                     </div>
                 </div>

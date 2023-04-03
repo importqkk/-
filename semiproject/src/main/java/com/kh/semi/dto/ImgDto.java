@@ -12,4 +12,5 @@ public class ImgDto {
 	private String imgName;
 	private String imgType;
 	private long imgSize;
+
 }

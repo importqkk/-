@@ -1,9 +1,13 @@
 package com.kh.semi.controller;
+<<<<<<< HEAD
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+=======
+import javax.servlet.http.HttpSession;
+>>>>>>> refs/remotes/origin/main
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +19,12 @@ import com.kh.semi.dao.BuyHistoryDao;
 import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ReviewDao;
 import com.kh.semi.dto.BuyHistoryDto;
+
 import com.kh.semi.dto.ProductInfoDto;
+import com.kh.semi.dto.ReviewDto;
+
+
+import com.kh.semi.dto.ProductDto;
 import com.kh.semi.dto.ReviewDto;
 
 
@@ -102,4 +111,28 @@ public class ProductController {
 		
 		return "/WEB-INF/views/product/search.jsp";
 	}
+	
+	
+	@GetMapping("/detail")
+	public String detail(@RequestParam int productNo,
+							Model model,
+							HttpSession session) {
+				
+				
+		ProductInfoDto productInfoDto = productDao.selectOne(productNo);
+		model.addAttribute("productInfoDto",productInfoDto);
+		
+		String memberId = (String) session.getAttribute("memberId");
+		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId);
+		ReviewDto reviewDto = reviewDao.selectOne(memberId, productNo);
+		model.addAttribute("reviewDto",reviewDto);
+
+		boolean hasBuyHistory = buyHistoryDto != null && buyHistoryDto.getProductNo() == productNo;
+		model.addAttribute("hasBuyHistory", hasBuyHistory);
+
+		return "/WEB-INF/views/product/detail.jsp";
+		
+	}
+	
+	
 }

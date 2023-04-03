@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.ReviewDto;
+import com.kh.semi.vo.paginationVO;
 
 @Repository
 public class ReviewDao {
@@ -59,11 +60,6 @@ public class ReviewDao {
 		Object[] param = {productNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-	
-//	public List<ReviewDto> selectList(){
-//		String sql = "select * from review order by review_no desc";
-//		return jdbcTemplate.query(sql, mapper);
-//	}
 	
 	//리뷰 수정
 	public void update(ReviewDto reviewDto) {
@@ -119,17 +115,21 @@ public class ReviewDao {
 		jdbcTemplate.update(sql, param);
 	}
 	
-	//특정 상품 리뷰 수 
-	public int countReview(int productNo) {
-		String sql = "select count(*) from review where product_no=?";
-		Object[] param = {productNo};
-		return jdbcTemplate.queryForObject(sql, Integer.class,param);
+	//페이징
+	public int selectCount(paginationVO vo, String memberId) {
+	    String sql = "select count(*) from review where member_id = ?";
+	    return jdbcTemplate.queryForObject(sql, int.class, memberId);
 	}
 
-	//특정 상품 리뷰 평점(평균의 반올림)
-	public int avgReview(int productNo) {
-		String sql = "select round(avg(review_star)) from review where product_no=?";
-		Object[] param = {productNo};
-		return jdbcTemplate.queryForObject(sql, Integer.class,param);
+	public List<ReviewDto> selectList(paginationVO vo, String memberId) {
+	    String sql = "select * from ( "
+	                + "select rownum rn, TMP.* from ( "
+	                    + "select * from review "
+	                    + "where member_id = ? "
+	                    + "order by review_no desc"
+	                + ") TMP"
+	            + ") where rn between ? and ?";
+	    Object[] param = {memberId, vo.getBegin(), vo.getEnd()};
+	    return jdbcTemplate.query(sql, mapper, param);
 	}
 }

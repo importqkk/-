@@ -10,6 +10,7 @@
     컬러팔렛트
     - 보라색
         - 100%: #776bff
+<<<<<<< HEAD
         - 60%: #ada6ff
         - 20%: #e4e1ff
         - 5%: #f8f8ff
@@ -18,6 +19,17 @@
         - 80%: #4e4d4b
         - 40%: #72706f
         - 3%: #f8f8f8
+=======
+        - 20%: #e4e1ff
+        - 5%: #f8f8ff
+
+    - 검은색
+        - 100%: #22201e
+        - 80%: #4e4d4b
+        - 40%: #72706f
+        - 3%: #f8f8f8
+
+>>>>>>> refs/remotes/origin/main
     - 빨간색
         - 100%: #FF4848
 */
@@ -138,6 +150,7 @@
 .w-33 {width: 33.3333%;}
 .w-30 {width: 30%;}
 .w-25 {width: 25%;}
+.w-24 {width: 24%;}
 .w-20 {width: 20%;}
 .w-15 {width: 15%;}
 .w-10 {width: 10%;}
@@ -199,6 +212,7 @@
 .ms-10 {margin-left: 10px;}
 .ms-15 {margin-left: 15px;}
 .ms-20 {margin-left: 20px;}
+.ms-24 {margin-left: 24px;}
 .ms-30 {margin-left: 30px;}
 .ms-40 {margin-left: 40px;}
 .ms-50 {margin-left: 50px;}
@@ -397,6 +411,40 @@ a.form-btn.neutral {
     color: #776BFF;
 }
 
+a.form-btn.large {
+    font-size: 18px;
+    padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border-width: 2px;
+    border-style: solid;
+}
+a.form-btn.medium {
+    font-size: 15px;
+    padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border-width: 2px;
+    border-style: solid;
+}
+a.form-btn.small {
+    font-size: 13px;
+    padding: 0.75em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    border-width: 2px;
+    border-style: solid;
+}
+a.form-btn.positive {
+    background-color: #776BFF;
+    border-color: #776BFF;
+    color: white;
+}
+a.form-btn.neutral {
+    background-color: white;
+    border-color: #776BFF;
+    color: #776BFF;
+}
 
 /*
     입력창 디자인(form-input)
@@ -449,9 +497,21 @@ a.form-btn.neutral {
     - 검색창은 부모 div(search-box), 자식 input(search-input)/button(search-btn)으로 만듭니다.
     - html 코드 예시
         <div class="row">
+<<<<<<< HEAD
             <div class="search-box">
                 <input class="search-input w-100">
                 <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+=======
+<<<<<<< HEAD
+            <div class="search-box">
+                <input class="search-input w-100">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+=======
+            <div class="parent">
+                <input class="search w-100">
+                <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+>>>>>>> refs/remotes/origin/main
+>>>>>>> refs/remotes/origin/main
             </div>
         </div>
 */
@@ -705,4 +765,200 @@ input[type="checkbox"] {
 .qty-stepper-small > .plus:hover:not(.disabled) {
     background-color: #f8f8ff;
     cursor: pointer;
+}
+
+/*
+    표
+    - QnA 게시판에서 쓰이는 표입니다.
+    - 메인클래스 table을 붙이고 그 뒤에 서브클래스 table-qna를 지정해주시면 됩니다.
+*/
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td {
+    padding: 0.5em;
+}
+.table.table-qna > thead {
+    border-bottom: 1.5px solid #4e4d4b;
+}
+.table.table-qna > tfoot {
+    border-bottom: 1.5px solid #4e4d4b;
+    border-top: 1.5px solid #4e4d4b;
+}
+.table.table-qna > tbody > tr {
+    border-bottom: 1px solid #72706f;
+}
+
+/*
+    페이지네이션
+    - 페이지네이션이 들어갈 div의 클래스에 pagenation만 붙이면 아래 설정들이 다 따라옵니다.
+    - html 코드 예시
+        <div class="row">
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#">&lt;</a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#" class="on">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+                <a href="#">&gt;</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+*/
+.pagenation {
+    text-align: center;
+}
+.pagination > a {
+    display: inline-block;
+    color: #4e4d4b;
+    text-decoration: none;
+    font-size: 16px;
+    min-width: 2.25em;
+    height: 2.25em;
+    padding: 0.4em;
+    text-align: center;
+    border-radius: 100px;
+}
+.pagination > a.on {
+    box-shadow: 0px 0px 0px 1px #776bff;
+    color: #4e4d4b;
+}
+.pagination > a:hover:not(.disabled) {
+    background-color: #f8f8ff;
+}
+.pagination > a.disabled {
+    background-color: #f8f8f8;
+    color: #72706f;
+    cursor: default;
+}
+
+/*
+    qty-stepper
+    - 상품 수량조절하는 카운트네비게이션입니다.
+    - 사이즈는 추후 페이지 디자인 시 변경되어야 할 수 있습니다.
+    - html 코드 작성 예시
+        <div class="flex qty-stepper center">
+            <span class="minus">-</span>
+            <span class="number">1</span>
+            <span class="plus">+</span>
+        </div>
+*/
+.qty-stepper {
+    width: 100px;
+    border-radius: 100px;
+    border: 2px solid #776bff;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    flex-grow: 1;
+    font-size: 16px;
+}
+.qty-stepper > .number {
+    width: 40px;
+    cursor: default;
+}
+.qty-stepper > .minus,
+.qty-stepper > .plus {
+    width: 24px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+.qty-stepper > .minus.disabled,
+.qty-stepper > .plus.disabled {
+    width: 24px;
+    border-radius: 100px;
+    color: #72706f;
+    background-color: #f8f8f8;
+    cursor: default;
+}
+.qty-stepper > .minus:hover:not(.disabled),
+.qty-stepper > .plus:hover:not(.disabled) {
+    background-color: #f8f8ff;
+    cursor: default;
+}
+
+.qty-stepper-small {
+    width: 90px;
+    border-radius: 100px;
+    border: 2px solid #776bff;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    flex-grow: 1;
+    font-size: 13px;
+}
+.qty-stepper-small > .number {
+    width: 37px;
+    cursor: default;
+}
+.qty-stepper-small > .minus,
+.qty-stepper-small > .plus {
+    width: 21.5px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+.qty-stepper-small > .minus.disabled,
+.qty-stepper-small > .plus.disabled {
+    border-radius: 100px;
+    color: #72706f;
+    background-color: #f8f8f8;
+    cursor: default;
+}
+.qty-stepper-small > .minus:hover:not(.disabled),
+.qty-stepper-small > .plus:hover:not(.disabled) {
+    background-color: #f8f8ff;
+    cursor: pointer;
+}
+.valid-message {
+  color: #776bff;
+  display: none;
+}
+.invalid-message,
+.invalid-message2,
+.invalid-message3 {
+  color: red;
+  display: none;
+}
+/* 
+  입력창이 성공상태(.valid)일 경우 
+  뒤에 있는 성공메세지(.valid-message)를 표시 
+*/
+.valid ~ .valid-message {
+  display: block;
+}
+/* 
+  입력창이 실패상태(.invalid)일 경우 
+  뒤에 있는 실패메세지(.invalid-message)를 표시 
+*/
+.invalid ~ .invalid-message {
+  display: block;
+}
+.invalid2 ~ .invalid-message2 {
+  display: block;
+}
+.invalid3 ~ .invalid-message3 {
+  display: block;
+}
+
+.valid {
+  border-color: #776bff;;
+}
+
+.invalid, .invalid2, .invalid3 {
+  border-color: red;
+}
+/* 비활성 상태 디자인 */
+.form-btn.positive[disabled],
+.form-btn.positive[disabled]:hover {
+    cursor: not-allowed;
+    background-color: #ada6ff;
+    border-color: #ada6ff;
+    filter:none;
 }

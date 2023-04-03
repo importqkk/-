@@ -135,5 +135,4 @@ public class MemberDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
-	
 }

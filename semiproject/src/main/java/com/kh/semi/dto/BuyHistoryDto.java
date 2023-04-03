@@ -10,4 +10,5 @@ public class BuyHistoryDto {
 	private String memberId;
 	private int productNo;
 
+
 }

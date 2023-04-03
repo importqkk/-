@@ -58,7 +58,6 @@
 			text-align: center; /* 이 부분은 수평 중앙 정렬을 위해 필요합니다 */
             font-weight: bold;  
             margin: 0 auto;
-            
         }
 
                /* 차트용 폰트 */
@@ -361,7 +360,7 @@ $(function(){
 });
 </script>
 	
-<body test>
+<body>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display:none;">${productInfoDto.productNo}</h6>
 	<h6 class="avg" style="display:none;">${reviewAvg}</h6>
@@ -571,7 +570,6 @@ $(function(){
                     </div>
             </div>
         </div>
-
     </div>
 
  
@@ -672,5 +670,4 @@ $(function(){
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
 
