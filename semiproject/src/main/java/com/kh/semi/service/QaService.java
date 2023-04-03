@@ -5,12 +5,21 @@ import org.springframework.stereotype.Service;
 
 import com.kh.semi.dao.QaDao;
 import com.kh.semi.dto.QaDto;
+import com.kh.semi.dto.TestDto;
 
 @Service
 public class QaService {
 
 	@Autowired
 	private QaDao qaDao;
+	
+	public TestDto testdo(String fff) {
+		TestDto test = new TestDto();
+		test = qaDao.selectTest(fff);
+		
+		
+		return test;
+	}
 	
 	//게시글 등록 서비스
 	public int write(QaDto qaDto) {

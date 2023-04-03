@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.QaDto;
+import com.kh.semi.dto.TestDto;
 import com.kh.semi.vo.QaPaginationVO;
 
 
@@ -39,6 +40,18 @@ public class QaDao {
 					null : rs.getInt("qa_parent"));
 			qaDto.setQaDepth(rs.getInt("qa_depth"));
 			return qaDto;
+		}
+	};
+	
+	private RowMapper<TestDto>mapper2 = new RowMapper<TestDto>() {
+		@Override
+		public TestDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			TestDto testDto = new TestDto();
+			testDto.setMEMBER_ID(rs.getString("MEMBER_ID"));
+			testDto.setMEMBER_NAME(rs.getString("MEMBER_NAME"));
+			testDto.setMEMBER_NICK(rs.getString("MEMBER_NICK"));
+			
+			return testDto;
 		}
 	};
 	
@@ -77,6 +90,21 @@ public class QaDao {
 		String sql = "select * from qa where qa_no = ?";
 		Object[] param = {qaNo};
 		List<QaDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public List<QaDto> selectGroup(int qaGroup) {
+		String sql = "select * from qa where qa_group = ? order by qa_depth";
+		Object[] param = {qaGroup};
+		List<QaDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list;
+	}
+	
+	public TestDto selectTest(String ff ) {
+		TestDto test = new TestDto();
+		String sql = "select * from MEMBER where MEMBER_ID = ?";
+		Object[] param = {ff};
+		List<TestDto> list = jdbcTemplate.query(sql, mapper2, param);
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
@@ -125,7 +153,7 @@ public class QaDao {
 	
 	//조회수
 	public boolean updateReadCount(int qaNo) {
-		String sql = "update qa ser qa_read = qa_read+1"
+		String sql = "update qa set qa_read = qa_read+1"
 				+ "where qa_no = ?";
 		Object[] param = {qaNo};
 		return jdbcTemplate.update(sql, param) > 0;
