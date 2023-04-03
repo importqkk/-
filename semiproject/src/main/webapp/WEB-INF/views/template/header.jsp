@@ -112,7 +112,7 @@
                         <a class="link" href="#">
                             <i class="fa-solid fa-cart-shopping custom-size c-p100 pe-30 mt-25"></i>
                         </a>
-                        <a class="link" href="/member/login">
+                        <a class="link" href="/member/login"> 
                             <i class="fa-solid fa-user custom-size c-p100 mt-25"></i>
                         </a>
                     </div>
