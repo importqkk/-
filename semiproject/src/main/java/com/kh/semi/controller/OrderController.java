@@ -65,11 +65,22 @@ public class OrderController {
 			
 			//카트에서 오면 
 			if(productNo==null || productCount==null) {
+				int totalproduct=0;
+				int totalprice=0;
+				List<CartProductInfoDto> list = cartProductInfoDao.cartItemInfo(memberId);
 				
-				CartProductInfoDto  dto=new CartProductInfoDto();
-				System.out.println(dto.getProductCount());
-				
+				//가격뽑기
+				for(int i=0; i<list.size();i++)
+				{
+					System.out.println(list.get(i));
+					int count = list.get(i).getProductCount();
+					int price = list.get(i).getProductPrice();
+					totalproduct+= (count*price);
+				}
+				totalprice=totalproduct-3000;
 				model.addAttribute("cartinfo",cartProductInfoDao.cartItemInfo(memberId));
+				model.addAttribute("totalproduct",totalproduct);
+				model.addAttribute("totalprice",totalprice);
 				return "/WEB-INF/views/order/buy.jsp";
 
 			//상세에서 오면
@@ -77,8 +88,12 @@ public class OrderController {
 				int no=productNo.intValue();
 				int Count=productCount.intValue();
 				int price=productInfoDao.orderPrice(no);
+				int totalproduct=(price*Count);
+				int totalprice=0;
+				
 				model.addAttribute("productInfo",productInfoDao.selectOne(no));
-				model.addAttribute(price);
+				model.addAttribute("totalproduct",totalproduct);
+				model.addAttribute("totalprice",totalprice);
 				model.addAttribute("Count",Count);
 				;
 				
@@ -192,6 +207,14 @@ public class OrderController {
 		 //아이디 배치후 주소추가 실행
 		 memberInfoDto.setMemberId(memberId);
 		 memberInfoDao.addinsert(memberInfoDto);
+		 return "redirect:popup";
+	 }
+	 
+	 @PostMapping("/popup")
+	 public String popDelete(HttpSession session,@ModelAttribute MemberInfoDto memberInfoDto) {
+		 String memberId=(String)session.getAttribute("memberId");
+		 memberInfoDto.setMemberId(memberId);
+		 
 		 return "redirect:popup";
 	 }
 	 

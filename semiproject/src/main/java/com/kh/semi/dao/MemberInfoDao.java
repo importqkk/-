@@ -25,6 +25,7 @@ public class MemberInfoDao {
 			Dto.setMemberDetailAddr(rs.getString("member_detail_addr"));
 			Dto.setOrderRequest(rs.getString("ORDER_REQUEST"));
 			Dto.setMemberId(rs.getString("member_id"));
+			Dto.setInsertDate(rs.getDate("INSERT_DATE"));
 	        return Dto;
 				
 	};
@@ -40,12 +41,18 @@ public class MemberInfoDao {
 	
 	//신규 주소 등록
 	public void addinsert(MemberInfoDto memberInfoDto) {
-		String sql="insert into MEMBER_ADDR(MEMBER_NAME, MEMBER_PHONE, MEMBER_POST, MEMBER_BASIC_ADDR, MEMBER_DETAIL_ADDR,ORDER_REQUEST ,MEMBER_ID) values (?,?,?,?,?,?,?)";
+		String sql="insert into MEMBER_ADDR(MEMBER_NAME, MEMBER_PHONE, MEMBER_POST, MEMBER_BASIC_ADDR, MEMBER_DETAIL_ADDR,ORDER_REQUEST ,MEMBER_ID,INSERT_DATE) values (?,?,?,?,?,?,?,sysdate)";
 		Object[] param= {memberInfoDto.getMemberName(),memberInfoDto.getMemberPhone(),memberInfoDto.getMemberPost(),
 				memberInfoDto.getMemberBasicAddr(),memberInfoDto.getMemberDetailAddr(),memberInfoDto.getOrderRequest(),memberInfoDto.getMemberId()};
 		jdbcTemplate.update(sql,param);
 	}
 	
+//	public boolean addDelete(int index,String memberId) {
+//		String sql="";
+//		Object[] param = {index,memberId};
+//		return jdbcTemplate.update(sql, param) > 0;
+//	}
+//	
 	
 		
 	

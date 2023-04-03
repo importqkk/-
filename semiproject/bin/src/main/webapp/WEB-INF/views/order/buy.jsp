@@ -2,17 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.text.DecimalFormat" %>
-<%@ page import="java.util.List" %>
-<c:set var="listSize" value="${fn:length(cartinfo)}" />
-
 
 <html>
-		
 <head>
 <title>Insert title here</title>
 	<style>
@@ -106,23 +99,15 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/static/js/find-address.min.js"></script>
 	<!-- 우편주소 api -->
-	<c:set var="cartinfo" value="${cartinfo}" />
-
-<!-- calculateTotalPrice 함수를 선언하는 코드 -->
-<script>
-
-</script>
-
-<!-- 총 가격을 출력하는 코드 -->
+	
 	<script type="text/javascript">
-/*------------------------------------------------------------------------------------------------------------------------------*/
 	//팝업생성
 	$(function( ){
         $(".pop-btn").click(function(){
-            window.open("popup",  "popupNo", "width=570, height=980")        
+            window.open("popup",  "popupNo", "width=570, height=970")        
         });
     });
-/*------------------------------------------------------------------------------------------------------------------------------*/
+	
      //주소api
     $(function(){
 		
@@ -147,7 +132,7 @@
                 }).open();
         
     		});
-        /*------------------------------------------------------------------------------------------------------------------------------*/
+        
         
       
        //체크박스 선택시
@@ -169,10 +154,7 @@
     });
     </script>
     
-    
     <script type="text/javascript">
-    
- /*------------------------------------------------------------------------------------------------------------------------------*/
     //포인트적용
     $(function(){
 		$(".apply").click(function(){
@@ -185,26 +167,43 @@
 			}else{
 				var total= point-usePoint;
 				$("span").text(total + "원");
-				if(usePoint==0){
-					$("table tr:nth-child(3) td:nth-child(2)").text(usePoint + "원");
-				}else{
-					$("table tr:nth-child(3) td:nth-child(2)").text("-"+ usePoint + "원");
-					
-				}
+				$("table tr:nth-child(3) td:nth-child(2)").text("-"+ usePoint + "원");
 			}
 		});
     });
-/*------------------------------------------------------------------------------------------------------------------------------*/
     </script>
     
-  
+    <script>
     
-	    
-  	<script src="https://cdn.iamport.kr/v1/iamport.js">
+	//결제api 진행중    
+   		<script src="https://cdn.iamport.kr/v1/iamport.js">
    	</script>
 
    	<script>
-    	
+    	const IMP = window.IMP; // 생략 가능
+    	IMP.init("imp07065242"); // 예: imp00000000a
+	    function requestPay() {
+	        IMP.request_pay({
+	          pg: "kakaopay",
+	          pay_method: "kakopay",
+	          merchant_uid: "ORD20180131-0000011",   // 주문번호
+	          name: "노르웨이 회전 의자",         //상품명
+	          amount: 64900,                         // 가격
+	          buyer_email: "gildong@gmail.com",    //구매자 이메일
+	          buyer_name: "홍길동",                 //구매자 이름
+	          buyer_tel: "010-4242-4242",                //구매자 번호
+	          buyer_addr: "서울특별시 강남구 신사동",           //구매자 주소
+	          buyer_postcode: "01181"                   //구매자 우편번호
+	        }, function (rsp) { // callback함수
+	          if (rsp.success) {
+	        	  if (rsp.success) {
+	                    console.log(rsp);
+	          } else {
+	            // 결제 실패 시 로직
+	        	  console.log(rsp);
+	          }
+	        });
+	      }
    	</script>
    
     
@@ -243,31 +242,31 @@
         </c:if>
     <!-- 카트에서 온거면 -->
         <c:if test="${not empty cartinfo}">
-        
-			<c:forEach var="cartinfo" items="${cartinfo}" varStatus="loop">
-			    <div class="row flex2">
-			        <img src="https://picsum.photos/100/100" class="pe-20">
-			                                        
-			                
-			        <div class="left info">
-			            <div>
-			                <label>[브랜드명]:${cartinfo.productBrand} </label> <label>${cartinfo.productName}</label>
-			            </div>
-			            	<label id="productPrice${loop.index}">상품가격: ${cartinfo.productPrice} 원</label>
-			            <div>
-			                <label id="productCount${loop.index}">상품수량: ${cartinfo.productCount} 개</label>
-			            </div>
-			        </div>
-			                    
-			    </div>
-			</c:forEach>
+        <c:forEach var="cartinfo" items="${cartinfo}">
+            <div class="row flex2">
+                <img src="https://picsum.photos/100/100" class="pe-20">
+                                        
+                
+                <div class="left info">
+                        <div>
+                            <label>[브랜드명]:${cartinfo.productBrand} </label> <label>${cartinfo.productName}</label>
+                        </div>
+                        
+                        <label>상품가격: ${cartinfo.productPrice}</label>
+                        <div>
+                                <label>상품수량:${cartinfo.productCount}</label>
+                        </div>
+                </div>
+                    
+            </div>
+            </c:forEach>
         </c:if>
     
     <!-- 배송지부분 -->
            <div class="row left">
-                <div class="row flex">
+                <div class="row">
                     <h2>배송지</h2>
-                    <button class="pop-btn form-btn small2 neutral mt-20" type="button">배송지 불러오기</button> 
+                    <button class="pop-btn form-btn small2 neutral" type="button">배송지 불러오기</button> 
                </div>
                <div class="row">
                    <p>받는사람</p>
@@ -309,7 +308,7 @@
                <p><label>적립금</label></p>
                     <input type="text" class="form-input small2 light" name="orderUserPoint" value="0">
                     <button class="form-btn positive medium apply" type="button">적용</button>
-               <p class="right">적용가능한 적립금: <span><fmt:formatNumber value="${point}" pattern="#,##0"/>원</span></p>
+               <p class="right">적용가능한 적립금: <span>${point}원</span></p>
 
 
                <div class="row order">
@@ -317,12 +316,12 @@
                     <table>
                         <tr>
                           <td>제품금액:</td>
-                          <td><fmt:formatNumber value="${totalproduct}" pattern="#,##0"/> 원</td>
+                          <td></td>
                           
                         </tr>
                         <tr>
                           <td>배송비:</td>
-                          <td><fmt:formatNumber value="3000" pattern="#,##0"/></td>
+                          <td>3,000원</td>
                         </tr>
                         <tr>
                           <td>적립금:</td>
@@ -330,9 +329,7 @@
                         </tr>
                         <tr>
                           <td>총 결제금액:</td>
-                          <td>
-                          <fmt:formatNumber value="${totalprice}" pattern="#,##0"/> 원
-                          </td>
+                          <td>원</td>
                         </tr>
                     </table>
                 </div>
