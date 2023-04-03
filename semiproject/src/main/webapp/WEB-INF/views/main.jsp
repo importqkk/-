@@ -7,6 +7,8 @@
 <!-- swiper cdn -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<!-- swiper script -->
+<script src="/static/js/swiper.js"></script>
 <style>
 	.swiper {
 		width: 100%;
@@ -91,13 +93,6 @@
 		min-height: 80px;
 	}
     .product-name {
-        /*
-            말줄임표 3종세트
-            (전제조건) 폭이 확정적이어야 한다
-            - overflow는 넘치는 화면에 대한 처리를 설정
-            - white-space는 넘치는 항목에 대한 개행 처리를 설정
-            - text-overflow는 글자가 넘칠 경우의 처리를 설정
-        */
         overflow: hidden;
         white-space: normal;
         text-overflow: ellipsis;
@@ -119,22 +114,6 @@
 			$(this).prev(".fas").removeClass("fa-beat");
 		})
 	})
-	// swiper api
-	window.addEventListener("load", function(){
-		var swiper = new Swiper('.swiper', {
-            direction: 'horizontal',
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                type: 'bullets',
-                clickable: true,
-            },
-            autoplay: {
-                delay: 5000,
-                pauseOnMouseEnter: true,
-            }
-        });
-	})
 </script>
 		<!----------------------메인컨텐츠 start---------------------->
 		    <div class="container-1000">
@@ -144,12 +123,12 @@
 		                <div class="swiper-wrapper center">
 		                	<c:if test="${mainImgList == null}">
 		                		<div class="swiper-slide">
-	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
-	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
-	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
+	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy01.png">
+	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy02.png">
+	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy03.png">
 		                    	</div>
 		                	</c:if>
-		                	<c:forEach var="mainImgConnectDto" items="${mainImgList}">
+ 		                	<c:forEach var="mainImgConnectDto" items="${mainImgList}">
 		                    	<div class="swiper-slide">
 	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
 		                    	</div>
