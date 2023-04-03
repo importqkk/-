@@ -2,7 +2,6 @@ package com.kh.semi.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -25,9 +24,12 @@ public class ProductInfoDao {
 						.productPrice(rs.getInt("product_price"))
 						.productSellCount(rs.getInt("product_sell_count"))
 						.productJoin(rs.getDate("product_join"))
+						.productStock(rs.getInt("product_stock"))
 						.reivewAVG(rs.getFloat("avg"))
 						.reivewCNT(rs.getInt("cnt"))
-						.imgNo(rs.getInt("detail_img_no"))
+						.productImgNo(rs.getInt("product_img_no"))
+						.tagNo(rs.getInt("tag_no"))
+						.detailImgNo(rs.getInt("detail_img_no"))
 					.build();
 		}
 	};
@@ -38,6 +40,12 @@ public class ProductInfoDao {
 		Object[] param = {productNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+	// 상품 번호로 상품 정보 불러오기
+	/*
+	 * public List<ProductInfoDto> selectOne(int productNo) { String sql =
+	 * "select * from product_info where product_no=?"; Object[] param =
+	 * {productNo}; return jdbcTemplate.query(sql, mapper, param); }
+	 */
 	
 	// 최신상품 순서대로 정렬하기
 	public List<ProductInfoDto> newList() {
@@ -61,6 +69,20 @@ public class ProductInfoDao {
 	public List<ProductInfoDto> cheapList(){
 		String sql = "select * from product_info order by product_price asc, product_no desc";
 		return jdbcTemplate.query(sql,mapper);
+	}
+	
+	// 전체 상품 불러오기
+	public List<ProductInfoDto> productList() {
+		String sql = "select * from product_info order by product_stock desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	// 이미지 조회
+	public ProductInfoDto selectOneForImg(int productNo) {
+		String sql = "select * from product_info where product_no = ?";
+		Object[] param = {productNo};
+		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	
 }

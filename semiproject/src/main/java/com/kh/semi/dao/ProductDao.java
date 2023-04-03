@@ -1,9 +1,16 @@
 package com.kh.semi.dao;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+import com.kh.semi.dto.ProductDto;
+import com.kh.semi.vo.ProductListPaginationVo;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -29,8 +36,24 @@ public class ProductDao {
 						.productJoin(rs.getDate("product_join"))
 						.reivewAVG(rs.getFloat("avg"))
 						.reivewCNT(rs.getInt("cnt"))
-						.imgNo(rs.getInt("detail_img_no"))
+						.detailImgNo(rs.getInt("detail_img_no"))
 					.build();
+		}
+	};
+	private RowMapper<ProductDto> mapper1 = new RowMapper<ProductDto>() {
+		@Override
+		public ProductDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			ProductDto productDto = new ProductDto();
+			productDto.setProductNo(rs.getInt("product_no"));
+			productDto.setProductName(rs.getString("product_name"));
+			productDto.setProductBrand(rs.getString("product_brand"));
+			productDto.setProductPrice(rs.getInt("product_price"));
+			productDto.setProductStock(rs.getInt("product_stock"));
+			productDto.setProductContent(rs.getString("product_content"));
+			productDto.setProductDeliveryPrice(rs.getInt("product_delivery_price"));
+			productDto.setProductSellCount(rs.getInt("product_sell_count"));
+			productDto.setProductJoin(rs.getDate("product_join"));
+			return productDto;
 		}
 	};
 	
@@ -42,8 +65,6 @@ public class ProductDao {
 			List<ProductInfoDto> list = jdbcTemplate.query(sql,mapper,param);
 			return list.isEmpty() ? null:list.get(0);
 	}
-	
-	
 	
 	// 상품 검색
 	public String productCount(String keyword) {
@@ -336,5 +357,96 @@ public class ProductDao {
 	}
 	
 		//8888888888888888888888888888888888888888888
+	
+	// 서영
+		public ProductDto selectOneInfo(int productNo) {
+			String sql = "select * from product where product_no=?";
+			Object[] param = {productNo};
+			List<ProductDto> list = jdbcTemplate.query(sql,mapper1,param);
+			return list.isEmpty() ? null:list.get(0);
+		}
+		
+		// 상품 등록
+		public int sequence() {
+			String sql = "select product_seq.nextval from dual";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+		public void insert(ProductDto productDto) {
+			String sql = "insert into product values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			Object[] param = {productDto.getProductNo(), productDto.getProductName(),
+					productDto.getProductBrand(), productDto.getProductPrice(),
+					productDto.getProductStock(), productDto.getProductContent(),
+					productDto.getProductDeliveryPrice(), productDto.getProductSellCount(),
+					productDto.getProductJoin()};
+			jdbcTemplate.update(sql, param);
+		}
+		
+		// 상품 삭제
+		public boolean delete(int productNo) {
+			String sql = "delete product where product_no=?";
+			Object[] param = {productNo};
+			return jdbcTemplate.update(sql, param) > 0;
+		}
+		
+		// 상품 목록
+		public List<ProductDto> list(ProductListPaginationVo vo) {
+			if(vo.isSearch()) {
+				String sql = "select * from ("
+								+ "select TMP.*, rownum RN from ("
+									+ "select * from product where instr(#1, ?) > 0 "
+									+ "order by product_no desc"
+								+ ")TMP"
+							+ ") where RN between ? and ?";
+				sql = sql.replace("#1", vo.getColumn());
+				Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+				return jdbcTemplate.query(sql, mapper1, param);
+			}
+			else {
+				String sql = "select * from ("
+								+ "select TMP.*, rownum RN from ("
+									+ "select * from product "
+									+ "order by product_no desc"
+								+ ")TMP"
+							+ ") where RN between ? and ?";
+				Object[] param = {vo.getBegin(), vo.getEnd()};
+				return jdbcTemplate.query(sql, mapper1, param);
+			}
+		}
+		// 상품 개수
+		public int selectCount(ProductListPaginationVo vo) {
+			// 검색
+			if(vo.isSearch()) {
+				String sql = "select count(*) from product where instr(#1, ?) > 0";
+				sql = sql.replace("#1", vo.getColumn());
+				Object[] param = {vo.getKeyword()};
+				return jdbcTemplate.queryForObject(sql, int.class, param);
+			}
+			// 목록
+			else {
+				String sql = "select count(*) from product";
+				return jdbcTemplate.queryForObject(sql, int.class);
+			}
+		}
+		
+		// 상품 수정
+		public boolean editInfo(ProductDto productDto) {
+			String sql = "update product set product_name=?, product_brand=?, product_price=?, "
+							+ "product_stock=?, product_content=?, product_delivery_price=?, "
+							+ "product_sell_count=?, product_join=? "
+						+ "where product_no=?";
+			Object[] param = {productDto.getProductName(), productDto.getProductBrand(),
+							productDto.getProductPrice(), productDto.getProductStock(),
+							productDto.getProductContent(), productDto.getProductDeliveryPrice(),
+							productDto.getProductSellCount(), productDto.getProductJoin(),
+							productDto.getProductNo()};
+			return jdbcTemplate.update(sql, param) > 0;
+		}
+		
+		// 상품 재고 불러오기
+		public int selectStock(int productNo) {
+			String sql = "select product_stock from product where product_no=?";
+			Object[] param = {productNo};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+		}
+		
 }
-

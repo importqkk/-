@@ -1,5 +1,4 @@
 package com.kh.semi.dto;
-
 import lombok.Data;
 
 @Data
