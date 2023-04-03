@@ -14,6 +14,7 @@
 			<c:otherwise>
 				<div class="row">
 					<h2 class="">내 리뷰 목록</h2>
+					<h4>리뷰 내용을 클릭하면 해당 리뷰로 이동합니다.</h4>
 				</div>
 				<hr>
 				<div class="row">

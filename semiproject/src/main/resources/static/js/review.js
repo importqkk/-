@@ -46,6 +46,9 @@ $(function(){
 //		console.log(memberId);
 		
 		if(content.trim().length == 0 || !starRating) return;
+		if(content.trim().length > 1000){
+			alert("글자수 제한 오류");
+		}
 		
 		$.ajax({
 			url:"/rest/review/", 
@@ -67,32 +70,15 @@ $(function(){
 //			    location.reload();
 			},
 			error:function(){
-				alert("이미 작성된 리뷰가 있습니다.\n리뷰는 1회만 작성 가능합니다.");
+				alert("이미 작성된 리뷰가 있습니다. \n 리뷰는 1회만 작성 가능합니다.");
+				$(".review-content").hide();
+			    $(".btn-panel").hide();
+			    $(".review-star").hide();
+			    $(".view-panel").show();
 			}
 		});
 	});
 	
-//	function checkReview() {
-//	  $.ajax({
-//	    url: "/rest/review/reviewCountCheck",
-//	    type: "POST",
-//	    success: function(response) {
-//	      if (response) {
-//	        // 리뷰가 존재하는 경우, 메시지를 띄워준다.
-//	        alert("이미 작성된 리뷰가 있습니다. 리뷰는 1회만 작성 가능합니다.");
-//	      } else {
-//	        // 리뷰가 존재하지 않는 경우, 리뷰 작성 페이지로 이동한다.
-//	         $(".view-panel").hide();
-//		     $(".review-content").show();
-//	         $(".btn-panel").show();
-//	         $(".review-star").show();
-//	      }
-//	    },
-//	    error: function(error) {
-//	      console.log(error);
-//	    }
-//	  });
-//	}
 	
 	function loadList(){
 		$(".review-list").empty();
@@ -196,6 +182,10 @@ $(function(){
 			url:"/rest/review/"+reviewNo,
 			method:"delete",
 			success:function(response){
+				$(".review-content").hide();
+			    $(".btn-panel").hide();
+			    $(".review-star").hide();
+			    $(".view-panel").show();
 				loadList();
 				location.reload();
 			},
