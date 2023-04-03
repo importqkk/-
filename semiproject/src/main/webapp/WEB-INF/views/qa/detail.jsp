@@ -5,6 +5,15 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+	.float{
+		float: left;
+		vertical-align: middle;
+	}
+	.title{
+		font-weight: bold;
+	}
+</style>
 <%-- 계정주인과 글쓴이 비교 필요--%>
 <%--
 <script> 	
@@ -166,8 +175,8 @@ function fn_reple_write(){
     <script type="text/template" id="edit-template">
         <div class="edit-panel right">
 			<div class="contents left">
-			<div class="left font-h1">${qaDto.qaHead}</div>
-			<div class="left font-h1">${qaDto.qaTitle}</div>
+			<div class="left font-h2 float me-40 center">${qaDto.qaHead}</div>
+			<div class="left font-h1 title center">${qaDto.qaTitle}</div>
             <textarea class="form-input large w-100 font-h2"></textarea></div>
             <button type="submit" class="form-btn positive save-btn">저장</button>
             <button class="form-btn neutral cancel-btn ms-20">취소</button>
@@ -177,20 +186,24 @@ function fn_reple_write(){
     <!-- 표시용 템플릿 -->
     <script type="text/template" id="view-template">
         <div class="view-panel right">
-			<div class="left font-h1 head"></div>
-			<div class="left font-h1 title"></div>
-			<div class="contents left font-h2"></div>
+			<div class="left font-h2 float head center me-50 pt-5"></div>
+			<div class="left font-h1 title mt-60 center"></div>
+			<hr>
+			<div class="contents left font-h2 mt-90 mb-90"></div>
             <a class="form-btn neutral edit-btn">수정</a>
             <a class="form-btn neutral ms-20 delete-btn">삭제</a>
             <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
         </div>
+<br>
     </script>
     
         <!-- 표시용 템플릿 -->
     <script type="text/template" id="view-template-answer">
+<hr>
+<br>
         <div class="view-panel right">
 			<div class="left font-h1 title"></div>
-			<div class="contents left font-h2"></div>
+			<div class="contents left font-h2  mt-90 mb-90"></div>
         </div>
     </script>
     
@@ -203,10 +216,12 @@ function fn_reple_write(){
         <div class="row target">
         </div>
         
+      
+        <br>
+        
         <div class="row targetAnswer">
         </div>
-		<hr>
-        <br>
+	
 
         
         <!-- 댓글 작성란 -->
