@@ -11,12 +11,18 @@
 <script type="text/template" id="review-template">
 	<div class="review-item">
 		<div class="memberId"></div>
-		<div class="reviewStar"></div> 
-		<div class="changeText">
-			<span class="text edit-text">수정</span>
-			<span class="text delete-text">삭제</span>
+		<div class="flex w-100">
+			<div class="w-50">
+				<div class="reviewStar w-33 left"></div> 
+			</div>
+			<div class="w-50">
+				<div class="changeText right">
+					<span class="text edit-text">수정</span>
+					<span class="text delete-text">삭제</span>
+				</div>
+				<div class="reviewTime right"></div>
+			</div>
 		</div>
-		<div class="reviewTime"></div>
 		<div class="reviewContent"></div>
 		<div class="reviewLike">
 			<span class="heart-count">${reviewDto.reviewLike}</span>
@@ -57,6 +63,13 @@ $(function(){
         $(".review-content").show();
         $(".btn-panel").show();
         $(".review-star").show();
+        if (${reviewDto != null}){
+            alert("구매 당 1회의 리뷰만 작성할 수 있습니다");
+            $(".review-content").hide();
+            $(".btn-panel").hide();
+            $(".review-star").hide();
+            $(".view-panel").show();
+        }
       } else if (${memberId == null}){
     	  alert("로그인 후 리뷰를 작성할 수 있습니다");
       } else {
@@ -89,18 +102,22 @@ $(function(){
 	            <i class="fa-regular fa-star starR" value="5"></i>
 	        </div>
 	        
-			<c:choose>
-			    <c:when test="${hasBuyHistory}">
-			        <div class="view-panel center">
-			            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button>
-			        </div>
-			    </c:when>
-			    <c:otherwise>
-			        <div class="view-panel center">
-			            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button>
-			        </div>
-			    </c:otherwise>
-			</c:choose>
+<%-- 			<c:choose> --%>
+<%-- 			    <c:when test="${hasBuyHistory}"> --%>
+<!-- 			        <div class="view-panel center"> -->
+<!-- 			            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button> -->
+<!-- 			        </div> -->
+<%-- 			    </c:when> --%>
+<%-- 			    <c:otherwise> --%>
+<!-- 			        <div class="view-panel center"> -->
+<!-- 			            <button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button> -->
+<!-- 			        </div> -->
+<%-- 			    </c:otherwise> --%>
+<%-- 			</c:choose> --%>
+
+						<div class="view-panel center">
+							<button class="form-btn small neutral edit-btn w-100" style="height:40px;">리뷰 작성하기</button>
+					    </div>
 
 	        
 <!-- 	         리뷰 등록하기 버튼 -->
@@ -135,9 +152,7 @@ $(function(){
         
         <div class="row review-list">
         	리뷰 목록 위치
-<!-- 	        <div class="row target"> -->
-	     
-<!-- 	        </div> -->
         </div>
     </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+	

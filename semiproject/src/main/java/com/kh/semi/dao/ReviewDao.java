@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.ReviewDto;
+import com.kh.semi.vo.paginationVO;
 
 @Repository
 public class ReviewDao {
@@ -84,6 +85,22 @@ public class ReviewDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//리뷰 상세(아이디로 리뷰 찾기)
+	public ReviewDto selectOne(String memberId) {
+		String sql = "select * from review where member_id = ?";
+		Object[] param = {memberId};
+		List<ReviewDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	//구매 당 하나의 리뷰만 작성할 수 있도록 함
+	public ReviewDto selectOne(String memberId, int productNo) {
+		String sql = "select * from review where member_id = ? and product_no = ?";
+		Object[] param = {memberId, productNo};
+		List<ReviewDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
 	//리뷰 좋아요 수 카운트
 	public void updateLikecount(int reviewNo, int count) {
 		String sql = "update review set review_like = ? where review_no = ?";
@@ -97,5 +114,30 @@ public class ReviewDao {
 		Object[] param = {reviewNo, imgNo};
 		jdbcTemplate.update(sql, param);
 	}
+	
+	//페이징
+	public int selectCount(paginationVO vo, String memberId) {
+	    String sql = "select count(*) from review where member_id = ?";
+	    return jdbcTemplate.queryForObject(sql, int.class, memberId);
+	}
 
+	public List<ReviewDto> selectList(paginationVO vo, String memberId) {
+	    String sql = "select * from ( "
+	                + "select rownum rn, TMP.* from ( "
+	                    + "select * from review "
+	                    + "where member_id = ? "
+	                    + "order by review_no desc"
+	                + ") TMP"
+	            + ") where rn between ? and ?";
+	    Object[] param = {memberId, vo.getBegin(), vo.getEnd()};
+	    return jdbcTemplate.query(sql, mapper, param);
+	}
+	
+	//리뷰 내역
+	public boolean reviewCheck(ReviewDto reviewDto) {
+		String sql = "select count(*) from review where member_id = ? and product_no = ?";
+		Object[] param = {reviewDto.getMemberId(), reviewDto.getProductNo()};
+		int count = jdbcTemplate.queryForObject(sql, int.class, param);
+		return count == 1;
+	}
 }
