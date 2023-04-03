@@ -9,15 +9,19 @@
 
 
  <script type="text/javascript">
-	$(function(){
-		$(window).on("beforeunload", function(){
-		    return false;
-		});
-		$(".btn-pass").click(function(){
-		    $(window).off("beforeunload");
-		    return true;
-		});
-	});
+// 	$(function(){
+// 		$(window).on("beforeunload", function(){
+// 		    return false;
+// 		});
+// 		$(".btn-pass").click(function(){
+// 		    $(window).off("beforeunload");
+// 		    return true;
+// 		});
+// 	});
+    var checkUnload = true;
+    $(window).on("beforeunload", function(){
+        if(checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+    });
 </script>
 <form action="edit" method="post">
 <div class="container-600">
@@ -54,12 +58,16 @@
 	
 	<div class="row">
 		<button class="form-btn neutral w-24 medium">취소</button>
-        <button type="submit" class="form-btn positive w-75 medium ms-25">변경하기</button>
+        <button type="submit" id="saveBtn" class="form-btn positive w-75 medium ms-25">변경하기</button>
 	</div>
 		<!-- 취소 버튼 클릭 이벤트 처리 -->
 	<script>
 		$('.form-btn.neutral').click(function(){
   		window.location.href = '/member/mypage';
+		});
+		$("#saveBtn").on("click", function(){
+		    checkUnload = false;
+		    $("#saveForm").submit();
 		});
 	</script>
 <%-- 	<c:if test="${param.mode == 'error'}"> --%>

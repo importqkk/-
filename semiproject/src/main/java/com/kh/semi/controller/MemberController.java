@@ -123,7 +123,7 @@ public class MemberController {
 			attr.addAttribute("mode", "error");
 			return "redirect:findPw";
 		}
-		// 이메일이 일치 시임시 비밀번호 생성
+		// 이메일이 일치 시 임시 비밀번호 생성
 		String temporaryPW = RandomComponent.generateString();
 		// 생성한 임시 비밀번호로 비밀번호 변경
 		memberDao.changePassword(memberId, temporaryPW);
