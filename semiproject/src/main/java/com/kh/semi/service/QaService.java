@@ -47,7 +47,7 @@ public class QaService {
 	     return qaDao.update(qaDto);
 	 }
 	 
-		//게시글 등록 서비스
+		//답글 등록 서비스
 		public int insertQaReple(int qaNo, String replyContent) {
 			
 			//부모게시글 불러서 변경할것만 세팅

@@ -35,36 +35,37 @@
 		return confirm("정말 삭제하시겠습니까?");
 	}
 </script>
+ <input type="checkbox" class="check-all" onclick="checkAll()">전체 선택
 </c:if>
 
  <script>
-//     $(document).ready(function() {
-//         // 전체 선택 체크박스 클릭 시 개별 선택 체크박스 상태 변경
-//         $(".check-all").change(function() {
-//             $(".center").find("input[type='checkbox']").prop("checked", $(this).prop("checked"));
-//         });
+    $(document).ready(function() {
+        // 전체 선택 체크박스 클릭 시 개별 선택 체크박스 상태 변경
+        $(".check-all").change(function() {
+            $(".center").find("input[type='checkbox']").prop("checked", $(this).prop("checked"));
+        });
 
-//         // 개별 선택 체크박스 클릭 시 전체 선택 체크박스 상태 변경
-//         $(".center").find("input[type='checkbox']").change(function() {
-//             if (!$(this).prop("checked")) {
-//                 $(".check-all").prop("checked", false);
-//             } else {
-//                 if ($(".center").find("input[type='checkbox']:not(:checked)").length == 0) {
-//                     $(".check-all").prop("checked", true);
-//                 }
-//             }
-//         });
+        // 개별 선택 체크박스 클릭 시 전체 선택 체크박스 상태 변경
+        $(".center").find("input[type='checkbox']").change(function() {
+            if (!$(this).prop("checked")) {
+                $(".check-all").prop("checked", false);
+            } else {
+                if ($(".center").find("input[type='checkbox']:not(:checked)").length == 0) {
+                    $(".check-all").prop("checked", true);
+                }
+            }
+        });
 
-//         // 삭제 버튼 클릭 시 선택된 게시물 삭제
-//         $("button.negative").click(function() {
-//             var checked = $(".center").find("input[type='checkbox']:checked");
-//             if (checked.length == 0) {
-//                 alert("삭제할 게시물을 선택해주세요.");
-//                 return false;
-//             }
-//             return confirm("정말로 삭제하시겠습니까?");
-//         });
-//     });
+        // 삭제 버튼 클릭 시 선택된 게시물 삭제
+        $("button.negative").click(function() {
+            var checked = $(".center").find("input[type='checkbox']:checked");
+            if (checked.length == 0) {
+                alert("삭제할 게시물을 선택해주세요.");
+                return false;
+            }
+            return confirm("정말로 삭제하시겠습니까?");
+        });
+    });
 </script>
 
 
@@ -116,11 +117,15 @@
 					</c:if>
 					<td class="center">${qaDto.qaNo}</td>
 					<td class="center">${qaDto.qaHead}</td>
-
-					<td class="center">
-					<a href="detail?qaNo=${qaDto.qaNo}" class="link">
-							${qaDto.qaTitle}
-						</a>
+					<td>
+	  						<c:choose>
+	    						<c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
+	      						<span>${qaDto.qaTitle}</span>
+	    						</c:when>
+	    						<c:otherwise>
+	      						<a href="detail?qaNo=${qaDto.qaNo}" class="link">${qaDto.qaTitle}</a>
+	    						</c:otherwise>
+	  						</c:choose>
 					</td>
 					<td class="left">${qaDto.memberId}</td>
 					
@@ -151,9 +156,14 @@
 					</td>
 					
 					<td>
-					<a href="detail?qaNo=${qaDto.qaNo}" class="link">
-							${qaDto.qaTitle}
-						</a>
+  						<c:choose>
+    						<c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
+      						<span>${qaDto.qaTitle}</span>
+    						</c:when>
+    						<c:otherwise>
+      						<a href="detail?qaNo=${qaDto.qaNo}" class="link">${qaDto.qaTitle}</a>
+    						</c:otherwise>
+  						</c:choose>
 					</td>
 					<td class="left">${qaDto.memberId}</td>
 					
@@ -162,19 +172,6 @@
 					<td>${qaDto.qaRead}</td>
 				</tr>
 				
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/642513f64247f20fefe8c632/1gsodbvhg';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 
 				</c:forEach>
             </tbody>

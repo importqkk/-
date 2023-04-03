@@ -128,7 +128,7 @@ public class QaController {
 	    }
 	}
 	
-	// PUT 요청 처리
+	// 요청 처리
 	@PutMapping("/repleWrite")
 	public ResponseEntity<String> repleWrite(
 			@RequestParam("qaNo") int qaNo,
