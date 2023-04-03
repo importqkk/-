@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/load.css">
+    <!-- font awsome 아이콘 -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <!-- tabler 아이콘 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="templates/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="templates/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="templates/css/commons.css">
+    <link rel="stylesheet" type="text/css" href="templates/css/test.css">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-f9q3yD8+iyf0zvJolTO0+QGd/U8rFyV7vUTd/h5u5lJxRZJz8sRkpA7MUzFGAG+AsTJ16ULbL3qT/ZHxT+XQVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        .flex .flex-left{
+            width:60%;
+        }
+        .flex .flex-right{
+            flex:1;
+            flex-direction: column; /*플렉스 내부 텍스트 작성 방향 가로로*/
+        }
+        .flex-content::after { /*플렉스 초기화 */ 
+            content:"";
+            display: block;
+            clear: both;
+        }
+        .oneLine { /* 한줄에 표현 */
+            display: inline;
+        }
+        .img-size { /* 이미지 사이즈 조정 */
+            width: 400px;
+            height: 400px;
+        }
+        .img-rad-10{ /*버튼을 둥글게 */
+            border-radius: 10%;
+        }
+        .img-background{
+            background-color: #F5F5f5;
+        }
+        .w-49 {width: 49%;}  /*장바구니, 구매버튼을 위한 간격*/
+
+        .font-lightgrey {
+            color: #A2a1a1;
+        }
+        .font-grey{
+            color: #A7a6a5;
+        }
+        .font-boldgrey{
+            color: #5a5b5a;
+        }
+        .hr-bold{  /* 선 진하게 */
+            border-width:2px;
+        }
+
+        .star-box{ /*별점 박스*/
+            width: 80%;
+            height: 150%;
+            background-color: #F5F5f5;
+            border-radius: 20%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;  
+        }
+
+        
+
+
+    </style>
+    <script type="text/javascript">
+    
+    </script>
+    <title>상품 상세페dldldl이오지</title>
+</head>
+<body test>
+    <div class="container-1000">
+        <hr>
+        <!-- 이미지 부터 구매하기 버튼까지 -->
+        <div class="flex">
+            <!-- 상품 이미지 -->
+            <div class="flex-left w-50 center">
+                <img src="templates/image/katalk.png" class="img-size img-rad-10 img-background ">
+            </div>
+         
+            <!-- 상품 가격 부터 구매하기 버튼까지-->
+            <div class="flex-right"> 
+                <div class="row">
+                    <h5 class="font-grey oneLine">브랜드</h5>
+                    <h5 class="font-grey oneLine"> 자로우포뮬러스</h5>
+                 
+                </div>
+                <div class="row">
+                    <h2>자로우 도필러스 이피에스 60캡슐</h2>
+                </div>
+                <div class="row">
+                    <br>
+                    <h3>30,000원</h3>
+                    <br>
+                    <h4 class="font-boldgrey oneLine">배송비</h4>
+                    &nbsp;
+                    <h4 class="oneLine">3,000원</h4><br>
+                    <h5 class="fas fa-star font-purple "></h5>
+                    <h5 class="fas fa-star font-purple "></h5>
+                    <h5 class="fas fa-star font-purple "></h5>
+                    <h5 class="fas fa-star font-purple "></h5>
+                    <h5 class="fas fa-star font-purple "></h5>
+                    <h6 class="font-boldgrey oneLine"> 150개의 후기</h6>
+
+                    
+                </div>
+                <div class="row">
+                    <hr>
+                    <h5 class="font-boldgrey oneLine">자로우 도필러스 이피에스 60캡슐</h5>
+                    <button class="w-30 form-btn small neutral center">하하</button>
+                    <br><hr>
+                
+                </div>
+                <div class="row">
+                    <h3 class="font-purple oneLine">총 금액</h3>
+                    <h3 class="oneLine">&nbsp;30,000원</h3>
+                </div>
+                <div class="row center ">
+                    <button class="w-49 form-btn small neutral">장바구니</button>
+                    <button class="w-49 form-btn small positive">구매하기</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- 구매하기 버튼 이후부터 -->
+
+    <!-- 제품상세정보, 후기, 상품구매안내 -->
+    <div class="container-1000 ">
+        <div class="flex"> 
+            <div class="flex-left center">
+                <h3>제품상세정보</h3>
+                
+            </div>
+            <div class="flex-left center">
+                <h3 class="oneLine">후기</h3>
+                <h3 class="oneLine font-grey">(150)</h3>
+               
+            </div>
+            <div class="flex-left center">
+                <h3>상품구매안내</h3>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container-1000 flex">
+        <hr class="w-30">
+        <hr class="w-30">
+        <hr class="w-30">
+    </div>
+
+    <div class="container-1000">
+        <div class="row center">
+            <button class="w-90 form-btn small positive">상세정보 펼쳐 보기</button>
+        </div>
+    </div>
+
+    <!-- 상세정보  -->
+
+
+
+    <!-- 제품상세정보, 후기, 상품구매안내 -->
+    <div class="container-1000 ">
+        <div class="flex"> 
+            <div class="flex-left center ">
+                <h3>제품상세정보</h3>
+                
+            </div>
+            <div class="flex-left center">
+                <h3 class="oneLine">후기</h3>
+                <h3 class="oneLine font-grey">(150)</h3>
+               
+            </div>
+            <div class="flex-left center">
+                <h3>상품구매안내</h3>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container-1000 flex">
+        <hr class="w-30">
+        <hr class="w-30">
+        <hr class="w-30">
+    </div>
+    
+    <div class="container-1000 flex">
+        <div class="flex-left center">
+            <div class="star-box">
+                <br>
+                <h4 class="font-purple oneLine">4.0</h4>
+                <h4 class="font-lightgrey oneLine">&nbsp/ 5</h4><br>
+                <h4 class="fas fa-star font-purple "></h4>
+                <h4 class="fas fa-star font-purple "></h4>
+                <h4 class="fas fa-star font-purple "></h4>
+                <h4 class="fas fa-star font-purple "></h4>
+                <h4 class="fas fa-star font-purple "></h4>
+            </div>
+        </div>
+        <div class="flex-left">
+
+        </div>
+    </div>
+
+</body>
+</html>

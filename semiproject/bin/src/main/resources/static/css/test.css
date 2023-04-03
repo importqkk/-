@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+/*
+    화면 레이아웃 테스트용 가이드라인입니다.
+
+    만든이: 진서영
+    날짜: 2023-
+*/
+
+[test] div,
+[test] main,
+[test] header,
+[test] footer,
+[test] nav,
+[test] aside,
+[test] article,
+[test] p,
+[test] label,
+[test] span,
+[test] ul,
+[test] ol,
+[test] li,
+[test] a {
+    border: 1px dotted gray !important;
+}
