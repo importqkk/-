@@ -25,7 +25,7 @@
 				<li><a href="${pageContext.request.contextPath}/member/delete">회원 탈퇴</a></li>
 				<!-- 테이블,컨트롤러 따로 만들어야되서 보류 .못할거같음 <li><a href="${pageContext.request.contextPath}/address/list">배송지 관리</a></li>-->
 			</ul>
-	</ul>
+	</ul>  
 	</div>
 	
 <!-- </aside> -->
