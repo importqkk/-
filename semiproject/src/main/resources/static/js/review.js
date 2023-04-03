@@ -32,6 +32,7 @@ $(function(){
 	
 	//리뷰 목록 불러오기
 	loadList();
+//	checkReview();
 	
 	$(".review-insert-btn").click(function(){
 		
@@ -41,10 +42,10 @@ $(function(){
 //		var rating = $("[name=reviewStar]").val();
 //		console.log(content);
 //		console.log(productNo);
-		console.log(starRating);
+//		console.log(starRating);
 //		console.log(memberId);
 		
-		if(content.trim().length == 0) return;
+		if(content.trim().length == 0 || !starRating) return;
 		
 		$.ajax({
 			url:"/rest/review/", 
@@ -62,13 +63,36 @@ $(function(){
 			    $(".btn-panel").hide();
 			    $(".review-star").hide();
 			    $(".view-panel").show();
-			    location.reload();
+//			    checkReview();
+//			    location.reload();
 			},
 			error:function(){
-				alert("등록 오류 발생");
+				alert("이미 작성된 리뷰가 있습니다.\n리뷰는 1회만 작성 가능합니다.");
 			}
 		});
 	});
+	
+//	function checkReview() {
+//	  $.ajax({
+//	    url: "/rest/review/reviewCountCheck",
+//	    type: "POST",
+//	    success: function(response) {
+//	      if (response) {
+//	        // 리뷰가 존재하는 경우, 메시지를 띄워준다.
+//	        alert("이미 작성된 리뷰가 있습니다. 리뷰는 1회만 작성 가능합니다.");
+//	      } else {
+//	        // 리뷰가 존재하지 않는 경우, 리뷰 작성 페이지로 이동한다.
+//	         $(".view-panel").hide();
+//		     $(".review-content").show();
+//	         $(".btn-panel").show();
+//	         $(".review-star").show();
+//	      }
+//	    },
+//	    error: function(error) {
+//	      console.log(error);
+//	    }
+//	  });
+//	}
 	
 	function loadList(){
 		$(".review-list").empty();
@@ -102,6 +126,9 @@ $(function(){
 							    .click(deleteReview);
 							
 					}
+					else{
+						$(html).find(".changeText").hide();
+					}
 			
 						
 //					$(html).find(".reviewStar").empty(); // 이전에 채워진 별표 초기화
@@ -117,7 +144,7 @@ $(function(){
 												.click(likeReview);
 					
 					var reviewNo = response[i].reviewNo;
-					console.log(reviewNo);
+//					console.log(reviewNo);
 					
 					
 						(function(reviewNo) {
@@ -211,9 +238,9 @@ function editReview(){
 		$editPanel.find(".review-edit-btn").click(function(){
 			var reviewContent = $editPanel.find("[name=reviewContent]").val();
 			var reviewStar = $editPanel.find('.starR.on').last().attr("value");
-			console.log(reviewStar);
-			console.log(reviewNo);
-			console.log(reviewContent);
+//			console.log(reviewStar);
+//			console.log(reviewNo);
+//			console.log(reviewContent);
 			$.ajax({
 				url:"/rest/review/",
 				method:"patch",
@@ -251,15 +278,16 @@ function likeReview(){
             reviewNo:reviewNo
         },
         success:function(response){
-			console.log($likeButton);
+//			console.log($likeButton);
             var $heartCount = $likeButton.siblings(".heart-count");
             var currentCount = parseInt($heartCount.text()); // 현재 좋아요 수 가져오기
-			$heartCount.text(currentCount + 1); // 원래의 좋아요 수에 +1 더하기
 			
             if(response.result){
+				$heartCount.text(currentCount + 1); // 원래의 좋아요 수에 +1 더하기
 				$likeButton.removeClass("fa-regular fa-solid").addClass("fa-solid");
             }
             else{
+				$heartCount.text(currentCount - 1); // 원래의 좋아요 수에 +1 더하기
 				$likeButton.removeClass("fa-regular fa-solid").addClass("fa-regular");
             }
         },

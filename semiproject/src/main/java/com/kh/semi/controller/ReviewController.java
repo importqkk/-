@@ -46,5 +46,16 @@ public class ReviewController {
 	    return "/WEB-INF/views/review/list.jsp";
 	}
 	
+//	@GetMapping("/productList")
+//	public String list(HttpSession session,
+//						Model model) {
+//		int productNo = (int) session.getAttribute("productNo");
+//		
+//		List<ReviewDto> list = reviewDao.selectList(productNo);
+//		model.addAttribute("list",list);
+//		
+//		return "/WEB-INF/views/review/productList.jsp";
+//	}
+//	
 
 }

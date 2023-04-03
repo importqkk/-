@@ -40,10 +40,6 @@
 
 		<div class="flex w-100 btn-panel">
 			<div class="w-50">
-                <label class="input-file-button" for="chooseFile">
-                    사진등록
-                </label>
-                <input type="file" id="chooseFile" name="attach" class="form-input w-10">
         	</div>
 			<div class="flex w-50 right">
                 <button type="button" class="form-btn small neutral review-cancel-btn me-10">취소</button>
@@ -64,7 +60,7 @@ $(function(){
         $(".btn-panel").show();
         $(".review-star").show();
         if (${reviewDto != null}){
-            alert("구매 당 1회의 리뷰만 작성할 수 있습니다");
+            alert("이미 작성된 리뷰가 있습니다. \n 리뷰는 1회만 작성 가능합니다.");
             $(".review-content").hide();
             $(".btn-panel").hide();
             $(".review-star").hide();
@@ -72,8 +68,16 @@ $(function(){
         }
       } else if (${memberId == null}){
     	  alert("로그인 후 리뷰를 작성할 수 있습니다");
+    	  $(".review-content").hide();
+          $(".btn-panel").hide();
+          $(".review-star").hide();
+          $(".view-panel").show();
       } else {
         alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
+        $(".review-content").hide();
+        $(".btn-panel").hide();
+        $(".review-star").hide();
+        $(".view-panel").show();
       }
       
   })

@@ -56,7 +56,7 @@ public class ReviewDao {
 	//리뷰 목록
 	public List<ReviewDto> selectList(int productNo){
 		String sql = "select * from review where product_no = ? "
-				+ "order by review_no desc";
+				+ "order by review_no asc";
 		Object[] param = {productNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
@@ -132,5 +132,13 @@ public class ReviewDao {
 	    Object[] param = {memberId, vo.getBegin(), vo.getEnd()};
 	    return jdbcTemplate.query(sql, mapper, param);
 	}
+	
+	//리뷰 내역
+		public boolean reviewCheck(ReviewDto reviewDto) {
+			String sql = "select count(*) from review where member_id = ? and product_no = ?";
+			Object[] param = {reviewDto.getMemberId(), reviewDto.getProductNo()};
+			int count = jdbcTemplate.queryForObject(sql, int.class, param);
+			return count == 1;
+		}
 
 }

@@ -49,9 +49,9 @@ public class ReviewRestController {
 		reviewDto.setMemberId(memberId);
 		
 		
-		reviewService.write(reviewDto, imgNo);
+//		reviewService.write(reviewDto, imgNo);
 		
-//		reviewDao.insert(reviewDto);
+		reviewDao.insert(reviewDto);
 		
 		
 	}
@@ -103,6 +103,21 @@ public class ReviewRestController {
 		reviewLikeDto.setMemberId(memberId);
 		
 		return reviewLikeDao.check(reviewLikeDto);
+	}
+	
+	@PostMapping("/reviewCountCheck")
+	public boolean check(HttpSession session,
+						@ModelAttribute ReviewDto reviewDto) {
+		String memberId = (String) session.getAttribute("memberId");
+		int productNo = (int) session.getAttribute("productNo");
+
+		if(productNo == reviewDto.getProductNo()) {
+			reviewDto.setMemberId(memberId);
+			reviewDto.setProductNo(productNo);
+			return reviewDao.reviewCheck(reviewDto);
+		} else {
+			return false;
+		}
 	}
 	
 
