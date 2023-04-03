@@ -98,27 +98,4 @@ public class ProductController {
 		return "/WEB-INF/views/product/search.jsp";
 	}
 	
-	
-	@GetMapping("/detail")
-	public String detail(@RequestParam int productNo,
-							Model model,
-							HttpSession session) {
-				
-				
-		ProductInfoDto productInfoDto = productDao.selectOne(productNo);
-		model.addAttribute("productInfoDto",productInfoDto);
-		
-		String memberId = (String) session.getAttribute("memberId");
-		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId);
-		ReviewDto reviewDto = reviewDao.selectOne(memberId, productNo);
-		model.addAttribute("reviewDto",reviewDto);
-
-		boolean hasBuyHistory = buyHistoryDto != null && buyHistoryDto.getProductNo() == productNo;
-		model.addAttribute("hasBuyHistory", hasBuyHistory);
-
-		return "/WEB-INF/views/product/detail.jsp";
-		
-	}
-	
-	
 }
