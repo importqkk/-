@@ -13,14 +13,6 @@ public class QaService {
 	@Autowired
 	private QaDao qaDao;
 	
-	public TestDto testdo(String fff) {
-		TestDto test = new TestDto();
-		test = qaDao.selectTest(fff);
-		
-		
-		return test;
-	}
-	
 	//게시글 등록 서비스
 	public int write(QaDto qaDto) {
 		int qaNo = qaDao.sequence();

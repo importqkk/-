@@ -58,18 +58,6 @@ public class QaController {
 		return "/WEB-INF/views/qa/list.jsp";
 	}
 	
-
-	@GetMapping("/test")
-	public String Test(Model model) {
-		TestDto test = new TestDto();
-		String aa = "testuser8";
-		
-		test = qaService.testdo(aa);
-		
-
-		model.addAttribute("hi",test);
-		return "/WEB-INF/views/qa/test.jsp";
-	}
 	
 	@PostMapping("/list")
 	public String QaList(Model model,

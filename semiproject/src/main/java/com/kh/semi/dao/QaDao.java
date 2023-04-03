@@ -99,14 +99,7 @@ public class QaDao {
 		List<QaDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list;
 	}
-	
-	public TestDto selectTest(String ff ) {
-		TestDto test = new TestDto();
-		String sql = "select * from MEMBER where MEMBER_ID = ?";
-		Object[] param = {ff};
-		List<TestDto> list = jdbcTemplate.query(sql, mapper2, param);
-		return list.isEmpty() ? null : list.get(0);
-	}
+
 	
 //	번호를 생성하면서 등록하는 방법
 //	1. 시퀀스 번호를 듀얼 테이블을 사용하여 조회
