@@ -48,7 +48,7 @@ public class CartDao {
 		Object[] param = {memberId};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-	// 상품 이미지 조회 (테스트 필요)
+	// 상품 이미지 조회
 	public Integer cartImg(int productNo) {
 		String sql = "select * from product_with_img where product_no=?";
 		Object[] param = {productNo};
@@ -79,26 +79,11 @@ public class CartDao {
 	}
 	
 	
-	// 장바구니에 있는 상품 개수 갱신 기능
-	// 금액 정보 업데이트 기능
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//만든거 가져가야함
-	//주문후 카트삭제
-	public boolean cartDeleteAll(String memberId) {
-		String sql = "delete cart where member_id=?";
-		Object[] param = {memberId};
-		return jdbcTemplate.update(sql, param) > 0;
-	}
+	//훈 만든거 가져가야함
+		//주문후 카트삭제
+		public boolean cartDeleteAll(String memberId) {
+			String sql = "delete cart where member_id=?";
+			Object[] param = {memberId};
+			return jdbcTemplate.update(sql, param) > 0;
+		}
 }

@@ -15,12 +15,9 @@ window.addEventListener("load", function(){
               }
               document.querySelector("[name=memberPost]").value = data.zonecode;
               document.querySelector("[name=memberBasicAddr]").value = addr;
-              document.querySelector("[name=memberDetailAddr]").focus();
               
-
+              document.querySelector("[name=memberDetailAddr]").focus();
           }
       }).open();
   }
-  
-  
 });

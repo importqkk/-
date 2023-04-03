@@ -3,6 +3,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -34,13 +35,19 @@ public class ProductInfoDao {
 					.build();
 		}
 	};
-	   
+	
 	// 상품 번호로 상품 정보 불러오기
 	public List<ProductInfoDto> selectOne(int productNo) {
 		String sql = "select * from product_info where product_no=?";
 		Object[] param = {productNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+	// 상품 번호로 상품 정보 불러오기
+	/*
+	 * public List<ProductInfoDto> selectOne(int productNo) { String sql =
+	 * "select * from product_info where product_no=?"; Object[] param =
+	 * {productNo}; return jdbcTemplate.query(sql, mapper, param); }
+	 */
 	
 	// 최신상품 순서대로 정렬하기
 	public List<ProductInfoDto> newList() {
@@ -52,6 +59,18 @@ public class ProductInfoDao {
 	public List<ProductInfoDto> bestList() {
 		String sql = "select * from product_info order by product_sell_count desc, product_no desc";
 		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	// 가격 비싼 순서대로 정렬하기
+	public List<ProductInfoDto> expensiveList(){
+		String sql = "select * from product_info order by product_price desc, product_no desc";
+		return jdbcTemplate.query(sql,mapper); 
+	}
+	
+	// 가격 싼 순서대로 정렬하기
+	public List<ProductInfoDto> cheapList(){
+		String sql = "select * from product_info order by product_price asc, product_no desc";
+		return jdbcTemplate.query(sql,mapper);
 	}
 	
 	// 전체 상품 불러오기
@@ -68,7 +87,10 @@ public class ProductInfoDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	//상품가격조회
+	
+	
+	//훈 만든거 
+	//가격조회
 	public int orderPrice(int productNo) {
 		String sql="select product_price from product where product_no=?";
 		Object[] param= {productNo};
@@ -76,3 +98,4 @@ public class ProductInfoDao {
 	}
 	
 }
+

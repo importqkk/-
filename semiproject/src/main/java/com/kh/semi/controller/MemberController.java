@@ -1,7 +1,8 @@
 package com.kh.semi.controller;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import com.kh.semi.component.RandomComponent;
 import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dto.MemberDto;
 
@@ -20,6 +21,13 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private RandomComponent RandomComponent;
+	@Autowired
+	private JavaMailSender sender;
+
+
+
 
 //	회원가입
 	@GetMapping("/join")
@@ -27,7 +35,14 @@ public class MemberController {
 		return "/WEB-INF/views/member/join.jsp";
 	}
 	 @PostMapping("/join")
-	 public String join(@ModelAttribute MemberDto memberDto) {
+	 public String join(@ModelAttribute MemberDto memberDto,
+			 			@RequestParam(name = "agreePromotion", required = false) String agreePromotion) {
+		if (agreePromotion == null) {
+		   memberDto.setAgreePromotion("N");
+		 }
+		else {
+		 memberDto.setAgreePromotion("Y");
+		}
 		 memberDao.insert(memberDto);
 		 return "redirect:joinFinish";
 	 }
@@ -96,18 +111,33 @@ public class MemberController {
 	 }
 	 
 	 @PostMapping("/findPw")
-	 public String findPw(@ModelAttribute MemberDto memberDto, 
-			 Model model, RedirectAttributes attr) {
-		 try {
-			 String memberPw = memberDao.findPw(memberDto);
-			 model.addAttribute("findPw", memberPw);
-			 return "/WEB-INF/views/member/findPwResult.jsp";
-		 }
-		 catch(Exception e) {
-			 attr.addAttribute("mode", "error");
-			 return "redirect:findPw";
-		 }
-	 }
+	 public String findPW(RedirectAttributes attr,
+		@RequestParam String memberId,
+		@RequestParam String memberEmail) {
+//		String memberId = memberId;
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		// 이메일이 일치하지 않는다면
+		if(!memberDto.getMemberEmail().equals(memberEmail)) {
+			attr.addAttribute("mode", "error");
+			return "redirect:findPw";
+		}
+		// 이메일이 일치 시임시 비밀번호 생성
+		String temporaryPW = RandomComponent.generateString();
+		// 생성한 임시 비밀번호로 비밀번호 변경
+		memberDao.changePassword(memberId, temporaryPW);
+		// 임시 비밀번호를 회원 이메일로 전송
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(memberDto.getMemberEmail());
+		message.setSubject("[SEMI] 임시 비밀번호 발급");
+		message.setText("발급된 임시 비밀번호는 "+temporaryPW+" 입니다. 로그인 후 비밀번호를 반드시 변경해주시길 바랍니다.");
+		sender.send(message);
+		return "redirect:findPwResult";
+		}
+		@GetMapping("/findPwResult")
+		public String findPwResult() {
+			return "/WEB-INF/views/member/findPwResult.jsp";
+		}
+		
 //mypage
 	 @GetMapping("/mypage")
 	 public String mypage(HttpSession session, Model model) {
@@ -117,7 +147,7 @@ public class MemberController {
 		 return "/WEB-INF/views/member/mypage.jsp";
 	 }
 	
-//	 비밀번호 변경 기능
+	 //비밀번호 변경 기능
 	 @GetMapping("/password")
 	 public String password() {
 		 return "/WEB-INF/views/member/password.jsp";
@@ -125,20 +155,17 @@ public class MemberController {
 	 
 	 @PostMapping("/password")
 	 public String password(
-			 HttpSession session,//아이디가 저장되어 있는 세션 객체
-			 @RequestParam String currentPw, //현재 비밀번호
-			 @RequestParam String changePw,//변경할 비밀번호
-			 RedirectAttributes attr) {//리다이렉트에 정보를 추가하기 위한 객체
+			 HttpSession session,
+			 @RequestParam String currentPw, 
+			 @RequestParam String changePw,
+			 RedirectAttributes attr) {
 		 String memberId = (String)session.getAttribute("memberId");
 		 MemberDto memberDto = memberDao.selectOne(memberId);
 		 
-		 //비밀번호가 일치하지 않는다면
 		 if(!memberDto.getMemberPw().equals(currentPw)) {
 			 attr.addAttribute("mode", "error");
 			 return "redirect:password";
 		 }
-		 
-		 //비밀번호가 일치한다면 → 비밀번호 변경 처리
 		 memberDao.changePassword(memberId, changePw);
 		 return "redirect:passwordFinish";		 
 	 }
@@ -148,12 +175,34 @@ public class MemberController {
 	 public String passwordFinish() {
 		 return "/WEB-INF/views/member/passwordFinish.jsp";
 	 }
+// 회원정보 수정 전 페이지
+	 @GetMapping("/pwVf")
+	 public String passwordVerify() {
+	     return "/WEB-INF/views/member/pwVf.jsp";
+	 }
+
+	 @PostMapping("/pwVf")
+	 public String verifyPassword(
+	         HttpSession session,
+	         @RequestParam String password,
+	         RedirectAttributes attr) {
+	     String memberId = (String)session.getAttribute("memberId");
+	     MemberDto memberDto = memberDao.selectOne(memberId);
+
+	     if(!memberDto.getMemberPw().equals(password)) {
+	         attr.addAttribute("mode", "error");
+	         return "redirect:pwVf";
+	     }
+	     
+	     return "redirect:edit";
+	 }
+
 	 
 //	 비밀번호를 제외한 나머지 개인정보 변경
 	 @GetMapping("/edit")
 	 public String edit(
-			 HttpSession session,//회원 아이디가 저장되어 있는 세션 객체
-			 Model model//회원의 모든 정보를 전달할 전송 객체
+			 HttpSession session,
+			 Model model
 			) {
 		 String memberId = (String) session.getAttribute("memberId");
 		 MemberDto memberDto = memberDao.selectOne(memberId);
@@ -163,22 +212,20 @@ public class MemberController {
 	 
 	 @PostMapping("/edit")
 	 public String edit(
-			 @ModelAttribute MemberDto memberDto,//데이터 자동 수신 객체
-			 HttpSession session,//회원 아이디가 저장되어 있는 세션 객체
-			 RedirectAttributes attr//리다이렉트 시 정보를 추가할 전송 객체
+			 @ModelAttribute MemberDto memberDto,
+			 HttpSession session,
+			 RedirectAttributes attr
 		 ) {
 		 String memberId = (String)session.getAttribute("memberId");
 		 MemberDto findDto = memberDao.selectOne(memberId);
-		 
-		 //비밀번호가 일치하지 않는다면 → 에러 표시 후 이전 페이지로 리다이렉트
+		
 		 if(!findDto.getMemberPw().equals(memberDto.getMemberPw())) {
 			 attr.addAttribute("mode", "error");
 			 return "redirect:edit";
 		 }
 		 
-		 //비밀번호가 일치한다면 → 비밀번호 변경 및 완료 페이지로 리다이렉트
-		 memberDto.setMemberId(memberId);//아이디를 추가 설정
-		 memberDao.changeInformation(memberDto);//정보 변경 요청
+		 memberDto.setMemberId(memberId);
+		 memberDao.changeInformation(memberDto);
 		 return "redirect:editFinish";
 	 }
 	 
@@ -188,38 +235,39 @@ public class MemberController {
 	 }
 	 
 //	 회원 탈퇴
-	 @GetMapping("/exit")
-	 public String exit(HttpSession session) {
-		 return "/WEB-INF/views/member/exit.jsp";
+	 @GetMapping("/delete")
+	 public String delete(HttpSession session) {
+		 return "/WEB-INF/views/member/delete.jsp";
 	 }
 	 
-	 @PostMapping("/exit")
-	 public String exit(
-			 	HttpSession session, //회원정보가 저장되어 있는 세션 객체
-			 	@RequestParam String memberPw,//사용자가 입력한 비밀번호
-			 	RedirectAttributes attr//리다이렉트 시 정보를 추가하기 위한 객체
+	 @PostMapping("/delete")
+	 public String delete(
+			 	HttpSession session, 
+			 	@RequestParam String memberPw,
+			 	RedirectAttributes attr
 			 ) {
 		 String memberId = (String)session.getAttribute("memberId");
 		 MemberDto memberDto = memberDao.selectOne(memberId);
 		 
-		 //비밀번호가 일치하지 않는다면 → 비밀번호 입력 페이지로 되돌린다
+		
 		 if(!memberDto.getMemberPw().equals(memberPw)) {
 			 attr.addAttribute("mode", "error");
-			 return "redirect:exit";
+			 return "redirect:delete";
 		 }
 		 
-		 //비밀번호가 일치한다면 → 회원탈퇴 + 로그아웃
+		
 		 memberDao.delete(memberId);
 		 
 		 session.removeAttribute("memberId");
-		 session.removeAttribute("memberLevel");
+		 session.removeAttribute("memberRole");
 		 
-		 return "redirect:exitFinish";
+		 return "redirect:deleteFinish";
 	 }
 	 
-	 @GetMapping("/exitFinish")
-	 public String exitFinish() {
-		 return "/WEB-INF/views/member/exitFinish.jsp";
+	 @GetMapping("/deleteFinish")
+	 public String deleteFinish() {
+		 return "/WEB-INF/views/member/deleteFinish.jsp";
 	 }
+	 
 	 
 }
