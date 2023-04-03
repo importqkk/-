@@ -34,7 +34,7 @@ public class ProductInfoDao {
 					.build();
 		}
 	};
-	
+	   
 	// 상품 번호로 상품 정보 불러오기
 	public List<ProductInfoDto> selectOne(int productNo) {
 		String sql = "select * from product_info where product_no=?";
