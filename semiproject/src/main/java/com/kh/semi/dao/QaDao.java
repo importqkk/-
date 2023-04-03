@@ -43,18 +43,7 @@ public class QaDao {
 		}
 	};
 	
-	private RowMapper<TestDto>mapper2 = new RowMapper<TestDto>() {
-		@Override
-		public TestDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			TestDto testDto = new TestDto();
-			testDto.setMEMBER_ID(rs.getString("MEMBER_ID"));
-			testDto.setMEMBER_NAME(rs.getString("MEMBER_NAME"));
-			testDto.setMEMBER_NICK(rs.getString("MEMBER_NICK"));
-			
-			return testDto;
-		}
-	};
-	
+
 	// QA게시판에 공지사항만 조회
 //		public List<QaDto> selectNoticeList(int begin, int end){
 //			String sql = "select * from ("
