@@ -27,6 +27,7 @@ public class ImgController {
 	private ImgDao imgDao;
 	@Autowired
 	private FileUploadProperties fileUploadProperties;
+	
 	private File dir;
 	@PostConstruct
 	public void init() {
