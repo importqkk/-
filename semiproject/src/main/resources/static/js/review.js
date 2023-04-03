@@ -269,8 +269,5 @@ function likeReview(){
     });
 }
 
-
-
-	
 });
-	
+

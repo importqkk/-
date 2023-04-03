@@ -2,7 +2,6 @@
 
 /*
     디자인 모듈입니다.
-
     만든이: 진서영
     날짜: 2023-03-17
 */
@@ -11,6 +10,16 @@
     컬러팔렛트
     - 보라색
         - 100%: #776bff
+<<<<<<< HEAD
+        - 60%: #ada6ff
+        - 20%: #e4e1ff
+        - 5%: #f8f8ff
+    - 검은색
+        - 100%: #22201e
+        - 80%: #4e4d4b
+        - 40%: #72706f
+        - 3%: #f8f8f8
+=======
         - 20%: #e4e1ff
         - 5%: #f8f8ff
 
@@ -20,6 +29,7 @@
         - 40%: #72706f
         - 3%: #f8f8f8
 
+>>>>>>> refs/remotes/origin/main
     - 빨간색
         - 100%: #FF4848
 */
@@ -365,8 +375,42 @@ a.form-btn {
     display: inline-block;
     text-align: center;
     text-decoration: none;
-    font-weight: bolder;
 }
+a.form-btn.large {
+    font-size: 18px;
+    padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border-width: 2px;
+    border-style: solid;
+}
+a.form-btn.medium {
+    font-size: 15px;
+    padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border-width: 2px;
+    border-style: solid;
+}
+a.form-btn.small {
+    font-size: 13px;
+    padding: 0.75em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    border-width: 2px;
+    border-style: solid;
+}
+a.form-btn.positive {
+    background-color: #776BFF;
+    border-color: #776BFF;
+    color: white;
+}
+a.form-btn.neutral {
+    background-color: white;
+    border-color: #776BFF;
+    color: #776BFF;
+}
+
 a.form-btn.large {
     font-size: 18px;
     padding: 1em;
@@ -458,9 +502,15 @@ a.form-btn.neutral {
                 <input class="search-input w-100">
                 <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 =======
+<<<<<<< HEAD
+            <div class="search-box">
+                <input class="search-input w-100">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+=======
             <div class="parent">
                 <input class="search w-100">
                 <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+>>>>>>> refs/remotes/origin/main
 >>>>>>> refs/remotes/origin/main
             </div>
         </div>

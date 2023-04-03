@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
+=======
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -228,3 +240,4 @@ Daum 서비스: 회사가 제공하는 Daum(다음) 브랜드를 사용하는 �
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+>>>>>>> refs/remotes/origin/main
