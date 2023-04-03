@@ -45,12 +45,10 @@
 </style>
 
 <script type="text/javascript">
-	$(function() {
-		$(".back-btn").click(function() {
-			var result = confirm("되돌아가면 수정하던 내용이 저장되지 않습니다.\n정말 돌아가시겠습니까?");
-			if(!result) return false;
-		})
-	})
+	window.addEventListener('beforeunload', (event) => {
+    	event.preventDefault();
+    	event.returnValue = '';
+    });
 </script>
 
 <div class="container-1000">
