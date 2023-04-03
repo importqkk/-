@@ -912,3 +912,49 @@ input[type="checkbox"] {
     border-color: #ada6ff;
     filter:none;
 }
+.table.table-border{
+    border: 1px solid gray;
+}
+.table.table-border > thead > tr > th, 
+.table.table-border > thead > tr > td, 
+.table.table-border > tbody > tr > th, 
+.table.table-border > tbody > tr > td, 
+.table.table-border > tfoot > tr > th, 
+.table.table-border > tfoot > tr > td{
+    border: 1px solid gray;
+}
+.accordian, 
+.accordian ul{
+    color: #474748;
+    margin: 0;
+    padding: 0.25em;
+    list-style: none;
+}
+.accordian{
+    font-size: 18px;
+    cursor: pointer;
+}
+.accordian ul{
+	font-size: 16px;
+}
+.accordian ul > li{
+	padding: 0.25em 0;
+}
+.accordian > li{
+    width: 100%;
+    padding: 0 0 0.5em 0;
+	padding-bottom: 20px;
+}
+
+.accordian a{
+    text-align: center;
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+    width: 100%;
+}
+.accordian li:hover{
+	cursor: pointer;
+}
+.accordian li:hover > a{
+    color: black;
+}

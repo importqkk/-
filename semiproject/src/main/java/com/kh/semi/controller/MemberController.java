@@ -223,12 +223,12 @@ public class MemberController {
 			 RedirectAttributes attr
 		 ) {
 		 String memberId = (String)session.getAttribute("memberId");
-		 MemberDto findDto = memberDao.selectOne(memberId);
+//		 MemberDto findDto = memberDao.selectOne(memberId);
 		
-		 if(!findDto.getMemberPw().equals(memberDto.getMemberPw())) {
-			 attr.addAttribute("mode", "error");
-			 return "redirect:edit";
-		 }
+//		 if(!findDto.getMemberPw().equals(memberDto.getMemberPw())) {
+//			 attr.addAttribute("mode", "error");
+//			 return "redirect:edit";
+//		 }
 		 
 		 memberDto.setMemberId(memberId);
 		 memberDao.changeInformation(memberDto);

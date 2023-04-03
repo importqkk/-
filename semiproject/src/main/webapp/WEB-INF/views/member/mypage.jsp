@@ -5,7 +5,7 @@
 
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 
-<div class="w-80 mt-100">
+<div class="w-80">
 	<div class="row center">
 		<h1>${memberDto.memberNick} 님</h1>
 		<hr>
