@@ -19,7 +19,7 @@
 		<input type="password" name="changePw" required class="form-input w-100 medium light">
 	</div>
 	<div class="row">
-		<button class="form-btn neutral w-20 medium">취소</button>
+		<button class="form-btn neutral w-24 medium">취소</button>
         <button type="submit" class="form-btn positive w-75 medium ms-25">변경</button>
 	</div>
 	<!-- 취소 버튼 클릭 이벤트 처리 -->
