@@ -19,4 +19,5 @@ public class MemberDto {
 	private String agreeTos;	
 	private String agreePrivacy;	
 	private String agreePromotion;
+
 }

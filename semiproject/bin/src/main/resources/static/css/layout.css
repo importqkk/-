@@ -55,7 +55,13 @@ aside {
 */
 .flex {
     display: flex;
+<<<<<<< HEAD
+    
+
+    justify-content: space-between;
+=======
     align-items: center;
+>>>>>>> refs/remotes/origin/main
 }
 .flex.center {
     justify-content: center;

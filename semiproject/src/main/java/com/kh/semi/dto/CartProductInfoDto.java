@@ -12,4 +12,8 @@ public class CartProductInfoDto {
 	private int productNo, productPrice, productStock, productCount;
 	private Integer imgNo;
 	
+
 }
+
+
+

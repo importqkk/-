@@ -334,8 +334,8 @@ fs-18 {
             $(".item-form").attr("method", "post");
          });
          $(".buy-btn").click(function(){
-            $(".item-form").attr("action", "/order/detail");
-            $(".item-form").attr("method", "post");
+            $(".item-form").attr("action", "/order/buy");
+            $(".item-form").attr("method", "get");
          });
         // 장바구니버튼, 주문 버튼 개별 경로처리--------------------------------
         // 장바구니 상품 담기 처리
@@ -724,4 +724,3 @@ $(function(){
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-

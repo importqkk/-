@@ -12,6 +12,51 @@
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Document</title>
+    <style>
+        .bordertest {
+                border-width: 100px;
+                background-color: rgb(248, 248, 255);
+                border-style: solid;
+                width: 100px;
+                height: 100px;
+                border-radius: 1em;
+            }
+
+            /* input 숨겨준다 */
+input#check_btn{
+  display:none;
+  }
+
+input#check_btn + label{
+  cursor:pointer;
+ }
+
+input#check_btn + label > span{
+  vertical-align: middle;
+  padding-left: 5px;
+ }
+
+/* label:before에 체크하기 전 상태 CSS */
+input#check_btn + label:before{
+  content:"";
+  display:inline-block;
+  width:17px;
+  height:17px;
+  border:2px solid #F47C7C;
+  border-radius: 4px;
+  vertical-align:middle;
+  }
+  
+/* label:before에 체크 된 상태 CSS */  
+input#check_btn:checked + label:before{
+  content:"";
+  background-color:#F47C7C;
+  border-color:#F47C7C;
+  background-image: url('check_btn.png');
+  background-repeat: no-repeat;
+  background-position: 50%;
+  }
+    </style>
 </head>
 <body test>
     <h1>positive btns</h1>
@@ -60,6 +105,14 @@
             <button class="form-btn large positive w-20">입력</button>
         </div>
     </div>
+
+    <div class="check_wrap">
+        <input type="checkbox" id="check_btn"/>
+        <label for="check_btn"><span>선택!</span></label>
+      </div>
+        
     </div>
+    </div>
+
 </body>
 </html>
