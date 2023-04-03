@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
@@ -58,15 +59,11 @@
             font-weight: bold;  
         }
 
-        /* 차트 */
-        .chart {
-            flex-direction: column;
-            height: 200px;
-        }
-
-        /* 차트용 폰트 */
+               /* 차트용 폰트 */
         .chart-font {
-            margin-bottom: 15.5px;
+        	font-size: 12px;
+        	margin-top: 10px;
+            margin-bottom: 22px;
         }
 
         .font-warning{
@@ -162,7 +159,17 @@
 			font-size:18px;
 		}
 		
+		.bar {
+			fill: #776BFF;
+			rx: 15px;
+			ry: 15px;
+            border-radius: 50%;
+		}
     </style>
+    
+    
+    <script src="/static/js/review.js"></script>
+    
     <script type="text/javascript">
  	// 페이지 로드--------------
     $(function(){    	
@@ -233,7 +240,6 @@
          		data: JSON.stringify({'number': number.toString()}),
                  contentType: 'application/json; charset=utf-8',
                  success: function(data) {
-            
                  	// 개수 최신화
                      $(".number").text(number);
                  	
@@ -265,15 +271,43 @@
         	});
     	});    	
     	
-    	// 별 다서색--------------------------------
-    	
+    	// 리뷰 구간----------------------------------------------
+//     	 $(".review-content").hide();
+//     	    $(".btn-panel").hide();
+//     	    $(".review-star").hide();
+//     	    $(".edit-btn").click(function(){
+//     	      if (${hasBuyHistory}) {
+//     	        $(".view-panel").hide();
+//     	        $(".review-content").show();
+//     	        $(".btn-panel").show();
+//     	        $(".review-star").show();
+//     	        if (${reviewDto != null}){
+//     	            alert("구매 당 1회의 리뷰만 작성할 수 있습니다");
+//     	            $(".review-content").hide();
+//     	            $(".btn-panel").hide();
+//     	            $(".review-star").hide();
+//     	            $(".view-panel").show();
+//     	        }
+//     	      } else if (${memberId == null}){
+//     	    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
+//     	      } else {
+//     	        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
+//     	      }
+    	      
+//     	  })
+//     	    $(".cancel-btn").click(function(){
+//     	    $(".view-panel").show();
+//     	    $(".review-content").hide();
+//     	    $(".btn-panel").hide();
+//     	    $(".review-star").hide();
+//     	  }) 
     	
     	
     });	   	
     // 페이지 로드--------------
     </script>
-
-<body>
+	
+<body test>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display:none;">${productInfoDto.productNo}</h6>
 	<h6 class="avg" style="display:none;">${reviewAvg}</h6>
@@ -364,7 +398,7 @@
             </div>
             <div class="flex-content w-33 center">
                 <a class="fs-20 oneLine font-black" href="#scrollTargetReview">후기</a>
-                <h3 class="fs-20 oneLine font-grey">(${reviewCount})</h3>
+                <a class="fs-20 oneLine font-grey" href="#scrollTargetReview">(${reviewCount})</a>
             </div>
             <div class="flex-content w-33 center">
                 <a class="fs-20 font-black" href="#scrollTargetPurchaseGuide">상품구매안내</a>
@@ -402,7 +436,7 @@
             </div>
             <div class="flex-content w-33 center">
                 <a class="fs-20 oneLine font-black" href="#scrollTargetReview">후기</a>
-                <h3 class="fs-20 oneLine font-grey">(${reviewCount})</h3>
+                <a class="fs-20 oneLine font-grey" href="#scrollTargetReview">(${reviewCount})</a>
             </div>
             <div class="flex-content w-33 center">
                 <a class="fs-20 font-black" href="#scrollTargetPurchaseGuide">상품구매안내</a>
@@ -441,22 +475,30 @@
             </div>
             <!-- 차트 -->
             <div class="w-75">
-                <div class="chart">
-                    <div class="bar w-50"></div> 
-                    <div class="bar w-60"></div> 
-                    <div class="bar w-70"></div> 
-                    <div class="bar w-80"></div> 
-                    <div class="bar w-90"></div> 
-                </div>
+				<svg width="500" height="30">
+		            <rect x="10" y="10" width="300" height="10" class="bar" rx="10" ry="10"/>
+		        </svg>
+				<svg width="500" height="30">
+		            <rect x="10" y="10" width="300" height="10" class="bar" rx="10" ry="10"/>
+		        </svg>    
+		        <svg width="500" height="30">
+		            <rect x="10" y="10" width="300" height="10" class="bar" rx="10" ry="10"/>
+		        </svg>
+				<svg width="500" height="30">
+		            <rect x="10" y="10" width="300" height="10" class="bar" rx="10" ry="10"/>
+		        </svg>
+		        <svg width="500" height="30">
+		            <rect x="10" y="10" width="300" height="10" class="bar" rx="10" ry="10"/>
+		        </svg>     
             </div>
             <!-- 리뷰수-->
-            <div class="w-5">
-                <h5 class="font-boldgrey chart-font">50</h5>
-                <h5 class="font-boldgrey chart-font">60</h5>
-                <h5 class="font-boldgrey chart-font">70</h5>
-                <h5 class="font-boldgrey chart-font">80</h5>
-                <h5 class="font-boldgrey chart-font">90</h5>
-            </div>
+<!--             <div class="w-5"> -->
+<!--                 <h5 class="font-boldgrey chart-font">50</h5> -->
+<!--                 <h5 class="font-boldgrey chart-font">60</h5> -->
+<!--                 <h5 class="font-boldgrey chart-font">70</h5> -->
+<!--                 <h5 class="font-boldgrey chart-font">80</h5> -->
+<!--                 <h5 class="font-boldgrey chart-font">90</h5> -->
+<!--             </div> -->
         </div>
     </div>
 
@@ -518,7 +560,7 @@
 	            </div>
 	            <div class="flex-content w-33 center">
 	                <a class="fs-20 oneLine font-black" href="#scrollTargetReview">후기</a>
-	                <h3 class="fs-20 oneLine font-grey">(${reviewCount})</h3>
+	                <a class="fs-20 oneLine font-grey" href="#scrollTargetReview">(${reviewCount})</a>
 	            </div>
 	            <div class="flex-content w-33 center">
 	                <a class="fs-20 font-black" href="#scrollTargetPurchaseGuide">상품구매안내</a>

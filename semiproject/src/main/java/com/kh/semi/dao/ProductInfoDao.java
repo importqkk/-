@@ -27,7 +27,7 @@ public class ProductInfoDao {
 						.productJoin(rs.getDate("product_join"))
 						.reivewAVG(rs.getFloat("avg"))
 						.reivewCNT(rs.getInt("cnt"))
-						.imgNo(rs.getInt("img_no"))
+						.imgNo(rs.getInt("detail_img_no"))
 					.build();
 		}
 	};

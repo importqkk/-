@@ -2,6 +2,8 @@ package com.kh.semi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.semi.dao.BuyHistoryDao;
 import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ReviewDao;
+import com.kh.semi.dto.BuyHistoryDto;
 import com.kh.semi.dto.ProductInfoDto;
 import com.kh.semi.dto.ReviewDto;
 
@@ -25,10 +29,15 @@ public class ProductController {
 	@Autowired
 	private ReviewDao reviewDao;
 
+	@Autowired
+	private BuyHistoryDao buyHistoryDao;
+	
 	// 상품 상세 페이지 - 상품 번호를 통해 페이지를 보여줌  
 	@GetMapping("/detail")
 	public String list(@RequestParam int productNo,
-						Model model) {
+						Model model,
+						HttpSession session
+			) {
 		// 상품 정보 전달
 		ProductInfoDto productInfoDto = productDao.selectOne(productNo);
 		model.addAttribute("productInfoDto",productInfoDto);
@@ -50,6 +59,13 @@ public class ProductController {
 			model.addAttribute("reviewList",reviewList);
 			
 		}
+		
+		// 리뷰 작성 구간--------------
+		// 아이디 확인
+		String memberId = (String) session.getAttribute("memberId");
+		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId);
+		ReviewDto reviewDto = reviewDao.selectOne(memberId, productNo);
+		model.addAttribute("reviewDto",reviewDto);
 		
 		return "/WEB-INF/views/product/detail.jsp";
 	}

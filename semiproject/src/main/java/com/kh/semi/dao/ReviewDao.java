@@ -89,6 +89,22 @@ public class ReviewDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	//리뷰 상세(아이디로 리뷰 찾기)
+	public ReviewDto selectOne(String memberId) {
+		String sql = "select * from review where member_id = ?";
+		Object[] param = {memberId};
+		List<ReviewDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	//구매 당 하나의 리뷰만 작성할 수 있도록 함
+	public ReviewDto selectOne(String memberId, int productNo) {
+		String sql = "select * from review where member_id = ? and product_no = ?";
+		Object[] param = {memberId, productNo};
+		List<ReviewDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
 	//리뷰 좋아요 수 카운트
 	public void updateLikecount(int reviewNo, int count) {
 		String sql = "update review set review_like = ? where review_no = ?";

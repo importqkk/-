@@ -171,7 +171,6 @@
 		<div class="row">
 			<hr>
 			<h5 class="font-lightgrey"> <i class=" fa-solid fa-house"></i> > 면역력 어쩌구</h5>
-			
 		</div>
 		<div class="row">
 			<hr>
