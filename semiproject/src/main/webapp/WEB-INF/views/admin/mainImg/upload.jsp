@@ -29,11 +29,11 @@
 	            return false;
 	        }
 	    })
-	    $(".back-btn").click(function() {
-	    	var result = confirm("목록으로 돌아가면 작성하던 정보가 저장되지 않습니다.\n정말 돌아가시겠습니까?");
-	    	if(!result) return false;
-	    })
 	})
+	window.addEventListener('beforeunload', (event) => {
+    	event.preventDefault();
+    	event.returnValue = '';
+    });
 </script>
 
 <div class="container-1000">
