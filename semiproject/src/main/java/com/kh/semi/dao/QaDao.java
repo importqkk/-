@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.QaDto;
+import com.kh.semi.dto.TestDto;
 import com.kh.semi.vo.QaPaginationVO;
 
 
@@ -27,18 +28,30 @@ public class QaDao {
 			qaDto.setQaNo(rs.getInt("qa_no"));
 			qaDto.setQaTitle(rs.getString("qa_title"));
 			qaDto.setMemberId(rs.getString("member_id"));
-			qaDto.setQaContent(rs.getString("content"));
+			qaDto.setQaContent(rs.getString("qa_content"));
 			qaDto.setQaAnswer(rs.getString("qa_answer"));
 			qaDto.setQaHead(rs.getString("qa_head"));
-			qaDto.setQaSecret(rs.getInt("qa_secret"));
+			qaDto.setQaSecret(rs.getString("qa_secret"));
 			qaDto.setQaGroup(rs.getInt("qa_group"));
-			qaDto.setQaTime(rs.getDate("qa_time"));
-			qaDto.setProductNo(rs.getInt("product_no"));
+			qaDto.setQaDate(rs.getDate("qa_date"));
 			qaDto.setQaRead(rs.getInt("qa_read"));
 			
-			qaDto.setQaParent(rs.getInt("qa_parent"));
+			qaDto.setQaParent(rs.getObject("qa_parent") == null ? 
+					null : rs.getInt("qa_parent"));
 			qaDto.setQaDepth(rs.getInt("qa_depth"));
 			return qaDto;
+		}
+	};
+	
+	private RowMapper<TestDto>mapper2 = new RowMapper<TestDto>() {
+		@Override
+		public TestDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			TestDto testDto = new TestDto();
+			testDto.setMEMBER_ID(rs.getString("MEMBER_ID"));
+			testDto.setMEMBER_NAME(rs.getString("MEMBER_NAME"));
+			testDto.setMEMBER_NICK(rs.getString("MEMBER_NICK"));
+			
+			return testDto;
 		}
 	};
 	
@@ -55,9 +68,9 @@ public class QaDao {
 //		}
 	
 	public List<QaDto>selectList(){
-		String sql = "select*from qa"
-				+ "connect by prior qa_no=qa_parent"
-				+ "start with qa_parent is null"
+		String sql = "select * from qa "
+				+ "connect by prior qa_no=qa_parent "
+				+ "start with qa_parent is null "
 				+ "order siblings by qa_group desc, qa_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
@@ -80,6 +93,21 @@ public class QaDao {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	public List<QaDto> selectGroup(int qaGroup) {
+		String sql = "select * from qa where qa_group = ? order by qa_depth";
+		Object[] param = {qaGroup};
+		List<QaDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list;
+	}
+	
+	public TestDto selectTest(String ff ) {
+		TestDto test = new TestDto();
+		String sql = "select * from MEMBER where MEMBER_ID = ?";
+		Object[] param = {ff};
+		List<TestDto> list = jdbcTemplate.query(sql, mapper2, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
 //	번호를 생성하면서 등록하는 방법
 //	1. 시퀀스 번호를 듀얼 테이블을 사용하여 조회
 //	2. 생성된 번호까지 설정한 DTO를 등록
@@ -91,14 +119,15 @@ public class QaDao {
 	//이 기능은 새글 답글 관계없이 동일하게 구현
 	public void insert(QaDto qaDto) {
 		String sql = "insert into qa("
-				+ "qa_no, qa_title, member_id, qa_content, "
-				+ "qa_answer, qa_head, qa_secret, qa_time, "
-				+ "qa_group, qa_parent, qa_depth, product_no, qa_read) "
-				+ "values(?,?,?,?,?,?,?,sysdate,?,?,?,?,0)";
+				+ "qa_no, qa_title, member_id, qa_content, qa_answer,"
+				+ "qa_head, qa_secret, qa_group, qa_parent, qa_depth,"
+				+ "qa_date, qa_read)"
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, 0)";
 		Object[] param = {
-			qaDto.getQaNo(), qaDto.getMemberId(),
-			qaDto.getQaTitle(), qaDto.getQaContent(),
-			qaDto.getQaHead(), qaDto.getQaGroup(),
+			qaDto.getQaNo(), qaDto.getQaTitle(),
+			qaDto.getMemberId(), qaDto.getQaContent(),
+			qaDto.getQaAnswer(),qaDto.getQaHead(),
+			qaDto.getQaSecret(), qaDto.getQaGroup(),
 			qaDto.getQaParent(), qaDto.getQaDepth()
 		};
 		jdbcTemplate.update(sql, param);
@@ -111,20 +140,20 @@ public class QaDao {
 	}
 	
 	//게시글 수정
-	public boolean update(QaDto qaDto) {
+	public int update(QaDto qaDto) {
 		String sql = "update qa "
-						+ "set qa_head=?, qa_title=?, qa_content=? "
+						+ "set  qa_content=? "
 						+ "where qa_no = ?";
 		Object[] param = {
-			qaDto.getQaHead(), qaDto.getQaTitle(),
 			qaDto.getQaContent(), qaDto.getQaNo()
 		};
-		return jdbcTemplate.update(sql, param) > 0;
+		return jdbcTemplate.update(sql, param) ;
 	}
+	
 	
 	//조회수
 	public boolean updateReadCount(int qaNo) {
-		String sql = "update qa ser qa_read = qa_read+1"
+		String sql = "update qa set qa_read = qa_read+1"
 				+ "where qa_no = ?";
 		Object[] param = {qaNo};
 		return jdbcTemplate.update(sql, param) > 0;
@@ -174,7 +203,24 @@ public class QaDao {
 		}
 	}
 	
-	//댓글 개수 갱신기능
+	//이 기능은 새글 답글 관계없이 동일하게 구현
+	public void insertQaReple(QaDto qaDto) {
+		String sql = "insert into qa("
+				+ "qa_no, qa_title, member_id, qa_content, qa_answer,"
+				+ "qa_head, qa_secret, qa_group, qa_parent, qa_depth,"
+				+ "qa_date, qa_read)"
+				+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, 0)";
+		Object[] param = {
+			qaDto.getQaNo(), qaDto.getQaTitle(),
+			qaDto.getMemberId(), qaDto.getQaContent(),
+			qaDto.getQaAnswer(),qaDto.getQaHead(),
+			qaDto.getQaSecret(), qaDto.getQaGroup(),
+			qaDto.getQaParent(), qaDto.getQaDepth()
+		};
+		jdbcTemplate.update(sql, param);
+	}
+	
+	//댓글 개수 갱신
 	public void updateReplycount(int qaNo) {
 		String sql = "update qa "
 						+ "set qa_reply = ("
@@ -185,7 +231,7 @@ public class QaDao {
 		jdbcTemplate.update(sql, param);
 	}
 
-	// 첨부파일
+//	 //첨부파일
 //	public void connect(int qaNo, int attachmentNo) {
 //		String sql = "insert into qa_attachment values(?, ?)";
 //		Object[] param = {qaNo, attachmentNo};
