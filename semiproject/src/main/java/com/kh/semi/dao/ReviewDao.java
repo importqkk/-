@@ -132,4 +132,19 @@ public class ReviewDao {
 	    Object[] param = {memberId, vo.getBegin(), vo.getEnd()};
 	    return jdbcTemplate.query(sql, mapper, param);
 	}
+	
+	//특정 상품 리뷰 수 
+	public int countReview(int productNo) {
+		String sql = "select count(*) from review where product_no=?";
+		Object[] param = {productNo};
+		return jdbcTemplate.queryForObject(sql, Integer.class,param);
+	}
+
+	//특정 상품 리뷰 평점(평균의 반올림)
+	public int avgReview(int productNo) {
+		String sql = "select round(avg(review_star)) from review where product_no=?";
+		Object[] param = {productNo};
+		return jdbcTemplate.queryForObject(sql, Integer.class,param);
+	}
+	
 }

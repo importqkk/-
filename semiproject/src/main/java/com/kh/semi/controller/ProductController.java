@@ -1,13 +1,13 @@
 package com.kh.semi.controller;
-<<<<<<< HEAD
+
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-=======
-import javax.servlet.http.HttpSession;
->>>>>>> refs/remotes/origin/main
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +24,6 @@ import com.kh.semi.dto.ProductInfoDto;
 import com.kh.semi.dto.ReviewDto;
 
 
-import com.kh.semi.dto.ProductDto;
-import com.kh.semi.dto.ReviewDto;
 
 
 @Controller
