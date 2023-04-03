@@ -64,8 +64,8 @@
         background-color: #f8f8ff;
     }
     .item-img {
-        width: 200px;
-        height: 200px;
+        width: 100%;
+        height: 100%;
         min-height: 200px;
     }
     .new-box > *,
