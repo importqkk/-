@@ -76,7 +76,7 @@
 	
 		$(document).on("click", ".delete-btn", function() {
 			  var index = $(this).data("index");
-			  $("#myForm").append('<input type="hidden" name="deleteIndex" value="' + index + '">');
+			  $("#myForm").append('<input type="hidden" name="index" value="' + index + '">');
 			  $("#myForm").submit();
 			});
 		

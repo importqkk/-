@@ -211,9 +211,10 @@ public class OrderController {
 	 }
 	 
 	 @PostMapping("/popup")
-	 public String popDelete(HttpSession session,@ModelAttribute MemberInfoDto memberInfoDto) {
+	 public String popDelete(HttpSession session,@ModelAttribute MemberInfoDto memberInfoDto,@RequestParam int index) {
 		 String memberId=(String)session.getAttribute("memberId");
 		 memberInfoDto.setMemberId(memberId);
+		 memberInfoDao.addDelete(index, memberId);
 		 
 		 return "redirect:popup";
 	 }
@@ -222,7 +223,6 @@ public class OrderController {
 	 @GetMapping("/myList")
 	 public String myList(HttpSession session) {
 		 String memberId=(String)session.getAttribute("memberId");
-		 
 		 return "/WEB-INF/views/order/myList.jsp";
 	 }
 }

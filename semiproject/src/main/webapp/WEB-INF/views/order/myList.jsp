@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-		<div class="container-1000">
+		<div class="container-1000"> 
 			<div>
 		        <div><h1>내 주문 내역 조회</h1></div>
 		    </div>
