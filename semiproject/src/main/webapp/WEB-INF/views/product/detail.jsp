@@ -192,7 +192,6 @@
        // 장바구니 상품 담기 처리
 		var params = new URLSearchParams(location.search);
 		var mode = params.get("mode");
-       //$(".cart-btn").click(function() {
 			if(mode == "error1") {
 				alert("이미 장바구니에 담긴 상품입니다.");
 				return false;
@@ -260,7 +259,6 @@
 	                            <h5 class="font-boldgrey oneLine">${productDto.productName}</h5>
 	                        </div>
 	                        <div class="flex-remain center">
-<!--                             <button class="w-100 form-btn small neutral center"> -->
 								<select class="productCount" name="productCount">
 								  <option value="1">1</option>
 								  <option value="2">2</option>
@@ -279,8 +277,6 @@
 	                    <hr>
 	                </div>
 	                <div class="row">
-	                	<%-- <input name="productCount">
-	                	<input hidden name="productNo" value="${productDto.productNo}"> --%>
 	                    <h3 class="font-purple oneLine">총 금액&nbsp;</h3>
 	                    <h3 class="oneLine total-price">${productDto.productPrice}</h3>
 	                    <h3 class="oneLine">원</h3>
