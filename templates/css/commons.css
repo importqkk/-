@@ -239,6 +239,7 @@
 .pt-5 {padding-top: 5px;}
 .pt-10 {padding-top: 10px;}
 .pt-20 {padding-top: 20px;}
+.pt-25 {padding-top: 25px;}
 .pt-30 {padding-top: 30px;}
 .pt-40 {padding-top: 40px;}
 .pt-50 {padding-top: 50px;}
@@ -448,6 +449,38 @@ a.form-btn.neutral {
 }
 
 /*
+    파일 input
+*/
+/*.filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 78%;
+    color: #999999;
+}
+.filebox label {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 10px;
+}
+.filebox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}*/
+
+
+/*
     검색창(form-input-search)
     - 검색창은 부모 div(search-box), 자식 input(search-input)/button(search-btn)으로 만듭니다.
     - html 코드 예시
@@ -465,13 +498,15 @@ a.form-btn.neutral {
 }
 .search-input {
     color: #22201e;
-    font-size: 20px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    font-size: 16px;
+    margin-top: 17px;
+    margin-bottom: 17px;
     margin-left: 25px;
     border: none;
     outline: none;
     background: none;
+    height: 18.4px;
+    line-height: 18.4px;
 }
 .search-btn {
     font-size: 23px;
@@ -493,18 +528,35 @@ input[type="checkbox"] {
     border: 2px solid #776bff;
     appearance: none;
     cursor: pointer;
-  }
+}
 
-  input[type="checkbox"]:checked {
-    background: #776bff;
+input[type="checkbox"]:checked {
+  background: #776bff;
+  border: 2px solid #776bff;
+}
+
+/*
+	라디오 디자인
+*/
+input[type="radio"] {
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
     border: 2px solid #776bff;
-  }
+    appearance: none;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked {
+  background: #776bff;
+  border: 2px solid #776bff;
+}
 
 /*
     글자 스타일
 */
 /* 글자색 */
-.c-p100 {
+.c-p100, .font-purple {
     color: #776BFF;
 }
 .c-p20 {
@@ -556,6 +608,9 @@ input[type="checkbox"] {
     - 장바구니에서 쓰이는 표
         - 메인클래스 table을 붙이고 그 뒤에 서브클래스 table-cart를 지정해주시면 됩니다.
 */
+.table {
+	table-layout: fixed;
+}
 .table > thead > tr > th,
 .table > thead > tr > td,
 .table > tbody > tr > th,
@@ -563,6 +618,9 @@ input[type="checkbox"] {
 .table > tfoot > tr > th,
 .table > tfoot > tr > td {
     padding: 0.5em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .table.table-qna > thead {
     border-bottom: 1.5px solid #4e4d4b;
@@ -708,4 +766,42 @@ input[type="checkbox"] {
 .qty-stepper-small > .plus:hover:not(.disabled) {
     background-color: #f8f8ff;
     cursor: pointer;
+}
+.qty-selector {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    border: 2px solid #776bff;
+    border-radius: 100px;
+    outline: none;
+    appearance: none;
+    background:url('/static/image/down-arrow.png') no-repeat 88% 55%/11px auto;
+}
+
+/*
+    통과, 오류메세지 스타일
+*/
+.valid-message {
+    color: #776bff;
+    display: none;
+    font-size: small;
+}
+.valid ~ .valid-message {
+    display: block;
+}
+.invalid-message,
+.invalid-message1,
+.invalid-message2 {
+    color: #FF4848;
+    display: none;
+    font-size: small;
+}
+.invalid ~ .invalid-message {
+    display: block;
+}
+.invalid1 ~ .invalid-message1 {
+    display: block;
+}
+.invalid2 ~ .invalid-message2 {
+    display: block;
 }
