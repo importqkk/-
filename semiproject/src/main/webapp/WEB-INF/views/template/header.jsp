@@ -19,102 +19,102 @@
 	    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
 	    <!-- jquery cdn -->
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	    <style>
-	        .custom-size {
-	            font-size: 25px;
-	        }
-	        .menu-btn,
-	        .close-btn {
-	            cursor: pointer;
-	        }
-	        .close-btn {
-	            font-size: 45px;
-	        }
-	        .fa-chevron-right {
-	            margin-top: 10px;
-	        }
-	        .row.large {
-	            margin: 20px 0px;
-	        }
-	        .menu-item {
-	            padding-top: 10px;
-	            padding-bottom: 10px;
-	            padding-left: 20px;
-	            border-radius: 100px;
-	            cursor: pointer;
-	        }
-	        .menu-item:hover {
-	            background-color: #f8f8ff;
-	        }
-	        .social {
-	            vertical-align: middle;
-	            margin-top: 12px;
-	        }
-	    </style>
-	    <script type="text/javascript">
-	        $(function() {
-	            $(".side-menu").hide();
-	            $(".close-btn").hide();
-	            $(".menu-btn").click(function() {
-	                $(".menu-btn").hide();
-	                $(".close-btn").show();
-	                $(".side-menu").show();
-	            })
-	            $(".close-btn").click(function() {
-	                $(".close-btn").hide();
-	                $(".menu-btn").show();
-	                $(".side-menu").hide();
-	            })
-	        })
-	        $(function(){	
-				$("a.logout").click(function(e){
-            	var choice = confirm("로그아웃 하시겠습니까?");
-            	if(choice){
-                return true;
-            }
-            else{
-                return false;
-            }
-		});
-	});
-	    </script>
-	    <title>SEMI</title>
-	</head>
-	<body>
+    <style>
+        .logo {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            /* font-size: 100%;
+            font: inherit; */
+            font-family: inherit;
+            vertical-align: baseline;
+        }
+        .search-box {
+            margin-top: 8px;
+        }
+        .custom-size {
+            font-size: 25px;
+        }
+        .menu-btn,
+        .close-btn {
+            font-size: 45px;
+            cursor: pointer;
+        }
+        .close-btn {
+            font-size: 53px;
+        }
+        .fa-chevron-right {
+            margin-top: 10px;
+        }
+        .row.large {
+            margin: 20px 0px;
+        }
+        .menu-item {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            border-radius: 100px;
+            cursor: pointer;
+        }
+        .menu-item:hover {
+            background-color: #f8f8ff;
+        }
+        .social {
+            vertical-align: middle;
+            margin-top: 12px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function() {
+            $(".side-menu").hide();
+            $(".close-btn").hide();
+            $(".menu-btn").click(function() {
+                $(".menu-btn").hide();
+                $(".close-btn").show();
+                $(".side-menu").show();
+            })
+            $(".close-btn").click(function() {
+                $(".close-btn").hide();
+                $(".menu-btn").show();
+                $(".side-menu").hide();
+            })
+        })
+    </script>
+    <title>SEMI</title>
+</head>
+<body>
     <main>
         <div id="wrapper">
         <header style="border-bottom: 0.5px solid #72706f;">
             <div class="container-1000">
                 <div class="flex">
                     <div class="flex w-25">
-                        <div class="w-15">
-                            <i class="fa-solid fa-bars fa-2x font-purple mt-20 menu-btn"></i>
-                            <i class="fa-solid fa-xmark fa-2x font-purple mt-15 close-btn"></i>
+                        <div class="w-20">
+                            <i class="fa-solid fa-bars fa-2x c-p100 mt-15 menu-btn"></i>
+                            <i class="fa-solid fa-xmark fa-2x c-p100 mt-10 close-btn"></i>
                         </div>
                         <div class="w-100 center">
-                                <h1 style="font-size: 50px;">
-                                    <a class="link font-purple" href="/">SEMI</a>
+                                <h1 class="c-p100 logo" style="font-size: 50px;">
+                                    <a class="link" style="color: #776BFF;" href="#">SEMI</a>
                                 </h1>
                         </div>
                     </div>
-                    <div class="center w-50">
-                        <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
+                    <div class="center w-60">
+                        <div class="search-box">
+                            <input class="search-input w-100">
+                            <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
                     </div>
-                    <div class="right w-25">
+                    <!-- <div class="center w-50">
+                        <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
+                    </div> -->
+                    <div class="right w-15">
                         <a class="link" href="#">
-                            <i class="fa-solid fa-cart-shopping custom-size font-purple pe-30 mt-25"></i>
+                            <i class="fa-solid fa-cart-shopping custom-size c-p100 pe-30 mt-25"></i>
                         </a>
-                        <a class="link" href="/member/mypage">
-                            <i class="fa-solid fa-user custom-size font-purple mt-25"></i>
+                        <a class="link" href="#">
+                            <i class="fa-solid fa-user custom-size c-p100 mt-25"></i>
                         </a>
-                        <c:if test="${memberId == null}"> <!-- 로그인 전 -->
-                        <a class="link" href="/member/join">join</a>
-                        <a class="link" href="/member/login">login</a>
-                        </c:if>
-                        <c:if test="${memberId != null}"> <!-- 로그인 후 -->
-                        <a class="link" href="/member/mypage">mypage</a>
-                        <a class="logout" href="/member/logout">logout</a>
-                        </c:if>
                     </div>
                 </div>
             </div>
@@ -197,6 +197,6 @@
                 <div class="w-70"></div>
             </div>
             
-        </aside> 
+        </aside>
         <section>
             <article>
