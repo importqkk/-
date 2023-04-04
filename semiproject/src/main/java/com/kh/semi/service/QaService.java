@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.semi.dao.QaDao;
 import com.kh.semi.dto.QaDto;
-import com.kh.semi.dto.TestDto;
 
 @Service
 public class QaService {

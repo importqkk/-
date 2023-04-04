@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.QaDto;
-import com.kh.semi.dto.TestDto;
 import com.kh.semi.vo.QaPaginationVO;
 
 

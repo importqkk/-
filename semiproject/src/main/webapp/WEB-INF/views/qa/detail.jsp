@@ -247,7 +247,7 @@ function fn_reple_write(){
     </c:otherwise>
 </c:choose>
 </div>
-
+    </div>
     </div>
 
 

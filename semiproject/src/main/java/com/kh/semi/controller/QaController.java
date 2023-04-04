@@ -27,7 +27,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.QaDao;
 import com.kh.semi.dto.QaDto;
-import com.kh.semi.dto.TestDto;
 import com.kh.semi.service.QaService;
 import com.kh.semi.vo.QaPaginationVO;
 
