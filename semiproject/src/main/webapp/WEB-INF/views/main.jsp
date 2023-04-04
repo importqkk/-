@@ -67,6 +67,7 @@
         width: 100%;
         height: 100%;
         min-height: 200px;
+        max-height: 200px;
     }
     .new-box > *,
     .best-box > *, 
@@ -121,18 +122,22 @@
 		        <div class="row pb-30">
 		            <div class="swiper">
 		                <div class="swiper-wrapper center">
-		                	<c:if test="${mainImgList == null}">
-		                		<div class="swiper-slide">
-	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy01.png">
-	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy02.png">
-	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy03.png">
-		                    	</div>
-		                	</c:if>
- 		                	<c:forEach var="mainImgConnectDto" items="${mainImgList}">
-		                    	<div class="swiper-slide">
-	                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
-		                    	</div>
-	                    	</c:forEach>
+		                	<c:choose>
+		                		<c:when test="${mainImgList == null}">
+		                			<div class="swiper-slide">
+		                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy01.jpg">
+		                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy02.jpg">
+		                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy03.jpg">
+			                    	</div>
+		                		</c:when>
+		                		<c:otherwise>
+		                			<c:forEach var="mainImgConnectDto" items="${mainImgList}">
+				                    	<div class="swiper-slide">
+			                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
+				                    	</div>
+			                    	</c:forEach>
+		                		</c:otherwise>
+		                	</c:choose>
 		                </div>
 		                <div class="swiper-pagination center"></div>
 		            </div>

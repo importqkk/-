@@ -71,6 +71,15 @@
 	margin: 0 auto;
 }
 
+/* 수량체크 div */
+.counter-box {
+	min-height: 70px;
+	border-bottom: 1px solid #72706f;
+	border-top: 1px solid #72706f;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
 /* 차트용 폰트 */
 .chart-font {
 	font-size: 12px;
@@ -356,10 +365,10 @@ fs-18 {
  			else if(mode == "success") {
  				alert("장바구니에 상품을 담았습니다.")
  			}
-     });        
-});	   	
+});           	
+ // 페이지 로드--------------
     </script>
-    // 페이지 로드--------------
+    
 	<script>
 $(function(){
     $(".review-content").hide();
@@ -393,12 +402,11 @@ $(function(){
   })    
 });
 </script>
-<body>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display: none;">${productInfoDto.productNo}</h6>
 	<h6 class="avg" style="display: none;">${reviewAvg}</h6>
 	<!--  -->
-	<div class="container-1000">
+	<div class="container-1000 mb-60">
 		<form class="item-form">
 			<!-- 이미지 부터 구매하기 버튼까지 -->
 			<div class="flex">
@@ -412,43 +420,35 @@ $(function(){
 
 				<div class="flex-remain">
 					<div class="row">
-						<input hidden type="number" name="productNo"
-							value="${productDto.productNo}">
+						<input type="hidden" name="productNo" value="${productInfoDto.productNo}">
 						<h5 class="font-grey oneLine">${productInfoDto.productBrand}</h5>
-						<h5 class="font-grey oneLine">${productInfoDto.productName}</h5>
 					</div>
-					<div class="row">
+					<div class="row pb-10">
 						<h2>${productInfoDto.productName}</h2>
 					</div>
 					<div class="row">
-						<br>
 						<h3 class="oneLine product-price">${productInfoDto.productPrice}</h3>
 						<h3 class="oneLine">원</h3>
-						<br>
-						<br>
-						<br>
-						<h4 class="font-boldgrey oneLine">배송비</h4>
-						&nbsp;
+						<div class="row"></div>
+						<h4 class="font-boldgrey oneLine me-10">배송비</h4>
 						<h4 class="oneLine">3,000원</h4>
-						<br>
-						<div class="rating oneLine">
-							<span class="fa fa-star font-white"></span> <span
-								class="fa fa-star font-white"></span> <span
-								class="fa fa-star font-white"></span> <span
-								class="fa fa-star font-white"></span> <span
-								class="fa fa-star font-white"></span>
+						<div class="row"></div>
+						<div class="rating oneLine me-5">
+							<span class="fa fa-star font-white"></span> 
+							<span class="fa fa-star font-white"></span> 
+							<span class="fa fa-star font-white"></span> 
+							<span class="fa fa-star font-white"></span> 
+							<span class="fa fa-star font-white"></span>
 						</div>
 						<h6 class="font-boldgrey oneLine">${reviewCount}개의 후기</h6>
 					</div>
-					<div class="row">
-						<hr>
-						<div class="flex">
-							<div class="w-70">
+					<div class="row flex">
+						<div class="flex w-100 counter-box">
+							<div class="w-70 ps-10">
 								<h5 class="font-boldgrey oneLine">${productInfoDto.productName}</h5>
 							</div>
-							<div class="flex-remain center">
-								<!--                             <button class="w-100 form-btn small neutral center"> -->
-								<select class="productCount" name="number">
+							<div class="flex-remain right pe-10">
+								<select class="productCount qty-selector w-50" name="productCount">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -460,33 +460,23 @@ $(function(){
 									<option value="9">9</option>
 									<option value="10">10</option>
 								</select>
-								<!-- 							</button> -->
 							</div>
 						</div>
-						<br>
-						<hr>
-
 					</div>
-					<div class="row">
+					<div class="row pb-10">
 						<h3 class="font-purple oneLine">총 금액&nbsp;</h3>
 						<h3 class="oneLine total-price">${productInfoDto.productPrice}</h3>
 						<h3 class="oneLine">원</h3>
 					</div>
 					<div class="row center">
-						<button class="w-49 form-btn small neutral"
-							onclick="location.href='/cart/' ">장바구니</button>
-						<button class="w-49 form-btn small positive"
-							onclick="location.href='/order/' ">구매하기</button>
+						<button class="w-49 form-btn small neutral cart-btn">장바구니</button>
+						<button class="w-49 form-btn small positive">구매하기</button>
 					</div>
-
 				</div>
 			</div>
 		</form>
 	</div>
 	<!-- 구매하기 버튼 이후부터 -->
-
-
-
 
 	<!-- 제품상세정보, 후기, 상품구매안내 -->
 	<div class="container-1000 ">
@@ -521,14 +511,16 @@ $(function(){
 	</div>
 
 
-	<div class="container-1000">
+	<div class="container-1000 mb-60">
 		<div class="row center">
 			<!--상세이미지 전부 보이기-->
-			<button class="w-95 form-btn small positive show-detail">상세정보
-				펼쳐 보기</button>
+			<button class="w-100 form-btn medium positive show-detail">
+				상세정보 펼쳐보기
+			</button>
 			<!--상세이미지 숨기기 -->
-			<button class="w-95 form-btn small positive hide-detail">상세정보
-				접기</button>
+			<button class="w-95 form-btn medium positive hide-detail">
+				상세정보 접기
+			</button>
 		</div>
 	</div>
 
@@ -570,9 +562,8 @@ $(function(){
 			</div>
 
 			<!-- 리뷰 작성하기 창 -->
-			<div class="view-panel center">
-				<button class="form-btn small neutral edit-btn w-100"
-					style="height: 40px;">리뷰 작성하기</button>
+			<div class="view-panel center mt-20">
+				<button class="form-btn medium neutral edit-btn w-100">리뷰 작성하기</button>
 			</div>
 
 			<!-- 리뷰 작성창 -->
@@ -590,18 +581,18 @@ $(function(){
 				</div>
 			</div>
 		</div>
-		<div class="row review-list review-initial" id=scrollTargetReview">
-			리뷰 목록 위치</div>
-		<button class="form-btn w-95 positive small show-review">리뷰
-			모두 보기</button>
-		<button class="form-btn w-95 neutral small hide-review">리뷰 접기</button>
+		<div class="row review-list review-initial" id="scrollTargetReview">
+			리뷰 목록 위치
+		</div>
+		<button class="form-btn w-100 positive medium show-review">리뷰 모두 보기</button>
+		<button class="form-btn w-100 neutral medium hide-review">리뷰 접기</button>
 	</div>
 
 	<div class="row center"></div>
 	<!--       =--------------------------------------------------------------------d -->
 
 	<!-- 리뷰 별점 및 차트 -->
-	<div class="container-1000">
+	<div class="container-1000 mt-40 mb-40">
 		<div class="row center">
 			<div class="star-box center">
 				<br>
@@ -719,8 +710,5 @@ $(function(){
 		</div>
 		<br>
 	</div>
-
-</body>
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
