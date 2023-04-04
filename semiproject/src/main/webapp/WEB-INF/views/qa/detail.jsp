@@ -27,7 +27,6 @@ $(function(){
 	var qaGroup = "${qaDto.qaGroup}";
 	var qaNo="${qaDto.qaNo}";
 	var memberId = "${sessionScope.memberId}";
-
 	$.ajax({
 		url:"/qa/detail",
 		type:"POST",
@@ -209,7 +208,6 @@ $(function(){
 		}
 	});//ajax end
 });
-
 /**
  * 문자열이 빈 문자열인지 체크하여 결과값을 리턴한다. 
  * @param str		: 체크할 문자열
@@ -220,7 +218,6 @@ function isEmpty(str){
 	else
 		return false ;
 }
-
 // 댓글 작성
 function fn_reple_write(){
 	var qaNo = "${qaDto.qaNo}";
@@ -239,7 +236,6 @@ function fn_reple_write(){
 		       window.location.href="/qa/list";
 		   },
 		   error: function(xhr, status, error) {
-
 		       alert("답글 실패");
 		   }
  	});	
@@ -261,23 +257,30 @@ function fn_reple_write(){
     </script>
     
     <!-- 표시용 템플릿 -->
-    <script type="text/template" id="view-template">
-        <div class="view-panel right">
-			<div class="left font-h2 float head center me-50 pt-5"></div>
-			<div class="left font-h1 title mt-60 center"></div>
-			<hr>
-			<div class="contents left font-h2 mt-90 mb-90"></div>
-            <a class="form-btn neutral edit-btn">수정</a>
-            <a class="form-btn neutral ms-20 delete-btn">삭제</a>
-            <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
-        </div>
-<br>
-    </script>
+	<script type="text/template" id="view-template">
+  	<div class="view-panel right">
+    <div class="left font-h2 float head center me-50 pt-5"></div>
+    <div class="left font-h1 title mt-60 center"></div>
+    <hr>
+    <div class="contents left font-h2 mt-90 mb-90"></div>
+    <c:choose>
+      <c:when test="${qaDto.memberId == sessionScope.memberId || sessionScope.memberRole == '관리자'}">
+        <a class="form-btn neutral edit-btn">수정</a>
+        <a class="form-btn neutral ms-20 delete-btn">삭제</a>
+      </c:when>
+      <c:otherwise>
+        <!-- 작성자가 아니면 수정, 삭제 버튼이 보이지 않도록 합니다. -->
+      </c:otherwise>
+    </c:choose>
+    <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
+  </div>
+  <br>
+	</script>
 
      <!-- 답글편집용 템플릿 -->
     <script type="text/template" id="edit-template-answer">
-<hr>
-<br>
+		<hr>
+		<br>
         <div class="reply-edit-panel right">
 			<div class="contents left">
 			<div class="left font-h2 float me-40 center"></div>
@@ -293,11 +296,18 @@ function fn_reple_write(){
         <div class="reply-view-panel right">
 			<div class="left font-h1 title"></div>
 			<div class="contents left font-h2  mt-90 mb-90"></div>
-  			<a class="form-btn neutral reply-edit-btn">수정</a>
-            <a class="form-btn neutral ms-20 reply-delete-btn">삭제</a>
-            <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
-        </div>
-    </script>
+  			<c:choose>
+      <c:when test="${sessionScope.memberRole == '관리자'}">
+		<a class="form-btn neutral reply-edit-btn">수정</a>
+        <a class="form-btn neutral ms-20 reply-delete-btn">삭제</a>
+      </c:when>
+      <c:otherwise>
+        <!-- 관리자가 아니면 수정, 삭제 버튼이 보이지 않도록 합니다. -->
+      </c:otherwise>
+    </c:choose>
+    <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
+    </div>
+</script>
     
 
     
