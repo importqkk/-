@@ -306,7 +306,6 @@
 				</div>
 			</c:forEach>
 		</div>
-		<!--최신상품 -->
 		<div class="flex-wr center mb-20 new" style="display: none;">
 			<c:forEach var="productInfoDto" items="${newList}"
 				varStatus="status1">
