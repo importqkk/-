@@ -183,6 +183,17 @@
                 $(this).find(".fa").css("color", "");
             })
         })
+                $(function(){	
+			$("a.logout").click(function(e){
+            	var choice = confirm("로그아웃 하시겠습니까?");
+            	if(choice){
+                return true;
+            }
+            else{
+                return false;
+            }
+		});
+	});
     </script>
     <title>SEMI</title>
 </head>

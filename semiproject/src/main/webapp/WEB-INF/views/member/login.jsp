@@ -4,16 +4,15 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     <style>
-      h2{
+      h1{
         color:#776BFF;
-        margin-top : 250px;
       }
     </style>
   <form action="/member/login" method="post" autocomplete="off">
 
     <div class="container-400">
-      <div class="row center">
-          <h2>SEMI</h2>
+      <div class="row center pt-100">
+          <h1>SEMI</h1>
         </div>
       <div class="row">
         <input type="text" name="memberId" required class="form-input w-100 medium light" placeholder="아이디" >

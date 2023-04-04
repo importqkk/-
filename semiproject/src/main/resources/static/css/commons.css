@@ -846,3 +846,60 @@ input[type="radio"]:checked {
 .invalid2 ~ .invalid-message2 {
     display: block;
 }
+/* 비활성 상태 디자인 */
+.form-btn.positive[disabled],
+.form-btn.positive[disabled]:hover {
+    cursor: not-allowed;
+    background-color: #ada6ff;
+    border-color: #ada6ff;
+    filter:none;
+}
+.table.table-border{
+    border: 1px solid gray;
+}
+.table-border tr > th{
+	background-color: #f4f4f5;
+}
+.table.table-border > thead > tr > th, 
+.table.table-border > thead > tr > td, 
+.table.table-border > tbody > tr > th, 
+.table.table-border > tbody > tr > td, 
+.table.table-border > tfoot > tr > th, 
+.table.table-border > tfoot > tr > td{
+    border: 1px solid gray;
+}
+.leftside, 
+.leftside ul{
+    color: #474748;
+    margin: 0;
+    padding: 0.25em;
+    list-style: none;
+}
+.leftside{
+    font-size: 18px;
+    cursor: pointer;
+}
+.leftside ul{
+	font-size: 16px;
+}
+.leftside ul > li{
+	padding: 0.25em 0;
+}
+.leftside > li{
+    width: 100%;
+    padding: 0 0 0.5em 0;
+	padding-bottom: 20px;
+}
+
+.leftside a{
+    text-align: center;
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+    width: 100%;
+}
+.leftside li:hover{
+	cursor: pointer;
+}
+.leftside li:hover > a{
+    color: black;
+}

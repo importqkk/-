@@ -3,10 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
+<style>
+  .content {
+  	min-height: 416px;
+  }
+</style>
 
-
-<form action="password" method="post">
-<div class="container-500">
+<form action="password" method="post" class="content">
+<div class="container-600 mt-70">
 	<div class="row center">
 		<h2>비밀번호 변경</h2>
 	</div>
@@ -19,7 +23,7 @@
 		<input type="password" name="changePw" required class="form-input w-100 medium light">
 	</div>
 	<div class="row">
-		<button class="form-btn neutral w-24 medium">취소</button>
+		<button class="form-btn neutral w-24 medium">취소</button>	
         <button type="submit" class="form-btn positive w-75 medium ms-25">변경</button>
 	</div>
 	<!-- 취소 버튼 클릭 이벤트 처리 -->
