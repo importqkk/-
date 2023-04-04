@@ -21,7 +21,16 @@
     }
 </style>
 <script type="text/javascript">
-
+	$(function() {
+	    $(".order-btn").click(function(event) {
+	       var stockCount = $("input[name='stockCount']").val();
+	          if(stockCount >0){
+	           alert("품절된 상품이 존재합니다. 삭제 후 다시 이용해주세요.");
+	          } else{
+	           $(this).attr("href", "../order/buy");             
+	          }
+	    });
+	});
 </script>
 
     <div class="container-1000">
@@ -611,6 +620,10 @@
 	                	</c:otherwise>
 	                </c:choose>
 	                <c:set var="total" value="${total + cartProductInfoDto.productPrice * cartProductInfoDto.productCount}"></c:set>
+	                <c:if test="${cartProductInfoDto.productStock == 0}">
+		               <c:set var="count" value="${count + 1}" />
+		               <input name="stockCount" type="hidden" value="${count}">
+		            </c:if>
 	            </div>
 	            <!------------ 상품 삭제할 x 아이콘 ------------>
 	            <div class="flex row" style="align-self: baseline;">
@@ -675,7 +688,7 @@
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
 	        <div class="row">
 	            <div class="row">
-	                <a class="form-btn medium positive w-100 order-btn" href="../order/buy">주문하기</a>
+                   <a class="form-btn medium positive w-100 order-btn">주문하기</a>
 	            </div>
 	        </div>
 		</c:if>

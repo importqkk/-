@@ -6,7 +6,7 @@
 	    display: grid;
 	    place-items: center;
 	    align-items: center;*/
-	    min-height: 100vh;
+	    min-height: 80vh;
 	}
 	.ti-exclamation-circle {
 	    color: #776bff;

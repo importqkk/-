@@ -4,11 +4,15 @@
 <style>
 	.social {
 	    vertical-align: middle;
-	    margin-top: 30px;
+	    margin-bottom: 60px;
 	}
 	.social:hover {
 		color: #22201e;
 	}
+	.footer-logo {
+     	width: 150px;
+     	padding-top: 5px;
+    }
 </style>
 
             </article>
@@ -18,7 +22,9 @@
             <div class="container-1000">
                 <div class="row flex">
                     <div class="w-50 pt-25">
-                        <h1 class="c-p100">SEMI</h1>
+                        <a class="link" style="color: #776BFF;" href="/">
+                        	<img class="footer-logo" alt="로고" src="/static/image/logo.png">
+                        </a>
                     </div>
                     <div class="w-50 right">
                         <a class="link" href="#">
@@ -32,7 +38,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row pb-20">
                     <div class="row">
                         사업장 번호 : 111-22-33333
                     </div>
