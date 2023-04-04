@@ -88,7 +88,7 @@
         <a href="write" class="form-btn neutral">글쓰기</a>
     </div>
     <div class="row">
-        <table class="table table-border">
+        <table class="table table-qna">
             <thead>
             
                 <tr>
@@ -107,7 +107,7 @@
                     <th class="w-10">조회수</th>
                 </tr>
             </thead>
-            <hr>
+
             <tbody class="center">
             	<!-- 공지사항을 출력 -->
 				<c:forEach var="qaDto" items="${noticeList}">
@@ -139,36 +139,45 @@
 					</td>
 					</c:if>
 					
-					<td>${qaDto.qaNo}</td>
+					<td class="center">${qaDto.qaNo}</td>
 					<td class="center">
 						${qaDto.qaHead}
-						<!-- qaDepth가 1 이상일 경우만 답글 표식을 추가 -->
-						<c:if test="${qaDto.qaDepth > 0}">
-
-						</c:if>
 					</td>
 					
-					<td class="center">
-				    <c:choose>
-				        <c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
-				            <c:choose>
-				                <c:when test="${qaDto.qaDepth == 1}">
-				                	<i class="fa-thin fa-lock-keyhole" style="color: #776bff "></i>
-				                    <span class="c-p100">ㄴRE : 비밀글 처리 되었습니다.</span>
-				                </c:when>
-				                <c:otherwise>
-				                	<i class="fa-thin fa-lock-keyhole" style="color: #776bff;"></i>
-				                    <span>비밀글 처리 되었습니다.</span>
-				                </c:otherwise>
-				            </c:choose>
-				        </c:when>
-				        <c:otherwise>
-				            <a href="detail?qaNo=${qaDto.qaNo}" class="link c-p100">
-				            ${(qaDto.qaDepth == 1 ? "ㄴRE : " : "")}${qaDto.qaTitle}</a>
-				        </c:otherwise>
-				    </c:choose>
-				</td>
-					<td class="left">${qaDto.memberId}</td>
+					<td class="left">
+					  <c:choose>
+					  
+					    <c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
+					      <c:choose>
+					        <c:when test="${qaDto.qaDepth == 1}">
+					          <i class="fa-solid fa-lock" style="color: #776bff;"></i>
+					          <span>ㄴRE : 비밀글 질문의 답글입니다.</span>
+					        </c:when>
+					        <c:otherwise>
+					         <i class="fa-solid fa-lock" style="color: #776bff;"></i>
+					          <span>
+					          비밀글 처리 되었습니다.
+					          </span>
+					        </c:otherwise>
+					      </c:choose>
+					    </c:when>
+					    
+					    <c:otherwise>
+					      <a href="detail?qaNo=${qaDto.qaNo}" class="link">
+					        <c:choose>
+					          <c:when test="${qaDto.qaDepth == 1}">
+					            ㄴRE : ${qaDto.qaTitle}의 답변입니다.
+					          </c:when>
+					          <c:otherwise>
+					            ${qaDto.qaTitle}
+					          </c:otherwise>
+					        </c:choose>
+					      </a>
+					    </c:otherwise>
+					    
+					  </c:choose>
+					</td>
+					<td class="center">${qaDto.memberId}</td>
 					
 					<%-- DTO에 만든 가상의 Getter 메소드를 불러 처리 --%>
 					<td>${qaDto.qaDate}</td>
