@@ -3,11 +3,15 @@ package com.kh.semi.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
 import com.kh.semi.dto.MemberDto;
+import com.kh.semi.vo.MemberListPaginationVo;
+
 
 @Repository
 public class MemberDao {
@@ -35,9 +39,6 @@ public class MemberDao {
 				memberDto.getMemberPost(),
 				memberDto.getMemberBasicAddr(),
 				memberDto.getMemberDetailAddr(),
-//				memberDto.getMemberPoint(),
-//				memberDto.getMemberJoin(), 
-//				memberDto.getMemberRole(),
 				memberDto.getAgreeTos(), 
 				memberDto.getAgreePrivacy(),
 				memberDto.getAgreePromotion()
@@ -141,5 +142,68 @@ public class MemberDao {
 			Object[] param= {memberId};
 			return jdbcTemplate.queryForObject(sql, int.class, param);
 		}
-	
+//		관리자용 회원 정보 변경
+		public boolean changeInformationByAdmin(MemberDto memberDto) {
+			String sql = "update member set "
+							+ "member_nick=?, member_phone=?,"
+							+ "member_email=?, member_post=?, member_basic_addr=?,"
+							+ "member_detail_addr=?, member_role=?, member_point=? "
+							+ "where member_id = ?";
+			Object[] param = {
+				memberDto.getMemberNick(), memberDto.getMemberPhone(),
+				memberDto.getMemberEmail(),
+				memberDto.getMemberPost(), memberDto.getMemberBasicAddr(),
+				memberDto.getMemberDetailAddr(), memberDto.getMemberRole(),
+				memberDto.getMemberPoint(), memberDto.getMemberId()
+			};
+			return jdbcTemplate.update(sql, param) > 0;
+		}
+
+		public MemberDto selectById(String memberId) {
+			String sql = "select * from member where member_nick = ?";
+			Object[] param = {memberId};
+			List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
+			return list.isEmpty() ? null : list.get(0);
+		}
+		//목록 및 검색 
+		public List<MemberDto> list(MemberListPaginationVo vo) {
+			if(vo.isSearch()) {
+				String sql = "select * from ("
+								+ "select TMP.*, rownum RN from ("
+									+ "select * from member where instr(#1, ?) > 0 "
+									+ "order by member_id desc"
+								+ ")TMP"
+							+ ") where RN between ? and ?";
+				sql = sql.replace("#1", vo.getColumn());
+				Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+				return jdbcTemplate.query(sql, mapper, param);
+			}
+			else {
+				String sql = "select * from ("
+								+ "select TMP.*, rownum RN from ("
+									+ "select * from member "
+									+ "order by member_id desc"
+								+ ")TMP"
+							+ ") where RN between ? and ?";
+				Object[] param = {vo.getBegin(), vo.getEnd()};
+				return jdbcTemplate.query(sql, mapper, param);
+			}
+		}
+
+		//카운트 수정본
+		public int selectCount(MemberListPaginationVo vo) {
+			// 검색
+			if(vo.isSearch()) {
+				String sql = "select count(*) from member where instr(#1, ?) > 0";
+				sql = sql.replace("#1", vo.getColumn());
+				Object[] param = {vo.getKeyword()};
+				return jdbcTemplate.queryForObject(sql, int.class, param);
+			}
+			// 목록
+			else {
+				String sql = "select count(*) from member";
+				return jdbcTemplate.queryForObject(sql, int.class);
+			}
+		}
+
 }

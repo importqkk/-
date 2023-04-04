@@ -1,5 +1,8 @@
 package com.kh.semi.controller;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.kh.semi.component.RandomComponent;
 import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dto.MemberDto;
@@ -116,16 +120,13 @@ public class MemberController {
 		@RequestParam String memberEmail) {
 //		String memberId = memberId;
 		MemberDto memberDto = memberDao.selectOne(memberId);
-		// 이메일이 일치하지 않는다면
 		if(!memberDto.getMemberEmail().equals(memberEmail)) {
 			attr.addAttribute("mode", "error");
 			return "redirect:findPw";
 		}
 		// 이메일이 일치 시 임시 비밀번호 생성
 		String temporaryPW = RandomComponent.generateString();
-		// 생성한 임시 비밀번호로 비밀번호 변경
 		memberDao.changePassword(memberId, temporaryPW);
-		// 임시 비밀번호를 회원 이메일로 전송
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(memberDto.getMemberEmail());
 		message.setSubject("[SEMI] 임시 비밀번호 발급");
@@ -217,12 +218,6 @@ public class MemberController {
 			 RedirectAttributes attr
 		 ) {
 		 String memberId = (String)session.getAttribute("memberId");
-//		 MemberDto findDto = memberDao.selectOne(memberId);
-		
-//		 if(!findDto.getMemberPw().equals(memberDto.getMemberPw())) {
-//			 attr.addAttribute("mode", "error");
-//			 return "redirect:edit";
-//		 }
 		 
 		 memberDto.setMemberId(memberId);
 		 memberDao.changeInformation(memberDto);
@@ -268,6 +263,5 @@ public class MemberController {
 	 public String deleteFinish() {
 		 return "/WEB-INF/views/member/deleteFinish.jsp";
 	 }
-	 
-	 
+
 }

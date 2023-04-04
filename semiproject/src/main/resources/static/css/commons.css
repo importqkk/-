@@ -857,7 +857,9 @@ input[type="radio"]:checked {
     border: 1px solid gray;
 }
 .table-border tr > th{
-	background-color: #f4f4f5;
+/* 	background-color: #f4f4f5; */
+background-color: #f8f8ff;
+
 }
 .table.table-border > thead > tr > th, 
 .table.table-border > thead > tr > td, 
@@ -901,4 +903,12 @@ input[type="radio"]:checked {
 }
 .leftside li:hover > a{
     color: black;
+}
+.btn-border{
+	border: 1px solid #D5D5D5;
+	padding: 0.25em;
+	text-decoration: none;
+}
+.btn-border:hover{
+	border: 1px solid #949494;
 }

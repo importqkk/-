@@ -7,6 +7,10 @@
   .content {
   	min-height: 416px;
   }
+  .error{ 
+    font-size: 20px;
+    color: red;
+  }
 </style>
 
 <form action="password" method="post" class="content">
@@ -35,8 +39,8 @@
 	
 	<!-- 오류가 발생한 경우 보여줄 메세지 -->
 	<c:if test="${param.mode == 'error'}">
-	<div class="row center" style="font-size: 15px; color: red;">
-		<h2>비밀번호가 일치하지 않습니다</h2>
+	<div class="row center">
+		<h3 class="error">비밀번호가 일치하지 않습니다</h3>
 	</div>
 	</c:if>
 </div>

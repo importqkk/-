@@ -349,7 +349,7 @@
                         </a>
                     </div>
                     <div class="p-10">
-                        <a href="#" class="link">회원 목록</a>
+                        <a href="/admin/member/list" class="link">회원 목록</a>
                     </div>
                     <div class="p-10">
                         <a href="/admin/productManage/list" class="link">상품 관리</a>
