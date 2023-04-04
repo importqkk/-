@@ -100,6 +100,8 @@ public class QaController {
 		
 		if(list.size() > 1) {
 			 QaDto qaAnswer = list.get(1);
+
+			 jsonObj.put("qaAnswerNo", qaAnswer.getQaNo());
 			 jsonObj.put("qaAnswer", qaAnswer.getQaAnswer());
 			 jsonObj.put("qaAnswerTitle", qaAnswer.getQaTitle());
 		}
