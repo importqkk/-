@@ -470,7 +470,7 @@ $(function(){
 					</div>
 					<div class="row center">
 						<button class="w-49 form-btn small neutral cart-btn">장바구니</button>
-						<button class="w-49 form-btn small positive">구매하기</button>
+						<button class="w-49 form-btn small positive buy-btn">구매하기</button>
 					</div>
 				</div>
 			</div>

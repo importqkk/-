@@ -11,14 +11,14 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/static/css/load.css">
-       <!-- font awsome 아이콘 -->
-       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-       <!-- tabler 아이콘 -->
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-       <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-       <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-       <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-       <link rel="stylesheet" type="text/css" href="/static/css/test.css">
+<!-- font awsome 아이콘 -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<!-- tabler 아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/layout.css">
+<link rel="stylesheet" type="text/css" href="/static/css/commons.css">
+<link rel="stylesheet" type="text/css" href="/static/css/test.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <meta charset="EUC-KR">
 <title>배송지관리 팝업</title>
@@ -34,14 +34,14 @@
         }
         
         .form-btn.small2 {
-                display: inline;
-                font-size: 13px;
-                padding: 0.55em;
-                padding-left: 0.5em;
-                padding-right: 0.5em;
-                border-width: 2px;
-                border-style: solid;
-                height:30px
+			display: inline;
+             font-size: 13px;
+             padding: 0.55em;
+             padding-left: 1em;
+             padding-right: 1em;
+             border-width: 2px;
+             border-style: solid;
+             margin-bottom: 18px;
         }
         .pop-100 {
           
@@ -119,10 +119,7 @@
                 <button class="row  insert-btn form-btn small2 neutral pt-50">신규 배송지 등록</button>
                 
               </div>
-      
-           
-           
-           
+
       <form id="myForm" action="/order/popup" method="post">
         <c:forEach var="allInfo" items="${allInfo}" varStatus="loop">
               <div class="mt-20" style="border: 2px solid rgb(119,107,255) ; width: 500px; padding: 10px;">
