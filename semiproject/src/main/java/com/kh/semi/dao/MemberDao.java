@@ -1,4 +1,5 @@
 package com.kh.semi.dao;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -131,5 +132,14 @@ public class MemberDao {
 		Object[] param = {memberId};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+	
+	
+	//훈 만든거
+	//멤버 포인트조회
+		public int point(String memberId) {
+			String sql="select member_point from member where member_id= ? ";
+			Object[] param= {memberId};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+		}
 	
 }

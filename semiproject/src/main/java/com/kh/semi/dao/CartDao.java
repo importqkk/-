@@ -78,4 +78,12 @@ public class CartDao {
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
 	
+	
+	//훈 만든거 가져가야함
+		//주문후 카트삭제
+		public boolean cartDeleteAll(String memberId) {
+			String sql = "delete cart where member_id=?";
+			Object[] param = {memberId};
+			return jdbcTemplate.update(sql, param) > 0;
+		}
 }

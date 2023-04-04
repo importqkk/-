@@ -83,7 +83,11 @@ CREATE TABLE  member  (
 CREATE TABLE  order_  (
 	 order_no 	number	PRIMARY KEY	 ,
 	 order_receiver 	varchar2(21)	NOT NULL,
+<<<<<<< HEAD
+     order_post number not null,
+=======
      	 order_post varchar2(6) not null,
+>>>>>>> refs/remotes/origin/main
 	 order_basic_addr 	VARCHAR2(150)	NOT NULL,
 	 order_detail_addr 	VARCHAR2(150)	NOT NULL,
 	 order_receiver_phone 	varchar2(11)	NOT NULL,
@@ -153,8 +157,13 @@ CREATE TABLE  Review  (
 	 review_star 	number 	DEFAULT 0	NOT NULL,
 	 review_time 	date 	DEFAULT sysdate	NOT NULL,
 	 review_like 	number 	DEFAULT 0	NOT NULL,
+<<<<<<< HEAD
+     product_no 	REFERENCES  product(product_no) on delete CASCADE,
+     member_Id REFERENCES member(member_id) on delete CASCADE,
+=======
      	product_no 	REFERENCES  product(product_no) on delete CASCADE,
      	member_Id REFERENCES member(member_id) on delete CASCADE,
+>>>>>>> refs/remotes/origin/main
      
      -- 리뷰 별점
      --0 ~ 5점
@@ -173,10 +182,20 @@ CREATE TABLE  QA  (
 	 QA_answer 	VARCHAR2(3000),
 	 QA_head 	VARCHAR2(12)	NOT NULL	,
 	 QA_secret 	number DEFAULT 0	NOT NULL,
+<<<<<<< HEAD
+     QA_group number not null,
+=======
          	 QA_group number,
+>>>>>>> refs/remotes/origin/main
 	 QA_parent 	references QA(QA_no) on delete cascade,
+<<<<<<< HEAD
+	 QA_depth 	number 	DEFAULT 0	NOT NULL,
+	 qa_date date default  sysdate,
+     member_Id 	REFERENCES member(member_id) on delete set null,
+=======
 	 QA_depth 	number 	DEFAULT 0	,
      	member_Id 	REFERENCES member(member_id) on delete set null,
+>>>>>>> refs/remotes/origin/main
      
      -- qa 말머리
      check (qa_head in('상품문의','결제문의','기타문의')),
@@ -224,7 +243,11 @@ CREATE TABLE  order_product  (
 	 product_price 	number	NOT NULL,
      product_no 	REFERENCES product(product_no) on delete cascade,
 	 order_no 	REFERENCES order_(order_no) on delete cascade,
+<<<<<<< HEAD
+	 primary key(product_no,order_no)
+=======
 	 primary key(product_no, order_no)
+>>>>>>> refs/remotes/origin/main
 );
 
 
@@ -267,3 +290,14 @@ CREATE TABLE  review_img  (
 
 
 
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+=======
+>>>>>>> refs/remotes/origin/main

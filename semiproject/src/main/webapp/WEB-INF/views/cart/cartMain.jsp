@@ -675,7 +675,7 @@
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
 	        <div class="row">
 	            <div class="row">
-	                <a class="form-btn medium positive w-100 order-btn" href="/buy">주문하기</a>
+	                <a class="form-btn medium positive w-100 order-btn" href="../order/buy">주문하기</a>
 	            </div>
 	        </div>
 		</c:if>
