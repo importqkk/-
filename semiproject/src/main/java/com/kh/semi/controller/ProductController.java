@@ -34,25 +34,29 @@ public class ProductController {
 		return "/WEB-INF/views/product/list.jsp";
 	}
 	
-	// 상품 상세 페이지 - 상품 번호를 통해 페이지를 보여줌  
-		@GetMapping("/detail")
-		public String list(@RequestParam int productNo,
+	//수정함
+	@GetMapping("/detail")
+	public String detail(@RequestParam int productNo,
 							Model model,
-							HttpSession session
-				) {
-			
-			// 리뷰 작성 구간--------------
-			// 아이디 확인
-			String memberId = (String) session.getAttribute("memberId");
-			BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId);
-			ReviewDto reviewDto = reviewDao.selectOne(memberId, productNo);
-			model.addAttribute("reviewDto",reviewDto);
-			
-			boolean hasBuyHistory = buyHistoryDto != null && buyHistoryDto.getProductNo() == productNo;
-			model.addAttribute("hasBuyHistory", hasBuyHistory);
-			
-			return "/WEB-INF/views/product/detail.jsp";
-		}
+							HttpSession session) {
+				
+				
+		ProductDto productDto = productDao.selectOne(productNo);
+		model.addAttribute("productDto",productDto);
+		
+		
+		String memberId = (String) session.getAttribute("memberId");
+		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId, productNo);
+
+		ReviewDto reviewDto = reviewDao.selectOne(memberId, productNo);
+		model.addAttribute("reviewDto",reviewDto);
+		
+		boolean hasBuyHistory = buyHistoryDto != null;
+		model.addAttribute("hasBuyHistory", hasBuyHistory);
+
+		return "/WEB-INF/views/product/detail.jsp";
+		
+	}
 	
 	
 }

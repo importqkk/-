@@ -15,7 +15,6 @@ import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ReviewDao;
 import com.kh.semi.dto.ProductDto;
 import com.kh.semi.dto.ReviewDto;
-import com.kh.semi.service.ReviewService;
 import com.kh.semi.vo.paginationVO;
 
 @Controller
@@ -27,9 +26,6 @@ public class ReviewController {
 	
 	@Autowired
 	private ProductDao productDao;
-	
-	@Autowired
-	private ReviewService reviewService;
 	
 	@GetMapping("/list")
 	public String list(@ModelAttribute("vo") paginationVO vo,
@@ -46,5 +42,16 @@ public class ReviewController {
 	    return "/WEB-INF/views/review/list.jsp";
 	}
 	
+//	@GetMapping("/productList")
+//	public String list(HttpSession session,
+//						Model model) {
+//		int productNo = (int) session.getAttribute("productNo");
+//		
+//		List<ReviewDto> list = reviewDao.selectList(productNo);
+//		model.addAttribute("list",list);
+//		
+//		return "/WEB-INF/views/review/productList.jsp";
+//	}
+//	
 
 }
