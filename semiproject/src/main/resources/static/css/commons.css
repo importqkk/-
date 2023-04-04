@@ -915,6 +915,9 @@ input[type="checkbox"] {
 .table.table-border{
     border: 1px solid gray;
 }
+.table-border tr > th{
+	background-color: #f4f4f5;
+}
 .table.table-border > thead > tr > th, 
 .table.table-border > thead > tr > td, 
 .table.table-border > tbody > tr > th, 
@@ -923,38 +926,38 @@ input[type="checkbox"] {
 .table.table-border > tfoot > tr > td{
     border: 1px solid gray;
 }
-.accordian, 
-.accordian ul{
+.leftside, 
+.leftside ul{
     color: #474748;
     margin: 0;
     padding: 0.25em;
     list-style: none;
 }
-.accordian{
+.leftside{
     font-size: 18px;
     cursor: pointer;
 }
-.accordian ul{
+.leftside ul{
 	font-size: 16px;
 }
-.accordian ul > li{
+.leftside ul > li{
 	padding: 0.25em 0;
 }
-.accordian > li{
+.leftside > li{
     width: 100%;
     padding: 0 0 0.5em 0;
 	padding-bottom: 20px;
 }
 
-.accordian a{
+.leftside a{
     text-align: center;
     text-decoration: none;
     color: rgb(100, 100, 100);
     width: 100%;
 }
-.accordian li:hover{
+.leftside li:hover{
 	cursor: pointer;
 }
-.accordian li:hover > a{
+.leftside li:hover > a{
     color: black;
 }

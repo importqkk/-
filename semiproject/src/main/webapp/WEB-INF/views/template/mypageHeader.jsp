@@ -10,7 +10,7 @@
   <div class="flex">
     <div class="w-20">
 <!-- <aside class="left"> -->
-	<ul class="accordian">
+	<ul class="leftside">
 		<li>
 			마이페이지
 			<ul>
