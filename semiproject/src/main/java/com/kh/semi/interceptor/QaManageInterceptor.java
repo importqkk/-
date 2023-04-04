@@ -23,11 +23,6 @@ public class QaManageInterceptor implements HandlerInterceptor {
 			Object handler)
 			throws Exception {
 		
-//		작성자 본인이라는 것은 게시글의 작성자와 현재 세션의 회원아이디가 같음을 의미
-//		- 게시글 정보를 불러오려면 게시글 번호와 QaDao가 필요
-//		- 게시글 번호는 파라미터(Parameter) 형태로 전송
-//		request.getParameter("이름") 작성 시 반환형이 String
-		
 //		게시글 작성자 확인 코드
 		int qaNo= Integer.parseInt(request.getParameter("qaNo"));
 		QaDto qaDto = qaDao.selectOne(qaNo);
@@ -40,10 +35,10 @@ public class QaManageInterceptor implements HandlerInterceptor {
 		boolean isOwner = memberId.equals(writerId);
 		
 //		현재 로그인 회원의 등급 확인 코드
-		String memberLevel = (String)session.getAttribute("memberRole");
+		String memberRole = (String)session.getAttribute("memberRole");
 		
 		
-		boolean isAdmin = memberLevel.equals("관리자");
+		boolean isAdmin = memberRole.equals("관리자");
 		
 //		작성자 본인이거나 관리자라면
 		if(isAdmin) {
