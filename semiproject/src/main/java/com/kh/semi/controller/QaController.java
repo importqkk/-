@@ -27,7 +27,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.QaDao;
 import com.kh.semi.dto.QaDto;
-import com.kh.semi.dto.TestDto;
 import com.kh.semi.service.QaService;
 import com.kh.semi.vo.QaPaginationVO;
 
@@ -58,18 +57,6 @@ public class QaController {
 		return "/WEB-INF/views/qa/list.jsp";
 	}
 	
-
-	@GetMapping("/test")
-	public String Test(Model model) {
-		TestDto test = new TestDto();
-		String aa = "testuser8";
-		
-		test = qaService.testdo(aa);
-		
-
-		model.addAttribute("hi",test);
-		return "/WEB-INF/views/qa/test.jsp";
-	}
 	
 	@PostMapping("/list")
 	public String QaList(Model model,
@@ -113,6 +100,8 @@ public class QaController {
 		
 		if(list.size() > 1) {
 			 QaDto qaAnswer = list.get(1);
+
+			 jsonObj.put("qaAnswerNo", qaAnswer.getQaNo());
 			 jsonObj.put("qaAnswer", qaAnswer.getQaAnswer());
 			 jsonObj.put("qaAnswerTitle", qaAnswer.getQaTitle());
 		}
@@ -140,7 +129,7 @@ public class QaController {
 	    }
 	}
 	
-	// PUT 요청 처리
+	// 요청 처리
 	@PutMapping("/repleWrite")
 	public ResponseEntity<String> repleWrite(
 			@RequestParam("qaNo") int qaNo,
