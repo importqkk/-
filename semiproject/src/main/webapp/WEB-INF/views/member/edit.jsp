@@ -7,7 +7,22 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/find-address.min.js"></script>
 
- 
+
+ <script type="text/javascript">
+// 	$(function(){
+// 		$(window).on("beforeunload", function(){
+// 		    return false;
+// 		});
+// 		$(".btn-pass").click(function(){
+// 		    $(window).off("beforeunload");
+// 		    return true;
+// 		});
+// 	});
+    var checkUnload = true;
+    $(window).on("beforeunload", function(){
+        if(checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+    });
+</script>
 <form action="edit" method="post">
 <div class="container-600">
 	<div class="row center">
@@ -36,26 +51,30 @@
 	<div class="row">
 		<input type="text" name="memberDetailAddr" class="form-input w-100 medium light"  placeholder="상세주소" value="${memberDto.memberDetailAddr}">
 	</div>
-	<div class="row">
-		<label>비밀번호 확인</label>
-		<input type="password" name="memberPw" required class="form-input w-100 medium light" >
-	</div>
+<!-- 	<div class="row"> -->
+<!-- 		<label>비밀번호 확인</label> -->
+<!-- 		<input type="password" name="memberPw" required class="form-input w-100 medium light" > -->
+<!-- 	</div> -->
 	
 	<div class="row">
-		<button class="form-btn neutral w-20 medium">취소</button>
-        <button type="submit" class="form-btn positive w-75 medium ms-25">변경하기</button>
+		<button class="form-btn neutral w-24 medium">취소</button>
+        <button type="submit" id="saveBtn" class="form-btn positive w-75 medium ms-25">변경하기</button>
 	</div>
 		<!-- 취소 버튼 클릭 이벤트 처리 -->
 	<script>
 		$('.form-btn.neutral').click(function(){
   		window.location.href = '/member/mypage';
 		});
+		$("#saveBtn").on("click", function(){
+		    checkUnload = false;
+		    $("#saveForm").submit();
+		});
 	</script>
-	<c:if test="${param.mode == 'error'}">
-	<div class="row center">
-		<h3 style="color:red;">비밀번호가 일치하지 않습니다</h3>
-	</div>
-	</c:if>
+<%-- 	<c:if test="${param.mode == 'error'}"> --%>
+<!-- 	<div class="row center"> -->
+<!-- 		<h3 style="color:red;">비밀번호가 일치하지 않습니다</h3> -->
+<!-- 	</div> -->
+<%-- 	</c:if> --%>
 </div>
 
 </form>
