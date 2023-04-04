@@ -6,19 +6,19 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/static/css/load.css">
-	    <!-- font awsome 아이콘 -->
-	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-	    <!-- tabler 아이콘 -->
-	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
+<!-- font awesome 아이콘 -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<!-- tabler 아이콘 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/layout.css">
+<link rel="stylesheet" type="text/css" href="/static/css/commons.css">
+<link rel="stylesheet" type="text/css" href="/static/css/test.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	<!-- 우편주소 api -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="/static/js/find-address.min.js"></script>
-	<!-- 우편주소 api -->
+<!-- 우편주소 api -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/static/js/find-address.min.js"></script>
+<!-- 우편주소 api -->
 <title>배송지 추가 팝업</title>
 <style>
         
@@ -35,6 +35,14 @@
 		}
 		table {
 		  border-spacing: 20px;
+		}
+		.qty-selector {
+			font-size: 13px;
+			padding-left: 1.3em;
+		    padding-top: 0.75em;
+		    padding-bottom: 0.75em;
+		    text-align: left;
+		    background:url('/static/image/down-arrow.png') no-repeat 96.5% 55%/11px auto;
 		}
     </style>
     <script type="text/javascript">
@@ -86,49 +94,42 @@
         </div>
         <!-- 방법을 모르겠어서 form으로 보냄 .. -->
        <form action="/order/popInsert" method="post">
-		<table>
-			  <tr>
-			    <td><label>수령인</label></td>
-			    <td><input type="text" name="memberName"></td>
-			  </tr>
-			  <tr>
-			    <td><label>휴대전화</label></td>
-			    <td><input type="text" name="memberPhone"></td>
-			  </tr>
-			  <tr>
-			    <td><label>주소</label></td>
-			    <td>
-			      <input type="text" name="memberPost">
-			      <button class="address-btn" type="button">검색</button>
-			    </td>
-			  </tr>
-			  <tr>
-			    <td></td>
-			    <td><input type="text" name="memberBasicAddr"></td>
-			  </tr>
-			  <tr>
-			    <td></td>
-			    <td><input type="text" name="memberDetailAddr"></td>
-			  </tr>
-			  <tr>
-			    <td>요청사항</td>
-			    <td>
-			      <select name="orderRequest" id="orderRequest">
+	       <div class="row">
+	       		<label class="ps-10">수령인</label>
+	       		<input type="text" class="form-input small w-100" name="memberName">
+	       </div>
+	       <div class="row">
+	       		<label class="ps-10">휴대전화</label>
+	       		<input type="text" class="form-input small w-100" name="memberPhone" placeholder="010XXXXXXXX">
+	       </div>
+	       <div class="row">
+	       		<label class="ps-10 w-100">주소</label>
+	       		<div class="flex">
+	       			<input type="text" class="form-input small w-80 me-5" name="memberPost" placeholder="우편번호">
+	       			<button class="address-btn form-btn small positive w-20" type="button">검색</button>
+	       		</div>
+	       </div>
+	       <div class="row">
+	       		<input type="text" class="form-input small w-100" name="memberBasicAddr" placeholder="기본주소">
+	       </div>
+	       <div class="row">
+	       		<input type="text" class="form-input small w-100" name="memberDetailAddr" placeholder="상세주소">
+	       </div>
+	       <div class="row">
+	       		<label class="ps-10">요청사항</label>
+	       		<select name="orderRequest" id="orderRequest" class="qty-selector w-100">
 			        <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
 			        <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
 			        <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
 			        <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
 			        <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
 			        <option value="etc">직접입력</option>
-			      </select>
-			      <textarea name="etc-text" id="etc-text" cols="57" rows="5" style="display:none"></textarea>
-			    </td>
-			  </tr>
-			  <tr>
-			    <td></td>
-			    <td><button class="btn" type="submit">등록하기</button></td>
-			  </tr>
-			</table>
+		        </select>
+		        <textarea name="etc-text" id="etc-text" cols="57" rows="5" style="display:none"></textarea>
+	       </div>
+	       <div class="row">
+	       		<button class="btn form-btn small positive w-100" type="submit">등록하기</button>
+	       </div>
         </form>
     </div>
 </body>

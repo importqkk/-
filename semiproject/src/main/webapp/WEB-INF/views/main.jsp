@@ -83,9 +83,6 @@
     .category-title {
     	color: #776bff;
     }
-    /*.text-wrap {
-    	word-warp: break-word;
-    }*/
     .flex-wr {
 		display: flex;		
 		flex-wrap: wrap;

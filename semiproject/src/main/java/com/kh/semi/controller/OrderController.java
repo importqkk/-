@@ -210,19 +210,39 @@ public class OrderController {
 		 return "redirect:popup";
 	 }
 	 
-	 @PostMapping("/popup")
-	 public String popDelete(HttpSession session,@ModelAttribute MemberInfoDto memberInfoDto,@RequestParam int index) {
-		 String memberId=(String)session.getAttribute("memberId");
-		 memberInfoDto.setMemberId(memberId);
-		 memberInfoDao.addDelete(index, memberId);
-		 
-		 return "redirect:popup";
-	 }
-	 
 	 //회원의 구매목록 조회
 	 @GetMapping("/myList")
 	 public String myList(HttpSession session) {
 		 String memberId=(String)session.getAttribute("memberId");
 		 return "/WEB-INF/views/order/myList.jsp";
 	 }
+	 
+	//삭제구문
+	@PostMapping("/popDelete")
+	public String popDelete(HttpSession session,@RequestParam String name,@RequestParam String phone,
+	      @RequestParam String post,@RequestParam String basic,@RequestParam String request) {
+	   MemberInfoDto dto=new MemberInfoDto();
+	   String memberId=(String)session.getAttribute("memberId");
+	   dto.setMemberId(memberId);
+	   List<MemberInfoDto> list= memberInfoDao.addrInfo(memberId);
+	   
+	   //받아온 값을 통해 equals로 비교하고 해당값이 맞으면 dao에 추가해 삭제하는 문장
+	   for (int i=0; i<list.size();i++) {
+	      
+	      System.out.println(list.get(i));
+	      if(name.equals(list.get(i).getMemberName()) &&
+	                phone.equals(list.get(i).getMemberPhone()) &&
+	                post.equals(list.get(i).getMemberPost()) &&
+	                basic.equals(list.get(i).getMemberBasicAddr()) &&
+	                request.equals(list.get(i).getOrderRequest())
+	                ){
+	        
+	         memberInfoDao.addDelete(memberId,name,phone,post,basic,request);
+	         break;
+	     }
+	      
+	   }
+	   return "redirect:popup";
+	}
+	 
 }
