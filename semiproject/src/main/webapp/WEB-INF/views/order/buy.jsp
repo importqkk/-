@@ -1,4 +1,4 @@
--<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -38,14 +38,14 @@
             }
         
         .form-btn.small2 {
-                display: inline;
-                font-size: 13px;
-                padding: 0.55em;
-                padding-left: 0.5em;
-                padding-right: 0.5em;
-                border-width: 2px;
-                border-style: solid;
-                height:30px
+             display: inline;
+             font-size: 13px;
+             padding: 0.55em;
+             padding-left: 1em;
+             padding-right: 1em;
+             border-width: 2px;
+             border-style: solid;
+             margin-bottom: 18px;
         }
 
         .form-input.small2 {
@@ -96,7 +96,11 @@
         }
         
         .info div {
-            margin-bottom: 20px; /* 세로 간격 조정 */
+            margin-bottom: 5px; /* 세로 간격 조정 */
+        }
+        
+        .brand-name-box {
+        	min-height: 2em;
         }
     </style>
 
@@ -214,21 +218,28 @@
 <div class="container-1000">
     <h1>주문/결제</h1>
      <form action="/order/buy" method="post">
-   <div class="flex">
+   <div class="flex mt-30">
        <div class=" w-70 pe-70">
            <p><h2>주문상품</h2></p>
     <!-- 상품상세에서 온거면 -->
         <c:if test="${not empty productInfo}">
             <c:forEach var="productInfo" items="${productInfo}" varStatus="status">
             <div class="row flex2">
-                    <img src="https://picsum.photos/100/100" class="pe-20">
+            	<c:choose>
+            		<c:when test="${cartProductInfoDto.imgNo != 0}">
+            			<img src="/img/download?imgNo=${productInfo.productImgNo}" class="me-20" width="130" height="130">
+            		</c:when>
+            		<c:otherwise>
+            			<img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
+            		</c:otherwise>
+            	</c:choose>
                         <input  type="hidden" name="productNo" value="${productInfo.productNo}">
                         <input  type="hidden" name="productPrice" value="${productInfo.productPrice}">
                         <input  type="hidden" name="productCount" value="${Count}">
                     
-                    <div class="left info">
-                        <div>
-                            <label>[브랜드명] </label> <label>${productInfo.productName}</label>
+                    <div class="left info mt-10">
+                        <div class="brand-name-box">
+                            <h4>[${cartinfo.productBrand}] </h4> <label>${productInfo.productName}</label>
                         </div>
                         
                         <label>상품가격: ${productInfo.productPrice}</label>
@@ -246,16 +257,27 @@
         
 			<c:forEach var="cartinfo" items="${cartinfo}" varStatus="loop">
 			    <div class="row flex2">
-			        <img src="https://picsum.photos/100/100" class="pe-20">
-			                                        
+			    	
+			    	<c:choose>
+			    		<c:when test="${cartinfo.imgNo != 0}">
+			    			<img src="/img/download?imgNo=${cartinfo.productImgNo}" class="me-20" width="130" height="130"> 
+			    		</c:when>
+			    		<c:otherwise>
+			    			<img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
+			    		</c:otherwise>
+			    	</c:choose>
 			                
-			        <div class="left info">
-			            <div>
-			                <label>[브랜드명]:${cartinfo.productBrand} </label> <label>${cartinfo.productName}</label>
+			        <div class="left info mt-10">
+			            <div class="brand-name-box">
+			                <h4>[${cartinfo.productBrand}]</h4> <label>${cartinfo.productName}</label>
 			            </div>
-			            	<label id="productPrice${loop.index}">상품가격: ${cartinfo.productPrice} 원</label>
+			            	<h3 id="productPrice${loop.index}">
+			            		<fmt:formatNumber pattern="#,##0" value="${cartinfo.productPrice}"></fmt:formatNumber>
+			            		 원
+			            	</h3>
 			            <div>
-			                <label id="productCount${loop.index}">상품수량: ${cartinfo.productCount} 개</label>
+			                <label id="productCount${loop.index}" class="me-10"><h4>수량</h4></label>
+			                <span><h4>${cartinfo.productCount}</h4></span>
 			            </div>
 			        </div>
 			                    
@@ -264,29 +286,32 @@
         </c:if>
     
     <!-- 배송지부분 -->
-           <div class="row left">
+           <div class="row left pt-30">
                 <div class="row flex">
                     <h2>배송지</h2>
                     <button class="pop-btn form-btn small2 neutral mt-20" type="button">배송지 불러오기</button> 
                </div>
                <div class="row">
-                   <p>받는사람</p>
+                   <label class="ps-10">받는사람</label>
                    <input type="text" class="form-input light w-100 medium" name="orderRecever">
                </div>
 
                <div class="row">
-                   <p>연락처</p>
+                   <label class="ps-10">연락처</label>
                    <input type="text" class="form-input light w-100 medium" name="orderReceivePhone">
                </div>
 
                <div class="row">
-                   <p>주소</p>
-                   <input type="text" class="form-input light medium w-50" name="orderPost" placeholder="우편번호">
-                   <button class="form-btn medium positive address-btn" type="button">우편번호찾기</button>
+               		<div>
+               			<label class="w-100 ps-10">주소</label>
+               		</div>
+                   <div class="flex">
+	                   <input type="text" class="form-input light medium w-75" name="orderPost" placeholder="우편번호">
+	                   <button class="form-btn medium positive address-btn" type="button">우편번호찾기</button>
+                   </div>
                </div>
 
                <div class="row">
-                   <p></p>
                    <input type="text" class="form-input light medium w-100" name="orderBasicAddr" placeholder="기본주소" readonly>
                </div>
 
@@ -295,7 +320,7 @@
                </div>
 
                <div class="row">
-                   <p>배송요청사항</p>
+                   <label class="ps-10">배송요청사항</label>
                    <input type="text" class="form-input light medium w-100" name="orderRequest">
                </div>
            </div>

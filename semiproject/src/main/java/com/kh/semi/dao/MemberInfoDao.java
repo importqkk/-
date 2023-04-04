@@ -47,16 +47,13 @@ public class MemberInfoDao {
 		jdbcTemplate.update(sql,param);
 	}
 	
-	public boolean addDelete(int index,String memberId) {
-		String sql="SELECT * FROM (SELECT MEMBER_NAME,MEMBER_PHONE,MEMBER_POST,MEMBER_BASIC_ADDR,MEMBER_DETAIL_ADDR,ORDER_REQUEST,MEMBER_ID,"
-				+ "insert_date,ROW_NUMBER() OVER (ORDER BY INSERT_DATE) as row_num"
-				+ "  FROM MEMBER_ADDR"
-				+ "  WHERE member_id= ? "
-				+ ") subquery"
-				+ "WHERE row_num = ? ;";
-		Object[] param = {memberId,index};
-		return jdbcTemplate.update(sql, param) > 0;
-	}
+	//삭제구문
+   public boolean addDelete(String memberId,String name,String phone,String post,String basic,String request) {
+   
+      String sql="DELETE FROM member_addr WHERE member_id= ? and MEMBER_NAME= ? and MEMBER_PHONE= ? and MEMBER_POST= ? and MEMBER_Basic_ADDR = ? and ORDER_REQUEST= ?";
+      Object[] param = {memberId,name,phone,post,basic,request};
+      return jdbcTemplate.update(sql, param) > 0;
+   }
 	
 	
 		
