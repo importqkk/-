@@ -153,7 +153,7 @@
 				        <c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
 				            <c:choose>
 				                <c:when test="${qaDto.qaDepth == 1}">
-				                	<i class="fa-thin fa-lock-keyhole" style="color: #776bff;"></i>
+				                	<i class="fa-thin fa-lock-keyhole" style="color: #776bff "></i>
 				                    <span class="c-p100">ㄴRE : 비밀글 처리 되었습니다.</span>
 				                </c:when>
 				                <c:otherwise>
