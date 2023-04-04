@@ -73,7 +73,7 @@ $(function(){
 			    $(".btn-panel").hide();
 			    $(".review-star").hide();
 			    $(".view-panel").show();
-//			     location.reload();
+			     location.reload();
 			},
 			error:function(){
 				alert("등록 오류");
@@ -221,9 +221,12 @@ function editReview(){
         	$(this).addClass('fa-solid').addClass('on').prevAll('.starR').addClass('on').addClass('fa-solid'); 
     	});
     	
-//		$editPanel.show();
+    	//수정 계속해서 누를 때 계속 뜨도록
+		$editPanel.show();
+		$(".review-write").hide();
 		
 		$editPanel.find(".review-edit-btn").click(function(){
+			$(".review-list").empty();
 			var reviewContent = $editPanel.find("[name=reviewContent]").val();
 			var reviewStar = $editPanel.find('.starR.on').last().attr("value");
 			
@@ -252,6 +255,7 @@ function editReview(){
 					reviewStar:reviewStar
 				},
 				success:function(response){
+					$(".review-list").empty();
 					loadList();
 				},
 				error:function(){
@@ -260,6 +264,8 @@ function editReview(){
 			});
 			$editPanel.hide();
 			$(".review-write").show();
+			$(".review-list").empty();
+			
 		});
 		
 		$editPanel.find(".review-cancel-btn").click(function(){
