@@ -35,36 +35,37 @@
 		return confirm("정말 삭제하시겠습니까?");
 	}
 </script>
+ <input type="checkbox" class="check-all" onclick="checkAll()">전체 선택
 </c:if>
 
  <script>
-//     $(document).ready(function() {
-//         // 전체 선택 체크박스 클릭 시 개별 선택 체크박스 상태 변경
-//         $(".check-all").change(function() {
-//             $(".center").find("input[type='checkbox']").prop("checked", $(this).prop("checked"));
-//         });
+    $(document).ready(function() {
+        // 전체 선택 체크박스 클릭 시 개별 선택 체크박스 상태 변경
+        $(".check-all").change(function() {
+            $(".center").find("input[type='checkbox']").prop("checked", $(this).prop("checked"));
+        });
 
-//         // 개별 선택 체크박스 클릭 시 전체 선택 체크박스 상태 변경
-//         $(".center").find("input[type='checkbox']").change(function() {
-//             if (!$(this).prop("checked")) {
-//                 $(".check-all").prop("checked", false);
-//             } else {
-//                 if ($(".center").find("input[type='checkbox']:not(:checked)").length == 0) {
-//                     $(".check-all").prop("checked", true);
-//                 }
-//             }
-//         });
+        // 개별 선택 체크박스 클릭 시 전체 선택 체크박스 상태 변경
+        $(".center").find("input[type='checkbox']").change(function() {
+            if (!$(this).prop("checked")) {
+                $(".check-all").prop("checked", false);
+            } else {
+                if ($(".center").find("input[type='checkbox']:not(:checked)").length == 0) {
+                    $(".check-all").prop("checked", true);
+                }
+            }
+        });
 
-//         // 삭제 버튼 클릭 시 선택된 게시물 삭제
-//         $("button.negative").click(function() {
-//             var checked = $(".center").find("input[type='checkbox']:checked");
-//             if (checked.length == 0) {
-//                 alert("삭제할 게시물을 선택해주세요.");
-//                 return false;
-//             }
-//             return confirm("정말로 삭제하시겠습니까?");
-//         });
-//     });
+        // 삭제 버튼 클릭 시 선택된 게시물 삭제
+        $("button.negative").click(function() {
+            var checked = $(".center").find("input[type='checkbox']:checked");
+            if (checked.length == 0) {
+                alert("삭제할 게시물을 선택해주세요.");
+                return false;
+            }
+            return confirm("정말로 삭제하시겠습니까?");
+        });
+    });
 </script>
 
 
@@ -82,7 +83,7 @@
     </c:if>
     <div class="row right">
     	<c:if test="${sessionScope.memberRole == '관리자'}">
-    	<button type="submit" class="form-btn negative">삭제</button>
+    	<a class="form-btn neutral me-20 delete-btn">삭제</a>
     	</c:if>
         <a href="write" class="form-btn neutral">글쓰기</a>
     </div>
@@ -110,17 +111,14 @@
             <tbody class="center">
             	<!-- 공지사항을 출력 -->
 				<c:forEach var="qaDto" items="${noticeList}">
-				<tr style="background-color:#eee">
+				<tr style="background-color:#e4e1ff">
 					<c:if test="${sessionScope.memberRole == '관리자'}">
 					<td></td>
 					</c:if>
 					<td class="center">${qaDto.qaNo}</td>
 					<td class="center">${qaDto.qaHead}</td>
-
-					<td class="center">
-					<a href="detail?qaNo=${qaDto.qaNo}" class="link">
-							${qaDto.qaTitle}
-						</a>
+					<td>
+	      				<a href="detail?qaNo=${qaDto.qaNo}" class="link">${qaDto.qaTitle}</a>
 					</td>
 					<td class="left">${qaDto.memberId}</td>
 					
@@ -150,11 +148,26 @@
 						</c:if>
 					</td>
 					
-					<td>
-					<a href="detail?qaNo=${qaDto.qaNo}" class="link">
-							${qaDto.qaTitle}
-						</a>
-					</td>
+					<td class="center">
+				    <c:choose>
+				        <c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
+				            <c:choose>
+				                <c:when test="${qaDto.qaDepth == 1}">
+				                	<i class="fa-thin fa-lock-keyhole" style="color: #776bff "></i>
+				                    <span class="c-p100">ㄴRE : 비밀글 처리 되었습니다.</span>
+				                </c:when>
+				                <c:otherwise>
+				                	<i class="fa-thin fa-lock-keyhole" style="color: #776bff;"></i>
+				                    <span>비밀글 처리 되었습니다.</span>
+				                </c:otherwise>
+				            </c:choose>
+				        </c:when>
+				        <c:otherwise>
+				            <a href="detail?qaNo=${qaDto.qaNo}" class="link c-p100">
+				            ${(qaDto.qaDepth == 1 ? "ㄴRE : " : "")}${qaDto.qaTitle}</a>
+				        </c:otherwise>
+				    </c:choose>
+				</td>
 					<td class="left">${qaDto.memberId}</td>
 					
 					<%-- DTO에 만든 가상의 Getter 메소드를 불러 처리 --%>
@@ -162,19 +175,6 @@
 					<td>${qaDto.qaRead}</td>
 				</tr>
 				
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/642513f64247f20fefe8c632/1gsodbvhg';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 
 				</c:forEach>
             </tbody>
@@ -182,7 +182,7 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
     <div class="row right">
     	<c:if test="${sessionScope.memberRole == '관리자'}">
-    	<button type="submit" class="form-btn negative">삭제</button>
+    	<a class="form-btn neutral me-20 delete-btn">삭제</a>
     	</c:if>
         <a href="write" class="form-btn neutral">글쓰기</a>
     </div>
