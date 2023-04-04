@@ -208,7 +208,7 @@
 				
 			}else{
 				var total= point-usePoint;
-				$("span").text(total + "원");
+				$("span#usePoint").text(total + "원");
 				if(usePoint==0){
 					$("table tr:nth-child(3) td:nth-child(2)").text(usePoint + "원");
 				}else{
@@ -355,9 +355,9 @@
            <div>
                <p><h2>결제정보</h2></p>
                <p class="no-margin ps-10"><label>적립금</label></p>
-                    <input type="text" class="form-input small2 light w-80" name="orderUserPoint" value="0">
+                    <input type="number" class="form-input small2 light w-80" name="orderUserPoint">
                     <button class="form-btn positive small3 apply no-margin" type="button">적용</button>
-               <p class="right no-margin font-h5 pe-10">적용가능한 적립금: <span><fmt:formatNumber value="${point}" pattern="#,##0"/>원</span></p>
+               <p class="right no-margin font-h5 pe-10">적용가능한 적립금: <span id="usePoint"><fmt:formatNumber value="${point}" pattern="#,##0"/>원</span></p>
 
 
                <div class="row order">
@@ -379,7 +379,7 @@
                         <tr>
                           <td>총 결제금액</td>
                           <td>
-                          <fmt:formatNumber value="${totalprice}" pattern="#,##0"/> 원
+                          <fmt:formatNumber value="${totalprice}" pattern="#,##0"/> 원 
                           </td>
                         </tr>
                     </table>

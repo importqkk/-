@@ -77,7 +77,8 @@ public class OrderController {
 					int price = list.get(i).getProductPrice();
 					totalproduct+= (count*price);
 				}
-				totalprice=totalproduct-3000;
+				totalprice=totalproduct+3000;
+				
 				model.addAttribute("cartinfo",cartProductInfoDao.cartItemInfo(memberId));
 				model.addAttribute("totalproduct",totalproduct);
 				model.addAttribute("totalprice",totalprice);
@@ -88,8 +89,10 @@ public class OrderController {
 				int no=productNo.intValue();
 				int Count=productCount.intValue();
 				int price=productInfoDao.orderPrice(no);
+				//상품 가격만
 				int totalproduct=(price*Count);
-				int totalprice=0;
+				//배달비 빼고 
+				int totalprice=totalproduct+3000;
 				
 				model.addAttribute("productInfo",productInfoDao.selectOne(no));
 				model.addAttribute("totalproduct",totalproduct);

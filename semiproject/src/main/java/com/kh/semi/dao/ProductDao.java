@@ -452,6 +452,9 @@ public class ProductDao {
 				
 
 				
+		
+		
+		
 				// 만든거 가져가야함
 				//판매수량 +
 				public boolean increaseSellCount(int productCount,int productno) {
