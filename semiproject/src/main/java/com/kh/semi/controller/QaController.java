@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -116,6 +115,7 @@ public class QaController {
 		}
 	}
 	
+	
 	// PUT 요청 처리
 	@PutMapping("/update")
 	public ResponseEntity<String> updateQa(
@@ -145,40 +145,6 @@ public class QaController {
 	    }
 	}
 	
-	
-//	@GetMapping("/detail")
-//	public String detail2(@RequestParam int qaNo,
-//							Model model, HttpSession session) {
-//		
-//		//사용자가 작성자인지 판정 후 전달(JSP)
-//		QaDto qaDto = qaDao.selectOne(qaNo);
-//		String memberId = (String)session.getAttribute("memberId");
-//		
-//		boolean owner = qaDto.getMemberId() != null
-//				&& qaDto.getMemberId().equals(memberId);
-//		model.addAttribute("owner",owner);
-//		
-//		String memberRole = (String)session.getAttribute("memberRole");
-//		boolean admin = memberRole != null && memberRole.equals("관리자");
-//		model.addAttribute("admin", admin);
-//		
-////		//조회수 증가
-//		if(!owner) {
-//			Set<Integer>memory = (Set<Integer>)session.getAttribute("memory");
-//			if(memory == null) {
-//				memory = new HashSet<>();
-//			}
-//			if(!memory.contains(qaNo)) {
-//				qaDao.updateReadCount(qaNo);
-//				qaDto.setQaRead(qaDto.getQaRead()+1);
-//				memory.add(qaNo);
-//			}
-//			session.setAttribute("memory", memory);
-//		}
-//		model.addAttribute("qaDto",qaDto);
-//		return"/WEB-INF/views/qa/detail.jsp";
-//	}
-//	
 	
 	
 	@GetMapping("/write")
@@ -228,6 +194,15 @@ public class QaController {
 		qaDao.update(qaDto);
 		attr.addAttribute("qaNo",qaDto.getQaNo());
 		return"redirect:detail";
+	}
+	
+	@PostMapping("/deleteAll")
+	public String deleteAll(
+			@RequestParam(value="qaNo") List<Integer> list) {
+		for(int qaNo : list) {
+			qaDao.delete(qaNo);
+		}
+		return "redirect:list";
 	}
 	
 }

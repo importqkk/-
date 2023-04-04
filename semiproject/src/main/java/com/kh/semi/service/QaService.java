@@ -1,5 +1,7 @@
 package com.kh.semi.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,13 +30,6 @@ public class QaService {
 		
 		//게시글 등록
 		qaDao.insert(qaDto);
-		
-		//첨부파일번호 글번호 연결
-//		if(attachmentNo != null) {
-//			for(int no : attachmentNo) {
-//				qaDao.connect(qaNo, no);
-//			}
-//		}
 		return qaNo;
 	}
 	
@@ -57,10 +52,28 @@ public class QaService {
 			qaDto.setQaTitle(qaDto.getQaTitle());
 			qaDto.setQaDepth(qaDto.getQaDepth() + 1);
 			
-			//게시글 등록
+			//답글 등록
 			qaDao.insertQaReple(qaDto);
-			
 			return qaNo;
 		}
+		
+		
+		// 인터셉터
+		 public QaDto getQaDto(int qaNo, HttpSession session) {
+		        QaDto qaDto = qaDao.selectOne(qaNo);
+		        String qaSecret = qaDto.getQaSecret();
+		        String memberId = qaDto.getMemberId();
+		        String sessionMemberId = (String) session.getAttribute("memberId");
+		        String memberRole = (String) session.getAttribute("memberRole");
 
+		        // qaSecret 값에 따라 접근 권한 설정
+		        if (qaSecret != null && qaSecret.equals("Y")) {
+		            boolean isAdmin = memberRole != null && memberRole.equals("관리자");
+		            boolean isOwner = sessionMemberId != null && sessionMemberId.equals(memberId);
+		            if (!isAdmin && !isOwner) {
+		                qaDto = null;
+		            }
+		        }
+		        return qaDto;
+		    }
 }

@@ -9,6 +9,7 @@
 
 <c:if test="${sessionScope.memberRole == '관리자'}">
 <script type="text/javascript">
+
 	function checkAll(){
 		var allCheckbox = document.querySelector(".check-all");
 		var checkboxes = document.querySelectorAll("input[type=checkbox][name=qaNo]");
@@ -27,6 +28,7 @@
 		}
 		allCheckbox.checked = (checkboxes.length == count);
 	}
+	
 	function formCheck() {
 		var checkboxes = document.querySelectorAll(
 							"input[type=checkbox][name=qaNo]:checked");	
@@ -35,39 +37,9 @@
 		return confirm("정말 삭제하시겠습니까?");
 	}
 </script>
- <input type="checkbox" class="check-all" onclick="checkAll()">전체 선택
 </c:if>
 
- <script>
-    $(document).ready(function() {
-        // 전체 선택 체크박스 클릭 시 개별 선택 체크박스 상태 변경
-        $(".check-all").change(function() {
-            $(".center").find("input[type='checkbox']").prop("checked", $(this).prop("checked"));
-        });
-
-        // 개별 선택 체크박스 클릭 시 전체 선택 체크박스 상태 변경
-        $(".center").find("input[type='checkbox']").change(function() {
-            if (!$(this).prop("checked")) {
-                $(".check-all").prop("checked", false);
-            } else {
-                if ($(".center").find("input[type='checkbox']:not(:checked)").length == 0) {
-                    $(".check-all").prop("checked", true);
-                }
-            }
-        });
-
-        // 삭제 버튼 클릭 시 선택된 게시물 삭제
-        $("button.negative").click(function() {
-            var checked = $(".center").find("input[type='checkbox']:checked");
-            if (checked.length == 0) {
-                alert("삭제할 게시물을 선택해주세요.");
-                return false;
-            }
-            return confirm("정말로 삭제하시겠습니까?");
-        });
-    });
-</script>
-
+ 
 
 
 <div class="container-1000">
@@ -113,7 +85,8 @@
 				<c:forEach var="qaDto" items="${noticeList}">
 				<tr style="background-color:#e4e1ff">
 					<c:if test="${sessionScope.memberRole == '관리자'}">
-					<td></td>
+					<td>	<input type="checkbox" name="qaNo" value="${qaDto.qaNo}"
+								onchange="checkUnit();"></td>
 					</c:if>
 					<td class="center">${qaDto.qaNo}</td>
 					<td class="center">${qaDto.qaHead}</td>

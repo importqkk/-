@@ -3,9 +3,12 @@ package com.kh.semi.dto;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import org.springframework.stereotype.Repository;
+
 import lombok.Data;
 
 @Data
+@Repository
 public class QaDto {
 	public int qaNo;
 	public String qaTitle;
