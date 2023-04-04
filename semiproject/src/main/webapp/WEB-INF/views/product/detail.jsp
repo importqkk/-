@@ -232,7 +232,6 @@ fs-18 {
 	var reviewNo = "${reviewLikeDto.reviewNo}";
 </script>
 <script type="text/javascript">
- 	// 페이지 로드--------------
     $(function(){    	
     	// 이미지 높이 조절---------------------------------------------------   	
     	// 초기상태에서 클리되었을때 
@@ -356,43 +355,38 @@ fs-18 {
  			else if(mode == "success") {
  				alert("장바구니에 상품을 담았습니다.")
  			}
-     });        
-});	   	
+ 		    $(".review-content").hide();
+ 		    $(".btn-panel").hide();
+ 		    $(".review-star").hide();
+ 		    $(".edit-btn").click(function(){
+ 		      if (${hasBuyHistory}) {
+ 		        $(".view-panel").hide();
+ 		        $(".review-content").show();
+ 		        $(".btn-panel").show();
+ 		        $(".review-star").show();
+ 		        if (${reviewDto != null}){
+ 		            alert("구매 당 1회의 리뷰만 작성할 수 있습니다");
+ 		            $(".review-content").hide();
+ 		            $(".btn-panel").hide();
+ 		            $(".review-star").hide();
+ 		            $(".view-panel").show();
+ 		        }
+ 		      } else if (${memberId == null}){
+ 		    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
+ 		      } else {
+ 		        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
+ 		      }
+ 		      
+ 		  })
+ 		    $(".cancel-btn").click(function(){
+ 		    $(".view-panel").show();
+ 		    $(".review-content").hide();
+ 		    $(".btn-panel").hide();
+ 		    $(".review-star").hide();
+ 		  })  
+     });
+   	
     </script>
-    // 페이지 로드--------------
-	<script>
-$(function(){
-    $(".review-content").hide();
-    $(".btn-panel").hide();
-    $(".review-star").hide();
-    $(".edit-btn").click(function(){
-      if (${hasBuyHistory}) {
-        $(".view-panel").hide();
-        $(".review-content").show();
-        $(".btn-panel").show();
-        $(".review-star").show();
-        if (${reviewDto != null}){
-            alert("구매 당 1회의 리뷰만 작성할 수 있습니다");
-            $(".review-content").hide();
-            $(".btn-panel").hide();
-            $(".review-star").hide();
-            $(".view-panel").show();
-        }
-      } else if (${memberId == null}){
-    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
-      } else {
-        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
-      }
-      
-  })
-    $(".cancel-btn").click(function(){
-    $(".view-panel").show();
-    $(".review-content").hide();
-    $(".btn-panel").hide();
-    $(".review-star").hide();
-  })    
-});
-</script>
 <body>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display: none;">${productInfoDto.productNo}</h6>
