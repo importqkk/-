@@ -4,16 +4,15 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     <style>
-      h2{
+      h1{
         color:#776BFF;
-        margin-top : 250px;
       }
     </style>
   <form action="/member/login" method="post" autocomplete="off">
 
     <div class="container-400">
-      <div class="row center">
-          <h2>SEMI</h2>
+      <div class="row center pt-100">
+          <h1>SEMI</h1>
         </div>
       <div class="row">
         <input type="text" name="memberId" required class="form-input w-100 medium light" placeholder="아이디" >
@@ -32,10 +31,7 @@
       <div class="row center">
         <a href="findId" class="link">아이디찾기</a>|<a href="findPw" class="link">비밀번호 찾기</a>|<a href="join" class="link">회원가입</a>
       </div>
-  
     </div>
     </form>
-
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -56,5 +56,4 @@ public class RandomComponent {
 		}
 		return buffer.toString();
 	}
-	
 }

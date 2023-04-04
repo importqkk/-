@@ -3,17 +3,15 @@ package com.kh.semi.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import com.kh.semi.dto.MemberDto;
 
 @Repository
 public class MemberDao {
-	  
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -135,5 +133,13 @@ public class MemberDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
+	
+	//훈 만든거
+	//멤버 포인트조회
+		public int point(String memberId) {
+			String sql="select member_point from member where member_id= ? ";
+			Object[] param= {memberId};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+		}
 	
 }
