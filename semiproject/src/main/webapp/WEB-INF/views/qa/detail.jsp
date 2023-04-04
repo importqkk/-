@@ -203,44 +203,34 @@ function fn_reple_write(){
         <div class="row target">
         </div>
         
+        <br>
+        <hr>
+        <br>
+        
         <div class="row targetAnswer">
         </div>
-		<hr>
-        <br>
 
         
         <!-- 댓글 작성란 -->
 	<div class="row repleDiv">
-		<h3>문의 답글 작성</h3>
-		<div class="row">
-		
-					<textarea id="replyContent" name="replyContent" class="form-input large w-100 font-h2"
-							placeholder="댓글 내용을 작성하세요"></textarea>	
-		
-			<c:choose>
-				<c:when test="${sessionScope.memberId != null}">
-					<textarea name="replyContent" class="form-input large w-100 font-h2"
-							placeholder="댓글 내용을 작성하세요"></textarea>	
-				</c:when>
-				<c:otherwise>
-<!-- 					<textarea name="replyContent" class="form-input w-100" -->
-<!-- 							placeholder="로그인 후에 댓글 작성이 가능합니다" disabled></textarea>	 -->
-				</c:otherwise>
-			</c:choose>
-			
-		</div>
-		
-			
-		<div class="row right">
-			<button type="button" onclick="fn_reple_write();" class="form-btn positive reply-insert-btn">댓글 작성</button>
-		</div>
-		
-		<c:if test="${sessionScope.memberId != null}">		
-		<div class="row right">
-			<button type="button" class="form-btn positive reply-insert-btn">댓글 작성</button>
-		</div>
-		</c:if>
-	</div>
+    <h3>문의 답글 작성</h3>
+    <div class="row">
+        <c:choose>
+            <c:when test="${sessionScope.memberRole == '관리자'}">
+                <textarea name="replyContent" class="form-input large w-100 font-h2"
+                            placeholder="댓글 내용을 작성하세요"></textarea>    
+            <div class="row right">
+                <button type="button" onclick="fn_reple_write();" class="form-btn positive reply-insert-btn">댓글 작성</button>
+            </div>
+            </c:when>
+            <c:otherwise>
+                <div class="row c-p100 font-h1">
+                    문의 주신 내용에 곧 답글이 달릴 예정입니다.
+                </div>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</div>
 	
 
     </div>

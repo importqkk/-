@@ -87,7 +87,7 @@
         <a href="write" class="form-btn neutral">글쓰기</a>
     </div>
     <div class="row">
-        <table class="table table-border">
+        <table class="table table-qna">
             <thead>
             
                 <tr>
