@@ -8,11 +8,14 @@
   .container-600 {
     margin-top: 100px;
   }
+  .content {
+  	min-height: 416px;
+  }
 </style>
 <script type="text/javascript">
 	
 </script>
-    <form action="pwVf" method="post" autocomplete="off" class="pw-form">
+    <form action="pwVf" method="post" autocomplete="off" class="pw-form content">
     <div class="container-600">
         <div class="row center">  
             <h2>비밀번호 인증</h2>

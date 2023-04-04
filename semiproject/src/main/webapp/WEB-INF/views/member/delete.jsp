@@ -3,12 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
-
+<style>
+  .content {
+  	min-height: 416px;
+  }
+  .container-600 {
+  	margin-top: 125px;
+  }
+</style>
 <script>
 
 </script>
-<form action="delete" method="post" autocomplete="off">
-<div class="container-500">
+<form action="delete" method="post" autocomplete="off" class="content">
+<div class="container-600">
 	<div class="row center">
 		<h2>비밀번호 확인</h2>
 	</div>
