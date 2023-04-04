@@ -326,7 +326,6 @@ fs-18 {
     	ratings.each(function(idx,rating){
     		var stars = $(rating).find('.fa');
         	stars.each(function(index,star){
-        		console.log(index);
         		if (index+1 <= avg){ // 별이 있는 구간
         			$(star).removeClass('font-white').addClass('font-purple');
         		}
@@ -472,7 +471,7 @@ $(function(){
 					</div>
 					<div class="row center">
 						<button class="w-49 form-btn small neutral cart-btn">장바구니</button>
-						<button class="w-49 form-btn small positive">구매하기</button>
+						<button class="w-49 form-btn small positive buy-btn">구매하기</button>
 					</div>
 				</div>
 			</div>
@@ -561,13 +560,17 @@ $(function(){
 					class="fa-regular fa-star starR" value="3"></i> <i
 					class="fa-regular fa-star starR" value="4"></i> <i
 					class="fa-regular fa-star starR" value="5"></i>
-			</div>
-
-			<!-- 리뷰 작성하기 창 -->
-			<div class="view-panel center mt-20">
-				<button class="form-btn medium neutral edit-btn w-100">리뷰 작성하기</button>
-			</div>
-
+			</div>		
+			<c:choose>
+			    <c:when test="${reviewDto==null}">
+			        <!-- 리뷰 작성하기 창 -->
+					<div class="view-panel center mt-20">
+						<button class="form-btn medium neutral edit-btn w-100">리뷰 작성하기</button>
+					</div>
+			    </c:when>
+			    <c:otherwise>
+			    </c:otherwise>
+			</c:choose>
 			<!-- 리뷰 작성창 -->
 			<div class="row review-content">
 				<textarea name="reviewContent" class="form-input w-100 semi-round"
@@ -586,8 +589,17 @@ $(function(){
 		<div class="row review-list review-initial" id="scrollTargetReview">
 			리뷰 목록 위치
 		</div>
-		<button class="form-btn w-100 positive medium show-review">리뷰 모두 보기</button>
-		<button class="form-btn w-100 neutral medium hide-review">리뷰 접기</button>
+		<c:choose>
+		    <c:when test="${reviewCount > 0}">
+		        <button class="form-btn w-100 positive medium show-review">리뷰 모두 보기</button>
+				<button class="form-btn w-100 neutral medium hide-review">리뷰 접기</button>
+		    </c:when>
+		    <c:otherwise>
+		    <div class="row center">
+		       <h2 >리뷰가 존재하지 않습니다.</h2>
+		     </div> 
+		    </c:otherwise>
+		</c:choose>			
 	</div>
 
 	<div class="row center"></div>
