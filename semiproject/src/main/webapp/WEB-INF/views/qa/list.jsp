@@ -83,7 +83,7 @@
     </c:if>
     <div class="row right">
     	<c:if test="${sessionScope.memberRole == '관리자'}">
-    	<button type="submit" class="form-btn negative">삭제</button>
+    	<a class="form-btn neutral me-20 delete-btn">삭제</a>
     	</c:if>
         <a href="write" class="form-btn neutral">글쓰기</a>
     </div>
@@ -111,21 +111,14 @@
             <tbody class="center">
             	<!-- 공지사항을 출력 -->
 				<c:forEach var="qaDto" items="${noticeList}">
-				<tr style="background-color:#eee">
+				<tr style="background-color:#e4e1ff">
 					<c:if test="${sessionScope.memberRole == '관리자'}">
 					<td></td>
 					</c:if>
 					<td class="center">${qaDto.qaNo}</td>
 					<td class="center">${qaDto.qaHead}</td>
 					<td>
-	  						<c:choose>
-	    						<c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
-	      						<span>${qaDto.qaTitle}</span>
-	    						</c:when>
-	    						<c:otherwise>
-	      						<a href="detail?qaNo=${qaDto.qaNo}" class="link">${qaDto.qaTitle}</a>
-	    						</c:otherwise>
-	  						</c:choose>
+	      				<a href="detail?qaNo=${qaDto.qaNo}" class="link">${qaDto.qaTitle}</a>
 					</td>
 					<td class="left">${qaDto.memberId}</td>
 					
@@ -155,16 +148,26 @@
 						</c:if>
 					</td>
 					
-					<td>
-  						<c:choose>
-    						<c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
-      						<span>${qaDto.qaTitle}</span>
-    						</c:when>
-    						<c:otherwise>
-      						<a href="detail?qaNo=${qaDto.qaNo}" class="link">${qaDto.qaTitle}</a>
-    						</c:otherwise>
-  						</c:choose>
-					</td>
+					<td class="center">
+				    <c:choose>
+				        <c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
+				            <c:choose>
+				                <c:when test="${qaDto.qaDepth == 1}">
+				                	<i class="fa-thin fa-lock-keyhole" style="color: #776bff;"></i>
+				                    <span class="c-p100">ㄴRE : 비밀글 처리 되었습니다.</span>
+				                </c:when>
+				                <c:otherwise>
+				                	<i class="fa-thin fa-lock-keyhole" style="color: #776bff;"></i>
+				                    <span>비밀글 처리 되었습니다.</span>
+				                </c:otherwise>
+				            </c:choose>
+				        </c:when>
+				        <c:otherwise>
+				            <a href="detail?qaNo=${qaDto.qaNo}" class="link c-p100">
+				            ${(qaDto.qaDepth == 1 ? "ㄴRE : " : "")}${qaDto.qaTitle}</a>
+				        </c:otherwise>
+				    </c:choose>
+				</td>
 					<td class="left">${qaDto.memberId}</td>
 					
 					<%-- DTO에 만든 가상의 Getter 메소드를 불러 처리 --%>
@@ -179,7 +182,7 @@
     </div>
     <div class="row right">
     	<c:if test="${sessionScope.memberRole == '관리자'}">
-    	<button type="submit" class="form-btn negative">삭제</button>
+    	<a class="form-btn neutral me-20 delete-btn">삭제</a>
     	</c:if>
         <a href="write" class="form-btn neutral">글쓰기</a>
     </div>

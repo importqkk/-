@@ -230,31 +230,22 @@ function fn_reple_write(){
 	<div class="row repleDiv">
     <h3>문의 답글 작성</h3>
     <div class="row">
-        <c:choose>
-            <c:when test="${sessionScope.memberRole == '관리자'}">
-                <textarea name="replyContent" class="form-input large w-100 font-h2"
-                            placeholder="댓글 내용을 작성하세요"></textarea>    
-            </c:when>
-            <c:otherwise>
-                <div class="row c-p100 font-h1">
-                    문의 주신 내용에 곧 답글이 달릴 예정입니다.
-                </div>
-            </c:otherwise>
-        </c:choose>
-    </div>
-
-    <c:choose>
-        <c:when test="${sessionScope.memberRole == '관리자'}">
-            <div class="row right">
-                <button type="button" onclick="fn_reple_write();" class="form-btn positive reply-insert-btn">댓글 작성</button>
-            </div>
-        </c:when>
-        <c:otherwise>
-            <div class="row right">
-                <button type="button" onclick="fn_reple_write();" class="form-btn positive reply-insert-btn hidden">댓글 작성</button>
-            </div>          
-        </c:otherwise>
-    </c:choose>
+       <c:choose>
+    <c:when test="${sessionScope.memberRole == '관리자'}">
+        <div class="row">
+            <textarea name="replyContent" class="form-input large w-100 font-h2"
+                    placeholder="댓글 내용을 작성하세요"></textarea>    
+        </div>
+        <div class="row right">
+            <button type="button" onclick="fn_reple_write();" class="form-btn positive reply-insert-btn">댓글 작성</button>
+        </div>
+    </c:when>
+    <c:otherwise>
+        <div class="row c-p100 font-h1">
+            문의 주신 내용에 곧 답글이 달릴 예정입니다.
+        </div>
+    </c:otherwise>
+</c:choose>
 </div>
 
     </div>
