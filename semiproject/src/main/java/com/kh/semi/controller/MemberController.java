@@ -1,6 +1,5 @@
 package com.kh.semi.controller;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.kh.semi.component.RandomComponent;
 import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dto.MemberDto;
@@ -140,10 +138,6 @@ public class MemberController {
 			return "/WEB-INF/views/member/findPwResult.jsp";
 		}
 		
-	
-	
-	 
-	 
 //mypage
 	 @GetMapping("/mypage")
 	 public String mypage(HttpSession session, Model model) {

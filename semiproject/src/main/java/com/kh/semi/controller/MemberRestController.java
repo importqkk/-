@@ -32,8 +32,3 @@ public class MemberRestController {
 		return memberDao.selectByEmail(memberEmail) == null ? "Y":"N";
 	}
 }
-
-
-
-
-

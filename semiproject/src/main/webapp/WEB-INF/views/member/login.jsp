@@ -31,10 +31,7 @@
       <div class="row center">
         <a href="findId" class="link">아이디찾기</a>|<a href="findPw" class="link">비밀번호 찾기</a>|<a href="join" class="link">회원가입</a>
       </div>
-  
     </div>
     </form>
-
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
