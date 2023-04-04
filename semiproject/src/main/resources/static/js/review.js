@@ -1,4 +1,26 @@
 //리뷰
+	function checkReview() {
+	  $.ajax({
+	    url: "/rest/review/reviewCountCheck",
+	    type: "POST",
+	    success: function(response) {
+	      if (response) {
+			  console.log(response);
+	        // 리뷰가 존재하는 경우, 메시지를 띄워준다.
+	        alert("이미 작성된 리뷰가 있습니다. 리뷰는 1회만 작성 가능합니다.");
+	      } else {
+	        // 리뷰가 존재하지 않는 경우, 리뷰 작성 페이지로 이동한다.
+	         $(".view-panel").hide();
+		     $(".review-content").show();
+	         $(".btn-panel").show();
+	         $(".review-star").show();
+	      }
+	    },
+	    error: function(error) {
+	      console.log(error);
+	    }
+	  });
+	}
 $(function(){
 	var params = new URLSearchParams(location.search);
 	var productNo = params.get("productNo");
@@ -14,6 +36,7 @@ $(function(){
     });
 	
 	$(".review-insert-btn").click(function(){
+		checkReview();
 		
 		var content = $("[name=reviewContent]").val();
 		var starRating = $(".review-star .starR.on").last().attr("value");
@@ -50,6 +73,7 @@ $(function(){
 			    $(".btn-panel").hide();
 			    $(".review-star").hide();
 			    $(".view-panel").show();
+//			     location.reload();
 			},
 			error:function(){
 				alert("등록 오류");

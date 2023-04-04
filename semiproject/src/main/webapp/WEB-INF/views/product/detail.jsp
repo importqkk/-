@@ -409,6 +409,7 @@ fs-18 {
 	    $(".review-star").hide();
 	  })    
 	});
+
 </script>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display: none;">${productInfoDto.productNo}</h6>
