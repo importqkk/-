@@ -20,14 +20,6 @@
       	/*
       		리뷰 별점
       	*/
-
-        .reviewStar .starR{
-            text-decoration: none;
-            color: #776BFF;
-        }
-        .reviewStar .starR.on{
-            color: #776BFF;
-        }
         
         .review-star .starR{
             text-decoration: none;

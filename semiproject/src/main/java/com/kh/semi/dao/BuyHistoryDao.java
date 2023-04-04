@@ -29,10 +29,9 @@ public class BuyHistoryDao {
 		
 	};
 	
-	//수정함
-	public BuyHistoryDto selectBuy(String memberId, int productNo) {
-		String sql = "select * from buy_history where member_id = ? and product_no = ?";
-		Object[] param = {memberId, productNo};
+	public BuyHistoryDto selectBuy(String memberId) {
+		String sql = "select * from buy_history where member_id = ?";
+		Object[] param = {memberId};
 		List<BuyHistoryDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
 	}

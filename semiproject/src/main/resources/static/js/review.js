@@ -1,29 +1,29 @@
-////리뷰
-//$(function(){
-//    $('.review-star .starR').click(function(){
-//        $(this).parent().children('.starR').removeClass('on').removeClass('fa-solid');      
-//        $(this).addClass('fa-solid').addClass('on').prevAll('.starR').addClass('on').addClass('fa-solid');
-//        var starRating = $(this).attr('value');
-//        console.log(starRating); // 선택된 별점의 value 값 출력
-//    });
-//});
-//$(function(){
-//      $(".review-content").hide();
-//      $(".btn-panel").hide();
-//      $(".review-star").hide();
-//      $(".edit-btn").click(function(){
-//      $(".view-panel").hide();
-//      $(".review-content").show();
-//      $(".btn-panel").show();
-//      $(".review-star").show();
-//    })
-//      $(".cancel-btn").click(function(){
-//      $(".view-panel").show();
-//      $(".review-content").hide();
-//      $(".btn-panel").hide();
-//      $(".review-star").hide();
-//    })
-//});
+//리뷰
+$(function(){
+    $('.review-star .starR').click(function(){
+        $(this).parent().children('.starR').removeClass('on').removeClass('fa-solid');      
+        $(this).addClass('fa-solid').addClass('on').prevAll('.starR').addClass('on').addClass('fa-solid');
+        var starRating = $(this).attr('value');
+        console.log(starRating); // 선택된 별점의 value 값 출력
+    });
+});
+$(function(){
+      $(".review-content").hide();
+      $(".btn-panel").hide();
+      $(".review-star").hide();
+      $(".edit-btn").click(function(){
+      $(".view-panel").hide();
+      $(".review-content").show();
+      $(".btn-panel").show();
+      $(".review-star").show();
+    })
+      $(".cancel-btn").click(function(){
+      $(".view-panel").show();
+      $(".review-content").hide();
+      $(".btn-panel").hide();
+      $(".review-star").hide();
+    })
+});
 
 
 $(function(){
@@ -32,23 +32,20 @@ $(function(){
 	
 	//리뷰 목록 불러오기
 	loadList();
-
-  	$('.review-star .starR').click(function(){
-        $(this).parent().children('.starR').removeClass('on').removeClass('fa-solid');      
-        $(this).addClass('fa-solid').addClass('on').prevAll('.starR').addClass('on').addClass('fa-solid');
-        var starRating = $(this).attr('value');
-        console.log(starRating); // 선택된 별점의 value 값 출력
-    });
+//	checkReview();
 	
 	$(".review-insert-btn").click(function(){
 		
 		var content = $("[name=reviewContent]").val();
 		var starRating = $(".review-star .starR.on").last().attr("value");
 		
-		//content를 입력하지 않거나 starRating이 null일 시 return
-		if(content.trim().length == 0 || !starRating) return;
+//		var rating = $("[name=reviewStar]").val();
+//		console.log(content);
+//		console.log(productNo);
+//		console.log(starRating);
+//		console.log(memberId);
 		
-		//글자수 1000자 미만까지 허용
+		if(content.trim().length == 0 || !starRating) return;
 		if(content.trim().length > 1000){
 			alert("글자수 제한 오류");
 		}
@@ -69,9 +66,11 @@ $(function(){
 			    $(".btn-panel").hide();
 			    $(".review-star").hide();
 			    $(".view-panel").show();
+//			    checkReview();
+//			    location.reload();
 			},
 			error:function(){
-				alert("등록 오류");
+				alert("등록오류");
 				$(".review-content").hide();
 			    $(".btn-panel").hide();
 			    $(".review-star").hide();
@@ -88,6 +87,8 @@ $(function(){
 			url:"/rest/review/"+productNo,
 			method:"get",
 			success:function(response){
+//				console.log(response);
+				
 				
 				for(var i=0; i < response.length; i++){ 
 					
@@ -100,7 +101,6 @@ $(function(){
 					$(html).find(".reviewContent").text(response[i].reviewContent);
 					$(html).find(".heart-count").text(response[i].reviewLike);
 					
-					//session에서 불러온 memberId와 불러온 review의 memberId가 같은 경우 수정/삭제 버튼 나타나도록 함
 					if(memberId == response[i].memberId){
 						$(html).find(".edit-text")
 								.attr("data-review-no", response[i].reviewNo)
@@ -129,8 +129,9 @@ $(function(){
 												.attr("data-review-no", response[i].reviewNo)
 												.click(likeReview);
 					
-					//reviewNo를 불러와 check한 후 화면에 현재의 좋아요 상태 찍음
 					var reviewNo = response[i].reviewNo;
+//					console.log(reviewNo);
+					
 					
 						(function(reviewNo) {
 							    $.ajax({
@@ -140,9 +141,11 @@ $(function(){
 							        reviewNo: reviewNo
 							      },
 							      success: function(response) {
-									    //response가 true인 경우 count == 1이므로 fa-regular class는 지우고 fa-solid class 추가
-									    //false인 경우에는 likeButton 유지
+//									    console.log(response);
+//										console.log(reviewNo); //83만 계속나옴 
+										
 										if (response) {
+		//									console.log(reviewNo);
 								            // reviewNo와 data-review-no가 일치하는 하트 버튼의 class를 변경
 								          $(`.review-list [data-review-no=${reviewNo}]`).removeClass("fa-regular").addClass("fa-solid");
 								        }
@@ -151,9 +154,12 @@ $(function(){
 							        alert("좋아요 체크 기능 오류");
 							      }
 							    });
-							  })(response[i].reviewNo); // 즉시 실행 함수로 클로저 생성 -> 생성하지 않으면 첫 번째 리뷰의 리뷰번호만 반복됨
+							  })(response[i].reviewNo); // 즉시 실행 함수로 클로저 생성
 												
 					$(html).find(".reviewLike").prepend(likeButton);
+					
+//					$(html).find(".reviewLike span").text("");
+						
 
 					$(".review-list").append(html);
 										
@@ -170,6 +176,7 @@ $(function(){
 		if(choice == false) return;
 		
 		var reviewNo = $(this).data("review-no");
+//		console.log(reviewNo);
 		
 		$.ajax({
 			url:"/rest/review/"+reviewNo,
@@ -216,11 +223,14 @@ function editReview(){
         	$(this).addClass('fa-solid').addClass('on').prevAll('.starR').addClass('on').addClass('fa-solid'); 
     	});
     	
-//		$editPanel.show();
+		$editPanel.show();
 		
 		$editPanel.find(".review-edit-btn").click(function(){
 			var reviewContent = $editPanel.find("[name=reviewContent]").val();
 			var reviewStar = $editPanel.find('.starR.on').last().attr("value");
+//			console.log(reviewStar);
+//			console.log(reviewNo);
+//			console.log(reviewContent);
 			$.ajax({
 				url:"/rest/review/",
 				method:"patch",
@@ -258,6 +268,7 @@ function likeReview(){
             reviewNo:reviewNo
         },
         success:function(response){
+//			console.log($likeButton);
             var $heartCount = $likeButton.siblings(".heart-count");
             var currentCount = parseInt($heartCount.text()); // 현재 좋아요 수 가져오기
 			

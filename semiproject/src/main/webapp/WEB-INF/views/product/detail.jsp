@@ -8,8 +8,6 @@
 	var reviewNo = "${reviewLikeDto.reviewNo}";
 </script>
 <script src="/static/js/review.js"></script>
-
-<!-- 리뷰 목록 템플릿 -->
 <script type="text/template" id="review-template">
 	<div class="review-item">
 		<div class="memberId"></div>
@@ -32,7 +30,6 @@
 	</div>
 </script>
 
-<!-- 리뷰 수정창 템플릿 -->
 <script type="text/template" id="review-edit-template">
 	<div class="edit-panel">
 		<div class="reviewStar"></div>
@@ -82,6 +79,7 @@ $(function(){
         $(".review-star").hide();
         $(".view-panel").show();
       }
+      
   })
     $(".cancel-btn").click(function(){
     $(".view-panel").show();

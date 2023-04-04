@@ -19,6 +19,7 @@ import com.kh.semi.dao.ReviewDao;
 import com.kh.semi.dao.ReviewLikeDao;
 import com.kh.semi.dto.ReviewDto;
 import com.kh.semi.dto.ReviewLikeDto;
+import com.kh.semi.service.ReviewService;
 import com.kh.semi.vo.ReviewLikeVO;
 
 @RestController
@@ -31,13 +32,14 @@ public class ReviewRestController {
 	@Autowired
 	private ReviewDao reviewDao;
 	
-	//리뷰 목록
+	@Autowired
+	private ReviewService reviewService;
+	
 	@GetMapping("/{productNo}")
 	public List<ReviewDto> list(@PathVariable int productNo){
 		return reviewDao.selectList(productNo);
 	}
 	
-	//리뷰 등록
 	@PostMapping("/")
 	public void write(HttpSession session,
 					  @ModelAttribute ReviewDto reviewDto,
@@ -46,10 +48,14 @@ public class ReviewRestController {
 		String memberId = (String) session.getAttribute("memberId");
 		reviewDto.setMemberId(memberId);
 		
-		reviewDao.insert(reviewDto);
+		
+		reviewService.write(reviewDto, imgNo);
+		
+//		reviewDao.insert(reviewDto);
+		
+		
 	}
 	
-	//리뷰 삭제
 	@DeleteMapping("/{reviewNo}")
 	public void delete(@PathVariable int reviewNo) {
 		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
@@ -57,13 +63,12 @@ public class ReviewRestController {
 		reviewDao.delete(reviewNo);
 	}
 	
-	//리뷰 수정
 	@PatchMapping("/")
 	public void edit(@ModelAttribute ReviewDto reviewDto) {
 		reviewDao.update(reviewDto);
 	}
 
-	//리뷰 좋아요 추가, 삭제
+	
 	@PostMapping("/like")
 	public ReviewLikeVO like(HttpSession session,
 							@ModelAttribute ReviewLikeDto reviewLikeDto) {
@@ -91,7 +96,6 @@ public class ReviewRestController {
 				.build();
 	}
 	
-	//리뷰 좋아요 수 체크
 	@PostMapping("/check")
 	public boolean check(HttpSession session,
 						@ModelAttribute ReviewLikeDto reviewLikeDto) {
@@ -100,5 +104,6 @@ public class ReviewRestController {
 		
 		return reviewLikeDao.check(reviewLikeDto);
 	}
+	
 
 }
