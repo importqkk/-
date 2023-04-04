@@ -34,7 +34,7 @@ public class ProductController {
 		return "/WEB-INF/views/product/list.jsp";
 	}
 	
-	
+	//수정함
 	@GetMapping("/detail")
 	public String detail(@RequestParam int productNo,
 							Model model,
@@ -44,12 +44,14 @@ public class ProductController {
 		ProductDto productDto = productDao.selectOne(productNo);
 		model.addAttribute("productDto",productDto);
 		
+		
 		String memberId = (String) session.getAttribute("memberId");
-		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId);
+		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId, productNo);
+
 		ReviewDto reviewDto = reviewDao.selectOne(memberId, productNo);
 		model.addAttribute("reviewDto",reviewDto);
-
-		boolean hasBuyHistory = buyHistoryDto != null && buyHistoryDto.getProductNo() == productNo;
+		
+		boolean hasBuyHistory = buyHistoryDto != null;
 		model.addAttribute("hasBuyHistory", hasBuyHistory);
 
 		return "/WEB-INF/views/product/detail.jsp";
