@@ -215,10 +215,12 @@
                         </div>
                     </div>
                     <div class="center w-50 pb-10">
+                    	<form action="/product/search/">
                         <div class="search-box">
-                            <input class="search-input w-100" placeholder="어떤 영양제가 궁금하세요?">
+                            <input class="search-input w-100" name="keyword" placeholder="어떤 영양제가 궁금하세요?">
                             <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
+                        </form>
                     </div>
                     <div class="right w-25 flex pb-10">
                     	<!-- 로그인 o, 관리자 -->
@@ -299,7 +301,7 @@
                 <div class="flex center">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/all">
                                 <i class="fa fa-solid fa-border-all"></i>
                                 <h3 class="category-text">전체</h3>
                             </a>
@@ -307,7 +309,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag1">
                                 <i class="fa fa-light fa-face-smile"></i>
                                 <h3 class="category-text">피부</h3>
                             </a>
@@ -315,7 +317,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag2">
                                 <i class="fa fa-light fa-weight-scale"></i>
                                 <h3 class="category-text">다이이트</h3>
                             </a>
@@ -325,7 +327,7 @@
                 <div class="flex center">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag3">
                                 <i class="fa fa-light fa-venus"></i>
                                 <h3 class="category-text">여성</h3>	
                             </a>
@@ -333,7 +335,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag4">
                                 <i class="fa fa-sharp fa-light fa-bolt-lightning"></i>
                                 <h3 class="category-text">활력</h3>
                             </a>
@@ -341,7 +343,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag5">
                                 <i class="fa fa-thin fa-mars"></i>
                                 <h3 class="category-text">남성</h3>
                             </a>
@@ -351,7 +353,7 @@
                 <div class="flex center mb-20">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag6">
                                 <i class="fa fa-light fa-eye"></i>
                                 <h3 class="category-text">눈</h3>
                             </a>
@@ -359,7 +361,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag7">
                                 <i class="fa fa-light fa-tooth"></i>
                                 <h3 class="category-text">치아</h3>
                             </a>
@@ -367,7 +369,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag8">
                                 <i class="fa fa-light fa-bone"></i>
                                 <h3 class="category-text">관절/뼈</h3>
                             </a>
