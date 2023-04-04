@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<%!    int count = 0 ; %>
+<c:set var="listSize" value="${fn:length(itemInfo)}" />
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- 상품 수량 수정 비동기처리 스크립트 -->
@@ -22,6 +26,16 @@
 </style>
 <script type="text/javascript">
 
+$(function() {
+    $(".order-btn").click(function(event) {
+    	var stockCount = $("input[name='stockCount']").val();
+       	if(stockCount >0){
+        	alert("품절된 상품이 존재합니다. 삭제 후 다시 이용해주세요.");
+       	} else{
+        	$(this).attr("href", "../order/buy");       		
+       	}
+    });
+});
 </script>
 
     <div class="container-1000">
@@ -29,6 +43,7 @@
             <h1 class="me-15">장바구니</h1>
             <h1 class="c-p100">${cartCnt}</h1> <%-- 상품 총 수량(상품별 개수X, 상품 종류 개수O) --%>
         </div>
+        
 <!-- ------------------------------------ 반복문 돌릴 부분 start ------------------------------------ -->
         <c:forEach var="cartProductInfoDto" items="${itemInfo}">
 	        <div class="row-large flex cart-item">
@@ -619,6 +634,12 @@
 	                </a>
 	            </div>
 	        </div>
+	        <!--  -->
+	        <c:if test="${cartProductInfoDto.productStock == 0}">
+	        	<c:set var="count" value="${count + 1}" />
+	        	<input name="stockCount" type="hidden" value="${count}">
+	        </c:if>
+	        <!--  -->
 	    </c:forEach>
 <!-- ------------------------------------ 반복문 돌릴 부분 end ------------------------------------ -->
 		<c:if test="${isEmpty == 0}">
@@ -675,7 +696,8 @@
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
 	        <div class="row">
 	            <div class="row">
-	                <a class="form-btn medium positive w-100 order-btn" href="../order/buy">주문하기</a>
+	                <a class="form-btn medium positive w-100 order-btn">주문하기</a>
+
 	            </div>
 	        </div>
 		</c:if>

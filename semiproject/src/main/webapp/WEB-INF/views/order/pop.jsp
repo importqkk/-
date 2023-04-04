@@ -142,7 +142,7 @@
                   </div>
                  
                   <div>
-                      <button class="form-btn small2 positive select-btn" data-index="${loop.index}">선택</button>
+                      <button class="form-btn small2 positive select-btn" type="button" data-index="${loop.index}">선택</button>
                       <button class="form-btn small2 positive delete-btn" data-index="${loop.index}">삭제</button>
                   </div>
               </div>

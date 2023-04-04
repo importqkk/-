@@ -199,25 +199,49 @@
  /*------------------------------------------------------------------------------------------------------------------------------*/
     //포인트적용
     $(function(){
-		$(".apply").click(function(){
-			  var usePoint = $("input[name='orderUserPoint']").val();
-			  var point=${point};
-			  
-			if(usePoint > point){
-				alert("보유 적립금 이상으로 입력할 수 없습니다.")
-				
-			}else{
-				var total= point-usePoint;
-				$("span#usePoint").text(total + "원");
-				if(usePoint==0){
-					$("table tr:nth-child(3) td:nth-child(2)").text(usePoint + "원");
-				}else{
-					$("table tr:nth-child(3) td:nth-child(2)").text("-"+ usePoint + "원");
-					
-				}
-			}
-		});
+    $(".apply").click(function(){
+    	//총 상품가격
+    	var totalProduct = ${totalproduct};
+        // 사용하는 포인트
+        var usePoint = $("input[name='orderUserPoint']").val();
+        // 사용가능 포인트
+        var point = ${point};
+        var fee=3000;
+        // 사용포인트가 사용가능 포인트보다 많으면
+        if(usePoint > point){
+            alert("보유 적립금 이상으로 입력할 수 없습니다.");
+			
+        }else if(usePoint < 0){
+        	alert("0원 이하로 입력할 수 없습니다.");
+        }else {
+        	if(totalProduct==0)
+            // 제품금액
+            
+            console.log(totalProduct);
+            // 사용포인트
+            var totalPoint = usePoint;
+            console.log(totalPoint)
+            // 적립금 사용 후 남은 사용가능 적립금
+            var remainingPoint = point - totalPoint;
+            console.log(remainingPoint);
+            // 총 금액
+            var totalPrice = totalProduct - totalPoint + 3000;
+            console.log(totalPrice);
+
+            $("span#usePoint").text(remainingPoint.toLocaleString() + "원");
+            $("span#remainingPoint").text(remainingPoint.toLocaleString() + "원");
+            if(totalPoint <= 0){
+                $("table tr:nth-child(3) td:nth-child(2)").text(totalPoint.toLocaleString() + "원");
+
+            }else{
+                $("table tr:nth-child(3) td:nth-child(2)").text("-"+ totalPoint.toLocaleString() + "원");
+
+            }
+            $("table tr:last-child td:last-child").text(totalPrice.toLocaleString() + "원");
+        }
     });
+});
+
 /*------------------------------------------------------------------------------------------------------------------------------*/
     </script>
     
