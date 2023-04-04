@@ -144,7 +144,7 @@
 						${qaDto.qaHead}
 					</td>
 					
-					<td class="center">
+					<td class="left">
 					  <c:choose>
 					  
 					    <c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
@@ -177,7 +177,7 @@
 					    
 					  </c:choose>
 					</td>
-					<td class="left">${qaDto.memberId}</td>
+					<td class="center">${qaDto.memberId}</td>
 					
 					<%-- DTO에 만든 가상의 Getter 메소드를 불러 처리 --%>
 					<td>${qaDto.qaDate}</td>
