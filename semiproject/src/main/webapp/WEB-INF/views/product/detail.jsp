@@ -241,7 +241,6 @@ fs-18 {
 	var reviewNo = "${reviewLikeDto.reviewNo}";
 </script>
 <script type="text/javascript">
- 	// 페이지 로드--------------
     $(function(){    	
     	// 이미지 높이 조절---------------------------------------------------   	
     	// 초기상태에서 클리되었을때 
@@ -365,10 +364,13 @@ fs-18 {
  			else if(mode == "success") {
  				alert("장바구니에 상품을 담았습니다.")
  			}
+
 });           	
  // 페이지 로드--------------
+
     </script>
-    
+
+
 	<script>
 $(function(){
     $(".review-content").hide();
