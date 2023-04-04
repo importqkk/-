@@ -863,4 +863,8 @@ input[type="checkbox"] {
 .qty-stepper-small > .plus:hover:not(.disabled) {
     background-color: #f8f8ff;
     cursor: pointer;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/origin/main

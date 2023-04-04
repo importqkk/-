@@ -1,0 +1,44 @@
+create or replace view cart_product_info as
+   select
+      C.member_id,
+      P.product_no,
+      P.product_brand,
+      P.product_name,
+      P.product_price,
+      P.product_stock,
+      C.product_count,
+      IMG.img_no
+   from
+      cart C left outer join product P
+         on C.product_no = P.product_no
+      left outer join product_img IMG 
+         on P.product_no = IMG.product_no;
+select * from cart_product_info;
+
+
+create or replace view product_info as
+   select
+      P.product_no,
+      P.product_brand,
+      P.product_name,
+      P.product_price,
+        P.product_sell_count,
+        P.product_join,
+        R.avg,
+        R.cnt,
+        IMG.img_no,
+        T.tag_no
+   from
+      product P left outer join review_star R 
+         on P.product_no = R.product_no
+        left outer join product_img IMG
+            on P.product_no = IMG.product_no
+        left outer join product_tag T
+            on P.product_no = T.product_no
+     order by P.product_no;
+commit;
+
+select * from product_info;
+
+select * from product_info order by product_price desc, product_no desc;
+select * from product_info order by product_price asc, product_no desc;
