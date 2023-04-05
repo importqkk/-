@@ -14,6 +14,7 @@
 		font-weight: bold;
 	}
 </style>
+
 <%-- 계정주인과 글쓴이 비교 필요--%>
 <%--
 <script> 	
@@ -248,8 +249,9 @@ function fn_reple_write(){
     <script type="text/template" id="edit-template">
         <div class="edit-panel right">
 			<div class="contents left">
-			<div class="left font-h2 float me-40 center">${qaDto.qaHead}</div>
-			<div class="left font-h1 title center">${qaDto.qaTitle}</div>
+			<div class="left font-h2 float center me-50 pt-5">${qaDto.qaHead}</div>
+			<div class="left font-h1 title mt-50 mb-30 center">${qaDto.qaTitle}</div>
+			<hr>
             <textarea class="form-input large w-100 font-h2"></textarea></div>
             <button type="submit" class="form-btn positive save-btn">저장</button>
             <button class="form-btn neutral cancel-btn ms-20">취소</button>
@@ -260,16 +262,16 @@ function fn_reple_write(){
 	<script type="text/template" id="view-template">
   	<div class="view-panel right">
     <div class="left font-h2 float head center me-50 pt-5"></div>
-    <div class="left font-h1 title mt-60 center"></div>
+     <div class="left font-h1 title mt-50 mb-30 center "></div>
     <hr>
     <div class="contents left font-h2 mt-90 mb-90"></div>
 
-      <c:if test="${qaDto.memberId == sessionScope.memberId}">
+      <c:if test="${qaDto.memberId==sessionScope.memberId}">
         <a class="form-btn neutral edit-btn">수정</a>
         <a class="form-btn neutral ms-20 delete-btn">삭제</a>
       </c:if>
 
-      <c:if test="${ sessionScope.memberRole == '관리자'}">
+      <c:if test="${sessionScope.memberRole=='관리자'}">
         <a class="form-btn neutral ms-20 delete-btn">삭제</a>
 		</c:if>
 
@@ -280,12 +282,11 @@ function fn_reple_write(){
 
      <!-- 답글편집용 템플릿 -->
     <script type="text/template" id="edit-template-answer">
-		<hr>
-		<br>
         <div class="reply-edit-panel right">
 			<div class="contents left">
-			<div class="left font-h2 float me-40 center"></div>
-			<div class="left font-h1 title center"></div>
+			<div class="left font-h2 float center me-50 pt-5">${qaDto.qaHead}</div>
+			<div class="left font-h1 title mt-50 mb-30 center">${qaDto.qaTitle}</div>
+			<hr>
             <textarea class="form-input large w-100 font-h2 textarea-reply"></textarea></div>
             <button type="submit" class="form-btn positive reply-save-btn">저장</button>
             <button class="form-btn neutral reply-cancel-btn ms-20">취소</button>
@@ -295,7 +296,8 @@ function fn_reple_write(){
         <!-- 답글표시용 템플릿 -->
     <script type="text/template" id="view-template-answer">
         <div class="reply-view-panel right">
-			<div class="left font-h1 title"></div>
+			<div class="left font-h1 title mt-50 mb-30"></div>
+			<hr>
 			<div class="contents left font-h2  mt-90 mb-90"></div>
   			<c:choose>
       <c:when test="${sessionScope.memberRole == '관리자'}">
