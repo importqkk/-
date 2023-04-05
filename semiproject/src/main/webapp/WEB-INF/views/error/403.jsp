@@ -7,16 +7,16 @@
         place-items: center;
         min-height: 80vh;
     }
-    .ti-error-404 {
-        color: #776bff;
-        font-size: 150px;
-    }
+    .ti-exclamation-circle {
+	    color: #776bff;
+	    font-size: 150px;
+	}
 </style>    
     
 <div class="container-1000 container">
    <div class="w-100">
        <div class="center">
-           <i class="ti ti-error-404"></i>
+           <i class="ti ti-exclamation-circle"></i>
        </div>
        <div class="center mb-50">
            <h2>권한이 없습니다.</h2>

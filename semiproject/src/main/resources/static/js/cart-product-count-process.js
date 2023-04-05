@@ -9,9 +9,6 @@ $(function() {
     	// 상품 재고
     	var productStock = parseInt($(this).parent().prev().prev().find(".productStock").text());
     	
-    	console.log("productCount = " + productCount);
-		console.log("productStock = " + productStock);
-    	
 		if(productCount <= 0) {
 			alert ("최소 1개, 최대 10개까지 구매할 수 있습니다.")
 		}
