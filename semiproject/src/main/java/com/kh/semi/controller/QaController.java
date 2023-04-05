@@ -76,12 +76,12 @@ public class QaController {
 	}
 	
 	
-	@GetMapping("/detail")
+	/*@GetMapping("/detail")
 	public String detail(Model model, @RequestParam int qaNo) {
 		boolean cnt = qaDao.updateReadCount(qaNo);
 		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
 		return "/WEB-INF/views/qa/detail.jsp";
-	}
+	}*/
 	
 
 	@PostMapping("/detail")
