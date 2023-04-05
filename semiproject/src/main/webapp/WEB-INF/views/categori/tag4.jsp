@@ -112,7 +112,10 @@
 			min-height: 80px;
 			max-height: 80px;
 		}
-		
+		.item-img{
+			min-height: 200px;
+			min-width: 200px;
+		}
 </style>
 <script type="text/javascript">
 	// "none"
