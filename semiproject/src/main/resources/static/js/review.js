@@ -260,14 +260,19 @@ function likeReview(){
             var $heartCount = $likeButton.siblings(".heart-count");
             var currentCount = parseInt($heartCount.text()); // 현재 좋아요 수 가져오기
 			
-            if(response.result){
-				$heartCount.text(currentCount + 1); // 원래의 좋아요 수에 +1 더하기
-				$likeButton.removeClass("fa-regular fa-solid").addClass("fa-solid");
-            }
-            else{
-				$heartCount.text(currentCount - 1); // 원래의 좋아요 수에 -1 빼기
-				$likeButton.removeClass("fa-regular fa-solid").addClass("fa-regular");
-            }
+			if(memberId){
+	            if(response.result){
+					$heartCount.text(currentCount + 1); // 원래의 좋아요 수에 +1 더하기
+					$likeButton.removeClass("fa-regular fa-solid").addClass("fa-solid");
+	            }
+	            else{
+					$heartCount.text(currentCount - 1); // 원래의 좋아요 수에 -1 빼기
+					$likeButton.removeClass("fa-regular fa-solid").addClass("fa-regular");
+	            }
+	           }
+	           else{
+				   alert("로그인 후 이용해주세요.");
+			   }
         },
         error:function(){
 			alert("좋아요 오류");

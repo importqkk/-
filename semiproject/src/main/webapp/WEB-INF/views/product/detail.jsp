@@ -206,10 +206,8 @@ fs-18 {
 			</div>
 		</div>
 		<div class="reviewContent w-100"></div>
-		<c:if test="${memberId != null}">
 		<div class="reviewLike">
 			<span class="heart-count">${reviewDto.reviewLike}</span>
-		</c:if>	
 	</div>
 </script>
 
