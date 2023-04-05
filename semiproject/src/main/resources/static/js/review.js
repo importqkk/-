@@ -69,73 +69,82 @@ $(function(){
 			method:"get",
 			success:function(response){
 				
-				for(var i=0; i < response.length; i++){ 
-					
-					
-					var template  = $("#review-template").html();
-					var html = $.parseHTML(template);
-					
-					$(html).find(".memberId").text(response[i].memberId);
-					$(html).find(".reviewTime").text(response[i].reviewTime);
-					$(html).find(".reviewContent").text(response[i].reviewContent);
-					$(html).find(".heart-count").text(response[i].reviewLike);
-					
-					//session에서 불러온 memberId와 불러온 review의 memberId가 같은 경우 수정/삭제 버튼 나타나도록 함
-					if(memberId == response[i].memberId){
-						$(html).find(".edit-text")
-								.attr("data-review-no", response[i].reviewNo)
-							    .attr("data-review-content", response[i].reviewContent)
-							    .attr("data-review-star", response[i].reviewStar)
-							    .click(editReview);
-						$(html).find(".delete-text")
-								.attr("data-review-no", response[i].reviewNo)
-							    .click(deleteReview);
-							
-					}
-					else{
-						$(html).find(".changeText").hide();
-					}
-			
-					for (var j = 0; j < response[i].reviewStar; j++) {
-					    $(html).find(".reviewStar").append('<i class="fa-solid fa-star starR on"></i>');
-					}
-					for (var j = response[i].reviewStar; j < 5; j++) {
-					    $(html).find(".reviewStar").append('<i class="fa-regular fa-star starR"></i>');
-					}
-					
-					var likeButton = $("<i>").addClass("fa-heart fa-regular")
-												.attr("data-review-no", response[i].reviewNo)
-												.click(likeReview);
-												
-					
-					
-					//reviewNo를 불러와 check한 후 화면에 현재의 좋아요 상태 찍음
-					var reviewNo = response[i].reviewNo;
-					
-						(function(reviewNo) {
-							    $.ajax({
-							      url: "/rest/review/check",
-							      method: "post",
-							      data: {
-							        reviewNo: reviewNo
-							      },
-							      success: function(response) {
-									    //response가 true인 경우 count == 1이므로 fa-regular class는 지우고 fa-solid class 추가
-									    //false인 경우에는 likeButton 유지
-										if (response) {
-								            // reviewNo와 data-review-no가 일치하는 하트 버튼의 class를 변경
-								          $(`.review-list [data-review-no=${reviewNo}]`).removeClass("fa-regular").addClass("fa-solid");
-								        }
-							      },
-							      error: function() {
-							        alert("좋아요 체크 기능 오류");
-							      }
-							    });
-							  })(response[i].reviewNo); // 즉시 실행 함수로 클로저 생성 -> 생성하지 않으면 첫 번째 리뷰의 리뷰번호만 반복됨
-					$(html).find(".reviewLike").prepend(likeButton);
-					$(".review-list").append(html);
-										
+				if(response.length == 0){
+					$(".review-list").text("리뷰가 존재하지 않습니다.").css("text-align", "center");
 				}
+				else{
+					for(var i=0; i < response.length; i++){ 
+						
+						
+						var template  = $("#review-template").html();
+						var html = $.parseHTML(template);
+						
+						$(html).find(".memberId").text(response[i].memberId);
+						$(html).find(".reviewTime").text(response[i].reviewTime);
+						$(html).find(".reviewContent").text(response[i].reviewContent);
+						$(html).find(".heart-count").text(response[i].reviewLike);
+						
+						//session에서 불러온 memberId와 불러온 review의 memberId가 같은 경우 수정/삭제 버튼 나타나도록 함
+						if(memberId == response[i].memberId){
+							$(html).find(".edit-text")
+									.attr("data-review-no", response[i].reviewNo)
+								    .attr("data-review-content", response[i].reviewContent)
+								    .attr("data-review-star", response[i].reviewStar)
+								    .click(editReview);
+							$(html).find(".delete-text")
+									.attr("data-review-no", response[i].reviewNo)
+								    .click(deleteReview);
+								
+						}
+						else{
+							$(html).find(".changeText").hide();
+						}
+				
+							
+	//					$(html).find(".reviewStar").empty(); // 이전에 채워진 별표 초기화
+						for (var j = 0; j < response[i].reviewStar; j++) {
+						    $(html).find(".reviewStar").append('<i class="fa-solid fa-star starR on"></i>');
+						}
+						for (var j = response[i].reviewStar; j < 5; j++) {
+						    $(html).find(".reviewStar").append('<i class="fa-regular fa-star starR"></i>');
+						}
+						
+						var likeButton = $("<i>").addClass("fa-heart fa-regular")
+													.attr("data-review-no", response[i].reviewNo)
+													.click(likeReview);
+						
+						//reviewNo를 불러와 check한 후 화면에 현재의 좋아요 상태 찍음
+						var reviewNo = response[i].reviewNo;
+						
+							(function(reviewNo) {
+								    $.ajax({
+								      url: "/rest/review/check",
+								      method: "post",
+								      data: {
+								        reviewNo: reviewNo
+								      },
+								      success: function(response) {
+										    //response가 true인 경우 count == 1이므로 fa-regular class는 지우고 fa-solid class 추가
+										    //false인 경우에는 likeButton 유지
+											if (response) {
+									            // reviewNo와 data-review-no가 일치하는 하트 버튼의 class를 변경
+									          $(`.review-list [data-review-no=${reviewNo}]`).removeClass("fa-regular").addClass("fa-solid");
+									        }
+								      },
+								      error: function() {
+								        alert("좋아요 체크 기능 오류");
+								      }
+								    });
+								  })(response[i].reviewNo); // 즉시 실행 함수로 클로저 생성 -> 생성하지 않으면 첫 번째 리뷰의 리뷰번호만 반복됨
+													
+						$(html).find(".reviewLike").prepend(likeButton);
+	
+						$(".review-list").append(html);
+											
+					}
+					
+				}
+				
 			},
 			error:function(){
 				alert("리스트 오류 발생")

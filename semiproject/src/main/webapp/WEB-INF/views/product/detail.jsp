@@ -427,8 +427,14 @@ fs-18 {
 			<div class="flex">
 				<!-- 상품 이미지 -->
 				<div class="w-50 center">
-					<img src="/static/image/basic_img.jpg"
-						class="img-size img-rad-10 img-background ">
+					<c:choose>
+            		<c:when test="${productInfoDto.productImgNo != 0}">
+	            		<img class="img-size img-rad-10 img-background " alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+	            	</c:when>
+            		<c:otherwise>
+            			<img class="img-size img-rad-10 img-background " alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+            		</c:otherwise>
+           	</c:choose>
 				</div>
 
 				<!-- 상품 가격 부터 구매하기 버튼까지-->
@@ -521,7 +527,15 @@ fs-18 {
 		<!--상세이미지 초기상태 -->
 		<div class="row detail-img-initial" id="scrollTargetDetailImage">
 			<!-- id 상세이미지로 스크롤 타겟팅 -->
-			<img width="1000" class="center" src="/static/image/detail_img.jpg">
+			<c:choose>
+	           	<c:when test="${productInfoDto.detailImgNo != 0}">
+	            	<img width="1000" class="center" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.detailImgNo}">
+	            </c:when>
+	           	<c:otherwise>
+	           		<img width="1000" class="center" alt="상품 대표 이미지" src="/static/image/productDummy.png">
+	            </c:otherwise>
+	        </c:choose>
+<!-- 			<img width="1000" class="center" src="/static/image/detail_img.jpg"> -->
 		</div>
 	</div>
 
@@ -562,6 +576,26 @@ fs-18 {
 		<hr class="w-30">
 		<hr class="w-30">
 	</div>
+	
+		<!-- 리뷰 별점 및 차트 -->
+	<div class="container-1000 mt-40 mb-40">
+		<div class="row center">
+			<div class="star-box center">
+				<br>
+				<h4 class="font-purple oneLine">${reviewAvg}</h4>
+				<h4 class="font-grey fs-18 oneLine">&nbsp;/ 5</h4>
+				<br>
+				<div class="rating">
+					<span class="fa fa-star font-white"></span> <span
+						class="fa fa-star font-white"></span> <span
+						class="fa fa-star font-white"></span> <span
+						class="fa fa-star font-white"></span> <span
+						class="fa fa-star font-white"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 
 	<!------------------------------------------------------------------------>
 	<div class="container-1000">
@@ -596,43 +630,18 @@ fs-18 {
 				</div>
 			</div>
 		</div>
-		<div class="row review-list review-initial" id="scrollTargetReview">
+		<div class="row review-list review-initial" id=scrollTargetReview">
 			리뷰 목록 위치
 		</div>
-		<c:choose>
-		    <c:when test="${reviewCount > 0}">
-		        <button class="form-btn w-100 positive medium show-review">리뷰 모두 보기</button>
-				<button class="form-btn w-100 neutral medium hide-review">리뷰 접기</button>
-		    </c:when>
-		    <c:otherwise>
-		    <div class="row center">
-		       <h2 >리뷰가 존재하지 않습니다.</h2>
-		     </div> 
-		    </c:otherwise>
-		</c:choose>			
+		<button class="form-btn w-95 positive small show-review">리뷰
+			모두 보기</button>
+		<button class="form-btn w-95 neutral small hide-review">리뷰 접기</button>
 	</div>
 
 	<div class="row center"></div>
 	<!--       =--------------------------------------------------------------------d -->
 
-	<!-- 리뷰 별점 및 차트 -->
-	<div class="container-1000 mt-40 mb-40">
-		<div class="row center">
-			<div class="star-box center">
-				<br>
-				<h4 class="font-purple oneLine">${reviewAvg}</h4>
-				<h4 class="font-grey fs-18 oneLine">&nbsp;/ 5</h4>
-				<br>
-				<div class="rating">
-					<span class="fa fa-star font-white"></span> <span
-						class="fa fa-star font-white"></span> <span
-						class="fa fa-star font-white"></span> <span
-						class="fa fa-star font-white"></span> <span
-						class="fa fa-star font-white"></span>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 
 
