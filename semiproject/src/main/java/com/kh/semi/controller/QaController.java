@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -20,11 +21,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.semi.advice.RequirePermissionException;
 import com.kh.semi.dao.QaDao;
 import com.kh.semi.dto.QaDto;
 import com.kh.semi.service.QaService;
@@ -76,12 +77,35 @@ public class QaController {
 	}
 	
 	
-	/*@GetMapping("/detail")
-	public String detail(Model model, @RequestParam int qaNo) {
-		boolean cnt = qaDao.updateReadCount(qaNo);
-		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
-		return "/WEB-INF/views/qa/detail.jsp";
-	}*/
+
+	@GetMapping("/detail")
+	public String detail(Model model, @RequestParam int qaNo, HttpSession session) {
+	    boolean cnt = qaDao.updateReadCount(qaNo);
+	    QaDto qaDto = qaDao.selectOne(qaNo);
+	    model.addAttribute("qaDto", qaDto);
+	    
+	    // 게시글 작성자 확인 코드
+	    String writerId = qaDto.getMemberId();
+	    String memberId = (String)session.getAttribute("memberId");
+	    boolean isOwner = memberId != null && memberId.equals(writerId);
+	    
+	    String qaSecret = qaDto.getQaSecret();
+	    
+	    String memberRole = (String)session.getAttribute("memberRole");
+	    boolean isAdmin = memberRole != null && memberRole.equals("관리자");
+	    
+	    if (qaSecret.equals("Y")) {
+	        // 작성자 본인이거나 관리자라면
+	        if (isAdmin || isOwner) {
+	        	return "/WEB-INF/views/qa/detail.jsp";
+	        }
+	        // 조건에 해당하지 않는 경우 모두 차단
+	        throw new RequirePermissionException("권한이 없습니다.");
+	    } else {
+	        // 모두 페이지 이동 가능
+	        return "/WEB-INF/views/qa/detail.jsp";
+	    }
+	}
 	
 
 	@PostMapping("/detail")
@@ -144,41 +168,7 @@ public class QaController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("");
 	    }
 	}
-	
-	
-//	@GetMapping("/detail")
-//	public String detail2(@RequestParam int qaNo,
-//							Model model, HttpSession session) {
-//		
-//		//사용자가 작성자인지 판정 후 전달(JSP)
-//		QaDto qaDto = qaDao.selectOne(qaNo);
-//		String memberId = (String)session.getAttribute("memberId");
-//		
-//		boolean owner = qaDto.getMemberId() != null
-//				&& qaDto.getMemberId().equals(memberId);
-//		model.addAttribute("owner",owner);
-//		
-//		String memberRole = (String)session.getAttribute("memberRole");
-//		boolean admin = memberRole != null && memberRole.equals("관리자");
-//		model.addAttribute("admin", admin);
-//		
-////		//조회수 증가
-//		if(!owner) {
-//			Set<Integer>memory = (Set<Integer>)session.getAttribute("memory");
-//			if(memory == null) {
-//				memory = new HashSet<>();
-//			}
-//			if(!memory.contains(qaNo)) {
-//				qaDao.updateReadCount(qaNo);
-//				qaDto.setQaRead(qaDto.getQaRead()+1);
-//				memory.add(qaNo);
-//			}
-//			session.setAttribute("memory", memory);
-//		}
-//		model.addAttribute("qaDto",qaDto);
-//		return"/WEB-INF/views/qa/detail.jsp";
-//	}
-//	
+
 	
 	
 	@GetMapping("/write")
