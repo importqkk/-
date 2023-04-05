@@ -1,3 +1,4 @@
+
 //리뷰 등록
 $(function(){
 	var params = new URLSearchParams(location.search);
@@ -47,8 +48,10 @@ $(function(){
 				$(".review-content").hide();
 			    $(".btn-panel").hide();
 			    $(".review-star").hide();
-			    $(".view-panel").show();
-			     location.reload();
+//			    $(".view-panel").show();
+			    
+//			    $(".review-insert-btn").attr("disabled", true).css("opacity", 0.5);
+//			     location.reload();
 			},
 			error:function(){
 				alert("등록 오류");
@@ -208,6 +211,7 @@ $(function(){
 		$(html).find(".review-edit-btn").click(function(){
 					var reviewContent = $(html).find("[name=reviewContent]").val();
 					var reviewStar = $(html).find('.starR.on').last().attr("value");
+					
 					if(reviewContent.trim().length == 0){
 					alert("내용을 입력해주세요.");
 					return false;

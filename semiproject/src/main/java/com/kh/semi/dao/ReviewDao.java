@@ -49,7 +49,6 @@ public class ReviewDao {
 				reviewDto.getProductNo(),
 				reviewDto.getMemberId()
 		};
-		System.out.println(Arrays.toString(param));
 		jdbcTemplate.update(sql, param);
 	}
 	
