@@ -217,16 +217,16 @@
         	if(totalProduct==0)
             // 제품금액
             
-            console.log(totalProduct);
+            
             // 사용포인트
             var totalPoint = usePoint;
-            console.log(totalPoint)
+            
             // 적립금 사용 후 남은 사용가능 적립금
             var remainingPoint = point - totalPoint;
-            console.log(remainingPoint);
+            
             // 총 금액
             var totalPrice = totalProduct - totalPoint + 3000;
-            console.log(totalPrice);
+            
 
             $("span#usePoint").text(remainingPoint.toLocaleString() + "원");
             $("span#remainingPoint").text(remainingPoint.toLocaleString() + "원");
@@ -264,9 +264,9 @@
 				  IMP.init("imp07065242");  // 예: imp00000000a
 					
 				  var name = $("#productName").val(); //상품이름 변수로 선언
-				console.log(name);
+				
 				  var totalPrice = parseInt($("td.tPrice").next().text().replace(/\D/g,''));
-					console.log(totalPrice);
+				
 				 
 				// IMP.request_pay(param, callback) 결제창 호출
 				IMP.request_pay({ // param
@@ -291,17 +291,7 @@
 	   	});
 	   });
 	   	
-	   	$(function() {
-	   	    $(".test-btn").click(function(event) {
-	   	       var stockCount = $("input[name='stockCount']").val();
-	   	       console.log(stockCount);
-	   	          if(stockCount >0){
-	   	           alert("품절된 상품이 존재합니다. 삭제 후 다시 이용해주세요.");
-	   	          } else{
-	   	        	alert("성공");
-	   	          }
-	   	    });
-	   	});
+	   	
 	   	
 	    $(function() {
 	        $("input[name='orderUserPoint']").on("input", function() { 
@@ -489,7 +479,6 @@
                 </div>
                <div>
                    <button class="form-btn positive medium w-100 mt-30" id="pay-btn" type="button" >결제하기</button>
-                   <button class="test-btn" type="button">테스트버튼</button>
                </div>
            </div>
        </div>
