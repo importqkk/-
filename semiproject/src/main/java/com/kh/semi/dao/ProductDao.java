@@ -447,13 +447,19 @@ public class ProductDao {
 				
 
 				
-		// 만든거 가져가야함
+
+		
+		
+
+	// 만든거 가져가야함
 		//판매수량 +
-		public boolean increaseSellCount(int productCount,int productno) {
-			String sql="update product set product_sell_count=product_sell_count + ? where product_no=?";
-			Object[] param= {productCount,productno};
-			return jdbcTemplate.update(sql, param) > 0;
-		}
+	public boolean increaseSellCount(int productCount,int productno) {
+		String sql="update product set product_sell_count=product_sell_count + ? where product_no=?";
+		Object[] param= {productCount,productno};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+				
+
 		
 		//상품재고
 		public boolean decreaseStock(int productCount,int productno) {
