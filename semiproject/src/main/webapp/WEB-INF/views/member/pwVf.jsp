@@ -11,6 +11,10 @@
   .content {
   	min-height: 416px;
   }
+  .error{ 
+    font-size: 20px;
+    color: red;
+  }
 </style>
 <script type="text/javascript">
 	
@@ -38,8 +42,8 @@
 		</script>
         
         <c:if test="${param.mode == 'error'}">
-          <div class="row center" style="font-size: 15px; color: red;">
-            <h3>비밀번호가 틀렸습니다.</h3>
+          <div class="row center">
+            <h3 class="error">비밀번호가 틀렸습니다.</h3>
           </div>
         </c:if>
     </div>

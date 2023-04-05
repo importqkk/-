@@ -8,6 +8,10 @@
   .container-600 {
     margin-top: 100px;
   }
+  .error{ 
+  font-size: 20px;
+  color: red;
+  }
 </style>
   <form action="findPw" method="post" autocomplete="off">
     <div class="container-600">
@@ -17,7 +21,7 @@
         </div>
         <div class="row">
           <input type="text" name="memberId" required class="form-input w-100 medium light" placeholder="아이디" >
-          <div class="row center" style="font-size: 15px; color: red;">
+          <div class="row center">
             </div>
           </div>
         <div class="row">
@@ -28,7 +32,7 @@
         </div>
         <c:if test="${param.mode == 'error'}">
           <div class="row center" style="font-size: 15px; color: red;">
-            <h3>입력하신 정보와 일치하는 회원이 없습니다.</h3>
+            <h3 class="error">입력하신 정보와 일치하는 회원이 없습니다.</h3>
           </div>
         </c:if>
     </div>

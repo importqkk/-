@@ -14,7 +14,7 @@
 <h2>아이디가 있습니다.</h2>
 	</div>
 	<div class="row">
-	<input type="text" name="memberEmail" required class="form-input w-100 medium light"  value="아이디: ${findId}" readonly>
+	<input type="text" name="memberEmail" required class="form-input w-100 medium light"  value="가입된 아이디: ${findId}" readonly>
 	</div>	
 	<div class="row center">
 <h2><a href="login">로그인 하러가기</a></h2>
