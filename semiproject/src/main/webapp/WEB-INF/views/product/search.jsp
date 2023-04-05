@@ -247,14 +247,11 @@
 
 <body>
 	<div class="container-1200">
-<<<<<<< HEAD
 		<br><br>
 		<div class="row center">
 			<h2 class="oneLine keyword" title="${keyword}">"${keyword}"&nbsp;</h2>
-=======
 		<div class="row center pb-20">
 			<h2 class="oneLine">"${keyword}"&nbsp;</h2>
->>>>>>> refs/remotes/origin/main
 			<h2 class="oneLine">총</h2><h2 class="oneLine font-purple"> ${searchCount}</h2><h2 class="oneLine">개의 검색결과</h2>
 		</div>
 		<div class="flex left grey-box ps-100 pb-10">	
