@@ -120,7 +120,7 @@ public class MemberController {
 		@RequestParam String memberEmail) {
 //		String memberId = memberId;
 		MemberDto memberDto = memberDao.selectOne(memberId);
-		if(!memberDto.getMemberEmail().equals(memberEmail)) {
+		if(memberDto==null || !memberDto.getMemberEmail().equals(memberEmail)) {
 			attr.addAttribute("mode", "error");
 			return "redirect:findPw";
 		}

@@ -245,7 +245,7 @@
 		                        </a>
 	                        </div>
 	                        <div class="center">
-		                        <a class="link" href="/member/logout" title="로그아웃">
+		                        <a class="link logout" href="/member/logout" title="로그아웃">
 		                            <i class="fa-solid fa-right-from-bracket c-p100"></i>
 		                            <span class="header-menu-text">로그아웃</span>
 		                        </a>
@@ -292,7 +292,7 @@
 	                        <h4><a class="link ps-20 pe-20" href="/member/mypage" style="border-right: 1px solid #22201e;">마이페이지</a></h4>
 	                    </div>
 	                    <div>
-	                        <h4><a class="link ps-20" href="/member/logout">로그아웃</a></h4>
+	                        <h4><a class="link ps-20 logout" href="/member/logout">로그아웃</a></h4>
 	                    </div>
                     </c:if>
                 </div>

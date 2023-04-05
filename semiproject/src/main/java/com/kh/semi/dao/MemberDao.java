@@ -171,7 +171,7 @@ public class MemberDao {
 				String sql = "select * from ("
 								+ "select TMP.*, rownum RN from ("
 									+ "select * from member where instr(#1, ?) > 0 "
-									+ "order by member_id desc"
+									+ "order by member_join asc"
 								+ ")TMP"
 							+ ") where RN between ? and ?";
 				sql = sql.replace("#1", vo.getColumn());
@@ -182,7 +182,7 @@ public class MemberDao {
 				String sql = "select * from ("
 								+ "select TMP.*, rownum RN from ("
 									+ "select * from member "
-									+ "order by member_id desc"
+									+ "order by member_join asc"
 								+ ")TMP"
 							+ ") where RN between ? and ?";
 				Object[] param = {vo.getBegin(), vo.getEnd()};

@@ -8,6 +8,10 @@
   .container-600 {
     margin-top: 100px;
   }
+  .error{ 
+  font-size: 20px;
+  color: red;
+  }
 </style>
   <form action="findId" method="post" autocomplete="off">
     <div class="container-600">
@@ -18,8 +22,8 @@
         <div class="row">
           <input type="text" name="memberEmail" required class="form-input w-100 medium light" placeholder="이메일" >
           <c:if test="${param.mode == 'error'}">
-          	<div class="row center" style="font-size: 15px; color: red;">
-            	<h3>가입된 이메일이 존재하지 않습니다.</h3>
+          	<div class="row center">
+            	<h3 class="error">가입된 이메일이 존재하지 않습니다.</h3>
           </div>
         </c:if>
         </div>

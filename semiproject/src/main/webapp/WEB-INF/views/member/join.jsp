@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
-</html>
-=======
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -40,30 +29,7 @@ $(".checkbox_group").on("click", ".normal", function() {
     $("#check_all").prop("checked", is_checked);
 });
 });
-//체크박스 값주기	
-// 	$(".normal").val('N');
-// 	// 체크박스의 값이 변경될 때마다 호출
-// 	$(".normal").change(function(){
-// 	  if(this.checked){
-// 	    $(this).val('Y');
-// 	  } else {
-// 	    $(this).val('N');
-// 	  }
-// });
-// });
-// //체크박스 값주기	
-	
-// 		$(".normal").prop('value', 'N');
 
-// // 체크박스의 값이 변경될 때마다 호출
-// 		$(".normal").change(function(){
-// 		  if(this.checked){
-// 		    $(this).prop('value', 'Y');
-// 		  }else{
-// 		    $(this).prop('value', 'N');
-// 		  }
-// 		});
-// });
     </script>
 <form class="join-form" action="join" method="post" enctype="multipart/form-data" autocomplete="off">
 <div class="container-500">
@@ -240,4 +206,3 @@ Daum 서비스: 회사가 제공하는 Daum(다음) 브랜드를 사용하는 �
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
->>>>>>> refs/remotes/origin/main

@@ -15,8 +15,9 @@
                     <th>아이디</th>
                     <th>닉네임</th>
                     <th>전화번호</th>
-                    <th>등급</th>
-                    <th>관리</th>
+                    <th class="w-10">등급</th>
+                    <th>가입일</th>
+                    <th class="w-20">관리</th>
                 </tr>
             </thead>
             <tbody class="center">
@@ -26,6 +27,7 @@
 					<td>${memberDto.memberNick}</td>
 					<td>${memberDto.memberPhone}</td>
 					<td>${memberDto.memberRole}</td>
+					<td>${memberDto.memberJoin}</td>
 					<td>
 						<a class="btn-border" href="detail?memberId=${memberDto.memberId}">상세</a>
 						<a class="btn-border" href="edit?memberId=${memberDto.memberId}">변경</a>

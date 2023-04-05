@@ -57,7 +57,7 @@
 				<a href="edit?memberId=${memberDto.memberId}" class="form-btn neutral small w-100">개인정보변경</a>
 			</div>
 			<div class="row w-50 center">
-				<a href="delete?memberId=${memberDto.memberId}" class="form-btn neutral small w-100">회원 탈퇴</a>
+				<a href="delete?memberId=${memberDto.memberId}" class="form-btn neutral small w-100" onclick="return confirm('정말 탈퇴시키겠습니까?')">회원 탈퇴</a>
 			</div>
 			
 		</div>
