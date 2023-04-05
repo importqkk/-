@@ -576,11 +576,11 @@ fs-18 {
 		<div class="review-write">
 			<!-- 리뷰 별점 -->
 			<div class="review-star">
-				<i class="fa-regular fa-star starR" value="1"></i> <i
-					class="fa-regular fa-star starR" value="2"></i> <i
-					class="fa-regular fa-star starR" value="3"></i> <i
-					class="fa-regular fa-star starR" value="4"></i> <i
-					class="fa-regular fa-star starR" value="5"></i>
+				<i class="fa-regular fa-star starR" value="1"></i>
+				<i class="fa-regular fa-star starR" value="2"></i>
+				<i class="fa-regular fa-star starR" value="3"></i>
+				<i class="fa-regular fa-star starR" value="4"></i>
+				<i class="fa-regular fa-star starR" value="5"></i>
 			</div>		
 			<c:choose>
 			    <c:when test="${reviewDto==null}">
