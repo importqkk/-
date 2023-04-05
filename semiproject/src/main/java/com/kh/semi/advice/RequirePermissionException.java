@@ -1,5 +1,6 @@
 package com.kh.semi.advice;
 
+
 // 403번 대신 사용할 예외 클래스
 public class RequirePermissionException extends RuntimeException {
 

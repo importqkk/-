@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="/static/css/review.css">
-
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
@@ -15,6 +14,7 @@
 			<c:otherwise>
 				<div class="row">
 					<h2 class="">내 리뷰 목록</h2>
+					<h4>리뷰 내용을 클릭하면 해당 리뷰가 작성된 상품상세로 이동합니다.</h4>
 				</div>
 				<hr>
 				<div class="row">
@@ -33,32 +33,6 @@
 						<hr>
 					</c:forEach>
 				</div>
-<!-- 				<table class="table table-qna"> -->
-<!-- 					<thead> -->
-<!-- 						<tr> -->
-<!-- 							<th>별점</th> -->
-<!-- 							<th>내용</th> -->
-<!-- 							<th>작성일</th> -->
-<!-- 						</tr> -->
-<!-- 					</thead> -->
-<!-- 					<tbody class="center"> -->
-<%-- 						<c:forEach var="reviewDto" items="${list}"> --%>
-<!-- 							<tr> -->
-<!-- 								<td> -->
-<%-- 									  <c:forEach begin="1" end="5" var="i"> --%>
-<%-- 					                    <i class="fa-regular fa-star starR ${reviewDto.reviewStar >= i ? 'fa-solid' : ''}" value="${i}"></i> --%>
-<%-- 					                </c:forEach> --%>
-<!-- 								</td> -->
-<!-- 								<td> -->
-<%-- 									<a href="/product/detail?productNo=${reviewDto.productNo}"> --%>
-<%-- 									${reviewDto.reviewContent} --%>
-<!-- 									</a> -->
-<!-- 								</td> -->
-<%-- 								<td>${reviewDto.reviewTime}</td> --%>
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
-<!-- 					</tbody> -->
-<!-- 				</table> -->
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -120,4 +94,4 @@
     
 </div>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>s
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

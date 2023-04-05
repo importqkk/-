@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
-
+<link rel="stylesheet" type="text/css" href="/static/css/review.css">
 <style>
 .flex-remain {
 	flex: 1;
@@ -207,7 +205,7 @@ fs-18 {
 				<div class="reviewTime right"></div>
 			</div>
 		</div>
-		<div class="reviewContent"></div>
+		<div class="reviewContent w-100"></div>
 		<div class="reviewLike">
 			<span class="heart-count">${reviewDto.reviewLike}</span>
 		</div>
@@ -224,11 +222,7 @@ fs-18 {
 
 		<div class="flex w-100 btn-panel">
 			<div class="w-50">
-                <label class="input-file-button" for="chooseFile">
-                    사진등록
-                </label>
-                <input type="file" id="chooseFile" name="attach" class="form-input w-10">
-        	</div>
+			</div>
 			<div class="flex w-50 right">
                 <button type="button" class="form-btn small neutral review-cancel-btn me-10">취소</button>
                 <button type="button" class="form-btn small positive review-edit-btn">수정</button>
@@ -241,7 +235,7 @@ fs-18 {
 	var reviewNo = "${reviewLikeDto.reviewNo}";
 </script>
 <script type="text/javascript">
-    $(function(){    	
+    $(function(){    	  	
     	// 이미지 높이 조절---------------------------------------------------   	
     	// 초기상태에서 클리되었을때 
    		$(".show-detail").click(function(){
@@ -326,7 +320,6 @@ fs-18 {
     	ratings.each(function(idx,rating){
     		var stars = $(rating).find('.fa');
         	stars.each(function(index,star){
-        		console.log(index);
         		if (index+1 <= avg){ // 별이 있는 구간
         			$(star).removeClass('font-white').addClass('font-purple');
         		}
@@ -336,15 +329,29 @@ fs-18 {
         	});
     	});    	
 
-    	// 장바구니버튼, 주문 버튼 개별 경로처리--------------------------------
-         $(".cart-btn").click(function(){
-            $(".item-form").attr("action", "/cart/insert");
-            $(".item-form").attr("method", "post");
-         });
-         $(".buy-btn").click(function(){
-            $(".item-form").attr("action", "/order/buy");
-            $(".item-form").attr("method", "get");
-         });
+		// 장바구니버튼, 주문 버튼 개별 경로 및 재고처리-------------------------------
+    	$(".cart-btn").click(function(){
+		    $(".item-form").attr("action", "/cart/insert");
+		    $(".item-form").attr("method", "post");
+  		});
+  
+ 		 $(".buy-btn").click(function(){
+		    $(".item-form").attr("action", "/order/buy");
+		    $(".item-form").attr("method", "get");
+ 		});
+  
+ 		 $('form').on('submit',  function(e){
+			var selectedOption = $(this).find('select[name="productCount"] option:selected');
+			if(parseInt(selectedOption.val()) > parseInt(${productInfoDto.productStock})) {
+			  e.preventDefault(); // 전송 취소
+			  alert('재고가 부족합니다.'); // 경고창 출력
+		      return false; // 함수 종료
+		   }
+    		else {
+      		  $(this).submit(); // 정상적으로 submit
+    	   }
+  		});
+ 		 
         // 장바구니버튼, 주문 버튼 개별 경로처리--------------------------------
         // 장바구니 상품 담기 처리
  		var params = new URLSearchParams(location.search);
@@ -364,6 +371,7 @@ fs-18 {
  			else if(mode == "success") {
  				alert("장바구니에 상품을 담았습니다.")
  			}
+ 		
 
 });           	
  // 페이지 로드--------------
@@ -372,37 +380,44 @@ fs-18 {
 
 
 	<script>
-$(function(){
-    $(".review-content").hide();
-    $(".btn-panel").hide();
-    $(".review-star").hide();
-    $(".edit-btn").click(function(){
-      if (${hasBuyHistory}) {
-        $(".view-panel").hide();
-        $(".review-content").show();
-        $(".btn-panel").show();
-        $(".review-star").show();
-        if (${reviewDto != null}){
-            alert("구매 당 1회의 리뷰만 작성할 수 있습니다");
-            $(".review-content").hide();
-            $(".btn-panel").hide();
-            $(".review-star").hide();
-            $(".view-panel").show();
-        }
-      } else if (${memberId == null}){
-    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
-      } else {
-        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
-      }
-      
-  })
-    $(".cancel-btn").click(function(){
-    $(".view-panel").show();
-    $(".review-content").hide();
-    $(".btn-panel").hide();
-    $(".review-star").hide();
-  })    
-});
+	$(function(){
+	    $(".review-content").hide();
+	    $(".btn-panel").hide();
+	    $(".review-star").hide();
+	    $(".edit-btn").click(function(){
+	      if (${hasBuyHistory}) {
+	        $(".view-panel").hide();
+	        $(".review-content").show();
+	        $(".btn-panel").show();
+	        $(".review-star").show();
+	        if (${reviewDto != null}){
+	            alert("이미 작성된 리뷰가 있습니다. \n 리뷰는 1회만 작성 가능합니다.");
+	            $(".review-content").hide();
+	            $(".btn-panel").hide();
+	            $(".review-star").hide();
+	            $(".view-panel").show();
+	        }
+	      } else if (${memberId == null}){
+	    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
+	    	  $(".review-content").hide();
+	          $(".btn-panel").hide();
+	          $(".review-star").hide();
+	          $(".view-panel").show();
+	      } else {
+	        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
+	        $(".review-content").hide();
+	        $(".btn-panel").hide();
+	        $(".review-star").hide();
+	        $(".view-panel").show();
+	      }
+	  })
+	    $(".cancel-btn").click(function(){
+	    $(".view-panel").show();
+	    $(".review-content").hide();
+	    $(".btn-panel").hide();
+	    $(".review-star").hide();
+	  })    
+	});
 </script>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display: none;">${productInfoDto.productNo}</h6>
@@ -550,7 +565,7 @@ $(function(){
 		<hr class="w-30">
 	</div>
 
-	<!--       =--------------------------------------------------------------------d -->
+	<!------------------------------------------------------------------------>
 	<div class="container-1000">
 		<!-- 리뷰 등록창 -->
 		<div class="review-write">
@@ -586,8 +601,17 @@ $(function(){
 		<div class="row review-list review-initial" id="scrollTargetReview">
 			리뷰 목록 위치
 		</div>
-		<button class="form-btn w-100 positive medium show-review">리뷰 모두 보기</button>
-		<button class="form-btn w-100 neutral medium hide-review">리뷰 접기</button>
+		<c:choose>
+		    <c:when test="${reviewCount > 0}">
+		        <button class="form-btn w-100 positive medium show-review">리뷰 모두 보기</button>
+				<button class="form-btn w-100 neutral medium hide-review">리뷰 접기</button>
+		    </c:when>
+		    <c:otherwise>
+		    <div class="row center">
+		       <h2 >리뷰가 존재하지 않습니다.</h2>
+		     </div> 
+		    </c:otherwise>
+		</c:choose>			
 	</div>
 
 	<div class="row center"></div>

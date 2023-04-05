@@ -23,6 +23,7 @@ public class ProductDao {
 						.productNo(rs.getInt("product_no"))
 						.productBrand(rs.getString("product_brand"))
 						.productName(rs.getString("product_name"))
+						.productStock(rs.getInt("product_stock"))
 						.productPrice(rs.getInt("product_price"))
 						.productSellCount(rs.getInt("product_sell_count"))
 						.productJoin(rs.getDate("product_join"))
@@ -333,7 +334,7 @@ public class ProductDao {
 		return list.isEmpty() ? null:list;
 	}
 	public List<ProductInfoDto> newTag8(){ // 1번 최신순
-		String sql = "SELECT * from product_info where tag_no=1 order by product_join desc, product_no desc";
+		String sql = "SELECT * from product_info where tag_no=8 order by product_join desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);
 		return list.isEmpty() ? null:list;
 	}

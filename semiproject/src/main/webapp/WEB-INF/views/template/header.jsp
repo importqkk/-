@@ -218,7 +218,7 @@
                     <div class="center w-50 pb-10">
                     	<form action="/product/search/">
                         <div class="search-box">
-                            <input class="search-input w-100" name="keyword" placeholder="어떤 영양제가 궁금하세요?">
+                            <input class="search-input w-100" name="keyword" placeholder="어떤 영양제가 궁금하세요?" value="${param.keyword}">
                             <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         </form>
