@@ -7,6 +7,10 @@
       h1{
         color:#776BFF;
       }
+      .error{ 
+	    font-size: 20px;
+	    color: red;
+	  }	
     </style>
   <form action="/member/login" method="post" autocomplete="off">
 
@@ -20,8 +24,8 @@
       <div class="row">
         <input type="password" name="memberPw" required class="form-input w-100 medium light" placeholder="비밀번호">
         <c:if test="${param.mode == 'error'}">
-          <div class="row center" style="font-size: 15px; color: red;">
-            <h3>아이디 또는 비밀번호를 잘못 입력했습니다.</h3>
+          <div class="row center">
+            <h3 class="error">아이디 또는 비밀번호를 잘못 입력했습니다.</h3>
           </div>
         </c:if>
       </div>

@@ -27,7 +27,6 @@
 	
 	<div class="row">
 		<button class="form-btn neutral w-24 medium">취소</button>
-        <!-- <button type="submit" class="form-btn positive w-75 medium ms-25">탈퇴하기</button> -->
         <button type="submit" class="form-btn positive w-75 medium ms-25" onclick="return confirm('정말 탈퇴하시겠습니까?')">탈퇴하기</button>
 	</div>
 		<!-- 취소 버튼 클릭 이벤트 처리 -->
