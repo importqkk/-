@@ -12,7 +12,6 @@ $(function(){
     });
 	
 	$(".review-insert-btn").click(function(){
-		checkReview();
 		
 		var content = $("[name=reviewContent]").val();
 		var starRating = $(".review-star .starR.on").last().attr("value");

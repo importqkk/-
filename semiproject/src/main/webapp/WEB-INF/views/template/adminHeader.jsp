@@ -29,17 +29,14 @@
             font-family: inherit;
             vertical-align: baseline;
         }
-        .search-box {
-            margin-top: 8px;
-        }
         .custom-size {
             font-size: 25px;
         }
         .menu-btn,
         .close-btn {
             font-size: 40px;
-            margin-top: 3px;
             cursor: pointer;
+            margin-bottom: 5px;
         }
         .close-btn {
             font-size: 53px;
@@ -63,7 +60,8 @@
         .fa-wrench,
         .fa-cart-shopping,
         .fa-user,
-        .fa-right-to-bracket {
+        .fa-right-to-bracket,
+        .fa-right-from-bracket {
             margin-top: 12px;
             font-size: 25px;
             text-align: center;
@@ -85,6 +83,10 @@
         .social {
             vertical-align: middle;
             margin-top: 30px;
+        }
+        .logo-img {
+        	width: 110px;
+        	padding-top: 5px;
         }
         /* 사이드메뉴 */
         .category {
@@ -145,7 +147,7 @@
     </script>
     <title>SEMI</title>
 </head>
-<body>
+	<body>
     <main>
         <div id="wrapper">
         <header style="border-bottom: 0.5px solid #72706f;">
@@ -157,50 +159,52 @@
                             <i class="fa-solid fa-xmark fa-2x c-p100 close-btn"></i>
                         </div>
                         <div class="w-100 center">
-                            <h1 class="c-p100 logo" style="font-size: 50px;">
-                                <a class="link" style="color: #776BFF;" href="/">SEMI</a>
-                            </h1>
+                            <a class="link" style="color: #776BFF;" href="/">
+                            	<img class="logo-img" alt="로고" src="/static/image/logo.png">
+                            </a>
                         </div>
                     </div>
-                    <div class="center w-55">
+                    <div class="center w-50 pb-10">
+                    	<form action="/product/search/">
                         <div class="search-box">
-                            <input class="search-input w-100">
+                            <input class="search-input w-100" name="keyword" placeholder="어떤 영양제가 궁금하세요?">
                             <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
+                        </form>
                     </div>
-                    <!-- <div class="center w-50">
-                        <input type="text" class="form-input-search w-100" style="margin-top: 14px;">
-                    </div> -->
-                    <div class="right w-20 flex">
-                    	<%-- <c:if test="${sessionScope.memberLevel == 'admin'}"> --%>
+                    <div class="right w-25 flex pb-10">
+                    	<!-- 로그인 o, 관리자 -->
+                    	<c:if test="${sessionScope.memberId != null && sessionScope.memberRole == '관리자'}">
                     		<div class="me-15 center">
                     			<a class="link" href="/admin" title="관리자 메인">
 	                            	<i class="fa-solid fa-wrench c-p100"></i>
 	                            	<span class="header-menu-text">관리</span>
 	                        	</a>
                     		</div>
-                        <%-- </c:if> --%>
-                        <%-- <c:if test="${sessionScope.memberId != null}"> --%>
+                        </c:if>
+                        <!-- 로그인 o -->
+                        <c:if test="${sessionScope.memberId != null}">
 	                        <div class="me-15 center">
 		                        <a class="link" href="/cart/main" title="장바구니">
 		                            <i class="fa-solid fa-cart-shopping c-p100"></i>
 		                            <span class="header-menu-text">장바구니</span>
 		                        </a>
 	                        </div>
-	                        <!-- <div class="me-15 center">
-		                        <a class="link" href="/member/join" title="마이페이지">
+	                        <div class="me-15 center">
+		                        <a class="link" href="/member/mypage" title="마이페이지">
 		                            <i class="fa-solid fa-user c-p100"></i>
 		                            <span class="header-menu-text">마이페이지</span>
 		                        </a>
-	                        </div> -->
-	                        <!-- <div class="center">
-		                        <a class="link" href="/member/login" title="로그아웃">
+	                        </div>
+	                        <div class="center">
+		                        <a class="link" href="/member/logout" title="로그아웃">
 		                            <i class="fa-solid fa-right-from-bracket c-p100"></i>
 		                            <span class="header-menu-text">로그아웃</span>
 		                        </a>
-	                        </div> -->
-                        <%-- </c:if> --%>
-                        <%-- <c:if test="${sessionScope.memberId == null}"> --%>
+	                        </div>
+                        </c:if>
+                        <!-- 로그인 x -->
+                        <c:if test="${sessionScope.memberId == null}">
 	                        <div class="me-15 center">
 		                        <a class="link" href="/member/join" title="회원가입">
 		                            <i class="fa-solid fa-user c-p100"></i>
@@ -213,7 +217,7 @@
 		                            <span class="header-menu-text center">로그인</span>
 		                        </a>
 	                        </div>
-                        <%-- </c:if> --%>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -247,7 +251,7 @@
                 <div class="flex center">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/all">
                                 <i class="fa fa-solid fa-border-all"></i>
                                 <h3 class="category-text">전체</h3>
                             </a>
@@ -255,7 +259,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag1">
                                 <i class="fa fa-light fa-face-smile"></i>
                                 <h3 class="category-text">피부</h3>
                             </a>
@@ -263,7 +267,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag2">
                                 <i class="fa fa-light fa-weight-scale"></i>
                                 <h3 class="category-text">다이이트</h3>
                             </a>
@@ -273,7 +277,7 @@
                 <div class="flex center">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag3">
                                 <i class="fa fa-light fa-venus"></i>
                                 <h3 class="category-text">여성</h3>	
                             </a>
@@ -281,7 +285,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag4">
                                 <i class="fa fa-sharp fa-light fa-bolt-lightning"></i>
                                 <h3 class="category-text">활력</h3>
                             </a>
@@ -289,7 +293,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag5">
                                 <i class="fa fa-thin fa-mars"></i>
                                 <h3 class="category-text">남성</h3>
                             </a>
@@ -299,7 +303,7 @@
                 <div class="flex center mb-20">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag6">
                                 <i class="fa fa-light fa-eye"></i>
                                 <h3 class="category-text">눈</h3>
                             </a>
@@ -307,7 +311,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag7">
                                 <i class="fa fa-light fa-tooth"></i>
                                 <h3 class="category-text">치아</h3>
                             </a>
@@ -315,7 +319,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="#">
+                            <a class="link" href="/categori/tag8">
                                 <i class="fa fa-light fa-bone"></i>
                                 <h3 class="category-text">관절/뼈</h3>
                             </a>
@@ -324,7 +328,7 @@
                 </div>
                 <div class="flex">
                     <div class="flex ps-100 ms-30 w-50">
-                        <h2><a class="link" href="#">QnA</a></h2>
+                        <h2><a class="link" href="/qa/list">QnA</a></h2>
                     </div>
                     <div class="flex right pe-100 me-30 w-50">
                         <a class="link-social" href="#">
@@ -349,7 +353,7 @@
                         </a>
                     </div>
                     <div class="p-10">
-                        <a href="#" class="link">회원 목록</a>
+                        <a href="/admin/member/list" class="link">회원 목록</a>
                     </div>
                     <div class="p-10">
                         <a href="/admin/productManage/list" class="link">상품 관리</a>
@@ -358,7 +362,7 @@
                         <a href="/admin/mainImg/list" class="link">메인 관리</a>
                     </div>
                     <div class="p-10">
-                        <a href="#" class="link">QnA 게시판</a>
+                        <a href="/qa/list" class="link">QnA 게시판</a>
                     </div>
                	</div>
         	</div>

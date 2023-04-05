@@ -54,12 +54,13 @@
         }
         
         .img-box{
-        	margin: 10px; 
-        	width: 240px;
-        	height: 400px;
-         	background-color: #f1f1f1;  /* 배경색 */
-        	border-radius: 0.5em; /* 끝부분 조정*/
-        	align-items: center;
+        	padding-top:10px;
+	        width: 235px;
+	        height: 400px;
+	        background-color: #f8f8f8;  /* 배경색 */
+	        border-radius: 20px; /* 끝부분 조정*/
+	        align-items: center;
+	        margin-bottom: 20px;
         }
        
 
@@ -76,7 +77,7 @@
 		}
 		
 		.a-font-purple{
-			color: #d0ccff;
+			color: #776bff;
 			font-size:13px;
 			font-weight:bolder;
 			cursor:pointer;
@@ -107,7 +108,10 @@
 		.star-purple{
 			color: #776BFF;
 		}
-		
+		.productName {
+			min-height: 80px;
+			max-height: 80px;
+		}
 </style>
 <script type="text/javascript">
 	// "none"
@@ -222,20 +226,9 @@
 	
 </script>
 
-</head>
-
-<body>
 	<div class="container-1200">
-		<div class="row">
-			<hr>
-			<h5 class="font-lightgrey"> <i class=" fa-solid fa-house"></i> > 면역력 어쩌구</h5>
-			
-		</div>
-		<div class="row">
-			<hr>
-		</div>
 		<div class="flex center">
-			<a class="w-5 me-50 fas fa-solid fa-bars" href="all"></a>		
+			<a class="w-5 me-50 fas fa-solid fa-border-all" href="all"></a>		
 			<a class="w-5 me-50 fas fa-light fa-face-smile" href="tag1"></a>
 			<a class="w-5 me-50 fas fa-light fa-weight-scale" href="tag2"></a>
 			<a class="w-5 me-50 fas fa-light fa-venus" href="tag3"></a>	
@@ -254,10 +247,10 @@
 			<h5 class="w-5 me-50">남성</h5>
 			<h5 class="w-5 me-50">눈</h5>
 			<h5 class="w-5 me-50">치아</h5>
-			<h5 class="w-5 me-50">뼈</h5>
+			<h5 class="w-5 me-50">관절/뼈</h5>
 		</div>
-		<div class="flex left grey-box">	
-			<div class="flex w-60 ">
+		<div class="flex left grey-box mt-20 mb-10">	
+			<div class="flex w-70 ps-100">
 				<a class="w-6 a-font-lightgrey oneLine">인기순</a>
 				<a class="w-2 font-lightgrey oneLine">&nbsp;|</a>
 				<a class="w-5 a-font-lightgrey oneLine">최신순</a>
@@ -266,11 +259,10 @@
 				<a class="w-2 font-lightgrey oneLine">|</a>
 				<a class="w-9 a-font-lightgrey oneLine">높은가격순</a>
 			</div>
-			<div class="flex w-40 right">
+			<div class="flex w-30 pe-100 right">
 				<h5 class="w-30 me-10 font-lightgrey">${count}개의 제품</h5>
 			</div>
 		</div>	
-		<br>
 <!---------------------여기부터는 이미지 들의 리스트 ------------------->
 		<!--인기상품 -->
 		<div class="flex-wr center mb-20 best">
@@ -279,7 +271,7 @@
 				<div class="img-box me-20 center" data-index="${status.index}"
 					data-info="best">
 					<img src="/static/image/basic_img.jpg"
-						class="img-list center mt-20"> <br>
+						class="img-list center"> <br>
 					<h5 class="productNoBest" style="display: none;">${productInfoDto.productNo}</h5>
 
 					<div class="row ms-10 me-10 left">
@@ -312,7 +304,7 @@
 				<div class="img-box me-20 center" data-index1="${status1.index}"
 					data-info="new">
 					<img src="/static/image/basic_img.jpg"
-						class="img-list center mt-20"> <br>
+						class="img-list center"> <br>
 					<h5 class="productNoNew" style="display: none;">${productInfoDto.productNo}</h5>
 
 					<div class="row ms-10 me-10 left">
@@ -345,7 +337,7 @@
 				<div class="img-box me-20 center" data-index2="${status2.index}"
 					data-info="cheap">
 					<img src="/static/image/basic_img.jpg"
-						class="img-list center mt-20"> <br>
+						class="img-list center"> <br>
 					<h5 class="productNoCheap" style="display: none;">${productInfoDto.productNo}</h5>
 
 					<div class="row ms-10 me-10 left">
@@ -378,7 +370,7 @@
 				<div class="img-box me-20 center" data-index3="${status2.index}"
 					data-info="expensive">
 					<img src="/static/image/basic_img.jpg"
-						class="img-list center mt-20"> <br>
+						class="img-list center"> <br>
 					<h5 class="productNoExpensive" style="display: none;">${productInfoDto.productNo}</h5>
 
 					<div class="row ms-10 me-10 left">
@@ -406,9 +398,6 @@
 		</div>
 
 	</div>
-</body>
-
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
