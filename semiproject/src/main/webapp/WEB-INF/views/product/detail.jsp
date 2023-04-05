@@ -208,7 +208,6 @@ fs-18 {
 		<div class="reviewContent w-100"></div>
 		<div class="reviewLike">
 			<span class="heart-count">${reviewDto.reviewLike}</span>
-		</div>
 	</div>
 </script>
 
@@ -399,7 +398,6 @@ fs-18 {
 	      } else if (${memberId == null}){
 	    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
 	    	  $(".review-content").hide();
-	          $(".btn-panel").hide();
 	          $(".review-star").hide();
 	          $(".view-panel").show();
 	      } else {
