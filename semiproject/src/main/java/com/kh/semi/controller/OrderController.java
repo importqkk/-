@@ -21,6 +21,7 @@ import com.kh.semi.dao.CartProductInfoDao;
 import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.MemberInfoDao;
 import com.kh.semi.dao.OrderDao;
+import com.kh.semi.dao.OrderListDao;
 import com.kh.semi.dao.OrderProductDao;
 import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ProductInfoDao;
@@ -52,6 +53,8 @@ public class OrderController {
 	private OrderDao orderDao;
 	@Autowired
 	private OrderProductDao orderProductDao;
+	@Autowired
+	private OrderListDao orderListDao;
 
 
 	
@@ -77,7 +80,8 @@ public class OrderController {
 					int price = list.get(i).getProductPrice();
 					totalproduct+= (count*price);
 				}
-				totalprice=totalproduct-3000;
+				totalprice=totalproduct+3000;
+				
 				model.addAttribute("cartinfo",cartProductInfoDao.cartItemInfo(memberId));
 				model.addAttribute("totalproduct",totalproduct);
 				model.addAttribute("totalprice",totalprice);
@@ -88,8 +92,10 @@ public class OrderController {
 				int no=productNo.intValue();
 				int Count=productCount.intValue();
 				int price=productInfoDao.orderPrice(no);
+				//상품 가격만
 				int totalproduct=(price*Count);
-				int totalprice=0;
+				//배달비 빼고 
+				int totalprice=totalproduct+3000;
 				
 				model.addAttribute("productInfo",productInfoDao.selectOne(no));
 				model.addAttribute("totalproduct",totalproduct);
@@ -210,19 +216,63 @@ public class OrderController {
 		 return "redirect:popup";
 	 }
 	 
-	 @PostMapping("/popup")
-	 public String popDelete(HttpSession session,@ModelAttribute MemberInfoDto memberInfoDto,@RequestParam int index) {
-		 String memberId=(String)session.getAttribute("memberId");
-		 memberInfoDto.setMemberId(memberId);
-		 memberInfoDao.addDelete(index, memberId);
-		 
-		 return "redirect:popup";
-	 }
+
 	 
-	 //회원의 구매목록 조회
-	 @GetMapping("/myList")
-	 public String myList(HttpSession session) {
-		 String memberId=(String)session.getAttribute("memberId");
-		 return "/WEB-INF/views/order/myList.jsp";
-	 }
+	//삭제구문
+	@PostMapping("/popDelete")
+	public String popDelete(HttpSession session,@RequestParam String name,@RequestParam String phone,
+	      @RequestParam String post,@RequestParam String basic,@RequestParam String request) {
+	   MemberInfoDto dto=new MemberInfoDto();
+	   String memberId=(String)session.getAttribute("memberId");
+	   dto.setMemberId(memberId);
+	   List<MemberInfoDto> list= memberInfoDao.addrInfo(memberId);
+	   
+	   //받아온 값을 통해 equals로 비교하고 해당값이 맞으면 dao에 추가해 삭제하는 문장
+	   for (int i=0; i<list.size();i++) {
+	      
+	      System.out.println(list.get(i));
+	      if(name.equals(list.get(i).getMemberName()) &&
+	                phone.equals(list.get(i).getMemberPhone()) &&
+	                post.equals(list.get(i).getMemberPost()) &&
+	                basic.equals(list.get(i).getMemberBasicAddr()) &&
+	                request.equals(list.get(i).getOrderRequest())
+	                ){
+	        
+	         memberInfoDao.addDelete(memberId,name,phone,post,basic,request);
+	         break;
+	     }
+	      
+	   }
+	   return "redirect:popup";
+	}
+	 
+	//회원의 구매목록 조회
+		 @GetMapping("/myList")
+		 public String myList(HttpSession session,Model model) {
+			 String memberId=(String)session.getAttribute("memberId");
+
+			 
+			 //결제완
+			 orderListDao.payment(memberId);
+			 model.addAttribute("payment",orderListDao.payment(memberId));
+			 
+			 
+			 //대기
+			 orderListDao.prepare(memberId);
+			 model.addAttribute("prepare",orderListDao.prepare(memberId));
+			 
+			 
+			 //배송중
+			 orderListDao.delivery(memberId);
+			 model.addAttribute("delivery",orderListDao.delivery(memberId));
+			 
+			 
+			 //완료
+			 orderListDao.complete(memberId);
+			 model.addAttribute("complete",orderListDao.complete(memberId));
+			 
+			 
+			 
+			 return "/WEB-INF/views/order/myList.jsp";
+		 }
 }

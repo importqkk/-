@@ -1,35 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body test>
+
+<style>
+	.fa-gifts {
+		font-size: 130px;
+	}
+</style>
+
     <div class="container-1000 center">
-        <div class="row pt-">
-            <h1>ÁÖ¹®ÀÌ ¼º°øÀûÀ¸·Î Á¢¼öµÇ¾ú½À´Ï´Ù.!</h1>
+        <div class="row pb-60">
+            <h1>ì£¼ë¬¸ì´ ì„±ê³µì ìœ¼ë¡œ ì ‘ìˆ˜ë˜ì—ˆìŠµë‹ˆë‹¤!</h1>
         </div>
         <div class="row">
-            <img src="https://picsum.photos/500/500">
+            <i class="fa-solid fa-gifts c-p100"></i>
         </div>
-        <div class="pt-20">
-            <p>¹è¼ÛÀº ¿µ¾÷ÀÏ ±âÁØ 3-5ÀÏ ³»·Î ½ÃÀÛµÇ¸ç,</p>
-            <p>Ã³¸® °úÁ¤Àº ¸¶ÀÌÆäÀÌÁö ±¸¸Å³»¿ª¿¡¼­ È®ÀÎÇÒ ¼ö ÀÖ½À´Ï´Ù.</p> 
+        <div class="pt-50">
+            <p>ë°°ì†¡ì€ ì˜ì—…ì¼ ê¸°ì¤€ 3-5ì¼ ë‚´ë¡œ ì‹œìž‘ë˜ë©°,</p>
+            <p>ì²˜ë¦¬ ê³¼ì •ì€ ë§ˆì´íŽ˜ì´ì§€ êµ¬ë§¤ë‚´ì—­ì—ì„œ í™•ì¸í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</p> 
         </div>
 
-        <div class="row pt-50">
-            <div>
-                <button class="form-btn medium neutral w-50">¸¶ÀÌÆäÀÌÁö</button>
+        <div class="row pt-10">
+            <div class="row">
+                <button class="form-btn medium neutral w-50">ë§ˆì´íŽ˜ì´ì§€</button>
             </div>
-            <div>
-                <button class="form-btn medium positive w-50">¸ÞÀÎÀ¸·Î</button>
+            <div class="row">
+                <button class="form-btn medium positive w-50">ë©”ì¸ìœ¼ë¡œ</button>
             </div>
         </div>
     </div>
-
-</body>
-</html>
+    
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

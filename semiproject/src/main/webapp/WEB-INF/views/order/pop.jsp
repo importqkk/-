@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -11,20 +11,20 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/static/css/load.css">
-	    <!-- font awsome ¾ÆÀÌÄÜ -->
-	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-	    <!-- tabler ¾ÆÀÌÄÜ -->
-	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
+<!-- font awsome ì•„ì´ì½˜ -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<!-- tabler ì•„ì´ì½˜ -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/static/css/layout.css">
+<link rel="stylesheet" type="text/css" href="/static/css/commons.css">
+<link rel="stylesheet" type="text/css" href="/static/css/test.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <meta charset="EUC-KR">
-<title>¹è¼ÛÁö°ü¸® ÆË¾÷</title>
-	<style>
-		
-		.flex {
+<title>ë°°ì†¡ì§€ê´€ë¦¬ íŒì—…</title>
+   <style>
+      
+      .flex {
             display: flex;
 
             justify-content: space-between;
@@ -34,71 +34,80 @@
         }
         
         .form-btn.small2 {
-                display: inline;
-                font-size: 13px;
-                padding: 0.55em;
-                padding-left: 0.5em;
-                padding-right: 0.5em;
-                border-width: 2px;
-                border-style: solid;
-                height:30px
+			display: inline;
+             font-size: 13px;
+             padding: 0.55em;
+             padding-left: 1em;
+             padding-right: 1em;
+             border-width: 2px;
+             border-style: solid;
+             margin-bottom: 18px;
         }
         .pop-100 {
-		    
-		    margin: 2em;
-		}
+          
+          margin: 2em;
+      }
     </style>
-	<script type="text/javascript">
-	
-	//ÆË¾÷Ã¢¸ŞÀÎ
-		//Ãß°¡¹öÆ° Å¬¸¯½Ã ÆË¾÷ÇÏ³ª´õ¶ç¿ò
-		$(function( ){
-	        
-	        //¹öÆ° Å¬¸¯½Ã ÇØ´ç ÇàµéÀÇ °ªÀ» ºÎ¸ğÃ¢À¸·Î ³Ñ±è
-	        $(".select-btn").click(function() {
-	            //ÀÎµ¦½º °ªÀ» ¹Ş¾Æ¼­ ÀúÀåÈÄ
-	            var index = $(this).data("index");
-	            //ÇØ´ç ÀÎµ¦½º°ªµéÀ» ÀÌ¸§¿¡ ³Ö¾î¼­ ºÒ·¯¿È
-	            
-				opener.document.getElementsByName('orderRecever')[0].value = $('span#orderRecever'+index).text();
-				opener.document.getElementsByName('orderReceivePhone')[0].value = $('span#orderReceivePhone'+index).text();
-				opener.document.getElementsByName('orderPost')[0].value = $('span#orderPost'+index).text();
-				opener.document.getElementsByName('orderBasicAddr')[0].value = $('span#orderBasicAddr'+index).text();
-				opener.document.getElementsByName('orderDetailAddr')[0].value = $('span#orderDetailAddr'+index).text();
-				opener.document.getElementsByName('orderRequest')[0].value = $('span#orderRequest'+index).text();
-	            
-	            
-	            window.close(); // ÆË¾÷Ã¢ ´İ±â
-	          });
+   <script type="text/javascript">
+   
+   //íŒì—…ì°½ë©”ì¸
+      //ì¶”ê°€ë²„íŠ¼ í´ë¦­ì‹œ íŒì—…í•˜ë‚˜ë”ë„ì›€
+      $(function( ){
+           
+           //ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ í–‰ë“¤ì˜ ê°’ì„ ë¶€ëª¨ì°½ìœ¼ë¡œ ë„˜ê¹€
+           $(".select-btn").click(function() {
+               //ì¸ë±ìŠ¤ ê°’ì„ ë°›ì•„ì„œ ì €ì¥í›„
+               var index = $(this).data("index");
+               //í•´ë‹¹ ì¸ë±ìŠ¤ê°’ë“¤ì„ ì´ë¦„ì— ë„£ì–´ì„œ ë¶ˆëŸ¬ì˜´
+               
+            opener.document.getElementsByName('orderRecever')[0].value = $('span#orderRecever'+index).text();
+            opener.document.getElementsByName('orderReceivePhone')[0].value = $('span#orderReceivePhone'+index).text();
+            opener.document.getElementsByName('orderPost')[0].value = $('span#orderPost'+index).text();
+            opener.document.getElementsByName('orderBasicAddr')[0].value = $('span#orderBasicAddr'+index).text();
+            opener.document.getElementsByName('orderDetailAddr')[0].value = $('span#orderDetailAddr'+index).text();
+            opener.document.getElementsByName('orderRequest')[0].value = $('span#orderRequest'+index).text();
+               
+               
+               window.close(); // íŒì—…ì°½ ë‹«ê¸°
+             });
 
-	       
-	    });  
-	
-		$(document).on("click", ".delete-btn", function() {
-			  var index = $(this).data("index");
-			  $("#myForm").append('<input type="hidden" name="index" value="' + index + '">');
-			  $("#myForm").submit();
-			});
-		
+          
+       });  
+   $(function( ){
+      $(".delete-btn").click(function() {
+           var index = $(this).data("index");
+           
+             
+           $("#myForm").append('<input type="hidden" name="name" value="' + $('span#orderRecever'+index).text() + '">');
+           $("#myForm").append('<input type="hidden" name="phone" value="' + $('span#orderReceivePhone'+index).text() + '">');
+           $("#myForm").append('<input type="hidden" name="post" value="' + $('span#orderPost'+index).text() + '">');
+           $("#myForm").append('<input type="hidden" name="basic" value="' + $('span#orderBasicAddr'+index).text() + '">');
+           $("#myForm").append('<input type="hidden" name="request" value="' + $('span#orderRequest'+index).text() + '">');
+           $("#myForm").attr("action", "/order/popDelete");
+             $("#myForm").attr("method", "post");
+           
+         });
+   });
         
     </script>
     <script type="text/javascript">
 
-    	    $(document).ready(function(){
-    	        $(".insert-btn").click(function(){
-    	            var size = ${listSize};
-    	            if(size == 3){
-    	                alert("ÃÖ´ë ÀúÀå °¡´É ÁÖ¼ÒÁö´Â 3°³ÀÔ´Ï´Ù.");
-    	            } else {
-    	                window.open("popInsert", "popupNo1", "width=530, height=500");
-    	            }
-    	            console.log(${listSize});
-    	        });
-    	    });
-    	    
-    	    
+           $(function() {
+             $(".insert-btn").click(function(){
+                   var size = ${listSize};
+                   if(size == 3){
+                       alert("ìµœëŒ€ ì €ì¥ ê°€ëŠ¥ ì£¼ì†Œì§€ëŠ” 3ê°œì…ë‹ˆë‹¤.");
+                   } else {
+                       window.open("popInsert", "popupNo1", "width=530, height=500");
+                   }
+                   console.log(${listSize});
+               });
+           });
 
-	</script>
+           
+           
+
+   </script>
 
 </head>
 <body>
@@ -106,42 +115,39 @@
     <div class="pop-100">
         
             <div class="row flex">
-                <h2>¹è¼ÛÁö º¯°æ</h2>
-                <button class="row  insert-btn form-btn small2 neutral pt-50">½Å±Ô ¹è¼ÛÁö µî·Ï</button>
+                <h2>ë°°ì†¡ì§€ ë³€ê²½</h2>
+                <button class="row  insert-btn form-btn small2 neutral pt-50">ì‹ ê·œ ë°°ì†¡ì§€ ë“±ë¡</button>
                 
               </div>
-      
-       	 
-	        
-	        
-	   <form id="myForm" action="/order/popup" method="post">
-	     <c:forEach var="allInfo" items="${allInfo}" varStatus="loop">
-	        	<div class="mt-20" style="border: 2px solid rgb(119,107,255) ; width: 500px; padding: 10px;">
-	            	<div class="row">
-	            		<h2>${allInfo.memberName} ´ÔÀÇ ¹è¼ÛÁö</h2> 
-	            		<hr>
-	            		¼ö·ÉÀÎ: <span class="ms-20" id="orderRecever${loop.index}">${allInfo.memberName}</span>
-	            	</div>
-	            	
-		            <div class="row">
-		            	ÀüÈ­¹øÈ£: <span class="ms-10" id="orderReceivePhone${loop.index}">${allInfo.memberPhone}</span>
-		            </div>
-		            
-		            <div class="row">
-		           		ÁÖ¼Ò:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(<span class="" id="orderPost${loop.index}">${allInfo.memberPost}</span>)	     <span id="orderBasicAddr${loop.index}">${allInfo.memberBasicAddr}</span>  	<span id="orderDetailAddr${loop.index}">${allInfo.memberDetailAddr}</span>		           
-		            </div>
-		            
-		            <div class="row">
-		           		 ¿äÃ»»çÇ×: <span class="ms-10" id="orderRequest${loop.index}">${allInfo.orderRequest}</span>
-		            </div>
-		           
-		            <div>
-		                <button class="select-btn form-btn small2 positive" type="submit" data-index="${loop.index}">¼±ÅÃ</button>
-		                <button class="delete-btn form-btn small2 positive" type="button" data-index="${loop.index}">»èÁ¦</button>
-		            </div>
-		        </div>
-  		</c:forEach>
-	</form>
+
+      <form id="myForm" action="/order/popup" method="post">
+        <c:forEach var="allInfo" items="${allInfo}" varStatus="loop">
+              <div class="mt-20" style="border: 2px solid rgb(119,107,255) ; width: 500px; padding: 10px;">
+                  <div class="row">
+                     <h2>${allInfo.memberName} ë‹˜ì˜ ë°°ì†¡ì§€</h2> 
+                     <hr>
+                     ìˆ˜ë ¹ì¸: <span class="ms-20" id="orderRecever${loop.index}">${allInfo.memberName}</span>
+                  </div>
+                  
+                  <div class="row">
+                     ì „í™”ë²ˆí˜¸: <span class="ms-10" id="orderReceivePhone${loop.index}">${allInfo.memberPhone}</span>
+                  </div>
+                  
+                  <div class="row">
+                       ì£¼ì†Œ:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(<span class="" id="orderPost${loop.index}">${allInfo.memberPost}</span>)        <span id="orderBasicAddr${loop.index}">${allInfo.memberBasicAddr}</span>     <span id="orderDetailAddr${loop.index}">${allInfo.memberDetailAddr}</span>                 
+                  </div>
+                  
+                  <div class="row">
+                        ìš”ì²­ì‚¬í•­: <span class="ms-10" id="orderRequest${loop.index}">${allInfo.orderRequest}</span>
+                  </div>
+                 
+                  <div>
+                      <button class="form-btn small2 positive select-btn" type="button" data-index="${loop.index}">ì„ íƒ</button>
+                      <button class="form-btn small2 positive delete-btn" data-index="${loop.index}">ì‚­ì œ</button>
+                  </div>
+              </div>
+        </c:forEach>
+   </form>
     </div>
 </body>
 </html>
