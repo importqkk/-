@@ -42,13 +42,7 @@ public class ProductInfoDao {
 		Object[] param = {productNo};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
-	// 상품 번호로 상품 정보 불러오기
-	/*
-	 * public List<ProductInfoDto> selectOne(int productNo) { String sql =
-	 * "select * from product_info where product_no=?"; Object[] param =
-	 * {productNo}; return jdbcTemplate.query(sql, mapper, param); }
-	 */
-	
+
 	// 최신상품 순서대로 정렬하기
 	public List<ProductInfoDto> newList() {
 		String sql = "select * from product_info order by product_join desc, product_no desc";

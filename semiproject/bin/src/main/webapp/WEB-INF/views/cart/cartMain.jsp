@@ -44,7 +44,6 @@
             var checkedCount = $(".check-item:checked").length;
             var isAllchecked = checkboxCount == checkedCount;
             $(".check-all").prop("checked", isAllchecked);
-            console.log($(".check-item:checked"));
             // 금액 합계 표에 체크된 상품 정보만 표시 (포기)
             if($(".check-item:checked")) {
             	var productPrice = $(this).parent().next().next().find(".productPrice").text();

@@ -1,5 +1,6 @@
 package com.kh.semi.controller;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,10 +34,17 @@ public class ProductController {
 						Model model,
 						HttpSession session
 			) {
+				
 		// 상품 정보 전달
 		ProductInfoDto productInfoDto = productDao.selectOne(productNo);
-		model.addAttribute("productInfoDto",productInfoDto);
 		
+		
+		// 존재하지 않는 detail 페이지에 접근 시도 시에, redirect /categori/all
+		if(productInfoDto == null) {
+			return "redirect:/categori/all";
+		}
+		model.addAttribute("productInfoDto",productInfoDto);
+				
 		// 상품 리뷰 수 전달
 		int reviewCount = reviewDao.countReview(productNo);
 		model.addAttribute("reviewCount",reviewCount);
@@ -46,24 +54,25 @@ public class ProductController {
 			
 			// 상품 리뷰 평점 전달
 			int reviewAvg = reviewDao.avgReview(productNo);
-			System.out.println(reviewAvg);
 			model.addAttribute("reviewAvg",reviewAvg);
 			
 			// 상품 리뷰 Dto 리스트 전달
 			List<ReviewDto> reviewList = reviewDao.selectList(productNo);
 			model.addAttribute("reviewList",reviewList);
 			
-		}
+		}		
 		
 		// 리뷰 작성 구간--------------
 		// 아이디 확인
 		String memberId = (String) session.getAttribute("memberId");
-		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId);
+		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId, productNo);
+
 		ReviewDto reviewDto = reviewDao.selectOne(memberId, productNo);
 		model.addAttribute("reviewDto",reviewDto);
 		
-		boolean hasBuyHistory = buyHistoryDto != null && buyHistoryDto.getProductNo() == productNo;
+		boolean hasBuyHistory = buyHistoryDto != null;
 		model.addAttribute("hasBuyHistory", hasBuyHistory);
+
 		
 		return "/WEB-INF/views/product/detail.jsp";
 	}

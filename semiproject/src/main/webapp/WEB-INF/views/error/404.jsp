@@ -5,7 +5,7 @@
     .container {
         display: grid;
         place-items: center;
-        min-height: 100vh;
+        min-height: 80vh;
     }
     .ti-error-404 {
         color: #776bff;

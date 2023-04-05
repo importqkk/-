@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
-
+<link rel="stylesheet" type="text/css" href="/static/css/review.css">
 <style>
 .flex-remain {
 	flex: 1;
@@ -130,7 +128,7 @@
 .review-initial {
 	position: relative;
 	overflow: hidden;
-	height: 100px; /* 보여질 높이 설정 */
+	height: 150px; /* 보여질 높이 설정 */
 }
 
 .review-click {
@@ -207,7 +205,7 @@ fs-18 {
 				<div class="reviewTime right"></div>
 			</div>
 		</div>
-		<div class="reviewContent"></div>
+		<div class="reviewContent w-100"></div>
 		<div class="reviewLike">
 			<span class="heart-count">${reviewDto.reviewLike}</span>
 		</div>
@@ -224,11 +222,7 @@ fs-18 {
 
 		<div class="flex w-100 btn-panel">
 			<div class="w-50">
-                <label class="input-file-button" for="chooseFile">
-                    사진등록
-                </label>
-                <input type="file" id="chooseFile" name="attach" class="form-input w-10">
-        	</div>
+			</div>
 			<div class="flex w-50 right">
                 <button type="button" class="form-btn small neutral review-cancel-btn me-10">취소</button>
                 <button type="button" class="form-btn small positive review-edit-btn">수정</button>
@@ -241,7 +235,7 @@ fs-18 {
 	var reviewNo = "${reviewLikeDto.reviewNo}";
 </script>
 <script type="text/javascript">
-    $(function(){    	
+    $(function(){    	  	
     	// 이미지 높이 조절---------------------------------------------------   	
     	// 초기상태에서 클리되었을때 
    		$(".show-detail").click(function(){
@@ -314,7 +308,6 @@ fs-18 {
                      $(".total-price").text((number*productPrice+3000).toLocaleString());
                  },
                  error: function(xhr, status, error) {
-                     console.log("에러다에러");
                  }
          	});
     	});
@@ -326,7 +319,6 @@ fs-18 {
     	ratings.each(function(idx,rating){
     		var stars = $(rating).find('.fa');
         	stars.each(function(index,star){
-        		console.log(index);
         		if (index+1 <= avg){ // 별이 있는 구간
         			$(star).removeClass('font-white').addClass('font-purple');
         		}
@@ -336,15 +328,29 @@ fs-18 {
         	});
     	});    	
 
-    	// 장바구니버튼, 주문 버튼 개별 경로처리--------------------------------
-         $(".cart-btn").click(function(){
-            $(".item-form").attr("action", "/cart/insert");
-            $(".item-form").attr("method", "post");
-         });
-         $(".buy-btn").click(function(){
-            $(".item-form").attr("action", "/order/buy");
-            $(".item-form").attr("method", "get");
-         });
+		// 장바구니버튼, 주문 버튼 개별 경로 및 재고처리-------------------------------
+    	$(".cart-btn").click(function(){
+		    $(".item-form").attr("action", "/cart/insert");
+		    $(".item-form").attr("method", "post");
+  		});
+  
+ 		 $(".buy-btn").click(function(){
+		    $(".item-form").attr("action", "/order/buy");
+		    $(".item-form").attr("method", "get");
+ 		});
+  
+ 		 $('form').on('submit',  function(e){
+			var selectedOption = $(this).find('select[name="productCount"] option:selected');
+			if(parseInt(selectedOption.val()) > parseInt(${productInfoDto.productStock})) {
+			  e.preventDefault(); // 전송 취소
+			  alert('재고가 부족합니다.'); // 경고창 출력
+		      return false; // 함수 종료
+		   }
+    		else {
+      		  $(this).submit(); // 정상적으로 submit
+    	   }
+  		});
+ 		 
         // 장바구니버튼, 주문 버튼 개별 경로처리--------------------------------
         // 장바구니 상품 담기 처리
  		var params = new URLSearchParams(location.search);
@@ -364,6 +370,7 @@ fs-18 {
  			else if(mode == "success") {
  				alert("장바구니에 상품을 담았습니다.")
  			}
+ 		
 
 });           	
  // 페이지 로드--------------
@@ -372,37 +379,44 @@ fs-18 {
 
 
 	<script>
-$(function(){
-    $(".review-content").hide();
-    $(".btn-panel").hide();
-    $(".review-star").hide();
-    $(".edit-btn").click(function(){
-      if (${hasBuyHistory}) {
-        $(".view-panel").hide();
-        $(".review-content").show();
-        $(".btn-panel").show();
-        $(".review-star").show();
-        if (${reviewDto != null}){
-            alert("구매 당 1회의 리뷰만 작성할 수 있습니다");
-            $(".review-content").hide();
-            $(".btn-panel").hide();
-            $(".review-star").hide();
-            $(".view-panel").show();
-        }
-      } else if (${memberId == null}){
-    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
-      } else {
-        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
-      }
-      
-  })
-    $(".cancel-btn").click(function(){
-    $(".view-panel").show();
-    $(".review-content").hide();
-    $(".btn-panel").hide();
-    $(".review-star").hide();
-  })    
-});
+	$(function(){
+	    $(".review-content").hide();
+	    $(".btn-panel").hide();
+	    $(".review-star").hide();
+	    $(".edit-btn").click(function(){
+	      if (${hasBuyHistory}) {
+	        $(".view-panel").hide();
+	        $(".review-content").show();
+	        $(".btn-panel").show();
+	        $(".review-star").show();
+	        if (${reviewDto != null}){
+	            alert("이미 작성된 리뷰가 있습니다. \n 리뷰는 1회만 작성 가능합니다.");
+	            $(".review-content").hide();
+	            $(".btn-panel").hide();
+	            $(".review-star").hide();
+	            $(".view-panel").show();
+	        }
+	      } else if (${memberId == null}){
+	    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
+	    	  $(".review-content").hide();
+	          $(".btn-panel").hide();
+	          $(".review-star").hide();
+	          $(".view-panel").show();
+	      } else {
+	        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
+	        $(".review-content").hide();
+	        $(".btn-panel").hide();
+	        $(".review-star").hide();
+	        $(".view-panel").show();
+	      }
+	  })
+	    $(".cancel-btn").click(function(){
+	    $(".view-panel").show();
+	    $(".review-content").hide();
+	    $(".btn-panel").hide();
+	    $(".review-star").hide();
+	  })    
+	});
 </script>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display: none;">${productInfoDto.productNo}</h6>
@@ -413,11 +427,21 @@ $(function(){
 			<!-- 이미지 부터 구매하기 버튼까지 -->
 			<div class="flex">
 				<!-- 상품 이미지 -->
-				<div class="w-50 center">
-					<img src="/static/image/basic_img.jpg"
+				<div class="w-50 center" >
+					<c:choose>
+	            		<c:when test="${productInfoDto.productImgNo != 0}">
+		            		<img class="img-size img-rad-10 img-background" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+		            	</c:when>
+	            		<c:otherwise>
+	            			<img class="img-size img-rad-10 img-background" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+	            		</c:otherwise>
+	            	</c:choose>
+<%-- 				<div class="w-50 center">
+					<img src="${basicImagePath}"
 						class="img-size img-rad-10 img-background ">
+					<h1>${basicImagePath} 가 경로입니다.</h1>
+				</div> --%>
 				</div>
-
 				<!-- 상품 가격 부터 구매하기 버튼까지-->
 
 				<div class="flex-remain">
@@ -507,9 +531,19 @@ $(function(){
 	<div class="container-1000">
 		<!--상세이미지 초기상태 -->
 		<div class="row detail-img-initial" id="scrollTargetDetailImage">
+			<c:choose>
+	           	<c:when test="${productInfoDto.detailImgNo != 0}">
+	            	<img width="1000" class="center" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.detailImgNo}">
+	            </c:when>
+	           	<c:otherwise>
+	           		<img width="1000" class="center" alt="상품 대표 이미지" src="/static/image/productDummy.png">
+	            </c:otherwise>
+	        </c:choose>
+	    </div>
+		<%-- <div class="row detail-img-initial" id="scrollTargetDetailImage">
 			<!-- id 상세이미지로 스크롤 타겟팅 -->
-			<img width="1000" class="center" src="/static/image/detail_img.jpg">
-		</div>
+			<img width="1000" class="center" src="${detailImagePath}">
+		</div> --%>
 	</div>
 
 
@@ -550,49 +584,6 @@ $(function(){
 		<hr class="w-30">
 	</div>
 
-	<!--       =--------------------------------------------------------------------d -->
-	<div class="container-1000">
-		<!-- 리뷰 등록창 -->
-		<div class="review-write">
-			<!-- 리뷰 별점 -->
-			<div class="review-star">
-				<i class="fa-regular fa-star starR" value="1"></i> <i
-					class="fa-regular fa-star starR" value="2"></i> <i
-					class="fa-regular fa-star starR" value="3"></i> <i
-					class="fa-regular fa-star starR" value="4"></i> <i
-					class="fa-regular fa-star starR" value="5"></i>
-			</div>
-
-			<!-- 리뷰 작성하기 창 -->
-			<div class="view-panel center mt-20">
-				<button class="form-btn medium neutral edit-btn w-100">리뷰 작성하기</button>
-			</div>
-
-			<!-- 리뷰 작성창 -->
-			<div class="row review-content">
-				<textarea name="reviewContent" class="form-input w-100 semi-round"
-					style="min-height: 100px"></textarea>
-			</div>
-			<div class="flex w-100 btn-panel">
-				<div class="w-50"></div>
-				<div class="flex w-50 right">
-					<button type="button"
-						class="form-btn small neutral cancel-btn me-10">취소</button>
-					<button type="button"
-						class="form-btn small positive review-insert-btn">등록</button>
-				</div>
-			</div>
-		</div>
-		<div class="row review-list review-initial" id="scrollTargetReview">
-			리뷰 목록 위치
-		</div>
-		<button class="form-btn w-100 positive medium show-review">리뷰 모두 보기</button>
-		<button class="form-btn w-100 neutral medium hide-review">리뷰 접기</button>
-	</div>
-
-	<div class="row center"></div>
-	<!--       =--------------------------------------------------------------------d -->
-
 	<!-- 리뷰 별점 및 차트 -->
 	<div class="container-1000 mt-40 mb-40">
 		<div class="row center">
@@ -611,6 +602,64 @@ $(function(){
 			</div>
 		</div>
 	</div>
+
+	<!------------------------------------------------------------------------>
+	<div class="container-1000">
+		<!-- 리뷰 등록창 -->
+		<div class="review-write">
+			<!-- 리뷰 별점 -->
+			<div class="review-star">
+				<i class="fa-regular fa-star starR" value="1"></i>
+				<i class="fa-regular fa-star starR" value="2"></i>
+				<i class="fa-regular fa-star starR" value="3"></i>
+				<i class="fa-regular fa-star starR" value="4"></i>
+				<i class="fa-regular fa-star starR" value="5"></i>
+			</div>		
+			<c:choose>
+			    <c:when test="${reviewDto!=null}">
+			        <!-- 리뷰 작성하기 창 -->
+					<div class="view-panel center mt-20">
+						<button class="form-btn medium neutral edit-btn w-100">리뷰 작성하기</button>
+					</div>
+			    </c:when>
+			    <c:otherwise>
+			    </c:otherwise>
+			</c:choose>
+			<!-- 리뷰 작성창 -->
+			<div class="row review-content">
+				<textarea name="reviewContent" class="form-input w-100 semi-round"
+					style="min-height: 100px"></textarea>
+			</div>
+			<div class="flex w-100 btn-panel">
+				<div class="w-50"></div>
+				<div class="flex w-50 right">
+					<button type="button"
+						class="form-btn small neutral cancel-btn me-10">취소</button>
+					<button type="button"
+						class="form-btn small positive review-insert-btn">등록</button>
+				</div>
+			</div>
+		</div>
+		<div class="row review-list review-initial" id="scrollTargetReview">
+			리뷰 목록 위치
+		</div>
+		<c:choose>
+		    <c:when test="${reviewCount > 0}">
+		        <button class="form-btn w-100 positive medium show-review">리뷰 모두 보기</button>
+				<button class="form-btn w-100 neutral medium hide-review">리뷰 접기</button>
+		    </c:when>
+		    <c:otherwise>
+		    <div class="row center">
+		       <h2 >리뷰가 존재하지 않습니다.</h2>
+		     </div> 
+		    </c:otherwise>
+		</c:choose>			
+	</div>
+
+	<div class="row center"></div>
+	<!--       =--------------------------------------------------------------------d -->
+
+	
 
 
 

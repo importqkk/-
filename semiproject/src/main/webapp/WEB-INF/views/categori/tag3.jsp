@@ -54,12 +54,13 @@
         }
         
         .img-box{
-        	margin: 10px; 
-        	width: 240px;
-        	height: 400px;
-         	background-color: #f1f1f1;  /* 배경색 */
-        	border-radius: 0.5em; /* 끝부분 조정*/
-        	align-items: center;
+        	padding-top:10px;
+	        width: 235px;
+	        height: 400px;
+	        background-color: #f8f8f8;  /* 배경색 */
+	        border-radius: 20px; /* 끝부분 조정*/
+	        align-items: center;
+	        margin-bottom: 20px;
         }
        
 
@@ -76,7 +77,7 @@
 		}
 		
 		.a-font-purple{
-			color: #d0ccff;
+			color: #776bff;
 			font-size:13px;
 			font-weight:bolder;
 			cursor:pointer;
@@ -107,6 +108,10 @@
 		.star-purple{
 			color: #776BFF;
 		}
+		.productName {
+			min-height: 80px;
+			max-height: 80px;
+		}
 		
 </style>
 <script type="text/javascript">
@@ -118,7 +123,7 @@
 			$(this).addClass("a-font-purple") // 눌린 글씨에 a-font-purple
 			if($(this).text()=="인기순")	
 			{
-				console.log($(this));
+				
 				$(".best").show();
 				$(".new").hide();
 				$(".cheap").hide();
@@ -126,7 +131,7 @@
 				
 			}
 			else if($(this).text()=="최신순"){
-				console.log($(this));
+				
 				$(".best").hide();
 				$(".new").show();
 				$(".cheap").hide();
@@ -134,14 +139,14 @@
 			}
 			else if($(this).text()=="낮은가격순")
 			{
-				console.log($(this));
+			
 				$(".best").hide();
 				$(".new").hide();
 				$(".cheap").show();
 				$(".expensive").hide();
 			}
 			else{
-				console.log($(this));
+				
 				$(".best").hide();
 				$(".new").hide();
 				$(".cheap").hide();
@@ -194,7 +199,7 @@
 			var productReview = $(this).children(".productReview").text();
 			productReview = Math.round(productReview)
 			// 평균 별점을 계산하고 각 별 아이콘에 대해 적절한 색상을 설정합니다.
-			console.log(productReview)
+			
 			if (productReview==0){
 			}
 			else{
@@ -214,7 +219,6 @@
 		// 상품 가격표시 
 		$(".productPrice").each(function(){
 			var productPrice = $(this).text();
-			console.log(productPrice);
 			$(this).text(parseInt(productPrice).toLocaleString()+"원");
 			
 		});
@@ -222,20 +226,9 @@
 	
 </script>
 
-</head>
-
-<body>
 	<div class="container-1200">
-		<div class="row">
-			<hr>
-			<h5 class="font-lightgrey"> <i class=" fa-solid fa-house"></i> > 면역력 어쩌구</h5>
-			
-		</div>
-		<div class="row">
-			<hr>
-		</div>
 		<div class="flex center">
-			<a class="w-5 me-50 fas fa-solid fa-bars" href="all"></a>		
+			<a class="w-5 me-50 fas fa-solid fa-border-all" href="all"></a>		
 			<a class="w-5 me-50 fas fa-light fa-face-smile" href="tag1"></a>
 			<a class="w-5 me-50 fas fa-light fa-weight-scale" href="tag2"></a>
 			<a class="w-5 me-50 fas fa-light fa-venus purple-box"></a>	
@@ -254,10 +247,10 @@
 			<h5 class="w-5 me-50">남성</h5>
 			<h5 class="w-5 me-50">눈</h5>
 			<h5 class="w-5 me-50">치아</h5>
-			<h5 class="w-5 me-50">뼈</h5>
+			<h5 class="w-5 me-50">관절/뼈</h5>
 		</div>
-		<div class="flex left grey-box">	
-			<div class="flex w-60 ">
+		<div class="flex left grey-box mt-20 mb-10">	
+			<div class="flex w-70 ps-100">
 				<a class="w-6 a-font-lightgrey oneLine">인기순</a>
 				<a class="w-2 font-lightgrey oneLine">&nbsp;|</a>
 				<a class="w-5 a-font-lightgrey oneLine">최신순</a>
@@ -266,11 +259,10 @@
 				<a class="w-2 font-lightgrey oneLine">|</a>
 				<a class="w-9 a-font-lightgrey oneLine">높은가격순</a>
 			</div>
-			<div class="flex w-40 right">
+			<div class="flex w-30 right pe-100">
 				<h5 class="w-30 me-10 font-lightgrey">${count}개의 제품</h5>
 			</div>
 		</div>	
-		<br>
 <!---------------------여기부터는 이미지 들의 리스트 ------------------->
 		<!--인기상품 -->
 		<div class="flex-wr center mb-20 best">
@@ -278,19 +270,26 @@
 				varStatus="status">
 				<div class="img-box me-20 center" data-index="${status.index}"
 					data-info="best">
-					<img src="/static/image/basic_img.jpg"
-						class="img-list center mt-20"> <br>
+					<c:choose>
+		            		<c:when test="${productInfoDto.productImgNo != 0}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            	</c:when>
+		            		<c:otherwise>
+		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            		</c:otherwise>
+	            	</c:choose>
+					<br>
 					<h5 class="productNoBest" style="display: none;">${productInfoDto.productNo}</h5>
 
-					<div class="row ms-10 me-10 left">
-						<h5 class="left ms-20 me-20 font-grey productName"
+					<div class="row left">
+						<h5 class="left ms-20 me-20 font-grey productName mb-10"
 							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
 							${productInfoDto.productName}</h5>
 					</div>
-					<div class="row left">
-						<h4 class="ms-20 productPrice">${productInfoDto.productPrice}원</h4>
+					<div class="left mb-5">
+						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
 					</div>
-					<div class="row left">
+					<div class="left">
 						<div class="flex left ms-20 oneLine star-box">
 							<h4 class="fas fa-star star-white star-13 "></h4>
 							<h4 class="fas fa-star star-white star-13 "></h4>
@@ -311,19 +310,26 @@
 				varStatus="status1">
 				<div class="img-box me-20 center" data-index1="${status1.index}"
 					data-info="new">
-					<img src="/static/image/basic_img.jpg"
-						class="img-list center mt-20"> <br>
+					<c:choose>
+		            		<c:when test="${productInfoDto.productImgNo != 0}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            	</c:when>
+		            		<c:otherwise>
+		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            		</c:otherwise>
+	            	</c:choose>
+					<br>
 					<h5 class="productNoNew" style="display: none;">${productInfoDto.productNo}</h5>
 
-					<div class="row ms-10 me-10 left">
-						<h5 class="left ms-20 me-20 font-grey productName"
+					<div class="row left">
+						<h5 class="left ms-20 me-20 font-grey productName mb-10"
 							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
 							${productInfoDto.productName}</h5>
 					</div>
-					<div class="row left">
-						<h4 class="ms-20 productPrice">${productInfoDto.productPrice}원</h4>
+					<div class="left mb-5">
+						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
 					</div>
-					<div class="row left">
+					<div class="left">
 						<div class="flex left ms-20 oneLine star-box">
 							<h4 class="fas fa-star star-white star-13 "></h4>
 							<h4 class="fas fa-star star-white star-13 "></h4>
@@ -344,19 +350,26 @@
 				varStatus="status2">
 				<div class="img-box me-20 center" data-index2="${status2.index}"
 					data-info="cheap">
-					<img src="/static/image/basic_img.jpg"
-						class="img-list center mt-20"> <br>
+					<c:choose>
+		            		<c:when test="${productInfoDto.productImgNo != 0}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            	</c:when>
+		            		<c:otherwise>
+		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            		</c:otherwise>
+	            	</c:choose>
+					<br>
 					<h5 class="productNoCheap" style="display: none;">${productInfoDto.productNo}</h5>
 
 					<div class="row ms-10 me-10 left">
-						<h5 class="left ms-20 me-20 font-grey productName"
+						<h5 class="left ms-20 me-20 font-grey productName mb-10"
 							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
 							${productInfoDto.productName}</h5>
 					</div>
-					<div class="row left">
-						<h4 class="ms-20 productPrice">${productInfoDto.productPrice}원</h4>
+					<div class="left mb-5">
+						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
 					</div>
-					<div class="row left">
+					<div class="left">
 						<div class="flex left ms-20 oneLine star-box">
 							<h4 class="fas fa-star star-white star-13 "></h4>
 							<h4 class="fas fa-star star-white star-13 "></h4>
@@ -377,8 +390,15 @@
 				varStatus="status2">
 				<div class="img-box me-20 center" data-index3="${status2.index}"
 					data-info="expensive">
-					<img src="/static/image/basic_img.jpg"
-						class="img-list center mt-20"> <br>
+					<c:choose>
+		            		<c:when test="${productInfoDto.productImgNo != 0}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            	</c:when>
+		            		<c:otherwise>
+		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            		</c:otherwise>
+	            	</c:choose>
+					<br>
 					<h5 class="productNoExpensive" style="display: none;">${productInfoDto.productNo}</h5>
 
 					<div class="row ms-10 me-10 left">
@@ -386,10 +406,10 @@
 							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
 							${productInfoDto.productName}</h5>
 					</div>
-					<div class="row left">
-						<h4 class="ms-20 productPrice">${productInfoDto.productPrice}원</h4>
+					<div class="left mb-5">
+						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
 					</div>
-					<div class="row left">
+					<div class="left">
 						<div class="flex left ms-20 oneLine star-box">
 							<h4 class="fas fa-star star-white star-13 "></h4>
 							<h4 class="fas fa-star star-white star-13 "></h4>
@@ -404,10 +424,6 @@
 				</div>
 			</c:forEach>
 		</div>
-
 	</div>
-</body>
-
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -68,6 +68,7 @@
         height: 100%;
         min-height: 200px;
         max-height: 200px;
+        border-radius: 20px;
     }
     .new-box > *,
     .best-box > *, 
@@ -76,6 +77,7 @@
     }
     .more-link {
     	cursor: pointer;
+    	text-decoration: none;
     }
     .more-link:hover {
     	color: #22201e;
@@ -143,55 +145,55 @@
 		        <!-- 카테고리 버튼 start -->
 		        <div class="flex center pt-40 flex-auto-width mb-70">
 		            <div>
-		                <a class="link" href="#" data-tag="1">
-		                    <i class="fas fa-solid fa-bars"></i>
+		                <a class="link" href="/categori/all">
+		                    <i class="fas fa-solid fa-border-all"></i>
 		                    <h5 class="category-title">전체</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#" data-tag="2">
+		                <a class="link" href="/categori/tag1">
 		                    <i class="fas fa-light fa-face-smile"></i>
 		                    <h5 class="category-title">피부</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#" data-tag="3">
+		                <a class="link" href="/categori/tag2">
 		                    <i class="fas fa-light fa-weight-scale"></i>
 		                    <h5 class="category-title">다이이트</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#" data-tag="4">
+		                <a class="link" href="/categori/tag3">
 		                    <i class="fas fa-light fa-venus"></i>
 		                    <h5 class="category-title">여성</h5>	
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#" data-tag="5">
+		                <a class="link" href="/categori/tag4">
 		                    <i class="fas fa-sharp fa-light fa-bolt-lightning"></i>
 		                    <h5 class="category-title">활력</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#" data-tag="6">
+		                <a class="link" href="/categori/tag5">
 		                    <i class="fas fa-thin fa-mars"></i>
 		                    <h5 class="category-title">남성</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#" data-tag="7">
+		                <a class="link" href="/categori/tag6">
 		                    <i class="fas fa-light fa-eye"></i>
 		                    <h5 class="category-title">눈</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#" data-tag="8">
+		                <a class="link" href="/categori/tag7">
 		                    <i class="fas fa-light fa-tooth"></i>
 		                    <h5 class="category-title">치아</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="#">
+		                <a class="link" href="/categori/tag8">
 		                    <i class="fas fa-light fa-bone"></i>
 		                    <h5 class="category-title">관절/뼈</h5>
 		                </a>
@@ -201,7 +203,7 @@
 		        <!-- 최신상품 목록 start -->
 		        <div class="row pb-70">
 		            <div class="row">
-		                <h1 class="c-b80 me-5">NEW</h1><h2 class="c-b80 me-5">in</h2><h1 class="me-10 c-p100">SEMI</h1>
+		                <h1 class="c-b80 me-5">NEW</h1><h2 class="c-b80 me-5">in</h2><h1 class="me-10 c-p100">MYFORMULA</h1>
 		                <span class="c-b80">이달의 신상품을 만나보세요!</span>
 		            </div>
  		            <div class="row flex new-box flex-wr">
@@ -217,7 +219,7 @@
 					            		</c:otherwise>
 					            	</c:choose>
 			                    </div>
-			                    <div class="mb-10 text-wrap item-title product-name">
+			                    <div class="row mb-10 text-wrap item-title product-name">
 			                        <h4 class="c-b40" title="${productInfoDto.productBrand}">[${productInfoDto.productBrand}] </h4>
 			                        <h4 title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 			                    </div>
@@ -282,8 +284,8 @@
 		        <!-- 인기상품 목록 start -->
 		        <div class="row pb-70">
 		            <div class="row">
-		                <h1 class="c-b80 me-5">BEST</h1><h2 class="c-b80 me-5">in</h2><h1 class="me-10 c-p100">SEMI</h1>
-		                <span class="c-b80">이번 달 SEMI에서 가장 인기 있는 상품이에요.</span>
+		                <h1 class="c-b80 me-5">BEST</h1><h2 class="c-b80 me-5">in</h2><h1 class="me-10 c-p100">MYFORMULA</h1>
+		                <span class="c-b80">이번 달 MYFORMULA에서 가장 인기 있는 상품이에요.</span>
 		            </div>
 		            <div class="row">
 		                <div class="row flex best-box flex-wr">
@@ -299,7 +301,7 @@
 						            		</c:otherwise>
 						            	</c:choose>
 			                        </div>
-			                        <div class="mb-10 item-title product-name">
+			                        <div class="row mb-10 item-title product-name">
 			                        	<h4 class="c-b40" title="${productInfoDto.productBrand}">[${productInfoDto.productBrand}] </h4>
 			                        	<h4 title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 			                        </div>
@@ -369,7 +371,7 @@
 		        			<h1 class="c-b80 me-5">전체상품</h1>
 		        		</div>
 		                <div class="right pe-10 w-50">
-	                	<a class="more-link c-b40">더보기 ></a>
+	                	<a class="more-link c-b40" href="/categori/all">더보기 ></a>
 	                </div>
 		            </div>
 		        	
@@ -386,7 +388,7 @@
 					            		</c:otherwise>
 					            	</c:choose>
 			                    </div>
-			                    <div class="mb-10 item-title product-name">
+			                    <div class="row mb-10 item-title product-name">
 			                       	<h4 class="c-b40" title="${productInfoDto.productBrand}">[${productInfoDto.productBrand}] </h4>
 		                        	<h4 title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 			                    </div>

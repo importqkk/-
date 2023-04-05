@@ -21,14 +21,12 @@ import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ProductImgDao;
 import com.kh.semi.dao.ProductInfoDao;
 import com.kh.semi.dao.ProductTagDao;
-import com.kh.semi.dao.TagDao;
 import com.kh.semi.dto.DetailImgDto;
 import com.kh.semi.dto.ImgDto;
 import com.kh.semi.dto.MainImgDto;
 import com.kh.semi.dto.ProductDto;
 import com.kh.semi.dto.ProductImgDto;
 import com.kh.semi.dto.ProductTagDto;
-import com.kh.semi.dto.TagDto;
 import com.kh.semi.vo.ProductListPaginationVo;
 
 @Controller
@@ -39,8 +37,6 @@ public class AdminController {
 	private ProductDao productDao;
 	@Autowired
 	private ProductTagDao productTagDao;
-	@Autowired
-	private TagDao tagDao;
 	@Autowired
 	private ImgDao imgDao;
 	@Autowired
@@ -137,17 +133,11 @@ public class AdminController {
 	// 상품 목록
 	@GetMapping("/productManage/list")
 	public String list(Model model,
-			@ModelAttribute("vo") ProductListPaginationVo vo/*,
-			@ModelAttribute ProductDto productDto,
-			@ModelAttribute ProductTagDto productTagDto,
-			@ModelAttribute TagDto tagDto*/) {
+			@ModelAttribute("vo") ProductListPaginationVo vo) {
 		int totalCount = productDao.selectCount(vo);
 		vo.setCount(totalCount);
 		List<ProductDto> list = productDao.list(vo);
 		model.addAttribute("list", list);
-		/*int productNo = productDto.getProductNo();
-		int tagNo = productTagDao.selectOne(productNo).getTagNo();
-		model.addAttribute("tagTitle", tagDao.selectOne(tagNo));*/
 		return "/WEB-INF/views/admin/productManage/list.jsp";
 	}
 	
@@ -258,6 +248,10 @@ public class AdminController {
 					.build());
 		}
 		attr.addAttribute("productNo", productDto.getProductNo());
+		return "redirect:editFinish";
+	}
+	@GetMapping("/productManage/editFinish")
+	public String editFinish() {
 		return "redirect:list";
 	}
 	

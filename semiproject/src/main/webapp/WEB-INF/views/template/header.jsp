@@ -29,17 +29,14 @@
             font-family: inherit;
             vertical-align: baseline;
         }
-        .search-box {
-            margin-top: 8px;
-        }
         .custom-size {
             font-size: 25px;
         }
         .menu-btn,
         .close-btn {
             font-size: 40px;
-            margin-top: 3px;
             cursor: pointer;
+            margin-bottom: 5px;
         }
         .close-btn {
             font-size: 53px;
@@ -77,6 +74,10 @@
         .social {
             vertical-align: middle;
             margin-top: 30px;
+        }
+        .logo-img {
+        	width: 110px;
+        	padding-top: 5px;
         }
         /* 메인 */
         .swiper {
@@ -183,7 +184,7 @@
                 $(this).find(".fa").css("color", "");
             })
         })
-                $(function(){	
+        $(function(){	
 			$("a.logout").click(function(e){
             	var choice = confirm("로그아웃 하시겠습니까?");
             	if(choice){
@@ -209,15 +210,15 @@
                             <i class="fa-solid fa-xmark fa-2x c-p100 close-btn"></i>
                         </div>
                         <div class="w-100 center">
-                            <h1 class="c-p100 logo" style="font-size: 50px;">
-                                <a class="link" style="color: #776BFF;" href="/">SEMI</a>
-                            </h1>
+                            <a class="link" style="color: #776BFF;" href="/">
+                            	<img class="logo-img" alt="로고" src="/static/image/logo.png">
+                            </a>
                         </div>
                     </div>
                     <div class="center w-50 pb-10">
                     	<form action="/product/search/">
                         <div class="search-box">
-                            <input class="search-input w-100" name="keyword" placeholder="어떤 영양제가 궁금하세요?">
+                            <input class="search-input w-100" name="keyword" placeholder="어떤 영양제가 궁금하세요?" value="${param.keyword}">
                             <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         </form>
@@ -247,7 +248,7 @@
 		                        </a>
 	                        </div>
 	                        <div class="center">
-		                        <a class="link" href="/member/logout" title="로그아웃">
+		                        <a class="link logout" href="/member/logout" title="로그아웃">
 		                            <i class="fa-solid fa-right-from-bracket c-p100"></i>
 		                            <span class="header-menu-text">로그아웃</span>
 		                        </a>
@@ -294,7 +295,7 @@
 	                        <h4><a class="link ps-20 pe-20" href="/member/mypage" style="border-right: 1px solid #22201e;">마이페이지</a></h4>
 	                    </div>
 	                    <div>
-	                        <h4><a class="link ps-20" href="/member/logout">로그아웃</a></h4>
+	                        <h4><a class="link ps-20 logout" href="/member/logout">로그아웃</a></h4>
 	                    </div>
                     </c:if>
                 </div>
@@ -378,7 +379,7 @@
                 </div>
                 <div class="flex">
                     <div class="flex ps-100 ms-30 w-50">
-                        <h2><a class="link" href="#">QnA</a></h2>
+                        <h2><a class="link" href="/qa/list">QnA</a></h2>
                     </div>
                     <div class="flex right pe-100 me-30 w-50">
                         <a class="link-social" href="#">

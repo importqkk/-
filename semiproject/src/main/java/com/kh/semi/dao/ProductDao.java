@@ -8,14 +8,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import com.kh.semi.dto.ProductDto;
 import com.kh.semi.vo.ProductListPaginationVo;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
-
 import com.kh.semi.dto.ProductInfoDto;
 
 @Repository
@@ -31,12 +23,15 @@ public class ProductDao {
 						.productNo(rs.getInt("product_no"))
 						.productBrand(rs.getString("product_brand"))
 						.productName(rs.getString("product_name"))
+						.productStock(rs.getInt("product_stock"))
 						.productPrice(rs.getInt("product_price"))
 						.productSellCount(rs.getInt("product_sell_count"))
 						.productJoin(rs.getDate("product_join"))
 						.reivewAVG(rs.getFloat("avg"))
 						.reivewCNT(rs.getInt("cnt"))
+						.tagNo(rs.getInt("tag_no"))
 						.detailImgNo(rs.getInt("detail_img_no"))
+						.productImgNo(rs.getInt("product_img_no"))
 					.build();
 		}
 	};
@@ -109,7 +104,7 @@ public class ProductDao {
 		return jdbcTemplate.query(sql, mapper);
 	}
 	public List<ProductInfoDto> newAll(){ // 최신순
-		String sql = "select * from product_info order by product_Join desc";
+		String sql = "select * from product_info order by product_Join desc, product_no desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 	public List<ProductInfoDto> cheapAll(){// 낮은 가격순 
@@ -341,7 +336,7 @@ public class ProductDao {
 		return list.isEmpty() ? null:list;
 	}
 	public List<ProductInfoDto> newTag8(){ // 1번 최신순
-		String sql = "SELECT * from product_info where tag_no=1 order by product_join desc, product_no desc";
+		String sql = "SELECT * from product_info where tag_no=8 order by product_join desc, product_no desc";
 		List<ProductInfoDto> list = jdbcTemplate.query(sql, mapper);
 		return list.isEmpty() ? null:list;
 	}
@@ -452,22 +447,45 @@ public class ProductDao {
 				
 
 				
+
 		
 		
-		
-				// 만든거 가져가야함
-				//판매수량 +
-				public boolean increaseSellCount(int productCount,int productno) {
-					String sql="update product set product_sell_count=product_sell_count + ? where product_no=?";
-					Object[] param= {productCount,productno};
-					return jdbcTemplate.update(sql, param) > 0;
-				}
+
+	// 만든거 가져가야함
+		//판매수량 +
+	public boolean increaseSellCount(int productCount,int productno) {
+		String sql="update product set product_sell_count=product_sell_count + ? where product_no=?";
+		Object[] param= {productCount,productno};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 				
-				//상품재고
-				public boolean decreaseStock(int productCount,int productno) {
-					String sql="update product set product_stock= product_stock - ? where product_no= ?";
-					Object[] param= {productCount,productno};
-					return jdbcTemplate.update(sql, param) > 0;
-				}
+
 		
+		//상품재고
+		public boolean decreaseStock(int productCount,int productno) {
+			String sql="update product set product_stock= product_stock - ? where product_no= ?";
+			Object[] param= {productCount,productno};
+			return jdbcTemplate.update(sql, param) > 0;
+		}
+		
+				
+		// 상품 번호로 상품 기본 이미지 불러오기 
+		public String productBasicImage(int productNo){
+			String sql="SELECT img.img_name "
+					+ "FROM product_img "
+					+ "JOIN img ON product_img.img_no = img.img_no "
+					+ "WHERE product_img.product_no = ?";
+			Object[] param = {productNo};
+			return jdbcTemplate.queryForObject(sql, String.class,param);
+		}
+		
+		// 상품 번호로 상품 상세 이미지 불러오기 
+		public String productDetailImage(int productNo){
+			String sql="SELECT img.img_name "
+					+ "FROM detail_img "
+					+ "JOIN img ON detail_img.img_no = img.img_no "
+					+ "WHERE detail_img.product_no = ?";
+			Object[] param = {productNo};
+			return jdbcTemplate.queryForObject(sql, String.class,param);
+		}
 }
