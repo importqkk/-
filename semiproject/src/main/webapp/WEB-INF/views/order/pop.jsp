@@ -100,7 +100,7 @@
                    } else {
                        window.open("popInsert", "popupNo1", "width=530, height=500");
                    }
-                   console.log(${listSize});
+                   
                });
            });
 

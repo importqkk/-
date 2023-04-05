@@ -75,7 +75,7 @@ public class OrderController {
 				//가격뽑기
 				for(int i=0; i<list.size();i++)
 				{
-					System.out.println(list.get(i));
+					
 					int count = list.get(i).getProductCount();
 					int price = list.get(i).getProductPrice();
 					totalproduct+= (count*price);
@@ -189,7 +189,7 @@ public class OrderController {
 	 @GetMapping("/popup")
 	 public String popup(HttpSession session,Model model) {
 		 String memberId=(String)session.getAttribute("memberId");
-		 System.out.println(memberId);
+		 
 		 //기본주소지를 보여줌
 
 //		 
@@ -230,7 +230,7 @@ public class OrderController {
 	   //받아온 값을 통해 equals로 비교하고 해당값이 맞으면 dao에 추가해 삭제하는 문장
 	   for (int i=0; i<list.size();i++) {
 	      
-	      System.out.println(list.get(i));
+	      
 	      if(name.equals(list.get(i).getMemberName()) &&
 	                phone.equals(list.get(i).getMemberPhone()) &&
 	                post.equals(list.get(i).getMemberPost()) &&
