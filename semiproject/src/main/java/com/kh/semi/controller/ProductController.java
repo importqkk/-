@@ -82,26 +82,26 @@ public class ProductController {
 	// 상품 검색 결과 페이지
 	@GetMapping("/search")
 	public String list(Model model,
-			@RequestParam String keyword
+			@RequestParam String search
 	) {
 		// 검색결과 표시
-		String searchCount = productDao.productCount(keyword);
+		String searchCount = productDao.productCount(search);
 		model.addAttribute("searchCount",searchCount);
 		
 		// 검색어 표시 위한 model.addAttribute
-		model.addAttribute("keyword",keyword);
+		model.addAttribute("keyword",search);
 		
 		// 상품 인기순 (판매량 제일 많은 순) 
-		List<ProductInfoDto> bestList = productDao.searchBest(keyword);
+		List<ProductInfoDto> bestList = productDao.searchBest(search);
 		model.addAttribute("bestList",bestList); 
 		// 최신순
-		List<ProductInfoDto> newList = productDao.searchNew(keyword);
+		List<ProductInfoDto> newList = productDao.searchNew(search);
 		model.addAttribute("newList",newList);
 		// 낮은 가격순 
-		List<ProductInfoDto> cheapList = productDao.searchCheap(keyword);
+		List<ProductInfoDto> cheapList = productDao.searchCheap(search);
 		model.addAttribute("cheapList",cheapList);
 		// 높은 가격순
-		List<ProductInfoDto> expensiveList = productDao.searchExpensive(keyword);
+		List<ProductInfoDto> expensiveList = productDao.searchExpensive(search);
 		model.addAttribute("expensiveList",expensiveList);
 		
 		return "/WEB-INF/views/product/search.jsp";

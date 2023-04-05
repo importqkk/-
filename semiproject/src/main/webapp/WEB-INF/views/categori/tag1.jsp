@@ -112,6 +112,11 @@
 			min-height: 80px;
 			max-height: 80px;
 		}
+		.item-img{
+			min-height: 200px;
+			min-width: 200px;
+		}
+		
 		
 </style>
 <script type="text/javascript">
@@ -271,10 +276,10 @@
 					data-info="best">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
-		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            			<img class="center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
 		            		</c:otherwise>
 	            	</c:choose>
 					<br>
@@ -311,10 +316,10 @@
 					data-info="new">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
-		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            			<img class="center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
 		            		</c:otherwise>
 	            	</c:choose>
 					<br>
@@ -351,10 +356,10 @@
 					data-info="cheap">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
-		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            			<img class="center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
 		            		</c:otherwise>
 	            	</c:choose>
 					<br>
@@ -391,10 +396,10 @@
 					data-info="expensive">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
-		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            			<img class="center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
 		            		</c:otherwise>
 	            	</c:choose>
 					<br>
@@ -424,5 +429,4 @@
 			</c:forEach>
 		</div>
 	</div>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
