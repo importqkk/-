@@ -21,6 +21,7 @@ import com.kh.semi.dao.CartProductInfoDao;
 import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.MemberInfoDao;
 import com.kh.semi.dao.OrderDao;
+import com.kh.semi.dao.OrderListDao;
 import com.kh.semi.dao.OrderProductDao;
 import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ProductInfoDao;
@@ -52,6 +53,8 @@ public class OrderController {
 	private OrderDao orderDao;
 	@Autowired
 	private OrderProductDao orderProductDao;
+	@Autowired
+	private OrderListDao orderListDao;
 
 
 	
@@ -213,12 +216,7 @@ public class OrderController {
 		 return "redirect:popup";
 	 }
 	 
-	 //회원의 구매목록 조회
-	 @GetMapping("/myList")
-	 public String myList(HttpSession session) {
-		 String memberId=(String)session.getAttribute("memberId");
-		 return "/WEB-INF/views/order/myList.jsp";
-	 }
+
 	 
 	//삭제구문
 	@PostMapping("/popDelete")
@@ -248,4 +246,33 @@ public class OrderController {
 	   return "redirect:popup";
 	}
 	 
+	//회원의 구매목록 조회
+		 @GetMapping("/myList")
+		 public String myList(HttpSession session,Model model) {
+			 String memberId=(String)session.getAttribute("memberId");
+
+			 
+			 //결제완
+			 orderListDao.payment(memberId);
+			 model.addAttribute("payment",orderListDao.payment(memberId));
+			 
+			 
+			 //대기
+			 orderListDao.prepare(memberId);
+			 model.addAttribute("prepare",orderListDao.prepare(memberId));
+			 
+			 
+			 //배송중
+			 orderListDao.delivery(memberId);
+			 model.addAttribute("delivery",orderListDao.delivery(memberId));
+			 
+			 
+			 //완료
+			 orderListDao.complete(memberId);
+			 model.addAttribute("complete",orderListDao.complete(memberId));
+			 
+			 
+			 
+			 return "/WEB-INF/views/order/myList.jsp";
+		 }
 }
