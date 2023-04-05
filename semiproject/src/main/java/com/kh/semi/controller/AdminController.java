@@ -248,6 +248,10 @@ public class AdminController {
 					.build());
 		}
 		attr.addAttribute("productNo", productDto.getProductNo());
+		return "redirect:editFinish";
+	}
+	@GetMapping("/productManage/editFinish")
+	public String editFinish() {
 		return "redirect:list";
 	}
 	

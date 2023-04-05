@@ -15,6 +15,10 @@
         background-color: #f8f8f8;
         border-radius: 25px;
         padding: 10px;
+        width: 130px;
+        height: 130px;
+        min-height: 130px;
+        min-width: 130px;
     }
     .check-btn, .fa-xmark {
         cursor: pointer;
@@ -41,7 +45,7 @@
 <!-- ------------------------------------ 반복문 돌릴 부분 start ------------------------------------ -->
         <c:forEach var="cartProductInfoDto" items="${itemInfo}">
 	        <div class="row-large flex cart-item">
-	            <div class="flex me-15">
+	            <div class="flex me-15 img-box">
   	            	<c:choose>
 	            		<c:when test="${cartProductInfoDto.imgNo != 0}">
 	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
