@@ -76,12 +76,12 @@ public class QaController {
 	}
 	
 	
-	@GetMapping("/detail")
-	public String detail(Model model, @RequestParam int qaNo) {
-		boolean cnt = qaDao.updateReadCount(qaNo);
-		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
-		return "/WEB-INF/views/qa/detail.jsp";
-	}
+//	@GetMapping("/detail")
+//	public String detail(Model model, @RequestParam int qaNo) {
+//		boolean cnt = qaDao.updateReadCount(qaNo);
+//		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
+//		return "/WEB-INF/views/qa/detail.jsp";
+//	}
 	
 
 	@PostMapping("/detail")
@@ -146,39 +146,26 @@ public class QaController {
 	}
 	
 	
-//	@GetMapping("/detail")
-//	public String detail2(@RequestParam int qaNo,
-//							Model model, HttpSession session) {
-//		
-//		//사용자가 작성자인지 판정 후 전달(JSP)
-//		QaDto qaDto = qaDao.selectOne(qaNo);
-//		String memberId = (String)session.getAttribute("memberId");
-//		
-//		boolean owner = qaDto.getMemberId() != null
-//				&& qaDto.getMemberId().equals(memberId);
-//		model.addAttribute("owner",owner);
-//		
-//		String memberRole = (String)session.getAttribute("memberRole");
-//		boolean admin = memberRole != null && memberRole.equals("관리자");
-//		model.addAttribute("admin", admin);
-//		
-////		//조회수 증가
-//		if(!owner) {
-//			Set<Integer>memory = (Set<Integer>)session.getAttribute("memory");
-//			if(memory == null) {
-//				memory = new HashSet<>();
-//			}
-//			if(!memory.contains(qaNo)) {
-//				qaDao.updateReadCount(qaNo);
-//				qaDto.setQaRead(qaDto.getQaRead()+1);
-//				memory.add(qaNo);
-//			}
-//			session.setAttribute("memory", memory);
-//		}
-//		model.addAttribute("qaDto",qaDto);
-//		return"/WEB-INF/views/qa/detail.jsp";
-//	}
-//	
+	@GetMapping("/detail")
+	public String detail(@RequestParam int qaNo, Model model, HttpSession session) {
+	    // 게시글 작성자와 현재 로그인한 회원 판별
+	    QaDto qaDto = qaDao.selectOne(qaNo);
+	    String memberId = (String) session.getAttribute("memberId");
+	    
+	    boolean owner = qaDto.getMemberId() != null && qaDto.getMemberId().equals(memberId);
+	    model.addAttribute("owner", owner);
+	    String memberRole = (String) session.getAttribute("memberRole");
+	    
+	    boolean admin = memberRole != null && memberRole.equals("관리자");
+	    model.addAttribute("admin", admin);
+	    model.addAttribute("qaDto", qaDto);
+	    
+	    boolean cnt = qaDao.updateReadCount(qaNo);
+		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
+	    
+	    return "/WEB-INF/views/qa/detail.jsp";
+	}
+	
 	
 	
 	@GetMapping("/write")
