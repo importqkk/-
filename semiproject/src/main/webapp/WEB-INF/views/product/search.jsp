@@ -228,7 +228,18 @@
 			$(this).text(parseInt(productPrice).toLocaleString()+"원");
 			
 		});
-	})
+		
+		
+		// 키워드 이름 처리 
+		$(".keyword").each(function(){
+			var maxChar = 16; 
+			var keyword = $(this).text();
+			if (keyword.length > maxChar) {
+				var shortName = keyword.substr(0, maxChar);
+				$(this).text(shortName + "...");
+			}
+		});
+	});
 	
 </script>
 
@@ -236,6 +247,9 @@
 
 <body>
 	<div class="container-1200">
+		<br><br>
+		<div class="row center">
+			<h2 class="oneLine keyword" title="${keyword}">"${keyword}"&nbsp;</h2>
 		<div class="row center pb-20">
 			<h2 class="oneLine">"${keyword}"&nbsp;</h2>
 			<h2 class="oneLine">총</h2><h2 class="oneLine font-purple"> ${searchCount}</h2><h2 class="oneLine">개의 검색결과</h2>

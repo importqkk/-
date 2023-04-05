@@ -1,4 +1,5 @@
-.input-file-button{
+@charset "UTF-8";
+		.input-file-button{
             text-align: center;
             cursor: pointer;
             border-radius: 50px;
