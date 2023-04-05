@@ -318,7 +318,7 @@
 		            		</c:otherwise>
 	            	</c:choose>
 					<br>
-					<h5 class="productNoBest" style="display: none;">${productInfoDto.productNo}</h5>
+					<h5 class="productNoNew" style="display: none;">${productInfoDto.productNo}</h5>
 
 					<div class="row left">
 						<h5 class="left ms-20 me-20 font-grey productName mb-10"
