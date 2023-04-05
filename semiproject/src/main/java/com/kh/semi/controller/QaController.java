@@ -49,9 +49,6 @@ public class QaController {
 		int totalCount = qaDao.selectCount(vo);
 		vo.setCount(totalCount);
 		
-		// 공지사항 띄울시
-//		model.addAttribute("noticeList",qaDao.selectNoticeList(1,2));
-		
 		//게시글
 		List<QaDto>list = qaDao.selectList(vo);
 		model.addAttribute("list",list);
@@ -173,7 +170,11 @@ public class QaController {
 	
 	@GetMapping("/write")
 	public String write(@RequestParam(required = false)Integer qaParent,
-								Model model) {
+								Model model, HttpSession session) {
+		 String memberId = (String) session.getAttribute("memberId");
+		    if (memberId == null) {
+		        throw new RequirePermissionException("권한이 없습니다.");
+		    }
 		model.addAttribute("qaParent",qaParent);
 		
 		return"/WEB-INF/views/qa/write.jsp";
