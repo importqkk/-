@@ -104,7 +104,7 @@ public class ProductDao {
 		return jdbcTemplate.query(sql, mapper);
 	}
 	public List<ProductInfoDto> newAll(){ // 최신순
-		String sql = "select * from product_info order by product_Join desc";
+		String sql = "select * from product_info order by product_Join desc, product_no desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
 	public List<ProductInfoDto> cheapAll(){// 낮은 가격순 
