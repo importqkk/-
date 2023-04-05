@@ -6,99 +6,25 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
-
-<c:if test="${sessionScope.memberRole == '관리자'}">
-<script type="text/javascript">
-	function checkAll(){
-		var allCheckbox = document.querySelector(".check-all");
-		var checkboxes = document.querySelectorAll("input[type=checkbox][name=qaNo]");
-		for(var i=0; i < checkboxes.length; i++) {
-			checkboxes[i].checked = allCheckbox.checked;
-		}
-	}
-	function checkUnit(){
-		var allCheckbox = document.querySelector(".check-all");
-		var checkboxes = document.querySelectorAll("input[type=checkbox][name=qaNo]");
-		var count = 0;
-		for(var i=0; i < checkboxes.length; i++) {
-			if(checkboxes[i].checked) {
-				count++;
-			}
-		}
-		allCheckbox.checked = (checkboxes.length == count);
-	}
-	function formCheck() {
-		var checkboxes = document.querySelectorAll(
-							"input[type=checkbox][name=qaNo]:checked");	
-		if(checkboxes.length == 0) return false;
-		
-		return confirm("정말 삭제하시겠습니까?");
-	}
-</script>
- <input type="checkbox" class="check-all" onclick="checkAll()">전체 선택
-</c:if>
-
- <script>
-    $(document).ready(function() {
-        // 전체 선택 체크박스 클릭 시 개별 선택 체크박스 상태 변경
-        $(".check-all").change(function() {
-            $(".center").find("input[type='checkbox']").prop("checked", $(this).prop("checked"));
-        });
-
-        // 개별 선택 체크박스 클릭 시 전체 선택 체크박스 상태 변경
-        $(".center").find("input[type='checkbox']").change(function() {
-            if (!$(this).prop("checked")) {
-                $(".check-all").prop("checked", false);
-            } else {
-                if ($(".center").find("input[type='checkbox']:not(:checked)").length == 0) {
-                    $(".check-all").prop("checked", true);
-                }
-            }
-        });
-
-        // 삭제 버튼 클릭 시 선택된 게시물 삭제
-        $("button.negative").click(function() {
-            var checked = $(".center").find("input[type='checkbox']:checked");
-            if (checked.length == 0) {
-                alert("삭제할 게시물을 선택해주세요.");
-                return false;
-            }
-            return confirm("정말로 삭제하시겠습니까?");
-        });
-    });
-</script>
-
-
-
 <div class="container-1000">
-    <div class="row left">
+    <div class="row left pt-20 pb-20">
         <h1>Q&A 게시판</h1>
     </div>
-    <div class="row center">
+    <div class="row center pt-40 pb-40">
     	<h4>욕설, 비방 글, 상업적인 게시글은 통보없이 삭제될 수 있고 이용에 제한이 생길 수 있습니다. </h4>
     </div>
     
-    <c:if test="${sessionScope.memberRole == '관리자'}">
-    <form action="deleteAll" method="post" onsubmit="return formCheck();">
-    </c:if>
+       <c:if test="${sessionScope.memberId != null || sessionScope.memberRole == '관리자'}">
     <div class="row right">
-    	<c:if test="${sessionScope.memberRole == '관리자'}">
-    	<a class="form-btn neutral me-20 delete-btn">삭제</a>
-    	</c:if>
-        <a href="write" class="form-btn neutral">글쓰기</a>
+        <a href="write" class="form-btn neutral pb-30">글쓰기</a>
     </div>
+    </c:if>
+    
     <div class="row">
         <table class="table table-qna">
             <thead>
             
                 <tr>
-                	<c:if test="${sessionScope.memberRole == '관리자'}">
-                	<!-- 전체 선택 체크박스를 배치 -->
-                	<th>
-                		<input type="checkbox" class="check-all"	
-                										onchange="checkAll();">
-                	</th>
-                	</c:if>
                     <th class="w-10">번호</th>
                     <th class="w-10">카테고리</th>
                     <th class="w-40">제목</th>
@@ -131,14 +57,6 @@
 				<!-- 검색 또는 목록 결과를 출력 -->
 				<c:forEach var="qaDto" items="${list}">
 				<tr>
-					<c:if test="${sessionScope.memberRole == '관리자'}">
-					<!-- 개별 선택 체크박스를 배치 -->
-					<td>
-						<input type="checkbox" name="qaNo" value="${qaDto.qaNo}"
-								onchange="checkUnit();">
-					</td>
-					</c:if>
-					
 					<td class="center">${qaDto.qaNo}</td>
 					<td class="center">
 						${qaDto.qaHead}
@@ -189,18 +107,13 @@
             </tbody>
         </table>
     </div>
+      <c:if test="${sessionScope.memberId != null || sessionScope.memberRole == '관리자'}">
     <div class="row right">
-    	<c:if test="${sessionScope.memberRole == '관리자'}">
-    	<a class="form-btn neutral me-20 delete-btn">삭제</a>
-    	</c:if>
-        <a href="write" class="form-btn neutral">글쓰기</a>
+        <a href="write" class="form-btn neutral pt-30">글쓰기</a>
     </div>
-    
-    <c:if test="${sessionScope.memberRole == '관리자'}">
-    </form>
     </c:if>
     
-    <div class="row pagination center">
+    <div class="row pagination center pt-20 pb-20">
     
     	<!-- 처음 -->
     	<c:choose>
