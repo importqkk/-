@@ -53,7 +53,6 @@ public class ProductController {
 			
 			// 상품 리뷰 평점 전달
 			int reviewAvg = reviewDao.avgReview(productNo);
-			System.out.println(reviewAvg);
 			model.addAttribute("reviewAvg",reviewAvg);
 			
 			// 상품 리뷰 Dto 리스트 전달

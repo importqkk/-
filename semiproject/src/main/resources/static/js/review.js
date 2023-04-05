@@ -48,10 +48,6 @@ $(function(){
 				$(".review-content").hide();
 			    $(".btn-panel").hide();
 			    $(".review-star").hide();
-//			    $(".view-panel").show();
-			    
-//			    $(".review-insert-btn").attr("disabled", true).css("opacity", 0.5);
-//			     location.reload();
 			},
 			error:function(){
 				alert("등록 오류");
@@ -100,8 +96,6 @@ $(function(){
 						$(html).find(".changeText").hide();
 					}
 			
-						
-//					$(html).find(".reviewStar").empty(); // 이전에 채워진 별표 초기화
 					for (var j = 0; j < response[i].reviewStar; j++) {
 					    $(html).find(".reviewStar").append('<i class="fa-solid fa-star starR on"></i>');
 					}
@@ -112,6 +106,8 @@ $(function(){
 					var likeButton = $("<i>").addClass("fa-heart fa-regular")
 												.attr("data-review-no", response[i].reviewNo)
 												.click(likeReview);
+												
+					
 					
 					//reviewNo를 불러와 check한 후 화면에 현재의 좋아요 상태 찍음
 					var reviewNo = response[i].reviewNo;
@@ -136,9 +132,7 @@ $(function(){
 							      }
 							    });
 							  })(response[i].reviewNo); // 즉시 실행 함수로 클로저 생성 -> 생성하지 않으면 첫 번째 리뷰의 리뷰번호만 반복됨
-												
 					$(html).find(".reviewLike").prepend(likeButton);
-
 					$(".review-list").append(html);
 										
 				}
@@ -201,12 +195,8 @@ $(function(){
         	$(this).parent().children('.starR').removeClass('on').removeClass('fa-solid').addClass('fa-regular');
         	$(this).addClass('fa-solid').addClass('on').prevAll('.starR').addClass('on').addClass('fa-solid'); 
     	});
-//		$(".view-panel").hide();
 		$(".review-write").hide();
 		$editPanel.show();
-    	$(".review[data-review-no=" + reviewNo + "]").hide();
-		 
-		
 
 		$(html).find(".review-edit-btn").click(function(){
 					var reviewContent = $(html).find("[name=reviewContent]").val();
@@ -245,9 +235,6 @@ $(function(){
 					});
 		$(".edit-panel").hide();
 		$(".review-write").show();
-		
-		
-		$(".review[data-review-no=" + reviewNo + "]").show();
 					
 			
 		});
@@ -263,7 +250,6 @@ function likeReview(){
     var reviewNo = $(this).data("review-no");
     
     var $likeButton = $(this); // 선택한 하트 엘리먼트
-
     $.ajax({
         url:"/rest/review/like",
         method:"post",
