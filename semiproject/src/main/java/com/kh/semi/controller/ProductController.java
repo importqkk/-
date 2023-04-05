@@ -37,7 +37,8 @@ public class ProductController {
 				
 		// 상품 정보 전달
 		ProductInfoDto productInfoDto = productDao.selectOne(productNo);
-
+		
+		
 		// 존재하지 않는 detail 페이지에 접근 시도 시에, redirect /categori/all
 		if(productInfoDto == null) {
 			return "redirect:/categori/all";
@@ -53,14 +54,13 @@ public class ProductController {
 			
 			// 상품 리뷰 평점 전달
 			int reviewAvg = reviewDao.avgReview(productNo);
-			System.out.println(reviewAvg);
 			model.addAttribute("reviewAvg",reviewAvg);
 			
 			// 상품 리뷰 Dto 리스트 전달
 			List<ReviewDto> reviewList = reviewDao.selectList(productNo);
 			model.addAttribute("reviewList",reviewList);
 			
-		}
+		}		
 		
 		// 리뷰 작성 구간--------------
 		// 아이디 확인
