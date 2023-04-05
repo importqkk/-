@@ -39,7 +39,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 								"/member/**",// 맴버를 모두 추가 후 제외할 항목을 밑에 추가
 								"/cart/**", // 장바구니
 								"/order/**",// 주문
-								"/review/list"// 내 리뷰 리스트
+								"/review/list",// 내 리뷰 리스트
+								"/admin/**"
 								)
 						.excludePathPatterns(// 세션이 맴버가 아니여도 접근 가능
 						"/member/join",

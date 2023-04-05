@@ -197,10 +197,8 @@
 	        }, function (rsp) { // callback함수
 	          if (rsp.success) {
 	        	  if (rsp.success) {
-	                    console.log(rsp);
 	          } else {
 	            // 결제 실패 시 로직
-	        	  console.log(rsp);
 	          }
 	        });
 	      }

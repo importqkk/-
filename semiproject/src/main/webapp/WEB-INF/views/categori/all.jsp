@@ -131,27 +131,27 @@ a.fas {
 					$(this).addClass("a-font-purple") // 눌린 글씨에 a-font-purple
 					if ($(this).text() == "인기순") // 인기순 정렬
 					{
-						console.log($(this));
+				
 						$(".best").show();
 						$(".new").hide();
 						$(".cheap").hide();
 						$(".expensive").hide();
 
 					} else if ($(this).text() == "최신순") { // 최신순 정렬
-						console.log($(this));
+					
 						$(".best").hide();
 						$(".new").show();
 						$(".cheap").hide();
 						$(".expensive").hide();
 					} else if ($(this).text() == "낮은가격순") // 낮은가격순 정렬
 					{
-						console.log($(this));
+						
 						$(".best").hide();
 						$(".new").hide();
 						$(".cheap").show();
 						$(".expensive").hide();
 					} else { // 높은가격순 정렬
-						console.log($(this));
+					
 						$(".best").hide();
 						$(".new").hide();
 						$(".cheap").hide();
@@ -203,7 +203,7 @@ a.fas {
 			var productReview = $(this).children(".productReview").text();
 			productReview = Math.round(productReview)
 			// 평균 별점을 계산하고 각 별 아이콘에 대해 적절한 색상을 설정합니다.
-			console.log(productReview)
+			
 			if (productReview==0){
 			}
 			else{
@@ -223,7 +223,6 @@ a.fas {
 		// 상품 가격표시 
 		$(".productPrice").each(function(){
 			var productPrice = $(this).text();
-			console.log(productPrice);
 			$(this).text(parseInt(productPrice).toLocaleString()+"원");
 			
 		});
@@ -268,26 +267,33 @@ a.fas {
 				<h5 class="w-30 me-10 font-lightgrey">${count}개의제품</h5>
 			</div>
 		</div>
-		<!---------------------여기부터는 이미지 들의 리스트 ------------------->
+<!---------------------여기부터는 이미지 들의 리스트 ------------------->
 		<!--인기상품 -->
 		<div class="flex-wr center mb-20 best">
 			<c:forEach var="productInfoDto" items="${bestList}"
 				varStatus="status">
 				<div class="img-box me-20 center" data-index="${status.index}"
 					data-info="best">
-					<img src="/static/image/basic_img.jpg"
-						class="img-list center">
+					<c:choose>
+		            		<c:when test="${productInfoDto.productImgNo != 0}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            	</c:when>
+		            		<c:otherwise>
+		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            		</c:otherwise>
+	            	</c:choose>
+					<br>
 					<h5 class="productNoBest" style="display: none;">${productInfoDto.productNo}</h5>
 
-					<div class="row ms-10 me-10 left">
-						<h5 class="left ms-20 me-20 font-grey productName"
+					<div class="row left">
+						<h5 class="left ms-20 me-20 font-grey productName mb-10"
 							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
 							${productInfoDto.productName}</h5>
 					</div>
-					<div class="row left">
-						<h4 class="ms-20 productPrice">${productInfoDto.productPrice}원</h4>
+					<div class="left mb-5">
+						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
 					</div>
-					<div class="row left">
+					<div class="left">
 						<div class="flex left ms-20 oneLine star-box">
 							<h4 class="fas fa-star star-white star-13 "></h4>
 							<h4 class="fas fa-star star-white star-13 "></h4>
@@ -308,19 +314,26 @@ a.fas {
 				varStatus="status1">
 				<div class="img-box me-20 center" data-index1="${status1.index}"
 					data-info="new">
-					<img src="/static/image/basic_img.jpg"
-						class="img-list center"> <br>
+					<c:choose>
+		            		<c:when test="${productInfoDto.productImgNo != 0}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            	</c:when>
+		            		<c:otherwise>
+		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            		</c:otherwise>
+	            	</c:choose>
+					<br>
 					<h5 class="productNoNew" style="display: none;">${productInfoDto.productNo}</h5>
 
-					<div class="row ms-10 me-10 left">
-						<h5 class="left ms-20 me-20 font-grey productName"
+					<div class="row left">
+						<h5 class="left ms-20 me-20 font-grey productName mb-10"
 							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
 							${productInfoDto.productName}</h5>
 					</div>
-					<div class="row left">
-						<h4 class="ms-20 productPrice">${productInfoDto.productPrice}원</h4>
+					<div class="left mb-5">
+						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
 					</div>
-					<div class="row left">
+					<div class="left">
 						<div class="flex left ms-20 oneLine star-box">
 							<h4 class="fas fa-star star-white star-13 "></h4>
 							<h4 class="fas fa-star star-white star-13 "></h4>
@@ -341,19 +354,26 @@ a.fas {
 				varStatus="status2">
 				<div class="img-box me-20 center" data-index2="${status2.index}"
 					data-info="cheap">
-					<img src="/static/image/basic_img.jpg"
-						class="img-list center"> <br>
+					<c:choose>
+		            		<c:when test="${productInfoDto.productImgNo != 0}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            	</c:when>
+		            		<c:otherwise>
+		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            		</c:otherwise>
+	            	</c:choose>
+					<br>
 					<h5 class="productNoCheap" style="display: none;">${productInfoDto.productNo}</h5>
 
 					<div class="row ms-10 me-10 left">
-						<h5 class="left ms-20 me-20 font-grey productName"
+						<h5 class="left ms-20 me-20 font-grey productName mb-10"
 							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
 							${productInfoDto.productName}</h5>
 					</div>
-					<div class="row left">
-						<h4 class="ms-20 productPrice">${productInfoDto.productPrice}원</h4>
+					<div class="left mb-5">
+						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
 					</div>
-					<div class="row left">
+					<div class="left">
 						<div class="flex left ms-20 oneLine star-box">
 							<h4 class="fas fa-star star-white star-13 "></h4>
 							<h4 class="fas fa-star star-white star-13 "></h4>
@@ -374,8 +394,15 @@ a.fas {
 				varStatus="status2">
 				<div class="img-box me-20 center" data-index3="${status2.index}"
 					data-info="expensive">
-					<img src="/static/image/basic_img.jpg"
-						class="img-list center"> <br>
+					<c:choose>
+		            		<c:when test="${productInfoDto.productImgNo != 0}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            	</c:when>
+		            		<c:otherwise>
+		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            		</c:otherwise>
+	            	</c:choose>
+					<br>
 					<h5 class="productNoExpensive" style="display: none;">${productInfoDto.productNo}</h5>
 
 					<div class="row ms-10 me-10 left">
@@ -383,10 +410,10 @@ a.fas {
 							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
 							${productInfoDto.productName}</h5>
 					</div>
-					<div class="row left">
-						<h4 class="ms-20 productPrice">${productInfoDto.productPrice}원</h4>
+					<div class="left mb-5">
+						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
 					</div>
-					<div class="row left">
+					<div class="left">
 						<div class="flex left ms-20 oneLine star-box">
 							<h4 class="fas fa-star star-white star-13 "></h4>
 							<h4 class="fas fa-star star-white star-13 "></h4>
@@ -401,7 +428,5 @@ a.fas {
 				</div>
 			</c:forEach>
 		</div>
-
 	</div>
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

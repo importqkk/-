@@ -199,25 +199,49 @@
  /*------------------------------------------------------------------------------------------------------------------------------*/
     //포인트적용
     $(function(){
-		$(".apply").click(function(){
-			  var usePoint = $("input[name='orderUserPoint']").val();
-			  var point=${point};
-			  
-			if(usePoint > point){
-				alert("보유 적립금 이상으로 입력할 수 없습니다.")
-				
-			}else{
-				var total= point-usePoint;
-				$("span").text(total + "원");
-				if(usePoint==0){
-					$("table tr:nth-child(3) td:nth-child(2)").text(usePoint + "원");
-				}else{
-					$("table tr:nth-child(3) td:nth-child(2)").text("-"+ usePoint + "원");
-					
-				}
-			}
-		});
+    $(".apply").click(function(){
+    	//총 상품가격
+    	var totalProduct = ${totalproduct};
+        // 사용하는 포인트
+        var usePoint = $("input[name='orderUserPoint']").val();
+        // 사용가능 포인트
+        var point = ${point};
+        var fee=3000;
+        // 사용포인트가 사용가능 포인트보다 많으면
+        if(usePoint > point){
+            alert("보유 적립금 이상으로 입력할 수 없습니다.");
+			
+        }else if(usePoint < 0){
+        	alert("0원 이하로 입력할 수 없습니다.");
+        }else {
+        	if(totalProduct==0)
+            // 제품금액
+            
+            console.log(totalProduct);
+            // 사용포인트
+            var totalPoint = usePoint;
+            console.log(totalPoint)
+            // 적립금 사용 후 남은 사용가능 적립금
+            var remainingPoint = point - totalPoint;
+            console.log(remainingPoint);
+            // 총 금액
+            var totalPrice = totalProduct - totalPoint + 3000;
+            console.log(totalPrice);
+
+            $("span#usePoint").text(remainingPoint.toLocaleString() + "원");
+            $("span#remainingPoint").text(remainingPoint.toLocaleString() + "원");
+            if(totalPoint <= 0){
+                $("table tr:nth-child(3) td:nth-child(2)").text(totalPoint.toLocaleString() + "원");
+
+            }else{
+                $("table tr:nth-child(3) td:nth-child(2)").text("-"+ totalPoint.toLocaleString() + "원");
+
+            }
+            $("table tr:last-child td:last-child").text(totalPrice.toLocaleString() + "원");
+        }
     });
+});
+
 /*------------------------------------------------------------------------------------------------------------------------------*/
     </script>
     
@@ -228,7 +252,64 @@
    	</script>
 
    	<script>
-    	
+	   	$(function() {
+	   		$("button#pay-btn").click(function(){
+	   			//재고관리
+	   			
+	   			
+	   			
+	   			
+	   			
+	   			const IMP = window.IMP; // 생략 가능
+				  IMP.init("imp07065242");  // 예: imp00000000a
+					
+				  var name = $("#productName").val(); //상품이름 변수로 선언
+				console.log(name);
+				  var totalPrice = parseInt($("td.tPrice").next().text().replace(/\D/g,''));
+					console.log(totalPrice);
+				 
+				// IMP.request_pay(param, callback) 결제창 호출
+				IMP.request_pay({ // param
+				   pg: "kakaopay",
+				   pay_method: "card",
+				   merchant_uid : 'merchant_' + new Date().getTime(),
+				   name: name +"개 외",   //필수 파라미터 입니다.
+				   amount: parseInt(totalPrice), //숫자타입
+				   buyer_email : 'iamport@siot.do1',
+				   buyer_name : '구매자이름',
+				   buyer_tel : '010-1234-5678',
+				   buyer_addr : '서울특별시 강남구 삼성동',
+				   buyer_postcode : '123-456'
+				}, function (rsp) { // callback
+				   if (rsp.success) { 
+					   $("form#pay").submit();
+			 
+				   } else {
+					   alert("결제를 취소하셨습니다.");
+				   }
+				})
+	   	});
+	   });
+	   	
+	   	$(function() {
+	   	    $(".test-btn").click(function(event) {
+	   	       var stockCount = $("input[name='stockCount']").val();
+	   	       console.log(stockCount);
+	   	          if(stockCount >0){
+	   	           alert("품절된 상품이 존재합니다. 삭제 후 다시 이용해주세요.");
+	   	          } else{
+	   	        	alert("성공");
+	   	          }
+	   	    });
+	   	});
+	   	
+	    $(function() {
+	        $("input[name='orderUserPoint']").on("input", function() { 
+	          if ($(this).val() === "") {
+	            $(this).val("0");
+	          }
+	        });
+	      });
    	</script>
    
     
@@ -237,7 +318,7 @@
 <!-- align-items: center; -->
 <div class="container-1000">
     <h1>주문/결제</h1>
-     <form action="/order/buy" method="post">
+     <form id="pay" action="/order/buy" method="post">
    <div class="flex mt-30 content-top">
        <div class=" w-70 pe-70">
            <p><h2>주문상품</h2></p>
@@ -302,9 +383,12 @@
 			                <label id="productCount${loop.index}" class="me-10"><h4>수량</h4></label>
 			                <h4>${cartinfo.productCount}</h4>
 			            </div>
-			        </div>
-			                    
+			        </div>      
 			    </div>
+			    <c:if test="${cartProductInfoDto.productStock == 0}">
+              		<c:set var="count" value="${count + 1}" />
+	              	<input name="stockCount" type="hidden" value="${count}">
+	           </c:if>
 			</c:forEach>
         </c:if>
     
@@ -316,7 +400,7 @@
                </div>
                <div class="row">
                    <label class="ps-10">받는사람</label>
-                   <input type="text" class="form-input light w-100 medium" name="orderRecever">
+                   <input type="text" class="form-input light w-100 medium" name="orderRecever" required="required">
                </div>
 
                <div class="row">
@@ -355,9 +439,9 @@
            <div>
                <p><h2>결제정보</h2></p>
                <p class="no-margin ps-10"><label>적립금</label></p>
-                    <input type="text" class="form-input small2 light w-80" name="orderUserPoint" value="0">
+                    <input type="number" class="form-input small2 light w-80" name="orderUserPoint" value="0">
                     <button class="form-btn positive small3 apply no-margin" type="button">적용</button>
-               <p class="right no-margin font-h5 pe-10">적용가능한 적립금: <span><fmt:formatNumber value="${point}" pattern="#,##0"/>원</span></p>
+               <p class="right no-margin font-h5 pe-10">적용가능한 적립금: <span id="usePoint"><fmt:formatNumber value="${point}" pattern="#,##0"/>원</span></p>
 
 
                <div class="row order">
@@ -377,9 +461,9 @@
                           <td>0 원</td>
                         </tr>
                         <tr>
-                          <td>총 결제금액</td>
+                          <td class="tPrice">총 결제금액</td>
                           <td>
-                          <fmt:formatNumber value="${totalprice}" pattern="#,##0"/> 원
+                          <fmt:formatNumber value="${totalprice}" pattern="#,##0"/> 원 
                           </td>
                         </tr>
                     </table>
@@ -404,7 +488,8 @@
                     </div>
                 </div>
                <div>
-                   <button class="form-btn positive medium w-100 mt-30" type="submit" >결제하기</button>
+                   <button class="form-btn positive medium w-100 mt-30" id="pay-btn" type="button" >결제하기</button>
+                   <button class="test-btn" type="button">테스트버튼</button>
                </div>
            </div>
        </div>

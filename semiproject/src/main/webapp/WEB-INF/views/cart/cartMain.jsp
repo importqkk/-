@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<%!    int count = 0 ; %>
+<c:set var="listSize" value="${fn:length(itemInfo)}" />
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- 상품 수량 수정 비동기처리 스크립트 -->
@@ -15,12 +19,17 @@
         background-color: #f8f8f8;
         border-radius: 25px;
         padding: 10px;
+        width: 130px;
+        height: 130px;
+        min-height: 130px;
+        min-width: 130px;
     }
     .check-btn, .fa-xmark {
         cursor: pointer;
     }
 </style>
 <script type="text/javascript">
+
 	$(function() {
 	    $(".order-btn").click(function(event) {
 	       var stockCount = $("input[name='stockCount']").val();
@@ -31,6 +40,7 @@
 	          }
 	    });
 	});
+
 </script>
 
     <div class="container-1000">
@@ -38,10 +48,11 @@
             <h1 class="me-15">장바구니</h1>
             <h1 class="c-p100">${cartCnt}</h1> <%-- 상품 총 수량(상품별 개수X, 상품 종류 개수O) --%>
         </div>
+        
 <!-- ------------------------------------ 반복문 돌릴 부분 start ------------------------------------ -->
         <c:forEach var="cartProductInfoDto" items="${itemInfo}">
 	        <div class="row-large flex cart-item">
-	            <div class="flex me-15">
+	            <div class="flex me-15 img-box">
   	            	<c:choose>
 	            		<c:when test="${cartProductInfoDto.imgNo != 0}">
 	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
@@ -632,6 +643,12 @@
 	                </a>
 	            </div>
 	        </div>
+	        <!--  -->
+	        <c:if test="${cartProductInfoDto.productStock == 0}">
+	        	<c:set var="count" value="${count + 1}" />
+	        	<input name="stockCount" type="hidden" value="${count}">
+	        </c:if>
+	        <!--  -->
 	    </c:forEach>
 <!-- ------------------------------------ 반복문 돌릴 부분 end ------------------------------------ -->
 		<c:if test="${isEmpty == 0}">

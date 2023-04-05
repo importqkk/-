@@ -128,7 +128,7 @@
 .review-initial {
 	position: relative;
 	overflow: hidden;
-	height: 100px; /* 보여질 높이 설정 */
+	height: 150px; /* 보여질 높이 설정 */
 }
 
 .review-click {
@@ -307,7 +307,6 @@ fs-18 {
                      $(".total-price").text((number*productPrice+3000).toLocaleString());
                  },
                  error: function(xhr, status, error) {
-                     console.log("에러다에러");
                  }
          	});
     	});
@@ -426,11 +425,21 @@ fs-18 {
 			<!-- 이미지 부터 구매하기 버튼까지 -->
 			<div class="flex">
 				<!-- 상품 이미지 -->
-				<div class="w-50 center">
-					<img src="/static/image/basic_img.jpg"
+				<div class="w-50 center" >
+					<c:choose>
+	            		<c:when test="${productInfoDto.productImgNo != 0}">
+		            		<img class="img-size img-rad-10 img-background" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+		            	</c:when>
+	            		<c:otherwise>
+	            			<img class="img-size img-rad-10 img-background" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+	            		</c:otherwise>
+	            	</c:choose>
+<%-- 				<div class="w-50 center">
+					<img src="${basicImagePath}"
 						class="img-size img-rad-10 img-background ">
+					<h1>${basicImagePath} 가 경로입니다.</h1>
+				</div> --%>
 				</div>
-
 				<!-- 상품 가격 부터 구매하기 버튼까지-->
 
 				<div class="flex-remain">
@@ -520,9 +529,19 @@ fs-18 {
 	<div class="container-1000">
 		<!--상세이미지 초기상태 -->
 		<div class="row detail-img-initial" id="scrollTargetDetailImage">
+			<c:choose>
+	           	<c:when test="${productInfoDto.detailImgNo != 0}">
+	            	<img width="1000" class="center" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.detailImgNo}">
+	            </c:when>
+	           	<c:otherwise>
+	           		<img width="1000" class="center" alt="상품 대표 이미지" src="/static/image/productDummy.png">
+	            </c:otherwise>
+	        </c:choose>
+	    </div>
+		<%-- <div class="row detail-img-initial" id="scrollTargetDetailImage">
 			<!-- id 상세이미지로 스크롤 타겟팅 -->
-			<img width="1000" class="center" src="/static/image/detail_img.jpg">
-		</div>
+			<img width="1000" class="center" src="${detailImagePath}">
+		</div> --%>
 	</div>
 
 
@@ -563,24 +582,47 @@ fs-18 {
 		<hr class="w-30">
 	</div>
 
+	<!-- 리뷰 별점 및 차트 -->
+	<div class="container-1000 mt-40 mb-40">
+		<div class="row center">
+			<div class="star-box center">
+				<br>
+				<h4 class="font-purple oneLine">${reviewAvg}</h4>
+				<h4 class="font-grey fs-18 oneLine">&nbsp;/ 5</h4>
+				<br>
+				<div class="rating">
+					<span class="fa fa-star font-white"></span> <span
+						class="fa fa-star font-white"></span> <span
+						class="fa fa-star font-white"></span> <span
+						class="fa fa-star font-white"></span> <span
+						class="fa fa-star font-white"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!------------------------------------------------------------------------>
 	<div class="container-1000">
 		<!-- 리뷰 등록창 -->
 		<div class="review-write">
 			<!-- 리뷰 별점 -->
 			<div class="review-star">
-				<i class="fa-regular fa-star starR" value="1"></i> <i
-					class="fa-regular fa-star starR" value="2"></i> <i
-					class="fa-regular fa-star starR" value="3"></i> <i
-					class="fa-regular fa-star starR" value="4"></i> <i
-					class="fa-regular fa-star starR" value="5"></i>
-			</div>
-
-			<!-- 리뷰 작성하기 창 -->
-			<div class="view-panel center mt-20">
-				<button class="form-btn medium neutral edit-btn w-100">리뷰 작성하기</button>
-			</div>
-
+				<i class="fa-regular fa-star starR" value="1"></i>
+				<i class="fa-regular fa-star starR" value="2"></i>
+				<i class="fa-regular fa-star starR" value="3"></i>
+				<i class="fa-regular fa-star starR" value="4"></i>
+				<i class="fa-regular fa-star starR" value="5"></i>
+			</div>		
+			<c:choose>
+			    <c:when test="${reviewDto!=null}">
+			        <!-- 리뷰 작성하기 창 -->
+					<div class="view-panel center mt-20">
+						<button class="form-btn medium neutral edit-btn w-100">리뷰 작성하기</button>
+					</div>
+			    </c:when>
+			    <c:otherwise>
+			    </c:otherwise>
+			</c:choose>
 			<!-- 리뷰 작성창 -->
 			<div class="row review-content">
 				<textarea name="reviewContent" class="form-input w-100 semi-round"
@@ -615,24 +657,7 @@ fs-18 {
 	<div class="row center"></div>
 	<!--       =--------------------------------------------------------------------d -->
 
-	<!-- 리뷰 별점 및 차트 -->
-	<div class="container-1000 mt-40 mb-40">
-		<div class="row center">
-			<div class="star-box center">
-				<br>
-				<h4 class="font-purple oneLine">${reviewAvg}</h4>
-				<h4 class="font-grey fs-18 oneLine">&nbsp;/ 5</h4>
-				<br>
-				<div class="rating">
-					<span class="fa fa-star font-white"></span> <span
-						class="fa fa-star font-white"></span> <span
-						class="fa fa-star font-white"></span> <span
-						class="fa fa-star font-white"></span> <span
-						class="fa fa-star font-white"></span>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 
 

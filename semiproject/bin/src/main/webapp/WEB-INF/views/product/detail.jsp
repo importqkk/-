@@ -169,7 +169,6 @@
                     $(".total-price").text((number*productPrice+3000).toLocaleString());
                  },
                  error: function(xhr, status, error) {
-                     console.log("에러다에러");
                  }
          	});
     	});
