@@ -630,20 +630,12 @@ fs-18 {
 				</div>
 			</div>
 		</div>
-		<div class="row review-list review-initial" id="scrollTargetReview">
+		<div class="row review-list review-initial" id=scrollTargetReview">
 			리뷰 목록 위치
 		</div>
-		<c:choose>
-		    <c:when test="${reviewCount > 0}">
-		        <button class="form-btn w-100 positive medium show-review">리뷰 모두 보기</button>
-				<button class="form-btn w-100 neutral medium hide-review">리뷰 접기</button>
-		    </c:when>
-		    <c:otherwise>
-		    <div class="row center">
-		       <h2 >리뷰가 존재하지 않습니다.</h2>
-		     </div> 
-		    </c:otherwise>
-		</c:choose>			
+		<button class="form-btn w-95 positive small show-review">리뷰
+			모두 보기</button>
+		<button class="form-btn w-95 neutral small hide-review">리뷰 접기</button>
 	</div>
 
 	<div class="row center"></div>

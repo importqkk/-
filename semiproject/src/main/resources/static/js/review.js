@@ -60,6 +60,7 @@ $(function(){
 	});
 	
 	
+		
 	//리뷰 로드
 	function loadList(){
 		$(".review-list").empty();
