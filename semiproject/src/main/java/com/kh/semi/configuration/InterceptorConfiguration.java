@@ -46,7 +46,10 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/member/join",
 						"/member/login",
 						"/member/findId",
-						"/member/findPw"
+						"/member/findPw",
+						"/member/delete",
+						"/member/joinFinish",
+						"/member/deleteFinish"
 				);
 				
 				//관리자 전용 인터셉터
