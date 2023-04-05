@@ -108,13 +108,6 @@ public class ReviewDao {
 		jdbcTemplate.update(sql, param);
 	}
 	
-	//리뷰 사진 첨부
-	public void connect(int reviewNo, int imgNo) {
-		String sql = "insert into review_img values(?,?)";
-		Object[] param = {reviewNo, imgNo};
-		jdbcTemplate.update(sql, param);
-	}
-	
 	//페이징
 	public int selectCount(paginationVO vo, String memberId) {
 	    String sql = "select count(*) from review where member_id = ?";
@@ -146,5 +139,14 @@ public class ReviewDao {
 		Object[] param = {productNo};
 		return jdbcTemplate.queryForObject(sql, Integer.class,param);
 	}
+	
+	//리뷰 내역
+			public boolean reviewCheck(ReviewDto reviewDto) {
+				String sql = "select count(*) from review where member_id = ? and product_no = ?";
+				Object[] param = {reviewDto.getMemberId(), reviewDto.getProductNo()};
+				int count = jdbcTemplate.queryForObject(sql, int.class, param);
+				return count == 1;
+			}
+
 	
 }
