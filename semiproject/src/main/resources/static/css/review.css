@@ -21,14 +21,6 @@
       	/*
       		리뷰 별점
       	*/
-
-        .reviewStar .starR{
-            text-decoration: none;
-            color: #776BFF;
-        }
-        .reviewStar .starR.on{
-            color: #776BFF;
-        }
         
         .review-star .starR{
             text-decoration: none;
@@ -69,6 +61,7 @@
         .review-item .reviewContent{
         	font-size:1em;
         	min-height:2em;
+        	word-break: break-all;
         }
         .review-item .reviewTime{
         	font-size:0.7em;

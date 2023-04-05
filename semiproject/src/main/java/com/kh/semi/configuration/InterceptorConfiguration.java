@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.kh.semi.interceptor.AdminInterceptor;
 import com.kh.semi.interceptor.MemberInterceptor;
 
 @Configuration
@@ -14,6 +15,10 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	// 인터셉터 등록
 	@Autowired
 	private MemberInterceptor memberInterceptor; 
+	
+	//관리자
+	@Autowired
+	private AdminInterceptor adminInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -45,7 +50,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/member/editFinish",
 						"/member/deleteFinish"
 				);
+				
+				//관리자 전용 인터셉터
+				registry.addInterceptor(adminInterceptor)
+										.addPathPatterns(
+													"/admin/**"
+										 );
 	
 	}
-	
+
 }

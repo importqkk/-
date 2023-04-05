@@ -19,7 +19,6 @@ import com.kh.semi.dao.ReviewDao;
 import com.kh.semi.dao.ReviewLikeDao;
 import com.kh.semi.dto.ReviewDto;
 import com.kh.semi.dto.ReviewLikeDto;
-import com.kh.semi.service.ReviewService;
 import com.kh.semi.vo.ReviewLikeVO;
 
 @RestController
@@ -31,9 +30,6 @@ public class ReviewRestController {
 	
 	@Autowired
 	private ReviewDao reviewDao;
-	
-	@Autowired
-	private ReviewService reviewService;
 	
 	@GetMapping("/{productNo}")
 	public List<ReviewDto> list(@PathVariable int productNo){
@@ -49,9 +45,10 @@ public class ReviewRestController {
 		reviewDto.setMemberId(memberId);
 		
 		
-		reviewService.write(reviewDto, imgNo);
+		int reviewNo = reviewDao.sequence();
+		reviewDto.setReviewNo(reviewNo);
 		
-//		reviewDao.insert(reviewDto);
+		reviewDao.insert(reviewDto);
 		
 		
 	}
@@ -103,6 +100,21 @@ public class ReviewRestController {
 		reviewLikeDto.setMemberId(memberId);
 		
 		return reviewLikeDao.check(reviewLikeDto);
+	}
+	
+	@PostMapping("/reviewCountCheck")
+	public boolean check(@RequestParam int productNo,
+						HttpSession session,
+						@ModelAttribute ReviewDto reviewDto) {
+		String memberId = (String) session.getAttribute("memberId");
+
+		if(productNo == reviewDto.getProductNo()) {
+			reviewDto.setMemberId(memberId);
+			reviewDto.setProductNo(productNo);
+			return reviewDao.reviewCheck(reviewDto);
+		} else {
+			return false;
+		}
 	}
 	
 

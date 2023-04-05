@@ -205,7 +205,7 @@ fs-18 {
 				<div class="reviewTime right"></div>
 			</div>
 		</div>
-		<div class="reviewContent"></div>
+		<div class="reviewContent w-100"></div>
 		<div class="reviewLike">
 			<span class="heart-count">${reviewDto.reviewLike}</span>
 		</div>
@@ -222,11 +222,7 @@ fs-18 {
 
 		<div class="flex w-100 btn-panel">
 			<div class="w-50">
-                <label class="input-file-button" for="chooseFile">
-                    사진등록
-                </label>
-                <input type="file" id="chooseFile" name="attach" class="form-input w-10">
-        	</div>
+			</div>
 			<div class="flex w-50 right">
                 <button type="button" class="form-btn small neutral review-cancel-btn me-10">취소</button>
                 <button type="button" class="form-btn small positive review-edit-btn">수정</button>
@@ -384,45 +380,44 @@ fs-18 {
 
 
 	<script>
-			$(function(){
-			    $(".review-content").hide();
-			    $(".btn-panel").hide();
-			    $(".review-star").hide();
-			    $(".edit-btn").click(function(){
-			      if (${hasBuyHistory}) {
-			        $(".view-panel").hide();
-			        $(".review-content").show();
-			        $(".btn-panel").show();
-			        $(".review-star").show();
-			        if (${reviewDto != null}){
-			            alert("구매 당 1회의 리뷰만 작성할 수 있습니다");
-			            $(".review-content").hide();
-			            $(".btn-panel").hide();
-			            $(".review-star").hide();
-			            $(".view-panel").show();
-			        }
-			      } else if (${memberId == null}){
-			    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
-			    	  $(".review-content").hide();
-			            $(".btn-panel").hide();
-			            $(".review-star").hide();
-			            $(".view-panel").show()
-			      } else {
-			        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
-			        $(".review-content").hide();
-		            $(".btn-panel").hide();
-		            $(".review-star").hide();
-		            $(".view-panel").show()
-			      }
-			      
-			  })
-			    $(".cancel-btn").click(function(){
-			    $(".view-panel").show();
-			    $(".review-content").hide();
-			    $(".btn-panel").hide();
-			    $(".review-star").hide();
-			  })    
-			});
+	$(function(){
+	    $(".review-content").hide();
+	    $(".btn-panel").hide();
+	    $(".review-star").hide();
+	    $(".edit-btn").click(function(){
+	      if (${hasBuyHistory}) {
+	        $(".view-panel").hide();
+	        $(".review-content").show();
+	        $(".btn-panel").show();
+	        $(".review-star").show();
+	        if (${reviewDto != null}){
+	            alert("이미 작성된 리뷰가 있습니다. \n 리뷰는 1회만 작성 가능합니다.");
+	            $(".review-content").hide();
+	            $(".btn-panel").hide();
+	            $(".review-star").hide();
+	            $(".view-panel").show();
+	        }
+	      } else if (${memberId == null}){
+	    	  alert("로그인 후 리뷰를 작성할 수 있습니다");
+	    	  $(".review-content").hide();
+	          $(".btn-panel").hide();
+	          $(".review-star").hide();
+	          $(".view-panel").show();
+	      } else {
+	        alert("해당 상품을 구매한 이력이 있는 회원만 리뷰를 작성할 수 있습니다");
+	        $(".review-content").hide();
+	        $(".btn-panel").hide();
+	        $(".review-star").hide();
+	        $(".view-panel").show();
+	      }
+	  })
+	    $(".cancel-btn").click(function(){
+	    $(".view-panel").show();
+	    $(".review-content").hide();
+	    $(".btn-panel").hide();
+	    $(".review-star").hide();
+	  })    
+	});
 </script>
 	<!-- 숨겨진 정보 클래스 선택으로 정보를 가져오기 위한 데이터 상품번호랑 평균 -->
 	<h6 class="productNo" style="display: none;">${productInfoDto.productNo}</h6>
@@ -576,22 +571,18 @@ fs-18 {
 		<div class="review-write">
 			<!-- 리뷰 별점 -->
 			<div class="review-star">
-				<i class="fa-regular fa-star starR" value="1"></i>
-				<i class="fa-regular fa-star starR" value="2"></i>
-				<i class="fa-regular fa-star starR" value="3"></i>
-				<i class="fa-regular fa-star starR" value="4"></i>
-				<i class="fa-regular fa-star starR" value="5"></i>
-			</div>		
-			<c:choose>
-			    <c:when test="${reviewDto==null}">
-			        <!-- 리뷰 작성하기 창 -->
-					<div class="view-panel center mt-20">
-						<button class="form-btn medium neutral edit-btn w-100">리뷰 작성하기</button>
-					</div>
-			    </c:when>
-			    <c:otherwise>
-			    </c:otherwise>
-			</c:choose>
+				<i class="fa-regular fa-star starR" value="1"></i> <i
+					class="fa-regular fa-star starR" value="2"></i> <i
+					class="fa-regular fa-star starR" value="3"></i> <i
+					class="fa-regular fa-star starR" value="4"></i> <i
+					class="fa-regular fa-star starR" value="5"></i>
+			</div>
+
+			<!-- 리뷰 작성하기 창 -->
+			<div class="view-panel center mt-20">
+				<button class="form-btn medium neutral edit-btn w-100">리뷰 작성하기</button>
+			</div>
+
 			<!-- 리뷰 작성창 -->
 			<div class="row review-content">
 				<textarea name="reviewContent" class="form-input w-100 semi-round"

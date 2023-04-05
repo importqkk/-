@@ -65,12 +65,14 @@ public class ProductController {
 		// 리뷰 작성 구간--------------
 		// 아이디 확인
 		String memberId = (String) session.getAttribute("memberId");
-		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId);
+		BuyHistoryDto buyHistoryDto = buyHistoryDao.selectBuy(memberId, productNo);
+
 		ReviewDto reviewDto = reviewDao.selectOne(memberId, productNo);
 		model.addAttribute("reviewDto",reviewDto);
 		
-		boolean hasBuyHistory = buyHistoryDto != null && buyHistoryDto.getProductNo() == productNo;
+		boolean hasBuyHistory = buyHistoryDto != null;
 		model.addAttribute("hasBuyHistory", hasBuyHistory);
+
 		
 		return "/WEB-INF/views/product/detail.jsp";
 	}
