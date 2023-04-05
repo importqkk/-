@@ -3,8 +3,11 @@ package com.kh.semi.dto;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import org.springframework.stereotype.Repository;
+
 import lombok.Data;
 
+@Repository
 @Data
 public class QaDto {
 	public int qaNo;
@@ -19,6 +22,7 @@ public class QaDto {
 	public int qaDepth;
 	public Date qaDate;
 	public int qaRead;
+	public String memberRole;
 	
 	//가상의 Getter 추가
 	//같은 날짜는 시간 분, 다른 날짜는 연월일
