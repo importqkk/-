@@ -12,11 +12,11 @@
 
 
 <html>
-      
+		
 <head>
 <title>Insert title here</title>
-   <style>
-      .flex {
+	<style>
+		.flex {
             display: flex;
 
             justify-content: space-between;
@@ -109,38 +109,108 @@
         }
         
         .brand-name-box {
-           min-height: 2em;
+        	min-height: 2em;
         }
         .no-margin {
-           margin: 0;
+        	margin: 0;
         }
         .product-img {
-           background-color: #f8f8f8;
-           border-radius: 25px;
-           padding: 10px;
-       }
-       .content-top {
-          align-items: flex-start;
-       }
+	        background-color: #f8f8f8;
+	        border-radius: 25px;
+	        padding: 10px;
+	    }
+	    .content-top {
+	    	align-items: flex-start;
+	    }
     </style>
 
 
 
     <!-- 우편주소 api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   <!-- 우편주소 api -->
-   <c:set var="cartinfo" value="${cartinfo}" />
+	<!-- 우편주소 api -->
+	<c:set var="cartinfo" value="${cartinfo}" />
 
 <!-- calculateTotalPrice 함수를 선언하는 코드 -->
-<script>
+<script type="text/javascript">
+$(function(){
+    $("#pay-btn").prop("disabled", true);
+    
+    //유효성 검사
+    function isOrderFormValid() {
+        var regexName = /^[가-힣]{2,7}$/;
+        var regexPhone = /^01[016789][1-9][0-9]{6,7}$/;
+        
+        var orderReceverValid = regexName.test($("[name=orderRecever]").val());
+        var orderReceivePhoneValid = regexPhone.test($("[name=orderReceivePhone]").val());
+        var orderRequestValid = $("[name=orderRequest]").val().length <= 33;
+        
+        var orderPost = $("[name=orderPost]").val();
+        var orderBasicAddr = $("[name=orderBasicAddr]").val();
+        var orderDetailAddr = $("[name=orderDetailAddr]").val();
+        var orderAddressValid = orderPost.length > 0 && orderBasicAddr.length > 0 && orderDetailAddr.length > 0;
+        
+        return orderReceverValid && orderReceivePhoneValid && orderRequestValid && orderAddressValid;
+    }
+    
+    //수령인 검사
+    $("[name=orderRecever]").blur(function(){
+        var isValid = /^[가-힣]{2,7}$/.test($(this).val());
+        
+        $(this).removeClass("valid invalid")
+                    .addClass(isValid ? "valid" : "invalid");
+        
+        $("#pay-btn").prop("disabled", !isOrderFormValid());
+        
+    });
+    
+    //수령인 번호 검사
+    $("[name=orderReceivePhone]").blur(function(){
+        var isValid = /^01[016789][1-9][0-9]{6,7}$/.test($(this).val());
+        console.log(isValid);
+        $(this).removeClass("valid invalid")
+                    .addClass(isValid ? "valid" : "invalid");
+        
+        $("#pay-btn").prop("disabled", !isOrderFormValid());
+    });
+    
+    //배송지 검사
+    $("[name=orderDetailAddr]").blur(function(){
+        var orderPost = $("[name=orderPost]").val();
+        var orderBasicAddr = $("[name=orderBasicAddr]").val();
+        var orderDetailAddr = $(this).val();
+        
+        var isAllEmpty = orderPost.length == 0 && orderBasicAddr.length == 0 && orderDetailAddr.length == 0;
+        var isAllWritten = orderPost.length > 0 && orderBasicAddr.length > 0 && orderDetailAddr.length > 0;
+        var isValid = isAllEmpty || isAllWritten;
+        console.log(isValid);
+        
+        $(this).removeClass("valid invalid")
+                    .addClass(isValid ? "valid" : "invalid");
+        
+        $("#pay-btn").prop("disabled", !isOrderFormValid());
+    });
+    
+    //요청사항 검사
+    $("[name=orderRequest]").blur(function() {
+        var isValid = $(this).val().length <= 33;
+        console.log(isValid);
+        $(this).removeClass("valid invalid")
+                    .addClass(isValid ? "valid" : "invalid");
+        
+        $("#pay-btn").prop("disabled", !isOrderFormValid());
+    })
+    
+});
+
 
 </script>
 
 <!-- 총 가격을 출력하는 코드 -->
-   <script type="text/javascript">
+	<script type="text/javascript">
 /*------------------------------------------------------------------------------------------------------------------------------*/
-   //팝업생성
-   $(function( ){
+	//팝업생성
+	$(function( ){
         $(".pop-btn").click(function(){
             window.open("popup",  "popupNo", "width=570, height=980")        
         });
@@ -148,7 +218,7 @@
 /*------------------------------------------------------------------------------------------------------------------------------*/
      //주소api
     $(function(){
-      
+		
         $(".address-btn").click(function(){
                    
             new daum.Postcode({ 
@@ -169,26 +239,26 @@
                 }
                 }).open();
         
-          });
+    		});
         /*------------------------------------------------------------------------------------------------------------------------------*/
         
       
        //체크박스 선택시
-      var checkboxes = document.getElementsByName("option");
-      let prevChecked = null;
-   
-      for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener("click", function() {
-          if (prevChecked !== null && prevChecked !== this) {
-            prevChecked.checked = false;
-          }
-          if (this.checked) {
-            prevChecked = this;
-          } else {
-            prevChecked = null;
-          }
-        });
-      }
+		var checkboxes = document.getElementsByName("option");
+		let prevChecked = null;
+	
+		for (let i = 0; i < checkboxes.length; i++) {
+		  checkboxes[i].addEventListener("click", function() {
+		    if (prevChecked !== null && prevChecked !== this) {
+		      prevChecked.checked = false;
+		    }
+		    if (this.checked) {
+		      prevChecked = this;
+		    } else {
+		      prevChecked = null;
+		    }
+		  });
+		}
     });
     </script>
     
@@ -199,8 +269,8 @@
     //포인트적용
     $(function(){
     $(".apply").click(function(){
-       //총 상품가격
-       var totalProduct = ${totalproduct};
+    	//총 상품가격
+    	var totalProduct = ${totalproduct};
     
         // 사용하는 포인트
         var usePoint = $("input[name='orderUserPoint']").val();
@@ -212,11 +282,11 @@
         // 사용포인트가 사용가능 포인트보다 많으면
         if(usePoint > point){
             alert("보유 적립금 이상으로 입력할 수 없습니다.");
-         
+			
         }else if(usePoint < 0){
-           alert("0원 이하로 입력할 수 없습니다.");
+        	alert("0원 이하로 입력할 수 없습니다.");
         }else {
-           if(totalProduct==0)
+        	if(totalProduct==0)
             // 제품금액
             
             console.log(usePoint);
@@ -245,65 +315,65 @@
 /*------------------------------------------------------------------------------------------------------------------------------*/
     </script>
     <script type="text/javascript">
-          
+    		
     </script>
   
     
-       
-     <script src="https://cdn.iamport.kr/v1/iamport.js">
-      </script>
+	    
+  	<script src="https://cdn.iamport.kr/v1/iamport.js">
+   	</script>
 
-      <script>
-         $(function() {
-            $("button#pay-btn").click(function(){
-               //재고관리
-               
-               
-               
-               
-               
-               const IMP = window.IMP; // 생략 가능
-              IMP.init("imp07065242");  // 예: imp00000000a
-               
-              var name = $("#productName").val(); //상품이름 변수로 선언
-            
-              var totalPrice = parseInt($("td.tPrice").next().text().replace(/\D/g,''));
-            
-             
-            // IMP.request_pay(param, callback) 결제창 호출
-            IMP.request_pay({ // param
-               pg: "kakaopay",
-               pay_method: "card",
-               merchant_uid : 'merchant_' + new Date().getTime(),
-               name: name +"개 외",   //필수 파라미터 입니다.
-               amount: parseInt(totalPrice), //숫자타입
-               buyer_email : 'iamport@siot.do1',
-               buyer_name : '구매자이름',
-               buyer_tel : '010-1234-5678',
-               buyer_addr : '서울특별시 강남구 삼성동',
-               buyer_postcode : '123-456'
-            }, function (rsp) { // callback
-               if (rsp.success) { 
-                  $("form#pay").submit();
-          
-               } else {
-                  alert("결제를 취소하셨습니다.");
-               }
-            })
-         });
-      });
-         
-         
-         
-       $(function() {
-           $("input[name='orderUserPoint']").on("input", function() { 
-             if ($(this).val() === "") {
-               $(this).val("0");
-             }
-           });
-         });
-       
-      </script>
+   	<script>
+	   	$(function() {
+	   		$("button#pay-btn").click(function(){
+	   			//재고관리
+	   			
+	   			
+	   			
+	   			
+	   			
+	   			const IMP = window.IMP; // 생략 가능
+				  IMP.init("imp07065242");  // 예: imp00000000a
+					
+				  var name = $("label#productName").val(); //상품이름 변수로 선언
+				
+				  var totalPrice = parseInt($("td.tPrice").next().text().replace(/\D/g,''));
+				
+				 
+				// IMP.request_pay(param, callback) 결제창 호출
+				IMP.request_pay({ // param
+				   pg: "kakaopay",
+				   pay_method: "card",
+				   merchant_uid : 'merchant_' + new Date().getTime(),
+				   name: name +"개 외",   //필수 파라미터 입니다.
+				   amount: parseInt(totalPrice), //숫자타입
+				   buyer_email : 'iamport@siot.do1',
+				   buyer_name : '구매자이름',
+				   buyer_tel : '010-1234-5678',
+				   buyer_addr : '서울특별시 강남구 삼성동',
+				   buyer_postcode : '123-456'
+				}, function (rsp) { // callback
+				   if (rsp.success) { 
+					   $("form#pay").submit();
+			 
+				   } else {
+					   alert("결제를 취소하셨습니다.");
+				   }
+				})
+	   	});
+	   });
+	   	
+	   	
+	   	
+	    $(function() {
+	        $("input[name='orderUserPoint']").on("input", function() { 
+	          if ($(this).val() === "") {
+	            $(this).val("0");
+	          }
+	        });
+	      });
+	    
+   	</script>
    
     
 </head>
@@ -315,25 +385,25 @@
    <div class="flex mt-30 content-top">
        <div class=" w-70 pe-70">
            <p><h2>주문상품</h2></p>
-           <c:if test="${empty productInfo && empty cartInfo}">
-           <script>
-             $(document).ready(function() {
-               window.location.replace("http://localhost:8080/");
-             });
-           </script>
-         </c:if>
+           <c:if test="${empty productInfo} && ${empty cartInfo}">
+			  <script>
+			    $(function() {
+			      window.location.replace("http://localhost:8080/");
+			    });
+			  </script>
+			</c:if>
     <!-- 상품상세에서 온거면 -->
         <c:if test="${not empty productInfo}">
             <c:forEach var="productInfo" items="${productInfo}" varStatus="status">
             <div class="row flex2">
-               <c:choose>
-                  <c:when test="${productInfo.productImgNo != 0}">
-                     <img src="/img/download?imgNo=${productInfo.productImgNo}" class="product-img me-20" width="130" height="130">
-                  </c:when>
-                  <c:otherwise>
-                     <img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
-                  </c:otherwise>
-               </c:choose>
+            	<c:choose>
+            		<c:when test="${productInfo.productImgNo != 0}">
+            			<img src="/img/download?imgNo=${productInfo.productImgNo}" class="product-img me-20" width="130" height="130">
+            		</c:when>
+            		<c:otherwise>
+            			<img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
+            		</c:otherwise>
+            	</c:choose>
                         <input type="hidden" name="productNo" value="${productInfo.productNo}">
                         <input type="hidden" name="productPrice" value="${productInfo.productPrice}">
                         <input type="hidden" name="productCount" value="${Count}">
@@ -341,7 +411,7 @@
                     <div class="left info mt-10">
                         <div class="brand-name-box">
                             <h4>[${productInfo.productBrand}] </h4>
-                            <label>${productInfo.productName}</label>
+                            <label id="productName">${productInfo.productName}</label>
                         </div>
                         
                         <label>상품가격: ${productInfo.productPrice}</label>
@@ -358,38 +428,35 @@
     <!-- 카트에서 온거면 -->
         <c:if test="${not empty cartinfo}">
         
-         <c:forEach var="cartinfo" items="${cartinfo}" varStatus="loop">
-             <div class="row flex2">
-                
-                <c:choose>
-                   <c:when test="${cartinfo.imgNo != 0}">
-                      <img src="/img/download?imgNo=${cartinfo.imgNo}" class="product-img me-20" width="130" height="130"> 
-                   </c:when>
-                   <c:otherwise>
-                      <img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
-                   </c:otherwise>
-                </c:choose>
-                         
-                 <div class="left info mt-10">
-                     <div class="brand-name-box">
-                         <h4 class="me-10">[${cartinfo.productBrand}]</h4>
-                         <label>${cartinfo.productName}</label>
-                     </div>
-                        <h3 id="productPrice${loop.index}">
-                           <fmt:formatNumber pattern="#,##0" value="${cartinfo.productPrice}"></fmt:formatNumber>
-                            원
-                        </h3>
-                     <div>
-                         <label id="productCount${loop.index}" class="me-10"><h4>수량</h4></label>
-                         <h4>${cartinfo.productCount}</h4>
-                     </div>
-                 </div>      
-             </div>
-             <c:if test="${cartProductInfoDto.productStock == 0}">
-                    <c:set var="count" value="${count + 1}" />
-                    <input name="stockCount" type="hidden" value="${count}">
-              </c:if>
-         </c:forEach>
+			<c:forEach var="cartinfo" items="${cartinfo}" varStatus="loop">
+			    <div class="row flex2">
+			    	
+			    	<c:choose>
+			    		<c:when test="${cartinfo.imgNo != 0}">
+			    			<img src="/img/download?imgNo=${cartinfo.imgNo}" class="product-img me-20" width="130" height="130"> 
+			    		</c:when>
+			    		<c:otherwise>
+			    			<img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
+			    		</c:otherwise>
+			    	</c:choose>
+			                
+			        <div class="left info mt-10">
+			            <div class="brand-name-box">
+			                <h4 class="me-10">[${cartinfo.productBrand}]</h4>
+			                <label id="productName">${cartinfo.productName}</label>
+			            </div>
+			            	<h3 id="productPrice${loop.index}">
+			            		<fmt:formatNumber pattern="#,##0" value="${cartinfo.productPrice}"></fmt:formatNumber>
+			            		 원
+			            	</h3>
+			            <div>
+			                <label id="productCount${loop.index}" class="me-10"><h4>수량</h4></label>
+			                <h4>${cartinfo.productCount}</h4>
+			            </div>
+			        </div>      
+			    </div>
+			    
+			</c:forEach>
         </c:if>
     
     <!-- 배송지부분 -->
@@ -401,20 +468,22 @@
                <div class="row">
                    <label class="ps-10">받는사람</label>
                    <input type="text" class="form-input light w-100 medium" name="orderRecever" required="required">
+                   <span></span>
                </div>
 
                <div class="row">
                    <label class="ps-10">연락처</label>
                    <input type="text" class="form-input light w-100 medium" name="orderReceivePhone">
+                   <span></span>
                </div>
 
                <div class="row">
-                     <div>
-                        <label class="w-100 ps-10">주소</label>
-                     </div>
+               		<div>
+               			<label class="w-100 ps-10">주소</label>
+               		</div>
                    <div class="flex">
-                      <input type="text" class="form-input light medium w-75" name="orderPost" placeholder="우편번호">
-                      <button class="form-btn medium positive address-btn" type="button">우편번호찾기</button>
+	                   <input type="text" class="form-input light medium w-75" name="orderPost" placeholder="우편번호" required="required">
+	                   <button class="form-btn medium positive address-btn" type="button">우편번호찾기</button>
                    </div>
                </div>
 
@@ -424,6 +493,7 @@
 
                <div class="row">
                    <input type="text" class="form-input light medium w-100" name="orderDetailAddr" placeholder="상세주소">
+                   <span></span>
                </div>
 
                <div class="row">
