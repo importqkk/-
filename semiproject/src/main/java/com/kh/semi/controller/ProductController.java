@@ -60,33 +60,7 @@ public class ProductController {
 			List<ReviewDto> reviewList = reviewDao.selectList(productNo);
 			model.addAttribute("reviewList",reviewList);
 			
-		}
-		// 상품 이미지 처리 구간---------------------------
-		// 기본 이미지 파일의 절대경로
-		/*String basicImagePath = "/atic/image/"+productDao.productBasicImage(productNo); // 이미지 파일의 경로와 파일명
-		String detailImagePath = "/static/image/"+productDao.productDetailImage(productNo); // 이미지 파일의 경로와 파일명
-		
-		System.out.println(productInfoDto.getProductImgNo()); // 상품 기본 이미지
-		System.out.println(productDao.productBasicImage(productNo));
-		System.out.println(basicImagePath);
-		
-		System.out.println(productInfoDto.getDetailImgNo()); // 상품 상세 이미지 
-		System.out.println(productDao.productDetailImage(productNo));
-		System.out.println(detailImagePath);
-		
-		if(productInfoDto.getProductImgNo()==null) // 상품 기본 이미지 
-		{
-			basicImagePath = "/static/image/basic_img.jpg";
-		}
-		if(productInfoDto.getDetailImgNo()==null) // 상품 상세 이미지
-		{
-			detailImagePath = "/static/image/detail_img.jpg";
-		}
-	
-		// 모델에 이미지 파일 경로를 추가
-	    model.addAttribute("basicImagePath", basicImagePath);
-		model.addAttribute("detailImagePath",detailImagePath);*/
-		
+		}		
 		
 		// 리뷰 작성 구간--------------
 		// 아이디 확인
