@@ -91,6 +91,9 @@ public class OrderController {
 			}else {
 				int no=productNo.intValue();
 				int Count=productCount.intValue();
+				if(Count>10) {
+					Count = 10; 
+				}
 				int price=productInfoDao.orderPrice(no);
 				//상품 가격만
 				int totalproduct=(price*Count);
