@@ -21,100 +21,120 @@
                 </tr>
             </thead>
             <tbody class="center">
-            	<c:forEach var="memberDto" items="${list}">
-				<tr>
-					<td>${memberDto.memberId}</td>
-					<td>${memberDto.memberNick}</td>
-					<td>${memberDto.memberPhone}</td>
-					<td>${memberDto.memberRole}</td>
-					<td>${memberDto.memberJoin}</td>
-					<td>
-						<a class="btn-border" href="detail?memberId=${memberDto.memberId}">상세</a>
-						<a class="btn-border" href="edit?memberId=${memberDto.memberId}">변경</a>
-						<a class="btn-border" href="delete?memberId=${memberDto.memberId}&page=${page}" onclick="return confirm('정말 탈퇴시키겠습니까?')">탈퇴</a>
-					</td>
-				</tr>	
-				</c:forEach>
+               <c:forEach var="memberDto" items="${list}">
+            <tr>
+               <td>${memberDto.memberId}</td>
+               <td>${memberDto.memberNick}</td>
+               <td>${memberDto.memberPhone}</td>
+               <td>${memberDto.memberRole}</td>
+               <td>${memberDto.memberJoin}</td>
+               <td>
+                  <a class="btn-border" href="detail?memberId=${memberDto.memberId}">상세</a>
+                  <a class="btn-border" href="edit?memberId=${memberDto.memberId}">변경</a>
+                  <a class="btn-border" href="delete?memberId=${memberDto.memberId}&page=${page}" onclick="return confirm('정말 탈퇴시키겠습니까?')">탈퇴</a>
+               </td>
+            </tr>   
+            </c:forEach>
             </tbody>
         </table>
-    </div>	
+    </div>   
 
     <div class="row center pt-20 pb-20">
         <!-- 페이지 네비 (vo에 있는 데이터를 기반으로 구현) -->
-		<div class="row pagination">
-			<!-- << (첫페이지로) -->
-			<c:choose>
-				<c:when test="${!vo.first}">
-					<a href="list?page=1${vo.parameter}">&laquo;</a>
-				</c:when>
-				<c:otherwise>
-					<a href="#" class="disabled">&laquo;</a>
-				</c:otherwise>
-			</c:choose>
-			<!-- < (이전페이지로) -->
-			<c:choose>
-				<c:when test="${vo.prev}">
-					<a href="list?page=${vo.prevPage}${vo.parameter}">&lt;</a>
-				</c:when>
-				<c:otherwise>
-					<a href="#" class="disabled">&lt;</a>
-				</c:otherwise>
-			</c:choose>
-			<!-- 숫자(begin ~ end) -->
-			<c:forEach var="i" begin="${vo.startBlock}" end="${vo.finishBlock}">
-				<c:choose>
-					<c:when test="${vo.page == i}">
-						<a href="#" class="on">${i}</a>
-					</c:when>
-					<c:otherwise>
-						<a href="list?page=${i}${vo.parameter}">${i}</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<!-- >  (다음페이지로) -->
-			<c:choose>
-				<c:when test="${vo.next}">
-					<a href="list?page=${vo.nextPage}${vo.parameter}">&gt;</a>
-				</c:when>
-				<c:otherwise>
-					<a href="#" class="disabled">&gt;</a>
-				</c:otherwise>
-			</c:choose>
-			<!-- >> (마지막 페이지로) -->
-			<c:choose>
-				<c:when test="${!vo.last}">
-					<a href="list?&page=${vo.totalPage}${vo.parameter}">&raquo;</a>
-				</c:when>
-				<c:otherwise>
-					<a href="#" class="disabled">&raquo;</a>
-				</c:otherwise>
-			</c:choose>
-		</div>
+      <div class="row pagination">
+         <!-- << (첫페이지로) -->
+         <c:choose>
+            <c:when test="${!vo.first}">
+               <a href="list?page=1${vo.parameter}">&laquo;</a>
+            </c:when>
+            <c:otherwise>
+               <a href="#" class="disabled">&laquo;</a>
+            </c:otherwise>
+         </c:choose>
+         <!-- < (이전페이지로) -->
+         <c:choose>
+            <c:when test="${vo.prev}">
+               <a href="list?page=${vo.prevPage}${vo.parameter}">&lt;</a>
+            </c:when>
+            <c:otherwise>
+               <a href="#" class="disabled">&lt;</a>
+            </c:otherwise>
+         </c:choose>
+         <!-- 숫자(begin ~ end) -->
+         <c:forEach var="i" begin="${vo.startBlock}" end="${vo.finishBlock}">
+            <c:choose>
+               <c:when test="${vo.page == i}">
+                  <a href="#" class="on">${i}</a>
+               </c:when>
+               <c:otherwise>
+                  <a href="list?page=${i}${vo.parameter}">${i}</a>
+               </c:otherwise>
+            </c:choose>
+         </c:forEach>
+         <!-- >  (다음페이지로) -->
+         <c:choose>
+            <c:when test="${vo.next}">
+               <a href="list?page=${vo.nextPage}${vo.parameter}">&gt;</a>
+            </c:when>
+            <c:otherwise>
+               <a href="#" class="disabled">&gt;</a>
+            </c:otherwise>
+         </c:choose>
+         <!-- >> (마지막 페이지로) -->
+         <c:choose>
+            <c:when test="${!vo.last}">
+               <a href="list?&page=${vo.totalPage}${vo.parameter}">&raquo;</a>
+            </c:when>
+            <c:otherwise>
+               <a href="#" class="disabled">&raquo;</a>
+            </c:otherwise>
+         </c:choose>
+      </div>
     </div>
     
-    	<div class="row center">
-		<!-- 검색창 -->
-		<form action="list" method="get">
-			<input type="hidden" name="column" value="member_id">
-			<input class="form-input small" type="search" name="keyword" placeholder="검색할 아이디" value="${keyword}">
-			<button  type="submit" class="form-btn small positive">검색</button>
-		</form>
-	</div>
+    <!-- 검색창 -->
+       <div class="row center">
+      <form action="list" method="get">
+        <div class="flex">
+       <c:choose>
+          <c:when test="${vo.column == 'member_id'}">
+             <select name="column" class="form-input small me-5 qty-selector">
+                  <option value="member_id">아이디</option>
+                   <option value="member_nick">닉네임</option>
+                   <option value="member_phone" selected>전화번호</option>
+               </select>
+            </c:when>
+            <c:when test="${vo.column == 'member_nick'}">
+               <select name="column" class="form-input small me-5 qty-selector">
+                  <option value="member_id">아이디</option>
+                   <option value="member_nick" selected>닉네임</option>
+                   <option value="member_phone">전화번호</option>
+               </select>
+            </c:when>
+            <c:otherwise>
+               <select name="column" class="form-input small me-5 qty-selector">
+                  <option value="member_id" selected>아이디</option>
+                   <option value="member_nick">닉네임</option>
+                   <option value="member_phone">전화번호</option>
+               </select>
+            </c:otherwise>
+        </c:choose>
+      <input type="text" name="keyword" class="form-input small w-35 me-5" placeholder="검색어를 입력하세요." value="${vo.keyword}" required>
+         <button  type="submit" class="form-btn small positive">검색</button>
+      </form>
+   </div>
 <div>
-	<c:choose>
-		<c:when test="${list.isEmpty()}">
-			<h2>데이터가 존재하지 않습니다</h2>
-		</c:when>
-		<c:otherwise>
-				</c:otherwise>
-	</c:choose>
-	</div>
-    
-</div>
+<c:choose>
+<c:when test="${list.isEmpty()}">
+   <h3 class="mt-50 mb-50 center c-p100">검색 결과가 없습니다.</h3>
+</c:when>
+<c:otherwise>
+            </c:otherwise>
+   </c:choose>
+   </div>
+   </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
 
 
 

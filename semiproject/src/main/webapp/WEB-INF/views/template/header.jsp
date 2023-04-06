@@ -196,7 +196,7 @@
 		});
 	});
     </script>
-    <title>SEMI</title>
+    <title>MYFORMULA</title>
 </head>
 <body>
     <main>
