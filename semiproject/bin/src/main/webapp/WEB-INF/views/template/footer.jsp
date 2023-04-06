@@ -25,7 +25,7 @@
                             <i class="fa-brands fa-instagram custom-size social me-5"></i>
                         </a>
                         <a class="link" href="#">
-                            <img class="social" width="23px" height="23px" src="/static/image/katalk.png">
+                            <img class="social" width="23px" height="23px" src="${pageContext.request.contextPath}/static/image/katalk.png">
                         </a>
                     </div>
                 </div>

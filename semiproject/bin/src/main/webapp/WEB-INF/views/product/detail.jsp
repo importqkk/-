@@ -157,7 +157,7 @@
     		 number = parseInt(number);
     		 $.ajax({ // 서버에 데이터 요청
      			type:'POST',
-         		url:"/rest/number",
+         		url:contextPath + "/rest/number",
          		data: JSON.stringify({'number': number.toString()}),
                  contentType: 'application/json; charset=utf-8',
                  success: function(data) {
@@ -199,7 +199,7 @@
 	        <div class="flex">
 	            <!-- 상품 이미지 -->
 	            <div class="w-50 center">
-	                <img src="/static/image/basic_img.jpg" class="img-size img-rad-10 img-background ">
+	                <img src="${pageContext.request.contextPath}/static/image/basic_img.jpg" class="img-size img-rad-10 img-background ">
 	            </div>
 	         	
 	            <!-- 상품 가격 부터 구매하기 버튼까지-->
@@ -301,7 +301,7 @@
    <div class="container-1000">
       <!--상세이미지 초기상태 -->
       <div class="row detail-img-initial">
-         <img width="1000" class="center" src="/static/image/detail_img.jpg">
+         <img width="1000" class="center" src="${pageContext.request.contextPath}/static/image/detail_img.jpg">
       </div>
    </div>
    

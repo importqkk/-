@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <!-- swiper script -->
-<script src="/static/js/swiper.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/swiper.js"></script>
 <style>
 	.swiper {
 		width: 100%;
@@ -124,15 +124,15 @@
 		                	<c:choose>
 		                		<c:when test="${mainImgList == null}">
 		                			<div class="swiper-slide">
-		                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy01.jpg">
-		                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy02.jpg">
-		                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/static/image/dummy03.jpg">
+		                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="${pageContext.request.contextPath}/static/image/dummy01.jpg">
+		                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="${pageContext.request.contextPath}/static/image/dummy02.jpg">
+		                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="${pageContext.request.contextPath}/static/image/dummy03.jpg">
 			                    	</div>
 		                		</c:when>
 		                		<c:otherwise>
 		                			<c:forEach var="mainImgConnectDto" items="${mainImgList}">
 				                    	<div class="swiper-slide">
-			                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="/img/download?imgNo=${mainImgConnectDto.imgNo}">
+			                    			<img alt="메인 슬라이드 이미지" class="slide-img" src="${pageContext.request.contextPath}/img/download?imgNo=${mainImgConnectDto.imgNo}">
 				                    	</div>
 			                    	</c:forEach>
 		                		</c:otherwise>
@@ -215,7 +215,7 @@
 					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 				 	            		</c:when>
 					            		<c:otherwise>
-					            			<img class="item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png">
+					            			<img class="item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png">
 					            		</c:otherwise>
 					            	</c:choose>
 			                    </div>
@@ -297,7 +297,7 @@
 						            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 					 	            		</c:when>
 						            		<c:otherwise>
-						            			<img class="item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png">
+						            			<img class="item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png">
 						            		</c:otherwise>
 						            	</c:choose>
 			                        </div>
@@ -384,7 +384,7 @@
 					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 				 	            		</c:when>
 					            		<c:otherwise>
-					            			<img class="item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png">
+					            			<img class="item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png">
 					            		</c:otherwise>
 					            	</c:choose>
 			                    </div>

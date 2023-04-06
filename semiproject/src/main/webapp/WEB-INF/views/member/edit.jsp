@@ -5,8 +5,8 @@
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/static/js/find-address.min.js"></script>
-<script src="/static/js/edit.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/find-address.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/edit.js"></script>
 
  <script type="text/javascript">
     var checkUnload = true;

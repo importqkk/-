@@ -167,7 +167,7 @@ $(function(){
     //수령인 번호 검사
     $("[name=orderReceivePhone]").blur(function(){
         var isValid = /^01[016789][1-9][0-9]{6,7}$/.test($(this).val());
-        console.log(isValid);
+        //console.log(isValid);
         $(this).removeClass("valid invalid")
                     .addClass(isValid ? "valid" : "invalid");
         
@@ -183,7 +183,7 @@ $(function(){
         var isAllEmpty = orderPost.length == 0 && orderBasicAddr.length == 0 && orderDetailAddr.length == 0;
         var isAllWritten = orderPost.length > 0 && orderBasicAddr.length > 0 && orderDetailAddr.length > 0;
         var isValid = isAllEmpty || isAllWritten;
-        console.log(isValid);
+        //console.log(isValid);
         
         $(this).removeClass("valid invalid")
                     .addClass(isValid ? "valid" : "invalid");
@@ -194,7 +194,7 @@ $(function(){
     //요청사항 검사
     $("[name=orderRequest]").blur(function() {
         var isValid = $(this).val().length <= 33;
-        console.log(isValid);
+        //console.log(isValid);
         $(this).removeClass("valid invalid")
                     .addClass(isValid ? "valid" : "invalid");
         
@@ -289,14 +289,14 @@ $(function(){
         	if(totalProduct==0)
             // 제품금액
             
-            console.log(usePoint);
+            //console.log(usePoint);
             
             // 적립금 사용 후 남은 사용가능 적립금
             var remainingPoint = point - usePoint;
-            console.log(remainingPoint);
+            //console.log(remainingPoint);
             // 총 금액
             var totalPrice = totalProduct - usePoint + 3000;
-            console.log(totalPrice);
+            //console.log(totalPrice);
 
             $("span#usePoint").text(remainingPoint.toLocaleString() + "원");
             $("span#remainingPoint").text(remainingPoint.toLocaleString() + "원");
@@ -401,7 +401,7 @@ $(function(){
             			<img src="/img/download?imgNo=${productInfo.productImgNo}" class="product-img me-20" width="130" height="130">
             		</c:when>
             		<c:otherwise>
-            			<img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
+            			<img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">
             		</c:otherwise>
             	</c:choose>
                         <input type="hidden" name="productNo" value="${productInfo.productNo}">
@@ -436,7 +436,7 @@ $(function(){
 			    			<img src="/img/download?imgNo=${cartinfo.imgNo}" class="product-img me-20" width="130" height="130"> 
 			    		</c:when>
 			    		<c:otherwise>
-			    			<img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
+			    			<img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">
 			    		</c:otherwise>
 			    	</c:choose>
 			                

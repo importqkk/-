@@ -23,7 +23,7 @@
                 <div class="row flex">
                     <div class="w-50 pt-25">
                         <a class="link" style="color: #776BFF;" href="/">
-                        	<img class="footer-logo" alt="로고" src="/static/image/logo.png">
+                        	<img class="footer-logo" alt="로고" src="${pageContext.request.contextPath}/static/image/logo.png">
                         </a>
                     </div>
                     <div class="w-50 right">
@@ -34,7 +34,7 @@
                             <i class="fa-brands fa-instagram custom-size social me-5"></i>
                         </a>
                         <a class="link" href="#">
-                            <img class="social" width="23px" height="23px" src="/static/image/katalk.png">
+                            <img class="social" width="23px" height="23px" src="${pageContext.request.contextPath}/static/image/katalk.png">
                         </a>
                     </div>
                 </div>
