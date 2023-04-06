@@ -23,7 +23,7 @@ $(function() {
     	// 상품을 10개 이하로 담았을 경우만 수량 변경 실행
     	else if(productCount <= 10 && productCount > 0 && productCount <= productStock) {
     		$.ajax({
-        		url:"/rest/cart/",
+        		url:contextPath + "/rest/cart/",
         		method:"patch",
         		data: {
         			productNo: productNo,

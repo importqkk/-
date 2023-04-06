@@ -14,19 +14,19 @@
 		<li>
 			마이페이지
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/member/mypage">회원정보</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/pwVf">회원정보 수정</a></li>
-				<li><a href="${pageContext.request.contextPath}/member/password">비밀번호 변경</a></li>
+				<li><a href="/member/mypage">회원정보</a></li>
+				<li><a href="/member/pwVf">회원정보 수정</a></li>
+				<li><a href="/member/password">비밀번호 변경</a></li>
 			</ul>
 		</li>
 		<li>
 			쇼핑 정보
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/order/myList">주문/배송 조회</a></li>
+				<li><a href="/order/myList">주문/배송 조회</a></li>
 				
- 				<li><a href="${pageContext.request.contextPath}/review/list">상품리뷰</a></li>
+ 				<li><a href="/review/list">상품리뷰</a></li>
 
-				<li><a href="${pageContext.request.contextPath}/member/delete">회원 탈퇴</a></li>
+				<li><a href="/member/delete">회원 탈퇴</a></li>
 		
 			</ul>
 	</ul>  

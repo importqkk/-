@@ -25,7 +25,7 @@
 	    border-radius: 100px;
 	    outline: none;
 	    appearance: none;
-	    background:url('/static/image/down-arrow.png') no-repeat 88% 55%/11px auto;
+	    background:url('${pageContext.request.contextPath}/static/image/down-arrow.png') no-repeat 88% 55%/11px auto;
 	}
 </style>
 <script type="text/javascript">
@@ -81,7 +81,7 @@
             var productValue = productCount * productPrice;
         	
         	$.ajax({
-        		url:"/rest/cart/",
+        		url:contextPath + "/rest/cart/",
         		method:"patch",
         		data: {
         			productNo: productNo,
@@ -133,7 +133,7 @@
 	            			<img class="product-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productImg.imgNo}" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
 	            		</c:when>
 	            		<c:otherwise>
-	            			<img class="product-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
+	            			<img class="product-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">	<!-- 상품 이미지 - 바꿔야함 -->
 	            		</c:otherwise>
 	            	</c:choose>
 	            </div>

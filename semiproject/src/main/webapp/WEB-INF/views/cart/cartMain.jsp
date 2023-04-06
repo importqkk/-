@@ -3,13 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<%!    int count = 0 ; %>
-<c:set var="listSize" value="${fn:length(itemInfo)}" />
-    
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- 상품 수량 수정 비동기처리 스크립트 -->
-<script src="/static/js/cart-product-count-process.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/cart-product-count-process.js"></script>
+<%!    int count = 0 ; %>
+<c:set var="listSize" value="${fn:length(itemInfo)}" />
 		
 <style>
     h1, h2, h3, h4, span {
@@ -29,7 +27,6 @@
     }
 </style>
 <script type="text/javascript">
-
 	$(function() {
 	    $(".order-btn").click(function(event) {
 	       var stockCount = $("input[name='stockCount']").val();
@@ -40,7 +37,6 @@
 	          }
 	    });
 	});
-
 </script>
 
     <div class="container-1000">
@@ -61,7 +57,7 @@
  	            		</c:when>
 	            		<c:otherwise>
 	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
-	            				<img class="product-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
+	            				<img class="product-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">
 	            			</a>
 	            		</c:otherwise>
 	            	</c:choose>
