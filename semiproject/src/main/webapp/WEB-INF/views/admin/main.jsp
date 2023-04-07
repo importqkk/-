@@ -7,7 +7,7 @@
 <!-- chart.js cdn -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- 차트 비동기 스크립트 -->
-<script src="/static/js/product-category-stat.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/product-category-stat.js"></script>
 
 <style>
 

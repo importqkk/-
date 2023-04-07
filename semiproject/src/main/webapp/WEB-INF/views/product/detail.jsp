@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/static/css/review.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/review.css">
 <style>
 .flex-remain {
 	flex: 1;

@@ -34,7 +34,7 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:"/rest/review/", 
+			url:contextPath+"/rest/review/", 
 			method:"post",
 			data:{
 				productNo: productNo,
@@ -66,7 +66,7 @@ $(function(){
 		$(".review-list").empty();
 		
 		$.ajax({
-			url:"/rest/review/"+productNo,
+			url:contextPath+"/rest/review/"+productNo,
 			method:"get",
 			success:function(response){
 				
@@ -152,7 +152,7 @@ $(function(){
 		var reviewNo = $(this).data("review-no");
 		
 		$.ajax({
-			url:"/rest/review/"+reviewNo,
+			url:contextPath+"/rest/review/"+reviewNo,
 			method:"delete",
 			success:function(response){
 				$(".review-content").hide();
@@ -220,7 +220,7 @@ $(function(){
 					}
 					
 					$.ajax({
-						url:"/rest/review/",
+						url:contextPath+"/rest/review/",
 						method:"patch",
 						data:{
 							reviewNo:reviewNo,
@@ -252,7 +252,7 @@ function likeReview(){
     
     var $likeButton = $(this); // 선택한 하트 엘리먼트
     $.ajax({
-        url:"/rest/review/like",
+        url:contextPath+"/rest/review/like",
         method:"post",
         data:{
             reviewNo:reviewNo

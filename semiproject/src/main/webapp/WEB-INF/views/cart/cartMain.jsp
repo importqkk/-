@@ -9,7 +9,7 @@
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- 상품 수량 수정 비동기처리 스크립트 -->
-<script src="/static/js/cart-product-count-process.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/cart-product-count-process.js"></script>
 		
 <style>
     h1, h2, h3, h4, span {

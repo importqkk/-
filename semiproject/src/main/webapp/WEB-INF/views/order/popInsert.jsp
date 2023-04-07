@@ -5,19 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/static/css/load.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/load.css">
 <!-- font awesome 아이콘 -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 <!-- tabler 아이콘 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-<link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-<link rel="stylesheet" type="text/css" href="/static/css/test.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/reset.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/commons.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/test.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- 우편주소 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/static/js/find-address.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/find-address.min.js"></script>
 <!-- 우편주소 api -->
 <title>배송지 추가 팝업</title>
 <style>
