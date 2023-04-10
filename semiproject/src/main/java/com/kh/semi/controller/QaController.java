@@ -200,20 +200,4 @@ public class QaController {
 		qaDao.delete(qaNo);
 		return "redirect:/qa/list";
 	}
-	
-	
-	@GetMapping("/edit")
-	public String edit(@RequestParam int qaNo, Model model) {
-		model.addAttribute("qaDto",qaDao.selectOne(qaNo));
-		return"/WEB-INF/views/qa/edit.jsp";
-	}
-	
-	@PostMapping("/edit")
-	public String edit(@ModelAttribute QaDto qaDto,
-								RedirectAttributes attr) {
-		qaDao.update(qaDto);
-		attr.addAttribute("qaNo",qaDto.getQaNo());
-		return"redirect:detail";
-	}
-	
 }
