@@ -1,4 +1,5 @@
 # MYFORMULA
+![logoFinal](https://user-images.githubusercontent.com/121537146/231100829-34f4bbcd-3119-46b0-8550-dcdcf2053f55.png)
 
 ## 팀명: 2조
 ### 역할 및 담당
