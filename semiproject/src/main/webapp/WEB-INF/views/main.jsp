@@ -274,7 +274,7 @@
 			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
 			                    		</c:when>
 			                    	</c:choose>
-			                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}</span>
+			                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}개의 리뷰</span>
 			                    </div>
 			                </a>
 			            </c:forEach>
@@ -356,7 +356,7 @@
 			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
 			                    		</c:when>
 			                    	</c:choose>
-			                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}</span>
+			                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}개의 리뷰</span>
 			                    </div>
 			                    </a>
 			                </c:forEach>
@@ -443,7 +443,7 @@
 			                    			<span class="star"><i class="fa-regular fa-star"></i></span>
 			                    		</c:when>
 			                    	</c:choose>
-			                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}</span>
+			                        <span class="ms-5 c-b40">${productInfoDto.reivewCNT}개의 리뷰</span>
 			                    </div>
 			                </a>
 			            </c:forEach>
