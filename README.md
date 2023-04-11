@@ -4,7 +4,6 @@
 ## 팀명: 2조
 
 
-
 ### 역할 및 담당
 - 진서영
 	- 팀장
@@ -59,7 +58,6 @@
 	- 헤더 카테고리 매핑
 
 
-
 ## 프로젝트 설명
 코로나19와 운동 열풍을 거치면서 건강 관리에 대한 사람들의 관심이 커지고 있습니다.
 
@@ -70,7 +68,6 @@
 저희 조는 건강기능식품 시장이 앞으로도 경쟁력있고 유망한 시장이라는 분석 아래에 건강기능식품을 전문적으로 판매하는 MYFORMULA를 구상 및 개발했습니다.
 
 
-
 ## 주요 구현기능
 - 회원 기능
 - 구매/결제 기능
@@ -78,8 +75,6 @@
 - 리뷰 기능
 - QnA 게시판 기능
 - 관리자 기능(상품관리, 회원관리, 메인 관리, 판매내역 조회)
-
-
 
 ## 개발환경
 ### 운영체제 및 버전
@@ -95,22 +90,15 @@
 - 아이허브: https://kr.iherb.com
 - 비타민샵: https://vitaminshop.co.kr
 
-
-
-## github 주소
+## 프로젝트 주소
+### github 주소
 - https://github.com/importqkk/SEMI
 
-
-
-## erd 주소
+### erd 주소
 - https://www.erdcloud.com/d/SKn89QpPRgSakjWvW
 
-
-
-## figma 주소
+### figma 주소
 * https://www.figma.com/file/sG6YRYeocRBcPu0OfkHttR/%ED%85%8C%EC%8A%A4%ED%8A%B8?node-id=0%3A1&t=VG2KnkRyAbMsNLTH-1
-
-
 
 ## 계정 정보
 ### 관리자
