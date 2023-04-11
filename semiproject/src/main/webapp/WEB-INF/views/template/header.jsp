@@ -25,6 +25,7 @@
 	    <script>
 	    	const contextPath = "${pageContext.request.contextPath}";
 	    </script>
+	    
     <style>
        .logo {
             margin: 0;
