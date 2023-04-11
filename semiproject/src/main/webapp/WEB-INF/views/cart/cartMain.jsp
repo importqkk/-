@@ -30,7 +30,7 @@
 	$(function() {
 	    $(".order-btn").click(function(event) {
 	       var stockCount = $("input[name='stockCount']").val();
-	          if(stockCount >0){
+	          if(stockCount > 0){
 	           alert("품절된 상품이 존재합니다. 삭제 후 다시 이용해주세요.");
 	          } else{
 	           $(this).attr("href", "../order/buy");             
@@ -626,7 +626,14 @@
 		                    </div>
 	                	</c:otherwise>
 	                </c:choose>
-	                <c:set var="total" value="${total + cartProductInfoDto.productPrice * cartProductInfoDto.productCount}"></c:set>
+	                <c:choose>
+	                	<c:when test="${cartProductInfoDto.productStock == 0}">
+	                		<c:set var="total" value="${total + cartProductInfoDto.productPrice * cartProductInfoDto.productCount * cartProductInfoDto.productStock}"></c:set>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<c:set var="total" value="${total + cartProductInfoDto.productPrice * cartProductInfoDto.productCount}"></c:set>
+	                	</c:otherwise>
+	                </c:choose>
 	                <c:if test="${cartProductInfoDto.productStock == 0}">
 		               <c:set var="count" value="${count + 1}" />
 		               <input name="stockCount" type="hidden" value="${count}">
@@ -639,12 +646,10 @@
 	                </a>
 	            </div>
 	        </div>
-	        <!--  -->
-	        <c:if test="${cartProductInfoDto.productStock == 0}">
+<%-- 	    <c:if test="${cartProductInfoDto.productStock == 0}">
 	        	<c:set var="count" value="${count + 1}" />
 	        	<input name="stockCount" type="hidden" value="${count}">
-	        </c:if>
-	        <!--  -->
+	        </c:if> --%>
 	    </c:forEach>
 <!-- ------------------------------------ 반복문 돌릴 부분 end ------------------------------------ -->
 		<c:if test="${isEmpty == 0}">
