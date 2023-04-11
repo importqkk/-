@@ -375,6 +375,9 @@
                         <a href="/admin/productManage/list" class="link">상품 관리</a>
                     </div>
                     <div class="p-10">
+                        <a href="/admin/sell/list" class="link">판매 내역</a>
+                    </div>
+                    <div class="p-10">
                         <a href="/admin/mainImg/list" class="link">메인 관리</a>
                     </div>
                     <div class="p-10">
