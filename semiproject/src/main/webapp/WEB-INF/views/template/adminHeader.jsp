@@ -21,6 +21,7 @@
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	    <!-- favicon -->
 	    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
+	    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
 	    <script>
 	    	const contextPath = "${pageContext.request.contextPath}";
 	    </script>
