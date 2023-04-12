@@ -18,23 +18,6 @@
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/layout.css">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/commons.css">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/test.css">
-
-	    
-	  <!--  
-	  <javascript에서 절대경로를 사용하기 위한 꼼수>
-      - js는 절대경로란 개념이 없으므로 JSP의 EL의 도움을 받아야함
-      - <script>는 분할해서 작성해도 결국 이어지는 특징을 활용
-      - 모든<script>의 가장 위에 다음과 같이 변수를 하나 선언 
-      - const로 변수를 선언하면 자바의 final과 같이 불변 처리가 됨 
-      --> 
-	    
-	    <script>
-	    	const contextPath = "${pageContext.request.contextPath}";
-	    </script>
-	    
-	    <!-- favicon 설정 -->
-	    <link rel="icon"  type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
-	    
 	    <!-- jquery cdn -->
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	    <!-- favicon -->
