@@ -127,7 +127,8 @@
     </div>
     </c:if>
     
-    <div class="row pagination center pt-20 pb-20">
+    
+    <div class="row pagination center pt-90 pb-20">
     
     	<!-- 처음 -->
     	<c:choose>
