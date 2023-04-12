@@ -266,10 +266,12 @@ function fn_reple_write(){
     <hr>
     <div class="contents left font-h2 mt-90 mb-90"></div>
 	
-	 <c:if test="${qaDto.memberId==sessionScope.memberId}">
-        <a class="form-btn neutral edit-btn">수정</a>
-        <a class="form-btn neutral ms-20 delete-btn">삭제</a>
-      </c:if>
+	<c:if test="${qaDto.memberId == sessionScope.memberId}">
+	<c:if test="${qaDto.depth != 1}">
+		<a class="form-btn neutral edit-btn">수정</a>
+	</c:if>
+		<a class="form-btn neutral ms-20 delete-btn">삭제</a>
+	</c:if>
 
       <c:if test="${sessionScope.memberRole=='관리자'}">
         <a class="form-btn neutral ms-20 delete-btn">삭제</a>

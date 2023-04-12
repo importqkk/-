@@ -9,11 +9,8 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/load.css">
-<<<<<<< HEAD
-	    <!-- font awsome 아이콘 -->
-=======
+
 	    <!-- font awesome 아이콘 -->
->>>>>>> refs/remotes/origin/main
 	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	    <!-- tabler 아이콘 -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -21,7 +18,7 @@
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/layout.css">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/commons.css">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/test.css">
-<<<<<<< HEAD
+
 	    
 	  <!--  
 	  <javascript에서 절대경로를 사용하기 위한 꼼수>
@@ -38,8 +35,6 @@
 	    <!-- favicon 설정 -->
 	    <link rel="icon"  type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
 	    
-=======
->>>>>>> refs/remotes/origin/main
 	    <!-- jquery cdn -->
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	    <!-- favicon -->
