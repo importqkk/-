@@ -25,6 +25,7 @@ import com.kh.semi.dao.ProductDao;
 import com.kh.semi.dao.ProductImgDao;
 import com.kh.semi.dao.ProductInfoDao;
 import com.kh.semi.dao.ProductTagDao;
+import com.kh.semi.dao.SellListDao;
 import com.kh.semi.dto.DetailImgDto;
 import com.kh.semi.dto.ImgDto;
 import com.kh.semi.dto.MainImgDto;
@@ -32,8 +33,10 @@ import com.kh.semi.dto.MemberDto;
 import com.kh.semi.dto.ProductDto;
 import com.kh.semi.dto.ProductImgDto;
 import com.kh.semi.dto.ProductTagDto;
+import com.kh.semi.dto.SellListDto;
 import com.kh.semi.vo.MemberListPaginationVo;
 import com.kh.semi.vo.ProductListPaginationVo;
+import com.kh.semi.vo.SellListPaginationVo;
 
 @Controller
 @RequestMapping("/admin")
@@ -58,6 +61,8 @@ public class AdminController {
 	private File dir;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private SellListDao sellListDao;
 	
 	@PostConstruct
 	public void init() {
@@ -262,6 +267,17 @@ public class AdminController {
 	@GetMapping("/productManage/editFinish")
 	public String editFinish() {
 		return "redirect:list";
+	}
+	
+	// 판매 목록
+	@GetMapping("/sell/list")
+	public String sellList(Model model,
+			@ModelAttribute("vo") SellListPaginationVo vo) {
+		int totalCount = sellListDao.selectCount(vo);
+		vo.setCount(totalCount);
+		List<SellListDto> list = sellListDao.list(vo);
+		model.addAttribute("list", list);
+		return "/WEB-INF/views/admin/sell/list.jsp";
 	}
 	
 	// 메인 이미지 리스트

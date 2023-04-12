@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/mypageHeader.jsp"></jsp:include>
-<script src="/static/js/password.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/password.js"></script>
 <style>
   .content {
   	min-height: 416px;

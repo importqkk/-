@@ -8,19 +8,33 @@
 		<meta charset="UTF-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <link rel="stylesheet" type="text/css" href="/static/css/load.css">
-	    <!-- font awsome 아이콘 -->
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/load.css">
+	    <!-- font awesome 아이콘 -->
 	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	    <!-- tabler 아이콘 -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<<<<<<< HEAD
 	    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
 	    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
 	    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
 	    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
 	    <!-- favicon 설정 -->
 	    <link rel="icon"  type="image/x-icon" href="/static/favicon.ico">
+=======
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/reset.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/layout.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/commons.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/test.css">
+>>>>>>> refs/remotes/origin/main
 	    <!-- jquery cdn -->
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	    <!-- favicon -->
+	    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
+	    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
+	    <script>
+	    	const contextPath = "${pageContext.request.contextPath}";
+	    </script>
+	    
     <style>
        .logo {
             margin: 0;
@@ -158,7 +172,7 @@
 		});
 	});
     </script>
-    <title>SEMI</title>
+    <title>MYFORMULA</title>
 </head>
 	<body>
     <main>
@@ -173,11 +187,11 @@
                         </div>
                         <div class="w-100 center">
                             <a class="link" style="color: #776BFF;" href="/">
-                            	<img class="logo-img" alt="로고" src="/static/image/logo.png">
+                            	<img class="logo-img" alt="로고" src="${pageContext.request.contextPath}/static/image/logo.png">
                             </a>
                         </div>
                     </div>
-                    <div class="center w-50 pb-10">
+                    <div class="center w-50">
                     	<form action="/product/search/">
                         <div class="search-box">
                             <input class="search-input w-100" name="keyword" placeholder="어떤 영양제가 궁금하세요?">
@@ -351,7 +365,7 @@
                             <i class="fa-brands fa-instagram custom-size social-icon me-10"></i>
                         </a>
                         <a class="link-social" href="#">
-                            <img class="social-icon" width="23px" height="23px" src="/static/image/katalk.png">
+                            <img class="social-icon" width="23px" height="23px" src="${pageContext.request.contextPath}/static/image/katalk.png">
                         </a>
                     </div>
                 </div>
@@ -370,6 +384,9 @@
                     </div>
                     <div class="p-10">
                         <a href="/admin/productManage/list" class="link">상품 관리</a>
+                    </div>
+                    <div class="p-10">
+                        <a href="/admin/sell/list" class="link">판매 내역</a>
                     </div>
                     <div class="p-10">
                         <a href="/admin/mainImg/list" class="link">메인 관리</a>

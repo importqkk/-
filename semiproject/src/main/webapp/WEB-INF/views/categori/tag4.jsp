@@ -279,7 +279,7 @@
 			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
-		            			<img class="center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            			<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
 		            		</c:otherwise>
 	            	</c:choose>
 					<br>
@@ -319,7 +319,7 @@
 			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
-		            			<img class="center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            			<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
 		            		</c:otherwise>
 	            	</c:choose>
 					<br>
@@ -359,7 +359,7 @@
 			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
-		            			<img class="center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            			<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
 		            		</c:otherwise>
 	            	</c:choose>
 					<br>
@@ -399,7 +399,7 @@
 			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
-		            			<img class="center item-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+		            			<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
 		            		</c:otherwise>
 	            	</c:choose>
 					<br>

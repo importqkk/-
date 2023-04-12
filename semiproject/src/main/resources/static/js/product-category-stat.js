@@ -3,7 +3,7 @@
 $(function() {
 	// 카테고리별 개수
 	$.ajax({
-		url:"http://localhost:8080/rest/admin/categoryCount",
+		url:contextPath + "/rest/admin/categoryCount",
 		method:"get",
 		success:function(response) {
 			var ctx = document.querySelector('#categoryCount');
@@ -35,7 +35,7 @@ $(function() {
 	})
 	// 카테고리별 판매량
 	$.ajax({
-		url:"http://localhost:8080/rest/admin/categorySellCount",
+		url:contextPath + "/rest/admin/categorySellCount",
 		method:"get",
 		success:function(response) {
 			var ctx = document.querySelector('#categorySellCount');
@@ -88,7 +88,7 @@ $(function() {
 	})
 	// 카테고리별 가격
 	$.ajax({
-		url:"http://localhost:8080/rest/admin/categoryPrice",
+		url:contextPath + "/rest/admin/categoryPrice",
 		method:"get",
 		success:function(response) {
 			var ctx = document.querySelector('#categoryPrice');

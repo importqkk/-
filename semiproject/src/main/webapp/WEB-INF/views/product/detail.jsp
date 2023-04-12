@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/static/css/review.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/review.css">
 <style>
 .flex-remain {
 	flex: 1;
@@ -189,7 +189,7 @@ fs-18 {
 	border-radius: 50%;
 }
 </style>
-<script src="/static/js/review.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/review.js"></script>
 <script type="text/template" id="review-template">
 	<div class="review-item">
 		<div class="memberId"></div>
@@ -296,7 +296,11 @@ fs-18 {
     		 number = parseInt(number);
     		 $.ajax({ // 서버에 데이터 요청
      			type:'POST',
+<<<<<<< HEAD
          		url: contextPath+"/rest/number",
+=======
+         		url:contextPath + "/rest/number",
+>>>>>>> refs/remotes/origin/main
          		data: JSON.stringify({'number': number.toString()}),
                  contentType: 'application/json; charset=utf-8',
                  success: function(data) {
@@ -432,7 +436,7 @@ fs-18 {
 	            		<img class="img-size img-rad-10 img-background " alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
 	            	</c:when>
             		<c:otherwise>
-            			<img class="img-size img-rad-10 img-background " alt="상품 대표 이미지" src="/static/image/productDummy.png" >
+            			<img class="img-size img-rad-10 img-background " alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
             		</c:otherwise>
            	</c:choose>
 				</div>
@@ -532,7 +536,7 @@ fs-18 {
 	            	<img width="1000" class="center" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.detailImgNo}">
 	            </c:when>
 	           	<c:otherwise>
-	           		<img width="1000" class="center" alt="상품 대표 이미지" src="/static/image/productDummy.png">
+	           		<img width="1000" class="center" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png">
 	            </c:otherwise>
 	        </c:choose>
 <!-- 			<img width="1000" class="center" src="/static/image/detail_img.jpg"> -->
@@ -630,7 +634,7 @@ fs-18 {
 				</div>
 			</div>
 		</div>
-		<div class="row review-list review-initial" id=scrollTargetReview">
+		<div class="row review-list review-initial" id="scrollTargetReview">
 			리뷰 목록 위치
 		</div>
 		<button class="form-btn w-95 positive small show-review">리뷰

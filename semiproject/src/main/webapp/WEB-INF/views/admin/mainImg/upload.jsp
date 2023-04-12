@@ -5,7 +5,7 @@
         
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- 메인 이미지 정보 유효성 검사 -->
-<script src="/static/js/main-img-checker.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/main-img-checker.js"></script>
 <style>
 	label, .invalid-message {
 		padding-left: 20px

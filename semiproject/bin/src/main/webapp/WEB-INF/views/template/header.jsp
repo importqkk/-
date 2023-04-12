@@ -8,15 +8,15 @@
 		<meta charset="UTF-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <link rel="stylesheet" type="text/css" href="/static/css/load.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/load.css">
 	    <!-- font awsome 아이콘 -->
 	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	    <!-- tabler 아이콘 -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-	    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/reset.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/layout.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/commons.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/test.css">
 	    <!-- jquery cdn -->
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>

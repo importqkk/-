@@ -6,9 +6,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
-<script src="/static/js/date-picker.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/date-picker.js"></script>
 <!-- 상품 정보 유효성 검사 -->
-<script src="/static/js/product-register-checker.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/product-register-checker.js"></script>
 <style>
 	label, .invalid-message {
 		padding-left: 20px;

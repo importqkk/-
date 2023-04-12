@@ -110,7 +110,7 @@
             			<td><img src="/img/download?imgNo=${payment.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
-            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130"></td>
+            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
             		</c:otherwise>
             	</c:choose>
 						<td>${payment.orderDate}</td>
@@ -128,7 +128,7 @@
             			<td><img src="/img/download?imgNo=${prepare.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
-            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130"></td>
+            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
             		</c:otherwise>
             	</c:choose>
 						<td>${prepare.orderDate}</td>
@@ -146,7 +146,7 @@
             			<td><img src="/img/download?imgNo=${delivery.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
-            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130"></td>
+            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
             		</c:otherwise>
             	</c:choose>
 						<td>${delivery.orderDate}</td>
@@ -164,7 +164,7 @@
             			<td><img src="/img/download?imgNo=${complete.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
-            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130"></td>
+            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
             		</c:otherwise>
             	</c:choose>
 						<td>${complete.orderDate}</td>
