@@ -33,7 +33,7 @@ $(".checkbox_group").on("click", ".normal", function() {
 <form class="join-form" action="join" method="post" enctype="multipart/form-data" autocomplete="off">
 <div class="container-500">
         <div class="row center">
-            <h1 style="color:#776BFF;">SEMI</h1>
+            <h1 style="color:#776BFF;">MYFORMULA</h1>
         </div>
         <div class="row">
             <label>아이디</label>
@@ -101,7 +101,7 @@ $(".checkbox_group").on("click", ".normal", function() {
         <div class="checkbox_group">
         <div class="row">
   <input type="checkbox" id="check_all">
-  <label for="check_all">SEMI 이용약관, 개인정보 수집 및 이용, 프로모션 정보 수신(선택)에 모두 동의합니다.</label>
+  <label for="check_all">MYFORMULA 이용약관, 개인정보 수집 및 이용, 프로모션 정보 수신(선택)에 모두 동의합니다.</label>
         <div class="row">
   <input type="checkbox" name="agreeTos" id="check_1" required class="normal"  value="Y">
   <label for="check_1	">(필수) 개인정보 처리방침 동의</label>
