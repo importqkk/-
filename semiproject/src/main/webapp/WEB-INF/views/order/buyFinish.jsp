@@ -23,10 +23,10 @@
 
         <div class="row pt-10">
             <div class="row">
-                <button class="form-btn medium neutral w-50">마이페이지</button>
+                <a class="form-btn medium neutral w-50" href="/member/mypage">마이페이지</a>
             </div>
             <div class="row">
-                <button class="form-btn medium positive w-50">메인으로</button>
+                <a class="form-btn medium positive w-50" href="/">메인으로</a>
             </div>
         </div>
     </div>

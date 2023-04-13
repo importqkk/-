@@ -9,6 +9,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/load.css">
+
 	    <!-- font awesome 아이콘 -->
 	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	    <!-- tabler 아이콘 -->
@@ -21,9 +22,11 @@
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	    <!-- favicon -->
 	    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
+	    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
 	    <script>
 	    	const contextPath = "${pageContext.request.contextPath}";
 	    </script>
+	    
     <style>
        .logo {
             margin: 0;
@@ -232,7 +235,7 @@
                     	<!-- 로그인 o, 관리자 -->
                     	<c:if test="${sessionScope.memberId != null && sessionScope.memberRole == '관리자'}">
                     		<div class="me-15 center">
-                    			<a class="link" href="/admin" title="관리자 메인">
+                    			<a class="link" href="${pageContext.request.contextPath}/admin" title="관리자 메인">
 	                            	<i class="fa-solid fa-wrench c-p100"></i>
 	                            	<span class="header-menu-text">관리</span>
 	                        	</a>
@@ -241,19 +244,19 @@
                         <!-- 로그인 o -->
                         <c:if test="${sessionScope.memberId != null}">
 	                        <div class="me-15 center">
-		                        <a class="link" href="/cart/main" title="장바구니">
+		                        <a class="link" href="${pageContext.request.contextPath}/cart/main" title="장바구니">
 		                            <i class="fa-solid fa-cart-shopping c-p100"></i>
 		                            <span class="header-menu-text">장바구니</span>
 		                        </a>
 	                        </div>
 	                        <div class="me-15 center">
-		                        <a class="link" href="/member/mypage" title="마이페이지">
+		                        <a class="link" href="${pageContext.request.contextPath}/member/mypage" title="마이페이지">
 		                            <i class="fa-solid fa-user c-p100"></i>
 		                            <span class="header-menu-text">마이페이지</span>
 		                        </a>
 	                        </div>
 	                        <div class="center">
-		                        <a class="link logout" href="/member/logout" title="로그아웃">
+		                        <a class="link logout" href="${pageContext.request.contextPath}/member/logout" title="로그아웃">
 		                            <i class="fa-solid fa-right-from-bracket c-p100"></i>
 		                            <span class="header-menu-text">로그아웃</span>
 		                        </a>
@@ -262,13 +265,13 @@
                         <!-- 로그인 x -->
                         <c:if test="${sessionScope.memberId == null}">
 	                        <div class="me-15 center">
-		                        <a class="link" href="/member/join" title="회원가입">
+		                        <a class="link" href="${pageContext.request.contextPath}/member/join" title="회원가입">
 		                            <i class="fa-solid fa-user c-p100"></i>
 		                            <span class="header-menu-text">회원가입</span>
 		                        </a>
 	                        </div>
 	                        <div class="center">
-		                        <a class="link" href="/member/login" title="로그인">
+		                        <a class="link" href="${pageContext.request.contextPath}/member/login" title="로그인">
 		                            <i class="fa-solid fa-right-to-bracket c-p100"></i>
 		                            <span class="header-menu-text center">로그인</span>
 		                        </a>

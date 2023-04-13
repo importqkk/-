@@ -21,9 +21,11 @@
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	    <!-- favicon -->
 	    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
+	    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
 	    <script>
 	    	const contextPath = "${pageContext.request.contextPath}";
 	    </script>
+	    
     <style>
        .logo {
             margin: 0;
@@ -373,6 +375,9 @@
                     </div>
                     <div class="p-10">
                         <a href="/admin/productManage/list" class="link">상품 관리</a>
+                    </div>
+                    <div class="p-10">
+                        <a href="/admin/sell/list" class="link">판매 내역</a>
                     </div>
                     <div class="p-10">
                         <a href="/admin/mainImg/list" class="link">메인 관리</a>

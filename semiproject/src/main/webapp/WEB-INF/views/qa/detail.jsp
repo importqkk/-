@@ -29,7 +29,7 @@ $(function(){
 	var qaNo="${qaDto.qaNo}";
 	var memberId = "${sessionScope.memberId}";
 	$.ajax({
-		url:"/qa/detail",
+		url: contextPath+"/qa/detail",
 		type:"POST",
 		data:{"qaGroup": qaGroup},
 		dataType:"json",
@@ -47,7 +47,7 @@ $(function(){
 	            //this == 저장버튼
 	            var editedContent = $(this).parents(".edit-panel").find("textarea").val();
 	            $.ajax({
-	                url:"/qa/update",
+	                url: contextPath+"/qa/update",
 	                type:"PUT",
 	                data:{
 	                    "qaNo": qaNo,
@@ -95,7 +95,7 @@ $(function(){
 		    		            
 		    	// AJAX 요청으로 게시물 삭제하기
 		    	$.ajax({
-		    		   url: "/qa/delete",
+		    		   url: contextPath+"/qa/delete",
 		    		   type: "GET",
 		    		   data: {
 		    		       "qaNo": qaNo
@@ -136,7 +136,7 @@ $(function(){
 		            var editedContent = $(this).parents(".reply-edit-panel").find(".textarea-reply").val();
 		
 		            $.ajax({
-		                url:"/qa/update",
+		                url:contextPath+"/qa/update",
 		                type:"PUT",
 		                data:{
 		                    "qaNo": qaAnswerNo,
@@ -183,7 +183,7 @@ $(function(){
 						    		            
 					 // AJAX 요청으로 게시물 삭제하기
 					 $.ajax({
-					    url: "/qa/delete",
+					    url: contextPath+"/qa/delete",
 					    type: "GET",
 					    data: {
 					    	"qaNo": qaAnswerNo
@@ -225,7 +225,7 @@ function fn_reple_write(){
 	var replyContent = $("#replyContent").val();
 	
 	$.ajax({
-		   url: "/qa/repleWrite",
+		   url: contextPath+"/qa/repleWrite",
 		   type: "PUT",
 		   data: {
 		       "qaNo": qaNo,
@@ -265,11 +265,13 @@ function fn_reple_write(){
      <div class="left font-h1 title mt-50 mb-30 center "></div>
     <hr>
     <div class="contents left font-h2 mt-90 mb-90"></div>
-
-      <c:if test="${qaDto.memberId==sessionScope.memberId}">
-        <a class="form-btn neutral edit-btn">수정</a>
-        <a class="form-btn neutral ms-20 delete-btn">삭제</a>
-      </c:if>
+	
+	<c:if test="${qaDto.memberId == sessionScope.memberId}">
+	<c:if test="${qaDto.depth != 1}">
+		<a class="form-btn neutral edit-btn">수정</a>
+	</c:if>
+		<a class="form-btn neutral ms-20 delete-btn">삭제</a>
+	</c:if>
 
       <c:if test="${sessionScope.memberRole=='관리자'}">
         <a class="form-btn neutral ms-20 delete-btn">삭제</a>
