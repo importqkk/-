@@ -80,7 +80,7 @@
             })
         })
     </script>
-    <title>SEMI</title>
+    <title>MYFORMULA</title>
 </head>
 <body>
     <main>
@@ -95,7 +95,7 @@
                         </div>
                         <div class="w-100 center">
                                 <h1 class="c-p100 logo" style="font-size: 50px;">
-                                    <a class="link" style="color: #776BFF;" href="#">SEMI</a>
+                                    <a class="link" style="color: #776BFF;" href="#">MYFORMULA</a>
                                 </h1>
                         </div>
                     </div>

@@ -16,7 +16,7 @@
 
     <div class="container-400">
       <div class="row center pt-100">
-          <h1>SEMI</h1>
+          <h1>MYFORMULA</h1>
         </div>
       <div class="row">
         <input type="text" name="memberId" required class="form-input w-100 medium light" placeholder="아이디" >
