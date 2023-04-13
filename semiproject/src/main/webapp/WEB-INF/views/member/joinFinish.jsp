@@ -4,7 +4,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <div class="container-500">
 	<div class="row center">
-		<h2>SEMI</h2>
+		<h2>MYFORMULA</h2>
 	</div>
 	<div class="row center">
 <h3>회원가입이 완료되었습니다!</h3>
