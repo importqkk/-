@@ -451,15 +451,9 @@ a.form-btn.neutral {
     - 검색창은 부모 div(search-box), 자식 input(search-input)/button(search-btn)으로 만듭니다.
     - html 코드 예시
         <div class="row">
-<<<<<<< HEAD
-            <div class="search-box">
-                <input class="search-input w-100">
-                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-=======
             <div class="parent">
                 <input class="search w-100">
                 <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
->>>>>>> refs/remotes/origin/main
             </div>
         </div>
 */
