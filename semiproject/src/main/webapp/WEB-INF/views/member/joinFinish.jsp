@@ -2,17 +2,29 @@
     pageEncoding="UTF-8"%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<div class="container-500">
+    <style>
+      h1{
+        color:#776BFF;
+      }
+      .error{ 
+	    font-size: 20px;
+	    color: red;
+	  }	
+    </style>
+<div class="container-500 mt-100">
 	<div class="row center">
-		<h2>SEMI</h2>
+		<h1>WELCOME</h1>
 	</div>
 	<div class="row center">
-<h3>회원가입이 완료되었습니다!</h3>
-<h4>나의 체질에 맞는 영양제를 찾으러 가볼까요?</h4>
+<h2>회원가입이 완료되었습니다!</h2><p>
+<h2>나한테 필요한 영양제를 찾으러 가볼까요?</h2>
 	</div>
 	<div class="row center">
-		<a href="login" class="form-btn neutral">로그인 하러 하기</a>
+		<a href="/" class="form-btn neutral medium w-30 mt-10">홈으로</a>
+		<a href="login" class="form-btn positive medium w-30 mt-10">로그인</a>
 	</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+		
+	

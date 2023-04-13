@@ -33,7 +33,7 @@ $(".checkbox_group").on("click", ".normal", function() {
 <form class="join-form" action="join" method="post" enctype="multipart/form-data" autocomplete="off">
 <div class="container-500">
         <div class="row center">
-            <h1 style="color:#776BFF;">SEMI</h1>
+            <h1 style="color:#776BFF;">MYFORMULA</h1>
         </div>
         <div class="row">
             <label>아이디</label>
