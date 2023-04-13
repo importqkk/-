@@ -269,34 +269,40 @@ $(function(){
     //포인트적용
     $(function(){
     $(".apply").click(function(){
-    	//총 상품가격
-    	var totalProduct = ${totalproduct};
-    
+       //총 상품가격
+       var totalProduct = ${totalproduct};
+        var fee=3000;
+        //배달비 포함 총가격
+      var totalPriceWithFee=totalProduct+3000;   
+        
         // 사용하는 포인트
         var usePoint = $("input[name='orderUserPoint']").val();
-       
+        usePoint= parseInt(usePoint);
+
         // 사용가능 포인트
         var point = ${point};
-       
-        var fee=3000;
+
+
+        
         // 사용포인트가 사용가능 포인트보다 많으면
         if(usePoint > point){
             alert("보유 적립금 이상으로 입력할 수 없습니다.");
-			
+         
         }else if(usePoint < 0){
-        	alert("0원 이하로 입력할 수 없습니다.");
-        }else {
-        	if(totalProduct==0)
-            // 제품금액
-            
-            //console.log(usePoint);
-            
+           alert("0원 이하로 입력할 수 없습니다.");
+        
+        }
+        //사용 포인트가 배달비+상품가격보다 높을때
+        else if(usePoint>totalPriceWithFee){
+           alert("적립금 사용량이 상품 결제금액을 초과합니다.");
+        }
+        else {
+                          
             // 적립금 사용 후 남은 사용가능 적립금
             var remainingPoint = point - usePoint;
-            //console.log(remainingPoint);
             // 총 금액
-            var totalPrice = totalProduct - usePoint + 3000;
-            //console.log(totalPrice);
+           var totalPrice = totalPriceWithFee - usePoint ;
+            
 
             $("span#usePoint").text(remainingPoint.toLocaleString() + "원");
             $("span#remainingPoint").text(remainingPoint.toLocaleString() + "원");

@@ -22,7 +22,21 @@
 		   border-collapse: separate;
   			border-spacing: 0 15px; /* 간격 조절 */
 		}
-		
+	th.option1 {
+        cursor: pointer;
+   }
+
+   th.option2 {
+       cursor: pointer;
+   }
+   
+   th.option3 {
+     cursor: pointer;
+   }
+   
+   th.option4 {
+     cursor: pointer;
+   }	
 </style>
 	<script type="text/javascript">
 	$(function() {
@@ -103,7 +117,7 @@
 			       
     <!-- --------------------------------반복문---------------------------------------------------------------------  -->
 			
-				<c:forEach var="payment" items="${payment}">
+				<c:forEach var="payment" items="${payment}" begin="0" end="9">
 					<tr class="paymentShow">
 				<c:choose>
             		<c:when test="${payment.imgNo != 0}">
@@ -121,7 +135,7 @@
 
 				</c:forEach>
 			
-				<c:forEach var="prepare" items="${prepare}">
+				<c:forEach var="prepare" items="${prepare}" begin="0" end="9">
 					<tr class="prepareShow" style="display:none">
 						<c:choose>
             		<c:when test="${prepare.imgNo != 0}">
@@ -139,7 +153,7 @@
 
 				</c:forEach>
 			
-				<c:forEach var="delivery" items="${delivery}">
+				<c:forEach var="delivery" items="${delivery}" begin="0" end="9">
 					<tr class="deliveryShow" style="display:none">
 						<c:choose>
             		<c:when test="${delivery.imgNo != 0}">
@@ -157,7 +171,7 @@
 
 				</c:forEach>
 			
-				<c:forEach var="complete" items="${complete}">
+				<c:forEach var="complete" items="${complete}" begin="0" end="9">
 					<tr class="completeShow" style="display:none">
 						<c:choose>
             		<c:when test="${complete.imgNo != 0}">

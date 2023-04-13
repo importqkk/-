@@ -296,11 +296,9 @@ fs-18 {
     		 number = parseInt(number);
     		 $.ajax({ // 서버에 데이터 요청
      			type:'POST',
-<<<<<<< HEAD
+
          		url: contextPath+"/rest/number",
-=======
-         		url:contextPath + "/rest/number",
->>>>>>> refs/remotes/origin/main
+
          		data: JSON.stringify({'number': number.toString()}),
                  contentType: 'application/json; charset=utf-8',
                  success: function(data) {
