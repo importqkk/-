@@ -297,6 +297,7 @@ fs-18 {
     		 $.ajax({ // 서버에 데이터 요청
      			type:'POST',
          		url: contextPath+"/rest/number",
+
          		data: JSON.stringify({'number': number.toString()}),
                  contentType: 'application/json; charset=utf-8',
                  success: function(data) {
