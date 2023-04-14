@@ -4,16 +4,18 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/review.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <style>
- .reviewContent{
- 	word-break: break-all;
- }
+	.reviewContent {
+		word-break: break-all;
+	}
 </style>
 
 <div class="container-1000">
 	<div class="row">
 		<c:choose>
 			<c:when test="${list.isEmpty()}">
-				<h4 class="center">작성한 리뷰가 없습니다.</h4>
+				<div class="row center">
+					<h4>작성한 리뷰가 없습니다.</h4>				
+				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="row">

@@ -34,7 +34,7 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:contextPath + "/rest/review/", 
+			url:contextPath+"/rest/review/",
 			method:"post",
 			data:{
 				productNo: productNo,
@@ -66,7 +66,7 @@ $(function(){
 		$(".review-list").empty();
 		
 		$.ajax({
-			url:contextPath + "/rest/review/"+productNo,
+			url:contextPath+"/rest/review/"+productNo,
 			method:"get",
 			success:function(response){
 				
@@ -82,16 +82,22 @@ $(function(){
 					$(html).find(".heart-count").text(response[i].reviewLike);
 					
 					//session에서 불러온 memberId와 불러온 review의 memberId가 같은 경우 수정/삭제 버튼 나타나도록 함
-					if(memberId == response[i].memberId){
+					//session에서 불러온 memberRole이 관리자인 경우 리뷰 삭제할 수 있도록 함
+					if(memberRole == "관리자"){
+						$(html).find(".delete-text")
+								.attr("data-review-no", response[i].reviewNo)
+							    .click(deleteReview);
+						$(html).find(".edit-text").hide();
+					}
+					else if(memberId == response[i].memberId){
+						$(html).find(".delete-text")
+								.attr("data-review-no", response[i].reviewNo)
+							    .click(deleteReview);
 						$(html).find(".edit-text")
 								.attr("data-review-no", response[i].reviewNo)
 							    .attr("data-review-content", response[i].reviewContent)
 							    .attr("data-review-star", response[i].reviewStar)
 							    .click(editReview);
-						$(html).find(".delete-text")
-								.attr("data-review-no", response[i].reviewNo)
-							    .click(deleteReview);
-							
 					}
 					else{
 						$(html).find(".changeText").hide();
@@ -152,7 +158,7 @@ $(function(){
 		var reviewNo = $(this).data("review-no");
 		
 		$.ajax({
-			url:contextPath + "/rest/review/"+reviewNo,
+			url:contextPath+"/rest/review/"+reviewNo,
 			method:"delete",
 			success:function(response){
 				$(".review-content").hide();
@@ -220,7 +226,7 @@ $(function(){
 					}
 					
 					$.ajax({
-						url:contextPath + "/rest/review/",
+						url:contextPath+"/rest/review/",
 						method:"patch",
 						data:{
 							reviewNo:reviewNo,
@@ -252,7 +258,7 @@ function likeReview(){
     
     var $likeButton = $(this); // 선택한 하트 엘리먼트
     $.ajax({
-        url:contextPath + "/rest/review/like",
+        url:contextPath+"/rest/review/like",
         method:"post",
         data:{
             reviewNo:reviewNo
