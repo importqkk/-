@@ -38,8 +38,7 @@ public class ReviewRestController {
 	
 	@PostMapping("/")
 	public void write(HttpSession session,
-					  @ModelAttribute ReviewDto reviewDto,
-					  @RequestParam(required = false) List<Integer> imgNo) {
+					  @ModelAttribute ReviewDto reviewDto) {
 		
 		String memberId = (String) session.getAttribute("memberId");
 		reviewDto.setMemberId(memberId);
@@ -68,7 +67,8 @@ public class ReviewRestController {
 	
 	@PostMapping("/like")
 	public ReviewLikeVO like(HttpSession session,
-							@ModelAttribute ReviewLikeDto reviewLikeDto) {
+							@ModelAttribute ReviewLikeDto reviewLikeDto,
+							@ModelAttribute ReviewDto reviewDto) {
 		String memberId  = (String) session.getAttribute("memberId");
 		reviewLikeDto.setMemberId(memberId);
 		
@@ -85,6 +85,9 @@ public class ReviewRestController {
 		
 		//게시글의 좋아요 개수를 업데이트
 		reviewDao.updateLikecount(reviewLikeDto.getReviewNo(), count);
+		
+//		//게시글의 후기 개수를 업데이터
+//		reviewDao.countReview(reviewDto.getProductNo(),count);
 		
 		
 		return ReviewLikeVO.builder()

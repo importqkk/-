@@ -192,6 +192,11 @@ fs-18 {
 <script src="/static/js/review.js"></script>
 <script type="text/template" id="review-template">
 	<div class="review-item">
+		<div class="row center">
+				<c:if test="${reviewList == null}">
+					<h4>작성된 리뷰가 없습니다.</h4>
+				</c:if>
+		</div>
 		<div class="memberId"></div>
 		<div class="flex w-100">
 			<div class="w-50">
@@ -231,6 +236,7 @@ fs-18 {
 	</script>
 <script>
 	var memberId = "${sessionScope.memberId}";
+	var memberRole = "${sessionScope.memberRole}";
 	var reviewNo = "${reviewLikeDto.reviewNo}";
 </script>
 <script type="text/javascript">
