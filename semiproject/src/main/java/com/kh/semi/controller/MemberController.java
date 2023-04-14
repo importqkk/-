@@ -127,7 +127,7 @@ public class MemberController {
 		memberDao.changePassword(memberId, temporaryPW);
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(memberDto.getMemberEmail());
-		message.setSubject("[SEMI] 임시 비밀번호 발급");
+		message.setSubject("[MYFORMULA] 임시 비밀번호 발급");
 		message.setText("발급된 임시 비밀번호는 "+temporaryPW+" 입니다. 로그인 후 비밀번호를 반드시 변경해주시길 바랍니다.");
 		sender.send(message);
 		return "redirect:findPwResult";

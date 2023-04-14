@@ -34,7 +34,7 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:contextPath+"/rest/review/", 
+			url:contextPath+"/rest/review/",
 			method:"post",
 			data:{
 				productNo: productNo,
@@ -121,7 +121,7 @@ $(function(){
 					
 						(function(reviewNo) {
 							    $.ajax({
-							      url: "/rest/review/check",
+							      url: contextPath + "/rest/review/check",
 							      method: "post",
 							      data: {
 							        reviewNo: reviewNo

@@ -3,13 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<%!    int count = 0 ; %>
-<c:set var="listSize" value="${fn:length(itemInfo)}" />
-    
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- 상품 수량 수정 비동기처리 스크립트 -->
 <script src="${pageContext.request.contextPath}/static/js/cart-product-count-process.js"></script>
+<%!    int count = 0 ; %>
+<c:set var="listSize" value="${fn:length(itemInfo)}" />
 		
 <style>
     h1, h2, h3, h4, span {
@@ -29,18 +27,16 @@
     }
 </style>
 <script type="text/javascript">
-
 	$(function() {
 	    $(".order-btn").click(function(event) {
 	       var stockCount = $("input[name='stockCount']").val();
-	          if(stockCount >0){
+	          if(stockCount > 0){
 	           alert("품절된 상품이 존재합니다. 삭제 후 다시 이용해주세요.");
 	          } else{
 	           $(this).attr("href", "../order/buy");             
 	          }
 	    });
 	});
-
 </script>
 
     <div class="container-1000">
@@ -61,7 +57,7 @@
  	            		</c:when>
 	            		<c:otherwise>
 	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
-	            				<img class="product-img" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130">
+	            				<img class="product-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">
 	            			</a>
 	            		</c:otherwise>
 	            	</c:choose>
@@ -630,7 +626,14 @@
 		                    </div>
 	                	</c:otherwise>
 	                </c:choose>
-	                <c:set var="total" value="${total + cartProductInfoDto.productPrice * cartProductInfoDto.productCount}"></c:set>
+	                <c:choose>
+	                	<c:when test="${cartProductInfoDto.productStock == 0}">
+	                		<c:set var="total" value="${total + cartProductInfoDto.productPrice * cartProductInfoDto.productCount * cartProductInfoDto.productStock}"></c:set>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<c:set var="total" value="${total + cartProductInfoDto.productPrice * cartProductInfoDto.productCount}"></c:set>
+	                	</c:otherwise>
+	                </c:choose>
 	                <c:if test="${cartProductInfoDto.productStock == 0}">
 		               <c:set var="count" value="${count + 1}" />
 		               <input name="stockCount" type="hidden" value="${count}">
@@ -643,12 +646,10 @@
 	                </a>
 	            </div>
 	        </div>
-	        <!--  -->
-	        <c:if test="${cartProductInfoDto.productStock == 0}">
+<%-- 	    <c:if test="${cartProductInfoDto.productStock == 0}">
 	        	<c:set var="count" value="${count + 1}" />
 	        	<input name="stockCount" type="hidden" value="${count}">
-	        </c:if>
-	        <!--  -->
+	        </c:if> --%>
 	    </c:forEach>
 <!-- ------------------------------------ 반복문 돌릴 부분 end ------------------------------------ -->
 		<c:if test="${isEmpty == 0}">

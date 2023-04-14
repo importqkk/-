@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RandomComponent {
+public class RandomComponent {  
 
 	private List<String> data = new ArrayList<>();
 	private Random ran = new Random();

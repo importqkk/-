@@ -8,7 +8,7 @@
 
 <div class="container-1000">
     <div class="row left pt-20 pb-20">
-        <h1>Q&A 게시판</h1>
+    	<h1><a href="/qa/list" class="link">Q&A게시판</a></h1>
     </div>
     <div class="row center pt-40 pb-40">
     	<h4>욕설, 비방 글, 상업적인 게시글은 통보없이 삭제될 수 있고 이용에 제한이 생길 수 있습니다. </h4>
@@ -64,7 +64,6 @@
 					
 					<td class="left">
 					  <c:choose>
-					  
 					    <c:when test="${qaDto.qaSecret == 'Y' && sessionScope.memberRole != '관리자' && sessionScope.memberId != qaDto.memberId}">
 					      <c:choose>
 					        <c:when test="${qaDto.qaDepth == 1}">
@@ -79,24 +78,39 @@
 					        </c:otherwise>
 					      </c:choose>
 					    </c:when>
-					    
 					    <c:otherwise>
 					      <a href="detail?qaNo=${qaDto.qaNo}" class="link">
 					        <c:choose>
 					          <c:when test="${qaDto.qaDepth == 1}">
+					            <c:choose>
+					              <c:when test="${qaDto.qaSecret == 'Y' && (sessionScope.memberRole == '관리자' || sessionScope.memberId == qaDto.memberId)}">
+					                <i class="fa-solid fa-lock" style="color: #776bff;"></i>
+					              </c:when>
+					            </c:choose>
 					            ㄴRE : ${qaDto.qaTitle}의 답변입니다.
 					          </c:when>
 					          <c:otherwise>
+					            <c:choose>
+					              <c:when test="${qaDto.qaSecret == 'Y' && (sessionScope.memberRole == '관리자' || sessionScope.memberId == qaDto.memberId)}">
+					                <i class="fa-solid fa-lock" style="color: #776bff;"></i>
+					              </c:when>
+					            </c:choose>
 					            ${qaDto.qaTitle}
 					          </c:otherwise>
 					        </c:choose>
 					      </a>
 					    </c:otherwise>
-					    
 					  </c:choose>
 					</td>
-					<td class="center">${qaDto.memberId}</td>
-					
+					<c:choose>
+						<c:when test="${qaDto.qaDepth == 1}">
+							<td class="center">관리자</td>
+						</c:when>
+						<c:otherwise>
+							<td class="center">${qaDto.memberId}</td>
+						</c:otherwise>
+					</c:choose>
+
 					<%-- DTO에 만든 가상의 Getter 메소드를 불러 처리 --%>
 					<td>${qaDto.qaDate}</td>
 					<td>${qaDto.qaRead}</td>
@@ -113,7 +127,8 @@
     </div>
     </c:if>
     
-    <div class="row pagination center pt-20 pb-20">
+    
+    <div class="row pagination center pt-90 pb-20">
     
     	<!-- 처음 -->
     	<c:choose>

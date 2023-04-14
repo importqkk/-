@@ -9,7 +9,6 @@
 	}
 </style>
 
-
 <div class="container-1000">
 	<div class="row">
 		<c:choose>

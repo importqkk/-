@@ -22,7 +22,21 @@
 		   border-collapse: separate;
   			border-spacing: 0 15px; /* 간격 조절 */
 		}
-		
+	th.option1 {
+        cursor: pointer;
+   }
+
+   th.option2 {
+       cursor: pointer;
+   }
+   
+   th.option3 {
+     cursor: pointer;
+   }
+   
+   th.option4 {
+     cursor: pointer;
+   }	
 </style>
 	<script type="text/javascript">
 	$(function() {
@@ -103,14 +117,14 @@
 			       
     <!-- --------------------------------반복문---------------------------------------------------------------------  -->
 			
-				<c:forEach var="payment" items="${payment}">
+				<c:forEach var="payment" items="${payment}" begin="0" end="9">
 					<tr class="paymentShow">
 				<c:choose>
             		<c:when test="${payment.imgNo != 0}">
             			<td><img src="/img/download?imgNo=${payment.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
-            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130"></td>
+            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
             		</c:otherwise>
             	</c:choose>
 						<td>${payment.orderDate}</td>
@@ -121,14 +135,14 @@
 
 				</c:forEach>
 			
-				<c:forEach var="prepare" items="${prepare}">
+				<c:forEach var="prepare" items="${prepare}" begin="0" end="9">
 					<tr class="prepareShow" style="display:none">
 						<c:choose>
             		<c:when test="${prepare.imgNo != 0}">
             			<td><img src="/img/download?imgNo=${prepare.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
-            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130"></td>
+            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
             		</c:otherwise>
             	</c:choose>
 						<td>${prepare.orderDate}</td>
@@ -139,14 +153,14 @@
 
 				</c:forEach>
 			
-				<c:forEach var="delivery" items="${delivery}">
+				<c:forEach var="delivery" items="${delivery}" begin="0" end="9">
 					<tr class="deliveryShow" style="display:none">
 						<c:choose>
             		<c:when test="${delivery.imgNo != 0}">
             			<td><img src="/img/download?imgNo=${delivery.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
-            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130"></td>
+            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
             		</c:otherwise>
             	</c:choose>
 						<td>${delivery.orderDate}</td>
@@ -157,14 +171,14 @@
 
 				</c:forEach>
 			
-				<c:forEach var="complete" items="${complete}">
+				<c:forEach var="complete" items="${complete}" begin="0" end="9">
 					<tr class="completeShow" style="display:none">
 						<c:choose>
             		<c:when test="${complete.imgNo != 0}">
             			<td><img src="/img/download?imgNo=${complete.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
-            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="/static/image/productDummy.png" width="130" height="130"></td>
+            			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
             		</c:otherwise>
             	</c:choose>
 						<td>${complete.orderDate}</td>

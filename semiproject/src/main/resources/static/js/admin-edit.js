@@ -28,7 +28,7 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:contextPath+"/rest/member/memberNick/"+memberNick,
+			url:contextPath + "/rest/member/memberNick/"+memberNick,
 			method:"get",
 			success:function(response){
 				if(response == "Y") {
@@ -63,7 +63,7 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:contextPath+"/rest/member/memberEmail/"+memberEmail,
+			url:contextPath + "/rest/member/memberEmail/"+memberEmail,
 			method:"get",
 			success:function(response){
 				if(response == "Y") {
@@ -120,7 +120,6 @@ $(function(){
 	});
 });
 	
-
 
 
 

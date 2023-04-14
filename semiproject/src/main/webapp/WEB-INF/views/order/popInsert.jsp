@@ -83,7 +83,9 @@
         		});
         });
     </script>
-
+	<script type="text/javascript">
+	
+	</script>
 </head>
 <body>
     <div class="pop-100">
@@ -105,12 +107,12 @@
 	       <div class="row">
 	       		<label class="ps-10 w-100">주소</label>
 	       		<div class="flex">
-	       			<input type="text" class="form-input small w-80 me-5" name="memberPost" placeholder="우편번호">
+	       			<input type="text" class="form-input small w-80 me-5" name="memberPost" placeholder="우편번호" required="required">
 	       			<button class="address-btn form-btn small positive w-20" type="button">검색</button>
 	       		</div>
 	       </div>
 	       <div class="row">
-	       		<input type="text" class="form-input small w-100" name="memberBasicAddr" placeholder="기본주소">
+	       		<input type="text" class="form-input small w-100" name="memberBasicAddr" placeholder="기본주소" readonly="readonly">
 	       </div>
 	       <div class="row">
 	       		<input type="text" class="form-input small w-100" name="memberDetailAddr" placeholder="상세주소">
@@ -128,7 +130,7 @@
 		        <textarea name="etc-text" id="etc-text" cols="57" rows="5" style="display:none"></textarea>
 	       </div>
 	       <div class="row">
-	       		<button class="btn form-btn small positive w-100" type="submit">등록하기</button>
+	       		<button class="btn form-btn small positive w-100" id="insert-btn" type="submit">등록하기</button>
 	       </div>
         </form>
     </div>

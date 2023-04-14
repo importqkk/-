@@ -9,31 +9,23 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/load.css">
-	    <!-- font awsome 아이콘 -->
+
+	    <!-- font awesome 아이콘 -->
 	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	    <!-- tabler 아이콘 -->
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/reset.css">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/layout.css">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/commons.css">
-	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}s/static/css/test.css">
-	    
-	    <!-- favicon 설정 -->
-   		<link rel="icon"type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
-    
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/test.css">
 	    <!-- jquery cdn -->
 	    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	    
-	    <!-- 
-	    	Javascript에서 절대 경로를 사용하기 위한 꼼수
-	    	-JS는 절대경로란 개념이 없으므로 JSP의 EL의 도움을 받아야 함
-	    	-<script>는 분할해서 작성해서 결국 이어지는 특징을 활용함
-	    	-모든 <script>의 가장 ㅜ이에 다음과 같이 변수를 하나 선언
-	    	-const로 변수를 선언하면 자바의 final과 같이 불변 처리가 됨
-	     -->
-	     <script>
-	     	const contextPath = "${pageContext.request.contextPath}";
-	     </script>
+	    <!-- favicon -->
+	    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
+	    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
+	    <script>
+	    	const contextPath = "${pageContext.request.contextPath}";
+	    </script>
 	    
     <style>
        .logo {
@@ -212,7 +204,7 @@
 		});
 	});
     </script>
-    <title>SEMI</title>
+    <title>MYFORMULA</title>
 </head>
 <body>
     <main>
@@ -227,11 +219,11 @@
                         </div>
                         <div class="w-100 center">
                             <a class="link" style="color: #776BFF;" href="/">
-                            	<img class="logo-img" alt="로고" src="/static/image/logo.png">
+                            	<img class="logo-img" alt="로고" src="${pageContext.request.contextPath}/static/image/logo.png">
                             </a>
                         </div>
                     </div>
-                    <div class="center w-50 pb-10">
+                    <div class="center w-50">
                     	<form action="/product/search/">
                         <div class="search-box">
                             <input class="search-input w-100" name="search" placeholder="어떤 영양제가 궁금하세요?" value="${param.search}">
@@ -243,7 +235,7 @@
                     	<!-- 로그인 o, 관리자 -->
                     	<c:if test="${sessionScope.memberId != null && sessionScope.memberRole == '관리자'}">
                     		<div class="me-15 center">
-                    			<a class="link" href="/admin" title="관리자 메인">
+                    			<a class="link" href="${pageContext.request.contextPath}/admin" title="관리자 메인">
 	                            	<i class="fa-solid fa-wrench c-p100"></i>
 	                            	<span class="header-menu-text">관리</span>
 	                        	</a>
@@ -252,19 +244,19 @@
                         <!-- 로그인 o -->
                         <c:if test="${sessionScope.memberId != null}">
 	                        <div class="me-15 center">
-		                        <a class="link" href="/cart/main" title="장바구니">
+		                        <a class="link" href="${pageContext.request.contextPath}/cart/main" title="장바구니">
 		                            <i class="fa-solid fa-cart-shopping c-p100"></i>
 		                            <span class="header-menu-text">장바구니</span>
 		                        </a>
 	                        </div>
 	                        <div class="me-15 center">
-		                        <a class="link" href="/member/mypage" title="마이페이지">
+		                        <a class="link" href="${pageContext.request.contextPath}/member/mypage" title="마이페이지">
 		                            <i class="fa-solid fa-user c-p100"></i>
 		                            <span class="header-menu-text">마이페이지</span>
 		                        </a>
 	                        </div>
 	                        <div class="center">
-		                        <a class="link logout" href="/member/logout" title="로그아웃">
+		                        <a class="link logout" href="${pageContext.request.contextPath}/member/logout" title="로그아웃">
 		                            <i class="fa-solid fa-right-from-bracket c-p100"></i>
 		                            <span class="header-menu-text">로그아웃</span>
 		                        </a>
@@ -273,13 +265,13 @@
                         <!-- 로그인 x -->
                         <c:if test="${sessionScope.memberId == null}">
 	                        <div class="me-15 center">
-		                        <a class="link" href="/member/join" title="회원가입">
+		                        <a class="link" href="${pageContext.request.contextPath}/member/join" title="회원가입">
 		                            <i class="fa-solid fa-user c-p100"></i>
 		                            <span class="header-menu-text">회원가입</span>
 		                        </a>
 	                        </div>
 	                        <div class="center">
-		                        <a class="link" href="/member/login" title="로그인">
+		                        <a class="link" href="${pageContext.request.contextPath}/member/login" title="로그인">
 		                            <i class="fa-solid fa-right-to-bracket c-p100"></i>
 		                            <span class="header-menu-text center">로그인</span>
 		                        </a>
@@ -405,7 +397,7 @@
                             <i class="fa-brands fa-instagram custom-size social-icon me-10"></i>
                         </a>
                         <a class="link-social" href="#">
-                            <img class="social-icon" width="23px" height="23px" src="/static/image/katalk.png">
+                            <img class="social-icon" width="23px" height="23px" src="${pageContext.request.contextPath}/static/image/katalk.png">
                         </a>
                     </div>
                 </div>

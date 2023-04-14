@@ -14,7 +14,7 @@ $(function(){
 		if(content.trim().length == 0) return;//의미없는 값 차단
 		
 		$.ajax({
-			url:contextPath+"/rest/reply/",
+			url:contextPath + "/rest/reply/",
 			method:"post",
 			data:{
 				replyOrigin: replyOrigin,
@@ -35,7 +35,7 @@ $(function(){
 		$(".reply-list").empty();//대상 영역을 청소
 		
 		$.ajax({
-			url:contextPath+"/rest/reply/"+replyOrigin,
+			url:contextPath + "/rest/reply/"+replyOrigin,
 			method:"get",
 			success:function(response){//response == List<ReplyDto>
 				//댓글 개수 변경
@@ -90,7 +90,7 @@ $(function(){
 		var replyNo = $(this).data("reply-no");
 		
 		$.ajax({
-			url:contextPath+"/rest/reply/"+replyNo,
+			url:contextPath + "/rest/reply/"+replyNo,
 			method:"delete",
 			success:function(response){
 				loadList();
@@ -120,7 +120,7 @@ $(function(){
 												.click(function(){
 													//번호와 내용을 비동기 전송 후 목록 갱신
 													$.ajax({
-														url:contextPath+"/rest/reply/",
+														url:contextPath + "/rest/reply/",
 														method:"patch",
 														data:{
 															replyNo:replyNo,

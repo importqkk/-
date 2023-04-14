@@ -66,7 +66,7 @@
             opener.document.getElementsByName('orderBasicAddr')[0].value = $('span#orderBasicAddr'+index).text();
             opener.document.getElementsByName('orderDetailAddr')[0].value = $('span#orderDetailAddr'+index).text();
             opener.document.getElementsByName('orderRequest')[0].value = $('span#orderRequest'+index).text();
-               
+            window.opener.document.getElementsByName('orderRequest')[0].focus();     
                
                window.close(); // 팝업창 닫기
              });

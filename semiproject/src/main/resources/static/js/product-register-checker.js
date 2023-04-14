@@ -12,8 +12,8 @@ $(function(){
 		productSellCountValid: false,
 		productJoinValid: false,
 		tagNoValid: false,
-		img1Valid: false,
-		img2Valid: false,
+		img1Valid: true,
+		img2Valid: true,
 		isAllValid:function() {
 			return this.productNameValid && this.productBrandValid 
 			&& this.productContentValid && this.productPriceValid 
