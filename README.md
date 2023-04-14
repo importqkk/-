@@ -102,8 +102,8 @@
 
 ## 계정 정보
 ### 관리자
-- ID: testuser2
-- PW: Testuser2!!
+- ID: adminuser01
+- PW: Adminuser01!
 ### 일반회원
 - ID: testuser01
 - PW: Testuser01!
