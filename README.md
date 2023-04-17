@@ -84,12 +84,12 @@
 
 ## 개발환경
 ### 운영체제 및 버전
-- <img src="https://img.shields.io/badge/windows10-0078D6?style=for-the-badge&logo=windows&logoColor=white">
+<img src="https://img.shields.io/badge/windows10-0078D6?style=for-the-badge&logo=windows&logoColor=white">
 ### 사용한 언어 및 버전
-- java 17
-- javascript
+<img src="https://img.shields.io/badge/java17-007396?style=for-the-badge&logo=java&logoColor=white"> 
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 ### 사용한 IDE 및 버전
-- Spring Tool Suite 4
+<img src="https://img.shields.io/badge/springboot4-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> 
 
 ## 참조한 사이트명과 주소
 - 필리: https://pilly.kr
