@@ -46,7 +46,7 @@
         <div class="row pb-20">
             <h1>메인 이미지 리스트</h1>
         </div>
-        <form action="${pageContext.request.contextPath}/mainImgDeleteAll" method="post" class="delete-form">
+        <form action="${pageContext.request.contextPath}/admin/mainImg/mainImgDeleteAll" method="post" class="delete-form">
             <div class="row w-100">
                 <div class="row right">
                     <button type="submit" class="form-btn small neutral delete-btn">이미지 삭제</button>

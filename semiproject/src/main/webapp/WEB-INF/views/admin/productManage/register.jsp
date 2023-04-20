@@ -51,7 +51,7 @@
 </script>
 
 <div class="container-1000">
-	<form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data" class="register-form" autocomplete="off">
+	<form action="${pageContext.request.contextPath}/admin/productManage/register" method="post" enctype="multipart/form-data" class="register-form" autocomplete="off">
         <div class="row pb-20">
             <h1>상품 등록</h1>
         </div>
