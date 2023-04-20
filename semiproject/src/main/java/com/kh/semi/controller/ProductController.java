@@ -41,7 +41,7 @@ public class ProductController {
 		
 		// 존재하지 않는 detail 페이지에 접근 시도 시에, redirect /categori/all
 		if(productInfoDto == null) {
-			return "redirect:${pageContext.request.contextPath}/categori/all";
+			return "redirect:/categori/all";
 		}
 		model.addAttribute("productInfoDto",productInfoDto);
 				

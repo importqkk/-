@@ -27,7 +27,7 @@ public class MemberInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		else{// 비회원이면 - 로그인 페이지로 이동시키면서 차단(리다이렉트)
-			response.sendRedirect("${pageContext.request.contextPath}/member/login");// 리다이렉트 코드 return "redirect:/member/login"과 같다
+			response.sendRedirect(request.getContextPath() + "/member/login");// 리다이렉트 코드 return "redirect:/member/login"과 같다
 			return false;
 			 
 		}
