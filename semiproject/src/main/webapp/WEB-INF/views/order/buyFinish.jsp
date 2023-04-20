@@ -23,10 +23,10 @@
 
         <div class="row pt-10">
             <div class="row">
-                <a class="form-btn medium neutral w-50" href="/member/mypage">마이페이지</a>
+                <a class="form-btn medium neutral w-50" href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
             </div>
             <div class="row">
-                <a class="form-btn medium positive w-50" href="/">메인으로</a>
+                <a class="form-btn medium positive w-50" href="${pageContext.request.contextPath}/">메인으로</a>
             </div>
         </div>
     </div>

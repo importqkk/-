@@ -177,13 +177,13 @@
                             <i class="fa-solid fa-xmark fa-2x c-p100 close-btn"></i>
                         </div>
                         <div class="w-100 center">
-                            <a class="link" style="color: #776BFF;" href="/">
+                            <a class="link" style="color: #776BFF;" href="${pageContext.request.contextPath}/">
                             	<img class="logo-img" alt="로고" src="${pageContext.request.contextPath}/static/image/logo.png">
                             </a>
                         </div>
                     </div>
                     <div class="center w-50">
-                    	<form action="/product/search/">
+                    	<form action="${pageContext.request.contextPath}/product/search/">
                         <div class="search-box">
                             <input class="search-input w-100" name="keyword" placeholder="어떤 영양제가 궁금하세요?">
                             <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -194,7 +194,7 @@
                     	<!-- 로그인 o, 관리자 -->
                     	<c:if test="${sessionScope.memberId != null && sessionScope.memberRole == '관리자'}">
                     		<div class="me-15 center">
-                    			<a class="link" href="/admin" title="관리자 메인">
+                    			<a class="link" href="${pageContext.request.contextPath}/admin" title="관리자 메인">
 	                            	<i class="fa-solid fa-wrench c-p100"></i>
 	                            	<span class="header-menu-text">관리</span>
 	                        	</a>
@@ -203,19 +203,19 @@
                         <!-- 로그인 o -->
                         <c:if test="${sessionScope.memberId != null}">
 	                        <div class="me-15 center">
-		                        <a class="link" href="/cart/main" title="장바구니">
+		                        <a class="link" href="${pageContext.request.contextPath}/cart/main" title="장바구니">
 		                            <i class="fa-solid fa-cart-shopping c-p100"></i>
 		                            <span class="header-menu-text">장바구니</span>
 		                        </a>
 	                        </div>
 	                        <div class="me-15 center">
-		                        <a class="link" href="/member/mypage" title="마이페이지">
+		                        <a class="link" href="${pageContext.request.contextPath}/member/mypage" title="마이페이지">
 		                            <i class="fa-solid fa-user c-p100"></i>
 		                            <span class="header-menu-text">마이페이지</span>
 		                        </a>
 	                        </div>
 	                        <div class="center">
-		                        <a class="link logout" href="/member/logout" title="로그아웃">
+		                        <a class="link logout" href="${pageContext.request.contextPath}/member/logout" title="로그아웃">
 		                            <i class="fa-solid fa-right-from-bracket c-p100"></i>
 		                            <span class="header-menu-text">로그아웃</span>
 		                        </a>
@@ -224,13 +224,13 @@
                         <!-- 로그인 x -->
                         <c:if test="${sessionScope.memberId == null}">
 	                        <div class="me-15 center">
-		                        <a class="link" href="/member/join" title="회원가입">
+		                        <a class="link" href="${pageContext.request.contextPath}/member/join" title="회원가입">
 		                            <i class="fa-solid fa-user c-p100"></i>
 		                            <span class="header-menu-text">회원가입</span>
 		                        </a>
 	                        </div>
 	                        <div class="center">
-		                        <a class="link" href="/member/login" title="로그인">
+		                        <a class="link" href="${pageContext.request.contextPath}/member/login" title="로그인">
 		                            <i class="fa-solid fa-right-to-bracket c-p100"></i>
 		                            <span class="header-menu-text center">로그인</span>
 		                        </a>
@@ -246,30 +246,30 @@
                     <!-- 로그인 전 -->
                     <c:if test="${sessionScope.memberId == null}">
                     	<div>
-	                        <h4><a class="link pe-20" href="/member/login" style="border-right: 1px solid #22201e;">로그인</a></h4>
+	                        <h4><a class="link pe-20" href="${pageContext.request.contextPath}/member/login" style="border-right: 1px solid #22201e;">로그인</a></h4>
 	                    </div>
 	                    <div>
-	                        <h4><a class="link ps-20" href="/member/join">회원가입</a></h4>
+	                        <h4><a class="link ps-20" href="${pageContext.request.contextPath}/member/join">회원가입</a></h4>
 	                    </div>
                     </c:if>
                     
                     <!-- 로그인 후 -->
                     <c:if test="${sessionScope.memberId != null}">
 	                    <div>
-	                        <h4><a class="link pe-20" href="/cart/main" style="border-right: 1px solid #22201e;">장바구니</a></h4>
+	                        <h4><a class="link pe-20" href="${pageContext.request.contextPath}/cart/main" style="border-right: 1px solid #22201e;">장바구니</a></h4>
 	                    </div>
 	                    <div>
-	                        <h4><a class="link ps-20 pe-20" href="/member/mypage" style="border-right: 1px solid #22201e;">마이페이지</a></h4>
+	                        <h4><a class="link ps-20 pe-20" href="${pageContext.request.contextPath}/member/mypage" style="border-right: 1px solid #22201e;">마이페이지</a></h4>
 	                    </div>
 	                    <div>
-	                        <h4><a class="link ps-20 logout" href="/member/logout">로그아웃</a></h4>
+	                        <h4><a class="link ps-20 logout" href="${pageContext.request.contextPath}/member/logout">로그아웃</a></h4>
 	                    </div>
                     </c:if>
                 </div>
                 <div class="flex center">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="/categori/all">
+                            <a class="link" href="${pageContext.request.contextPath}/categori/all">
                                 <i class="fa fa-solid fa-border-all"></i>
                                 <h3 class="category-text">전체</h3>
                             </a>
@@ -277,7 +277,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="/categori/tag1">
+                            <a class="link" href="${pageContext.request.contextPath}/categori/tag1">
                                 <i class="fa fa-light fa-face-smile"></i>
                                 <h3 class="category-text">피부</h3>
                             </a>
@@ -285,7 +285,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="/categori/tag2">
+                            <a class="link" href="${pageContext.request.contextPath}/categori/tag2">
                                 <i class="fa fa-light fa-weight-scale"></i>
                                 <h3 class="category-text">다이이트</h3>
                             </a>
@@ -295,7 +295,7 @@
                 <div class="flex center">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="/categori/tag3">
+                            <a class="link" href="${pageContext.request.contextPath}/categori/tag3">
                                 <i class="fa fa-light fa-venus"></i>
                                 <h3 class="category-text">여성</h3>	
                             </a>
@@ -303,7 +303,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="/categori/tag4">
+                            <a class="link" href="${pageContext.request.contextPath}/categori/tag4">
                                 <i class="fa fa-sharp fa-light fa-bolt-lightning"></i>
                                 <h3 class="category-text">활력</h3>
                             </a>
@@ -311,7 +311,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="/categori/tag5">
+                            <a class="link" href="${pageContext.request.contextPath}/categori/tag5">
                                 <i class="fa fa-thin fa-mars"></i>
                                 <h3 class="category-text">남성</h3>
                             </a>
@@ -321,7 +321,7 @@
                 <div class="flex center mb-20">
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="/categori/tag6">
+                            <a class="link" href="${pageContext.request.contextPath}/categori/tag6">
                                 <i class="fa fa-light fa-eye"></i>
                                 <h3 class="category-text">눈</h3>
                             </a>
@@ -329,7 +329,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="/categori/tag7">
+                            <a class="link" href="${pageContext.request.contextPath}/categori/tag7">
                                 <i class="fa fa-light fa-tooth"></i>
                                 <h3 class="category-text">치아</h3>
                             </a>
@@ -337,7 +337,7 @@
                     </div>
                     <div class="w-33 flex center">
                         <div class="w-40 category">
-                            <a class="link" href="/categori/tag8">
+                            <a class="link" href="${pageContext.request.contextPath}/categori/tag8">
                                 <i class="fa fa-light fa-bone"></i>
                                 <h3 class="category-text">관절/뼈</h3>
                             </a>
@@ -346,7 +346,7 @@
                 </div>
                 <div class="flex">
                     <div class="flex ps-100 ms-30 w-50">
-                        <h2><a class="link" href="/qa/list">QnA</a></h2>
+                        <h2><a class="link" href="${pageContext.request.contextPath}/qa/list">QnA</a></h2>
                     </div>
                     <div class="flex right pe-100 me-30 w-50">
                         <a class="link-social" href="#">
@@ -366,24 +366,24 @@
         	<div class="admin-menu w-20">
                 <div class="flex-box flex-vertical">
                     <div class="p-10">
-                        <a class="link" href="/admin">
+                        <a class="link" href="${pageContext.request.contextPath}/admin">
                         	<h2 class="c-p100">관리자 메뉴</h2>
                         </a>
                     </div>
                     <div class="p-10">
-                        <a href="/admin/member/list" class="link">회원 목록</a>
+                        <a href="${pageContext.request.contextPath}/admin/member/list" class="link">회원 목록</a>
                     </div>
                     <div class="p-10">
-                        <a href="/admin/productManage/list" class="link">상품 관리</a>
+                        <a href="${pageContext.request.contextPath}/admin/productManage/list" class="link">상품 관리</a>
                     </div>
                     <div class="p-10">
-                        <a href="/admin/sell/list" class="link">판매 내역</a>
+                        <a href="${pageContext.request.contextPath}/admin/sell/list" class="link">판매 내역</a>
                     </div>
                     <div class="p-10">
-                        <a href="/admin/mainImg/list" class="link">메인 관리</a>
+                        <a href="${pageContext.request.contextPath}/admin/mainImg/list" class="link">메인 관리</a>
                     </div>
                     <div class="p-10">
-                        <a href="/qa/list" class="link">QnA 게시판</a>
+                        <a href="${pageContext.request.contextPath}/qa/list" class="link">QnA 게시판</a>
                     </div>
                	</div>
         	</div>

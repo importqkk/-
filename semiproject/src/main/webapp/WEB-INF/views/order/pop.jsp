@@ -120,7 +120,7 @@
                 
               </div>
 
-      <form id="myForm" action="/order/popup" method="post">
+      <form id="myForm" action="${pageContext.request.contextPath}/order/popup" method="post">
         <c:forEach var="allInfo" items="${allInfo}" varStatus="loop">
               <div class="mt-20" style="border: 2px solid rgb(119,107,255) ; width: 500px; padding: 10px;">
                   <div class="row">

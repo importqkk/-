@@ -47,7 +47,7 @@
     	<c:if test="${sessionScope.memberRole == '관리자'}">
     	<button type="submit" class="form-btn negative">삭제</button>
     	</c:if>
-        <a href="write" class="form-btn positive">글쓰기</a>
+        <a href="${pageContext.request.contextPath}/write" class="form-btn positive">글쓰기</a>
     </div>
     <div class="row">
         <table class="table table-border">
@@ -79,7 +79,7 @@
 					<td>${boardDto.boardNo}</td>
 					<td class="left">
 						<!-- 제목을 누르면 상세로 이동 -->
-						<a href="detail?boardNo=${boardDto.boardNo}" class="link">
+						<a href="${pageContext.request.contextPath}/detail?boardNo=${boardDto.boardNo}" class="link">
 							
 							<c:if test="${boardDto.boardHead != null}">
 								<!-- 말머리가 있으면 출력 -->
@@ -125,7 +125,7 @@
 						</c:if>
 					
 						<!-- 제목을 누르면 상세로 이동 -->
-						<a href="detail?boardNo=${boardDto.boardNo}" class="link">
+						<a href="${pageContext.request.contextPath}/detail?boardNo=${boardDto.boardNo}" class="link">
 							
 							<c:if test="${boardDto.boardHead != null}">
 								<!-- 말머리가 있으면 출력 -->
@@ -151,7 +151,7 @@
     	<c:if test="${sessionScope.memberRole == '관리자'}">
     	<button type="submit" class="form-btn negative">삭제</button>
     	</c:if>
-        <a href="write" class="form-btn positive">글쓰기</a>
+        <a href="${pageContext.request.contextPath}/write" class="form-btn positive">글쓰기</a>
     </div>
     
     <c:if test="${sessionScope.memberRole == '관리자'}">
@@ -166,14 +166,14 @@
 				<a class="disabled">&laquo;</a>
 			</c:when>
 			<c:otherwise>
-				<a href="list?${vo.parameter}&page=1">&laquo;</a>
+				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=1">&laquo;</a>
 			</c:otherwise>
 		</c:choose>
 		
 		<!-- 이전 -->
 		<c:choose>
 			<c:when test="${vo.prev}">
-				<a href="list?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
+				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
 			</c:when>
 			<c:otherwise>
 				<a class="disabled">&lt;</a>
@@ -187,7 +187,7 @@
 					<a class="on">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="list?${vo.parameter}&page=${i}">${i}</a>
+					<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${i}">${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>	
@@ -195,7 +195,7 @@
 		<!-- 다음 -->
 		<c:choose>
 			<c:when test="${vo.next}">
-				<a href="list?${vo.parameter}&page=${vo.nextPage}">&gt;</a>
+				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${vo.nextPage}">&gt;</a>
 			</c:when>
 			<c:otherwise>
 				<a class="disabled">&gt;</a>
@@ -208,7 +208,7 @@
 				<a class="disabled">&raquo;</a>
 			</c:when>
 			<c:otherwise>
-				<a href="list?${vo.parameter}&page=${vo.totalPage}">&raquo;</a>
+				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${vo.totalPage}">&raquo;</a>
 			</c:otherwise>
 		</c:choose>
     </div>

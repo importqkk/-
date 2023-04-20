@@ -54,15 +54,15 @@
 			</table>
 		<div class="w-100 flex">
 			<div class="row w-50 pe-5">
-				<a href="edit?memberId=${memberDto.memberId}" class="form-btn neutral small w-100">개인정보변경</a>
+				<a href="${pageContext.request.contextPath}/edit?memberId=${memberDto.memberId}" class="form-btn neutral small w-100">개인정보변경</a>
 			</div>
 			<div class="row w-50 center">
-				<a href="delete?memberId=${memberDto.memberId}" class="form-btn neutral small w-100" onclick="return confirm('정말 탈퇴시키겠습니까?')">회원 탈퇴</a>
+				<a href="${pageContext.request.contextPath}/delete?memberId=${memberDto.memberId}" class="form-btn neutral small w-100" onclick="return confirm('정말 탈퇴시키겠습니까?')">회원 탈퇴</a>
 			</div>
 			
 		</div>
 		<div>
-			<a href="list" class="form-btn positive small w-100">목록</a>
+			<a href="${pageContext.request.contextPath}/list" class="form-btn positive small w-100">목록</a>
 		</div>
 		</div>
 	</div>	

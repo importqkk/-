@@ -41,7 +41,7 @@
 </c:choose>
 </div>
 
-<form action="write" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/write" method="post" onsubmit="return validateForm()">
 	<%--답글일 때는 정보가 한 개 더 전송되어야 한다(qaParent) --%>
 	<c:if test="${qaParent != null }">
 	
@@ -81,7 +81,7 @@
             <span class="c-p100 font-h3">비밀글</span>
             
 	<button onclick=""  type="submit" class="form-btn positive medium ms-20 me-20 font-h3">등록</button>
-	<a href="/qa/list"class="form-btn nuetral medium font-h3">취소</a>
+	<a href="${pageContext.request.contextPath}/qa/list"class="form-btn nuetral medium font-h3">취소</a>
 	</div>
 	
 	<script>

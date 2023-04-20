@@ -121,7 +121,7 @@
 					<tr class="paymentShow">
 				<c:choose>
             		<c:when test="${payment.imgNo != 0}">
-            			<td><img src="/img/download?imgNo=${payment.imgNo}" class="product-img me-20" width="130" height="130"></td>
+            			<td><img src="${pageContext.request.contextPath}/img/download?imgNo=${payment.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
             			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
@@ -139,7 +139,7 @@
 					<tr class="prepareShow" style="display:none">
 						<c:choose>
             		<c:when test="${prepare.imgNo != 0}">
-            			<td><img src="/img/download?imgNo=${prepare.imgNo}" class="product-img me-20" width="130" height="130"></td>
+            			<td><img src="${pageContext.request.contextPath}/img/download?imgNo=${prepare.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
             			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
@@ -157,7 +157,7 @@
 					<tr class="deliveryShow" style="display:none">
 						<c:choose>
             		<c:when test="${delivery.imgNo != 0}">
-            			<td><img src="/img/download?imgNo=${delivery.imgNo}" class="product-img me-20" width="130" height="130"></td>
+            			<td><img src="${pageContext.request.contextPath}/img/download?imgNo=${delivery.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
             			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>
@@ -175,7 +175,7 @@
 					<tr class="completeShow" style="display:none">
 						<c:choose>
             		<c:when test="${complete.imgNo != 0}">
-            			<td><img src="/img/download?imgNo=${complete.imgNo}" class="product-img me-20" width="130" height="130"></td>
+            			<td><img src="${pageContext.request.contextPath}/img/download?imgNo=${complete.imgNo}" class="product-img me-20" width="130" height="130"></td>
             		</c:when>
             		<c:otherwise>
             			<td><img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130"></td>

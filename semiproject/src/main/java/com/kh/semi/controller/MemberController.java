@@ -46,7 +46,7 @@ public class MemberController {
 		 memberDto.setAgreePromotion("Y");
 		}
 		 memberDao.insert(memberDto);
-		 return "redirect:joinFinish";
+		 return "redirect:${pageContext.request.contextPath}/joinFinish";
 	 }
 	
 	@GetMapping("/joinFinish")
@@ -65,19 +65,19 @@ public class MemberController {
 
 		if (findDto == null) {
 			attr.addAttribute("mode", "error");
-			return "redirect:login";
+			return "redirect:${pageContext.request.contextPath}/login";
 		}
 
 		if (!userDto.getMemberPw().equals(findDto.getMemberPw())) {
 			attr.addAttribute("mode", "error");
-			return "redirect:login";
+			return "redirect:${pageContext.request.contextPath}/login";
 		}
 
 		session.setAttribute("memberId", findDto.getMemberId());
 		session.setAttribute("memberRole", findDto.getMemberRole());
 
 
-		return "redirect:/";
+		return "redirect:${pageContext.request.contextPath}/";
 	}
 
 //	 로그아웃
@@ -85,7 +85,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("memberId");
 		session.removeAttribute("memberRole");
-		return "redirect:/";
+		return "redirect:${pageContext.request.contextPath}/";
 	}
 //	 아이디 찾기
 	 @GetMapping("/findId")
@@ -103,7 +103,7 @@ public class MemberController {
 		 }
 		 catch(Exception e) {
 			 attr.addAttribute("mode", "error");
-			 return "redirect:findId";
+			 return "redirect:${pageContext.request.contextPath}/findId";
 		 }
 	 }
 //	 비밀번호 찾기
@@ -120,7 +120,7 @@ public class MemberController {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		if(memberDto==null || !memberDto.getMemberEmail().equals(memberEmail)) {
 			attr.addAttribute("mode", "error");
-			return "redirect:findPw";
+			return "redirect:${pageContext.request.contextPath}/findPw";
 		}
 		// 이메일이 일치 시 임시 비밀번호 생성
 		String temporaryPW = RandomComponent.generateString();
@@ -130,7 +130,7 @@ public class MemberController {
 		message.setSubject("[MYFORMULA] 임시 비밀번호 발급");
 		message.setText("발급된 임시 비밀번호는 "+temporaryPW+" 입니다. 로그인 후 비밀번호를 반드시 변경해주시길 바랍니다.");
 		sender.send(message);
-		return "redirect:findPwResult";
+		return "redirect:${pageContext.request.contextPath}/findPwResult";
 		}
 		@GetMapping("/findPwResult")
 		public String findPwResult() {
@@ -163,10 +163,10 @@ public class MemberController {
 		 
 		 if(!memberDto.getMemberPw().equals(currentPw)) {
 			 attr.addAttribute("mode", "error");
-			 return "redirect:password";
+			 return "redirect:${pageContext.request.contextPath}/password";
 		 }
 		 memberDao.changePassword(memberId, changePw);
-		 return "redirect:passwordFinish";		 
+		 return "redirect:${pageContext.request.contextPath}/passwordFinish";		 
 	 }
 	 
 	 
@@ -190,10 +190,10 @@ public class MemberController {
 
 	     if(!memberDto.getMemberPw().equals(password)) {
 	         attr.addAttribute("mode", "error");
-	         return "redirect:pwVf";
+	         return "redirect:${pageContext.request.contextPath}/pwVf";
 	     }
 	     
-	     return "redirect:edit";
+	     return "redirect:${pageContext.request.contextPath}/edit";
 	 }
 
 	 
@@ -219,7 +219,7 @@ public class MemberController {
 		 
 		 memberDto.setMemberId(memberId);
 		 memberDao.changeInformation(memberDto);
-		 return "redirect:editFinish";
+		 return "redirect:${pageContext.request.contextPath}/editFinish";
 	 }
 	 
 	 @GetMapping("/editFinish")
@@ -245,7 +245,7 @@ public class MemberController {
 		
 		 if(!memberDto.getMemberPw().equals(memberPw)) {
 			 attr.addAttribute("mode", "error");
-			 return "redirect:delete";
+			 return "redirect:${pageContext.request.contextPath}/delete";
 		 }
 		 
 		
@@ -254,7 +254,7 @@ public class MemberController {
 		 session.removeAttribute("memberId");
 		 session.removeAttribute("memberRole");
 		 
-		 return "redirect:deleteFinish";
+		 return "redirect:${pageContext.request.contextPath}/deleteFinish";
 	 }
 	 
 	 @GetMapping("/deleteFinish")

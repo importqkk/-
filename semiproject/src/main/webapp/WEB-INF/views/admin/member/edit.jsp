@@ -15,7 +15,7 @@ $(window).on("beforeunload", function(){
     if(checkUnload) return "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
 });
 </script>
-<form action="edit" method="post" class="content admin-edit-form">
+<form action="${pageContext.request.contextPath}/edit" method="post" class="content admin-edit-form">
 <input type="hidden" name="memberId" value="${memberDto.memberId}">
 <div class="container-600">
 	<div class="row center">
@@ -81,7 +81,7 @@ $(window).on("beforeunload", function(){
 	</div>
 	
 	<div class="row right">
-		<a href="list" class="form-btn neutral medium">목록</a>
+		<a href="${pageContext.request.contextPath}/list" class="form-btn neutral medium">목록</a>
 		<button type="submit" id="saveBtn" class="form-btn positive medium">변경</button>
 	</div>
 		<script>

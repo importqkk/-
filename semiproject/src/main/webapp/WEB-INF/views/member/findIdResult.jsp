@@ -17,7 +17,7 @@
 	<input type="text" name="memberEmail" required class="form-input w-100 medium light"  value="가입된 아이디: ${findId}" readonly>
 	</div>	
 	<div class="row center">
-<h2><a href="login">로그인 하러가기</a></h2>
+<h2><a href="${pageContext.request.contextPath}/login">로그인 하러가기</a></h2>
 	</div>
 </div>
 

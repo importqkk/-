@@ -51,12 +51,12 @@
 	            <div class="flex me-15 img-box">
   	            	<c:choose>
 	            		<c:when test="${cartProductInfoDto.imgNo != 0}">
-	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
-		            			<img class="product-img" alt="상품 대표 이미지" src="/img/download?imgNo=${cartProductInfoDto.imgNo}" width="130" height="130">
+	            			<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${cartProductInfoDto.productNo}">
+		            			<img class="product-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${cartProductInfoDto.imgNo}" width="130" height="130">
 	 	            		</a>
  	            		</c:when>
 	            		<c:otherwise>
-	            			<a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
+	            			<a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${cartProductInfoDto.productNo}">
 	            				<img class="product-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">
 	            			</a>
 	            		</c:otherwise>
@@ -66,7 +66,7 @@
 	                <div class="row-medium flex">
 	                	<span hidden class="productNo">${cartProductInfoDto.productNo}</span> <%-- 상품번호(숨김) --%>
 	                	<span hidden class="productStock">${cartProductInfoDto.productStock}</span> <%-- 재고(숨김) --%>
-	                    <a class="link" href="/product/detail?productNo=${cartProductInfoDto.productNo}">
+	                    <a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${cartProductInfoDto.productNo}">
 	                    	<h4 class="me-5 c-b80" style="display: inline;">[${cartProductInfoDto.productBrand}]</h4>	<%-- 브랜드명 --%>
 	                    	<span class="c-b80">${cartProductInfoDto.productName}</span>	<%-- 상품명 --%>
 	                    </a>
@@ -641,7 +641,7 @@
 	            </div>
 	            <!------------ 상품 삭제할 x 아이콘 ------------>
 	            <div class="flex row" style="align-self: baseline;">
-	            	<a href="delete?memberId=${cartProductInfoDto.memberId}&productNo=${cartProductInfoDto.productNo}" class="link">
+	            	<a href="${pageContext.request.contextPath}/delete?memberId=${cartProductInfoDto.memberId}&productNo=${cartProductInfoDto.productNo}" class="link">
 	                	<i class="fa-solid fa-xmark font-h2 delete-btn"></i>
 	                </a>
 	            </div>
@@ -657,12 +657,12 @@
 				<h3>장바구니에 담긴 상품이 없어요.</h3>
 			</div>
 			<div class="row-large">
-	            <a class="form-btn medium positive w-100" href="/">쇼핑하러 가기</a>
+	            <a class="form-btn medium positive w-100" href="${pageContext.request.contextPath}/">쇼핑하러 가기</a>
 	        </div>
 		</c:if>
 		<c:if test="${isEmpty > 0}">
 	        <div class="row-large">
-	            <a class="form-btn medium neutral w-100" href="/">더 쇼핑하기</a>
+	            <a class="form-btn medium neutral w-100" href="${pageContext.request.contextPath}/">더 쇼핑하기</a>
 	        </div>
         </c:if>
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
