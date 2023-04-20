@@ -24,7 +24,7 @@ public class ErrorController {
 	
 	@ExceptionHandler(RequireLoginException.class)
 	public String unAuthorized(Exception ex) {
-		return "redirect:${pageContext.request.contextPath}/member/login";
+		return "redirect:/member/login";
 	}
 	
 }
