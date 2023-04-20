@@ -3,7 +3,7 @@
         
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <!-- LightPick -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/date-picker.js"></script>
@@ -51,7 +51,7 @@
 </script>
 
 <div class="container-1000">
-	<form action="register" method="post" enctype="multipart/form-data" class="register-form" autocomplete="off">
+	<form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data" class="register-form" autocomplete="off">
         <div class="row pb-20">
             <h1>상품 등록</h1>
         </div>
@@ -126,7 +126,7 @@
         	<button type="submit" class="form-btn medium positive w-100 register-btn">등록하기</button>
         </div>
         <div class="row">
-        	<a class="form-btn medium neutral w-100 back-btn" href="/admin/productManage/list">돌아가기</a>
+        	<a class="form-btn medium neutral w-100 back-btn" href="${pageContext.request.contextPath}/admin/productManage/list">돌아가기</a>
         </div>
     </form>
 </div>

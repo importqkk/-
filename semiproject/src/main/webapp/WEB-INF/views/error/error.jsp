@@ -23,7 +23,7 @@
             <h2>오류가 발생했습니다.</h2>
         </div>
         <div class="w-100 center">
-            <a class="form-btn positive medium w-50" href="/">메인으로</a>
+            <a class="form-btn positive medium w-50" href="${pageContext.request.contextPath}/">메인으로</a>
         </div>
     </div>
 </div>

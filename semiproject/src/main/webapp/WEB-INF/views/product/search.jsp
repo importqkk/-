@@ -183,7 +183,7 @@
 				indexr = index3;
 				var productNo = $(".productNoExpensive").eq(indexr).text();
 			}; 			 
-  			$(location).attr("href","/product/detail?productNo="+productNo);
+  			$(location).attr("href","${pageContext.request.contextPath}/product/detail?productNo="+productNo);
 		});
 		
 		
@@ -278,7 +278,7 @@
 					data-info="best">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -321,7 +321,7 @@
 					data-info="new">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -364,7 +364,7 @@
 					data-info="cheap">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -407,7 +407,7 @@
 					data-info="expensive">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >

@@ -387,7 +387,7 @@ $(function(){
 <!-- align-items: center; -->
 <div class="container-1000">
     <h1>주문/결제</h1>
-     <form id="pay" action="/order/buy" method="post">
+     <form id="pay" action="${pageContext.request.contextPath}/order/buy" method="post">
    <div class="flex mt-30 content-top">
        <div class=" w-70 pe-70">
            <p><h2>주문상품</h2></p>
@@ -404,7 +404,7 @@ $(function(){
             <div class="row flex2">
             	<c:choose>
             		<c:when test="${productInfo.productImgNo != 0}">
-            			<img src="/img/download?imgNo=${productInfo.productImgNo}" class="product-img me-20" width="130" height="130">
+            			<img src="${pageContext.request.contextPath}/img/download?imgNo=${productInfo.productImgNo}" class="product-img me-20" width="130" height="130">
             		</c:when>
             		<c:otherwise>
             			<img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">
@@ -439,7 +439,7 @@ $(function(){
 			    	
 			    	<c:choose>
 			    		<c:when test="${cartinfo.imgNo != 0}">
-			    			<img src="/img/download?imgNo=${cartinfo.imgNo}" class="product-img me-20" width="130" height="130"> 
+			    			<img src="${pageContext.request.contextPath}/img/download?imgNo=${cartinfo.imgNo}" class="product-img me-20" width="130" height="130"> 
 			    		</c:when>
 			    		<c:otherwise>
 			    			<img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">

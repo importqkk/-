@@ -103,7 +103,7 @@ $(function(){
 		    		   success: function(data) {
 		    		       // 삭제가 성공적으로 완료되었을 때 처리할 코드 작성
 		    		       alert("삭제되었습니다.");
-		    		       window.location.href="/qa/list";
+		    		       window.location.href="${pageContext.request.contextPath}/qa/list";
 		    		   },
 		    		   error: function(xhr, status, error) {
 		    		       // 삭제가 실패했을 때 처리할 코드 작성
@@ -191,7 +191,7 @@ $(function(){
 					    success: function(data) {
 					    	// 삭제가 성공적으로 완료되었을 때 처리할 코드 작성
 					    	alert("삭제되었습니다.");
-					    	window.location.href="/qa/list";
+					    	window.location.href="${pageContext.request.contextPath}/qa/list";
 					    		},
 					    error: function(xhr, status, error) {
 				    		// 삭제가 실패했을 때 처리할 코드 작성
@@ -234,7 +234,7 @@ function fn_reple_write(){
 		   success: function(data) {
 			   alert("답글작성완료");
 			   
-		       window.location.href="/qa/list";
+		       window.location.href="${pageContext.request.contextPath}/qa/list";
 		   },
 		   error: function(xhr, status, error) {
 		       alert("답글 실패");
@@ -277,7 +277,7 @@ function fn_reple_write(){
         <a class="form-btn neutral ms-20 delete-btn">삭제</a>
 		</c:if>
 
-    <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
+    <a class="form-btn neutral ms-20" href="${pageContext.request.contextPath}/qa/list">목록으로</a>
   </div>
   <br>
 	</script>
@@ -310,7 +310,7 @@ function fn_reple_write(){
         <!-- 관리자가 아니면 수정, 삭제 버튼이 보이지 않도록 합니다. -->
       </c:otherwise>
     </c:choose>
-    <a class="form-btn neutral ms-20" href="/qa/list">목록으로</a>
+    <a class="form-btn neutral ms-20" href="${pageContext.request.contextPath}/qa/list">목록으로</a>
     </div>
 </script>
     

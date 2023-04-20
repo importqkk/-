@@ -46,11 +46,11 @@
         <div class="row pb-20">
             <h1>메인 이미지 리스트</h1>
         </div>
-        <form action="mainImgDeleteAll" method="post" class="delete-form">
+        <form action="${pageContext.request.contextPath}/mainImgDeleteAll" method="post" class="delete-form">
             <div class="row w-100">
                 <div class="row right">
                     <button type="submit" class="form-btn small neutral delete-btn">이미지 삭제</button>
-                    <a class="form-btn small positive upload-btn" href="/admin/mainImg/upload">이미지 등록</a>
+                    <a class="form-btn small positive upload-btn" href="${pageContext.request.contextPath}/admin/mainImg/upload">이미지 등록</a>
                 </div>
             </div>
             <div class="row">
@@ -82,7 +82,7 @@
                                 	<fmt:formatNumber pattern="#,##0" value="${mainImgConnectDto.imgSize/1024}"></fmt:formatNumber>kb
                                 </td>
                                 <td>
-                                    <a class="link single-delete-btn" href="/admin/mainImg/delete?mainNo=${mainImgConnectDto.mainNo}">삭제</a>
+                                    <a class="link single-delete-btn" href="${pageContext.request.contextPath}/admin/mainImg/delete?mainNo=${mainImgConnectDto.mainNo}">삭제</a>
                                 </td>
                             </tr>
                         </c:forEach>
