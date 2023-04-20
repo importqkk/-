@@ -8,8 +8,8 @@
 		<h2>회원정보 변경 완료</h2>
 	</div>
 	<div class="row center">
-		<a href="/" class="form-btn neutral">메인화면으로</a>
-		<a href="mypage" class="form-btn neutral">마이페이지</a>
+		<a href="${pageContext.request.contextPath}/" class="form-btn neutral">메인화면으로</a>
+		<a href="${pageContext.request.contextPath}/mypage" class="form-btn neutral">마이페이지</a>
 	</div>
 </div>
 

@@ -1,10 +1,8 @@
 package com.kh.semi.configuration;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import com.kh.semi.interceptor.AdminInterceptor;
 import com.kh.semi.interceptor.MemberInterceptor;
 
@@ -36,26 +34,26 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				// /find 제외
 				registry.addInterceptor(memberInterceptor)
 						.addPathPatterns(// 세션이 맴버인 경우에만 접근
-								"/member/**",// 맴버를 모두 추가 후 제외할 항목을 밑에 추가
-								"/cart/**", // 장바구니
-								"/order/**",// 주문
-								"/review/list",// 내 리뷰 리스트
-								"/admin/**"
+								"${pageContext.request.contextPath}/member/**",// 맴버를 모두 추가 후 제외할 항목을 밑에 추가
+								"${pageContext.request.contextPath}/cart/**", // 장바구니
+								"${pageContext.request.contextPath}/order/**",// 주문
+								"${pageContext.request.contextPath}/review/list",// 내 리뷰 리스트
+								"${pageContext.request.contextPath}/admin/**"
 								)
 						.excludePathPatterns(// 세션이 맴버가 아니여도 접근 가능
-						"/member/join",
-						"/member/login",
-						"/member/findId",
-						"/member/findPw",
-						"/member/delete",
-						"/member/joinFinish",
-						"/member/deleteFinish"
+						"${pageContext.request.contextPath}/member/join",
+						"${pageContext.request.contextPath}/member/login",
+						"${pageContext.request.contextPath}/member/findId",
+						"${pageContext.request.contextPath}/member/findPw",
+						"${pageContext.request.contextPath}/member/delete",
+						"${pageContext.request.contextPath}/member/joinFinish",
+						"${pageContext.request.contextPath}/member/deleteFinish"
 				);
 				
 				//관리자 전용 인터셉터
 				registry.addInterceptor(adminInterceptor)
 										.addPathPatterns(
-													"/admin/**"
+													"${pageContext.request.contextPath}/admin/**"
 										 );
 	
 	}

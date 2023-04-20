@@ -189,13 +189,13 @@ public class QaController {
 		int qaNo = qaService.write(qaDto);
 		
 		attr.addAttribute("qaNo",qaNo);
-		return "redirect:detail";
+		return "redirect:${pageContext.request.contextPath}/detail";
 	}
 	
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int qaNo) {
 		qaDao.delete(qaNo);
-		return "redirect:/qa/list";
+		return "redirect:${pageContext.request.contextPath}/qa/list";
 	}
 }

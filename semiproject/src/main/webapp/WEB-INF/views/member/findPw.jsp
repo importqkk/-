@@ -13,7 +13,7 @@
   color: red;
   }
 </style>
-  <form action="findPw" method="post" autocomplete="off">
+  <form action="${pageContext.request.contextPath}/findPw" method="post" autocomplete="off">
     <div class="container-600">
         <div class="row center">  
             <h2>비밀번호 찾기</h2>

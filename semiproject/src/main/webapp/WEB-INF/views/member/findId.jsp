@@ -13,7 +13,7 @@
   color: red;
   }
 </style>
-  <form action="findId" method="post" autocomplete="off">
+  <form action="${pageContext.request.contextPath}/findId" method="post" autocomplete="off">
     <div class="container-600">
         <div class="row center">
             <h2>아이디 찾기</h2>

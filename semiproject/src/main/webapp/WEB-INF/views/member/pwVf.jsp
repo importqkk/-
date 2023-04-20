@@ -19,7 +19,7 @@
 <script type="text/javascript">
 	
 </script>
-    <form action="pwVf" method="post" autocomplete="off" class="pw-form content">
+    <form action="${pageContext.request.contextPath}/pwVf" method="post" autocomplete="off" class="pw-form content">
     <div class="container-600">
         <div class="row center">  
             <h2>비밀번호 인증</h2>
@@ -37,7 +37,7 @@
 				<!-- 취소 버튼 클릭 이벤트 처리 -->
 		<script>
 			$('.form-btn.neutral').click(function(){
-  			window.location.href = '/member/mypage';
+  			window.location.href = '${pageContext.request.contextPath}/member/mypage';
 			});
 		</script>
         

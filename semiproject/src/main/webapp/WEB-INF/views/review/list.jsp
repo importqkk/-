@@ -31,7 +31,7 @@
 							<i class="fa-regular fa-star starR ${reviewDto.reviewStar >= i ? 'fa-solid' : ''}" value="${i}"></i>
 						</c:forEach>
 						<div class="row reviewContent">						
-							<a href="/product/detail?productNo=${reviewDto.productNo}">
+							<a href="${pageContext.request.contextPath}/product/detail?productNo=${reviewDto.productNo}">
 								${reviewDto.reviewContent}
 							</a>
 						</div>
@@ -53,14 +53,14 @@
 				<a class="disabled">&laquo;</a>
 			</c:when>
 			<c:otherwise>
-				<a href="list?${vo.parameter}&page=1">&laquo;</a>
+				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=1">&laquo;</a>
 			</c:otherwise>
 		</c:choose>
 		
 		<!-- 이전 -->
 		<c:choose>
 			<c:when test="${vo.prev}">
-				<a href="list?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
+				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
 			</c:when>
 			<c:otherwise>
 				<a class="disabled">&lt;</a>
@@ -74,7 +74,7 @@
 					<a class="on">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="list?${vo.parameter}&page=${i}">${i}</a>
+					<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${i}">${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>	
@@ -82,7 +82,7 @@
 		<!-- 다음 -->
 		<c:choose>
 			<c:when test="${vo.next}">
-				<a href="list?${vo.parameter}&page=${vo.nextPage}">&gt;</a>
+				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${vo.nextPage}">&gt;</a>
 			</c:when>
 			<c:otherwise>
 				<a class="disabled">&gt;</a>
@@ -95,7 +95,7 @@
 				<a class="disabled">&raquo;</a>
 			</c:when>
 			<c:otherwise>
-				<a href="list?${vo.parameter}&page=${vo.totalPage}">&raquo;</a>
+				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${vo.totalPage}">&raquo;</a>
 			</c:otherwise>
 		</c:choose>
     </div>

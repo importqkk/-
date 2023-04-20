@@ -48,13 +48,13 @@
 
 <div class="container-1000">
     <div class="row pb-20">
-        <a class="link" href="/admin/productManage/list">
+        <a class="link" href="${pageContext.request.contextPath}/admin/productManage/list">
         	<h1>상품 목록</h1>
         </a>
     </div>
     <div class="row flex w-100">
     	<!-- 검색창 start -->
-        <form action="list" method="get" class="row w-100 search-form">
+        <form action="${pageContext.request.contextPath}/list" method="get" class="row w-100 search-form">
 	        <div class="flex">
 	        	<c:choose>
 	        		<c:when test="${vo.column == 'product_brand'}">
@@ -84,10 +84,10 @@
 	        </div>
 	    </form>
         <!-- 검색창 end -->
-        <form action="deleteAll" method="post" class="delete-form w-30">
+        <form action="${pageContext.request.contextPath}/deleteAll" method="post" class="delete-form w-30">
 	        <div class="row right">
             	<button type="submit" class="form-btn small neutral delete-btn">상품삭제</button>
-	            <a class="form-btn small positive register-btn" href="/admin/productManage/register">상품등록</a>
+	            <a class="form-btn small positive register-btn" href="${pageContext.request.contextPath}/admin/productManage/register">상품등록</a>
 	        </div>
 	    </div>
 	    <div class="row">
@@ -120,7 +120,7 @@
 				                    </td>
 				                    <td title="${productDto.productNo}">${productDto.productNo}</td>
 				                    <td style="text-align: left">
-				                        <a class="link" href="/product/detail?productNo=${productDto.productNo}" title="[${productDto.productBrand}] ${productDto.productName}">
+				                        <a class="link" href="${pageContext.request.contextPath}/product/detail?productNo=${productDto.productNo}" title="[${productDto.productBrand}] ${productDto.productName}">
 				                            [${productDto.productBrand}] ${productDto.productName}
 				                        </a>
 				                    </td>
@@ -136,9 +136,9 @@
 				                    </td>
 				                    <td title="${productDto.productJoin}">${productDto.productJoin}</td>
 				                    <td>
-				                        <a class="link" href="/admin/productManage/edit?productNo=${productDto.productNo}">수정 </a>
+				                        <a class="link" href="${pageContext.request.contextPath}/admin/productManage/edit?productNo=${productDto.productNo}">수정 </a>
 				                        <span>| </span>
-				                        <a class="link single-delete-btn" href="/admin/productManage/delete?productNo=${productDto.productNo}">삭제</a>
+				                        <a class="link single-delete-btn" href="${pageContext.request.contextPath}/admin/productManage/delete?productNo=${productDto.productNo}">삭제</a>
 				                    </td>
 				                </tr>
 				            </c:forEach>
@@ -154,7 +154,7 @@
 			<!-- << (첫페이지로) -->
 			<c:choose>
 				<c:when test="${!vo.first}">
-					<a href="list?page=1${vo.parameter}">&laquo;</a>
+					<a href="${pageContext.request.contextPath}/list?page=1${vo.parameter}">&laquo;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#" class="disabled">&laquo;</a>
@@ -163,7 +163,7 @@
 			<!-- < (이전페이지로) -->
 			<c:choose>
 				<c:when test="${vo.prev}">
-					<a href="list?page=${vo.prevPage}${vo.parameter}">&lt;</a>
+					<a href="${pageContext.request.contextPath}/list?page=${vo.prevPage}${vo.parameter}">&lt;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#" class="disabled">&lt;</a>
@@ -176,14 +176,14 @@
 						<a href="#" class="on">${i}</a>
 					</c:when>
 					<c:otherwise>
-						<a href="list?page=${i}${vo.parameter}">${i}</a>
+						<a href="${pageContext.request.contextPath}/list?page=${i}${vo.parameter}">${i}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- >  (다음페이지로) -->
 			<c:choose>
 				<c:when test="${vo.next}">
-					<a href="list?page=${vo.nextPage}${vo.parameter}">&gt;</a>
+					<a href="${pageContext.request.contextPath}/list?page=${vo.nextPage}${vo.parameter}">&gt;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#" class="disabled">&gt;</a>
@@ -192,7 +192,7 @@
 			<!-- >> (마지막 페이지로) -->
 			<c:choose>
 				<c:when test="${!vo.last}">
-					<a href="list?&page=${vo.totalPage}${vo.parameter}">&raquo;</a>
+					<a href="${pageContext.request.contextPath}/list?&page=${vo.totalPage}${vo.parameter}">&raquo;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#" class="disabled">&raquo;</a>

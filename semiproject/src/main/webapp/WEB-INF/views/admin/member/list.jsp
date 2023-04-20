@@ -29,9 +29,9 @@
                <td>${memberDto.memberRole}</td>
                <td>${memberDto.memberJoin}</td>
                <td>
-                  <a class="btn-border" href="detail?memberId=${memberDto.memberId}">상세</a>
-                  <a class="btn-border" href="edit?memberId=${memberDto.memberId}">변경</a>
-                  <a class="btn-border" href="delete?memberId=${memberDto.memberId}&page=${page}" onclick="return confirm('정말 탈퇴시키겠습니까?')">탈퇴</a>
+                  <a class="btn-border" href="${pageContext.request.contextPath}/detail?memberId=${memberDto.memberId}">상세</a>
+                  <a class="btn-border" href="${pageContext.request.contextPath}/edit?memberId=${memberDto.memberId}">변경</a>
+                  <a class="btn-border" href="${pageContext.request.contextPath}/delete?memberId=${memberDto.memberId}&page=${page}" onclick="return confirm('정말 탈퇴시키겠습니까?')">탈퇴</a>
                </td>
             </tr>   
             </c:forEach>
@@ -45,7 +45,7 @@
          <!-- << (첫페이지로) -->
          <c:choose>
             <c:when test="${!vo.first}">
-               <a href="list?page=1${vo.parameter}">&laquo;</a>
+               <a href="${pageContext.request.contextPath}/list?page=1${vo.parameter}">&laquo;</a>
             </c:when>
             <c:otherwise>
                <a href="#" class="disabled">&laquo;</a>
@@ -54,7 +54,7 @@
          <!-- < (이전페이지로) -->
          <c:choose>
             <c:when test="${vo.prev}">
-               <a href="list?page=${vo.prevPage}${vo.parameter}">&lt;</a>
+               <a href="${pageContext.request.contextPath}/list?page=${vo.prevPage}${vo.parameter}">&lt;</a>
             </c:when>
             <c:otherwise>
                <a href="#" class="disabled">&lt;</a>
@@ -67,14 +67,14 @@
                   <a href="#" class="on">${i}</a>
                </c:when>
                <c:otherwise>
-                  <a href="list?page=${i}${vo.parameter}">${i}</a>
+                  <a href="${pageContext.request.contextPath}/list?page=${i}${vo.parameter}">${i}</a>
                </c:otherwise>
             </c:choose>
          </c:forEach>
          <!-- >  (다음페이지로) -->
          <c:choose>
             <c:when test="${vo.next}">
-               <a href="list?page=${vo.nextPage}${vo.parameter}">&gt;</a>
+               <a href="${pageContext.request.contextPath}/list?page=${vo.nextPage}${vo.parameter}">&gt;</a>
             </c:when>
             <c:otherwise>
                <a href="#" class="disabled">&gt;</a>
@@ -83,7 +83,7 @@
          <!-- >> (마지막 페이지로) -->
          <c:choose>
             <c:when test="${!vo.last}">
-               <a href="list?&page=${vo.totalPage}${vo.parameter}">&raquo;</a>
+               <a href="${pageContext.request.contextPath}/list?&page=${vo.totalPage}${vo.parameter}">&raquo;</a>
             </c:when>
             <c:otherwise>
                <a href="#" class="disabled">&raquo;</a>
@@ -94,7 +94,7 @@
     
     <!-- 검색창 -->
        <div class="row center">
-      <form action="list" method="get">
+      <form action="${pageContext.request.contextPath}/list" method="get">
         <div class="flex">
        <c:choose>
           <c:when test="${vo.column == 'member_id'}">

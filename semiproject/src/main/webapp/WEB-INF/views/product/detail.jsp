@@ -242,7 +242,7 @@ fs-18 {
 <script type="text/javascript">
     $(function(){    	  	
     	// 이미지 높이 조절---------------------------------------------------   	
-    	// 초기상태에서 클리되었을때 
+    	// 초기상태에서 클릭되었을때 
    		$(".show-detail").click(function(){
    			
    			// 상세이미지를 전부 펼처보임
@@ -254,7 +254,7 @@ fs-18 {
    			$(".hide-detail").css("display","block");// 접기 버튼 열기  
    		});
     	
-   		// 펼쳐진상태에서 클리되었을때 
+   		// 펼쳐진상태에서 클릭되었을때 
    		$(".hide-detail").click(function(){
    			
    			// 상세이미지를 숨김 
@@ -337,12 +337,12 @@ fs-18 {
 
 		// 장바구니버튼, 주문 버튼 개별 경로 및 재고처리-------------------------------
     	$(".cart-btn").click(function(){
-		    $(".item-form").attr("action", "/cart/insert");
+		    $(".item-form").attr("action", "${pageContext.request.contextPath}/cart/insert");
 		    $(".item-form").attr("method", "post");
   		});
   
  		 $(".buy-btn").click(function(){
-		    $(".item-form").attr("action", "/order/buy");
+		    $(".item-form").attr("action", "${pageContext.request.contextPath}/order/buy");
 		    $(".item-form").attr("method", "get");
  		});
   
@@ -436,7 +436,7 @@ fs-18 {
 				<div class="w-50 center">
 					<c:choose>
             		<c:when test="${productInfoDto.productImgNo != 0}">
-	            		<img class="img-size img-rad-10 img-background " alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+	            		<img class="img-size img-rad-10 img-background " alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 	            	</c:when>
             		<c:otherwise>
             			<img class="img-size img-rad-10 img-background " alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -536,13 +536,12 @@ fs-18 {
 			<!-- id 상세이미지로 스크롤 타겟팅 -->
 			<c:choose>
 	           	<c:when test="${productInfoDto.detailImgNo != 0}">
-	            	<img width="1000" class="center" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.detailImgNo}">
+	            	<img width="1000" class="center" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.detailImgNo}">
 	            </c:when>
 	           	<c:otherwise>
 	           		<img width="1000" class="center" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png">
 	            </c:otherwise>
 	        </c:choose>
-<!-- 			<img width="1000" class="center" src="/static/image/detail_img.jpg"> -->
 		</div>
 	</div>
 

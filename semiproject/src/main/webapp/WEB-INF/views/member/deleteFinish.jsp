@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="row center">
-		<h2><a href="/" class="link">메인페이지</a></h2>	
+		<h2><a href="${pageContext.request.contextPath}/" class="link">메인페이지</a></h2>	
 	</div>
 </div>
 

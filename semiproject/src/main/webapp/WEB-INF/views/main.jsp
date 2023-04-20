@@ -145,55 +145,55 @@
 		        <!-- 카테고리 버튼 start -->
 		        <div class="flex center pt-40 flex-auto-width mb-70">
 		            <div>
-		                <a class="link" href="/categori/all">
+		                <a class="link" href="${pageContext.request.contextPath}/categori/all">
 		                    <i class="fas fa-solid fa-border-all"></i>
 		                    <h5 class="category-title">전체</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="/categori/tag1">
+		                <a class="link" href="${pageContext.request.contextPath}/categori/tag1">
 		                    <i class="fas fa-light fa-face-smile"></i>
 		                    <h5 class="category-title">피부</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="/categori/tag2">
+		                <a class="link" href="${pageContext.request.contextPath}/categori/tag2">
 		                    <i class="fas fa-light fa-weight-scale"></i>
 		                    <h5 class="category-title">다이이트</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="/categori/tag3">
+		                <a class="link" href="${pageContext.request.contextPath}/categori/tag3">
 		                    <i class="fas fa-light fa-venus"></i>
 		                    <h5 class="category-title">여성</h5>	
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="/categori/tag4">
+		                <a class="link" href="${pageContext.request.contextPath}/categori/tag4">
 		                    <i class="fas fa-sharp fa-light fa-bolt-lightning"></i>
 		                    <h5 class="category-title">활력</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="/categori/tag5">
+		                <a class="link" href="${pageContext.request.contextPath}/categori/tag5">
 		                    <i class="fas fa-thin fa-mars"></i>
 		                    <h5 class="category-title">남성</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="/categori/tag6">
+		                <a class="link" href="${pageContext.request.contextPath}/categori/tag6">
 		                    <i class="fas fa-light fa-eye"></i>
 		                    <h5 class="category-title">눈</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="/categori/tag7">
+		                <a class="link" href="${pageContext.request.contextPath}/categori/tag7">
 		                    <i class="fas fa-light fa-tooth"></i>
 		                    <h5 class="category-title">치아</h5>
 		                </a>
 		            </div>
 		            <div>
-		                <a class="link" href="/categori/tag8">
+		                <a class="link" href="${pageContext.request.contextPath}/categori/tag8">
 		                    <i class="fas fa-light fa-bone"></i>
 		                    <h5 class="category-title">관절/뼈</h5>
 		                </a>
@@ -208,11 +208,11 @@
 		            </div>
  		            <div class="row flex new-box flex-wr">
 		            	<c:forEach var="productInfoDto" items="${newProduct}" end="3">
-			                <a class="link item-box" href="/product/detail?productNo=${productInfoDto.productNo}">
+			                <a class="link item-box" href="${pageContext.request.contextPath}/product/detail?productNo=${productInfoDto.productNo}">
 			                    <div>
 			                    	<c:choose>
 					            		<c:when test="${productInfoDto.productImgNo != 0}">
-					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+					            			<img class="item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 				 	            		</c:when>
 					            		<c:otherwise>
 					            			<img class="item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png">
@@ -290,11 +290,11 @@
 		            <div class="row">
 		                <div class="row flex best-box flex-wr">
 		                	<c:forEach var="productInfoDto" items="${bestProduct}" end="3">
-			                    <a class="link item-box" href="/product/detail?productNo=${productInfoDto.productNo}">
+			                    <a class="link item-box" href="${pageContext.request.contextPath}/product/detail?productNo=${productInfoDto.productNo}">
 			                        <div>
 			                            <c:choose>
 						            		<c:when test="${productInfoDto.productImgNo != 0}">
-						            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+						            			<img class="item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 					 	            		</c:when>
 						            		<c:otherwise>
 						            			<img class="item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png">
@@ -371,17 +371,17 @@
 		        			<h1 class="c-b80 me-5">전체상품</h1>
 		        		</div>
 		                <div class="right pe-10 w-50">
-	                	<a class="more-link c-b40" href="/categori/all">더보기 ></a>
+	                	<a class="more-link c-b40" href="${pageContext.request.contextPath}/categori/all">더보기 ></a>
 	                </div>
 		            </div>
 		        	
 			        <div class="row flex product-box flex-wr">
 		            	<c:forEach var="productInfoDto" items="${productList}" end="3">
-			                <a class="link item-box" href="/product/detail?productNo=${productInfoDto.productNo}">
+			                <a class="link item-box" href="${pageContext.request.contextPath}/product/detail?productNo=${productInfoDto.productNo}">
 			                    <div>
 			                    	<c:choose>
 					            		<c:when test="${productInfoDto.productImgNo != 0}">
-					            			<img class="item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+					            			<img class="item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 				 	            		</c:when>
 					            		<c:otherwise>
 					            			<img class="item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png">

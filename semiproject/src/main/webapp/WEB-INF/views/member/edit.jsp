@@ -54,7 +54,7 @@
 
 	
 	<div class="row">
-		<a href="mypage" id="canBtn" class="form-btn neutral w-24 medium">취소</a>
+		<a href="${pageContext.request.contextPath}/mypage" id="canBtn" class="form-btn neutral w-24 medium">취소</a>
         <button type="submit" id="saveBtn" class="form-btn positive w-75 medium	 ms-25">변경하기</button>
 	</div>
 
