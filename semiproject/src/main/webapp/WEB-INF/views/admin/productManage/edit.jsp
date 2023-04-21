@@ -54,7 +54,7 @@
 </script>
 
 <div class="container-1000">
-	<form action="${pageContext.request.contextPath}/edit" method="post" enctype="multipart/form-data" class="edit-form" autocomplete="off">
+	<form action="${pageContext.request.contextPath}/admin/productManage/edit" method="post" enctype="multipart/form-data" class="edit-form" autocomplete="off">
         <div class="row pb-20">
             <h1>상품 정보 수정</h1>
         </div>

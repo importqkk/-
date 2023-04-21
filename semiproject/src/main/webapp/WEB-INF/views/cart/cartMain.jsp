@@ -641,7 +641,7 @@
 	            </div>
 	            <!------------ 상품 삭제할 x 아이콘 ------------>
 	            <div class="flex row" style="align-self: baseline;">
-	            	<a href="${pageContext.request.contextPath}/delete?memberId=${cartProductInfoDto.memberId}&productNo=${cartProductInfoDto.productNo}" class="link">
+	            	<a href="${pageContext.request.contextPath}/cart/delete?memberId=${cartProductInfoDto.memberId}&productNo=${cartProductInfoDto.productNo}" class="link">
 	                	<i class="fa-solid fa-xmark font-h2 delete-btn"></i>
 	                </a>
 	            </div>

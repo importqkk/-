@@ -22,7 +22,7 @@
     </div>
     <div class="row flex w-100">
     	<!-- 검색창 start -->
-        <form action="${pageContext.request.contextPath}/list" method="get" class="row w-100 search-form">
+        <form action="${pageContext.request.contextPath}/admin/sell/list" method="get" class="row w-100 search-form">
 	        <div class="flex">
 	        	<c:choose>
 	        		<c:when test="${vo.column == 'product_brand'}">
@@ -117,7 +117,7 @@
 			<!-- << (첫페이지로) -->
 			<c:choose>
 				<c:when test="${!vo.first}">
-					<a href="${pageContext.request.contextPath}/list?page=1${vo.parameter}">&laquo;</a>
+					<a href="${pageContext.request.contextPath}/admin/sell/list?page=1${vo.parameter}">&laquo;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#" class="disabled">&laquo;</a>
@@ -126,7 +126,7 @@
 			<!-- < (이전페이지로) -->
 			<c:choose>
 				<c:when test="${vo.prev}">
-					<a href="${pageContext.request.contextPath}/list?page=${vo.prevPage}${vo.parameter}">&lt;</a>
+					<a href="${pageContext.request.contextPath}/admin/sell/list?page=${vo.prevPage}${vo.parameter}">&lt;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#" class="disabled">&lt;</a>
@@ -139,14 +139,14 @@
 						<a href="#" class="on">${i}</a>
 					</c:when>
 					<c:otherwise>
-						<a href="${pageContext.request.contextPath}/list?page=${i}${vo.parameter}">${i}</a>
+						<a href="${pageContext.request.contextPath}/admin/sell/list?page=${i}${vo.parameter}">${i}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- >  (다음페이지로) -->
 			<c:choose>
 				<c:when test="${vo.next}">
-					<a href="${pageContext.request.contextPath}/list?page=${vo.nextPage}${vo.parameter}">&gt;</a>
+					<a href="${pageContext.request.contextPath}/admin/sell/list?page=${vo.nextPage}${vo.parameter}">&gt;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#" class="disabled">&gt;</a>
@@ -155,7 +155,7 @@
 			<!-- >> (마지막 페이지로) -->
 			<c:choose>
 				<c:when test="${!vo.last}">
-					<a href="${pageContext.request.contextPath}/list?&page=${vo.totalPage}${vo.parameter}">&raquo;</a>
+					<a href="${pageContext.request.contextPath}/admin/sell/list?&page=${vo.totalPage}${vo.parameter}">&raquo;</a>
 				</c:when>
 				<c:otherwise>
 					<a href="#" class="disabled">&raquo;</a>

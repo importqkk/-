@@ -37,7 +37,7 @@
 </script>
 
 <div class="container-1000">
-	<form action="${pageContext.request.contextPath}/upload" method="post" enctype="multipart/form-data" class="upload-form" autocomplete="off">
+	<form action="${pageContext.request.contextPath}/admin/mainImg/upload" method="post" enctype="multipart/form-data" class="upload-form" autocomplete="off">
 	    <div class="row">
 	        <h1>메인 이미지 등록</h1>
 	    </div>
