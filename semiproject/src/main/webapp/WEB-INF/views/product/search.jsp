@@ -183,7 +183,7 @@
 				indexr = index3;
 				var productNo = $(".productNoExpensive").eq(indexr).text();
 			}; 			 
-  			$(location).attr("href","/product/detail?productNo="+productNo);
+  			$(location).attr("href","${pageContext.request.contextPath}/product/detail?productNo="+productNo);
 		});
 		
 		
@@ -278,7 +278,7 @@
 					data-info="best">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -287,10 +287,13 @@
 					<br>
 					<h5 class="productNoBest" style="display: none;">${productInfoDto.productNo}</h5>
 
-					<div class="row left">
-						<h5 class="left ms-20 me-20 font-grey productName mb-10"
-							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
-							${productInfoDto.productName}</h5>
+					<div class="left">
+						<h5 class="left ms-20 me-20 font-grey"
+							title="${productInfoDto.productBrand}">${productInfoDto.productBrand}</h5>
+					</div>
+					<div class="left productName">
+						<h4 class="ms-20 me-20"
+							title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 					</div>
 					<div class="left mb-5">
 						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
@@ -318,7 +321,7 @@
 					data-info="new">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -327,10 +330,13 @@
 					<br>
 					<h5 class="productNoNew" style="display: none;">${productInfoDto.productNo}</h5>
 
-					<div class="row left">
-						<h5 class="left ms-20 me-20 font-grey productName mb-10"
-							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
-							${productInfoDto.productName}</h5>
+					<div class="left">
+						<h5 class="left ms-20 me-20 font-grey"
+							title="${productInfoDto.productBrand}">${productInfoDto.productBrand}</h5>
+					</div>
+					<div class="left productName">
+						<h4 class="ms-20 me-20"
+							title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 					</div>
 					<div class="left mb-5">
 						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
@@ -358,7 +364,7 @@
 					data-info="cheap">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -367,10 +373,13 @@
 					<br>
 					<h5 class="productNoCheap" style="display: none;">${productInfoDto.productNo}</h5>
 
-					<div class="row ms-10 me-10 left">
-						<h5 class="left ms-20 me-20 font-grey productName mb-10"
-							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
-							${productInfoDto.productName}</h5>
+					<div class="left">
+						<h5 class="left ms-20 me-20 font-grey"
+							title="${productInfoDto.productBrand}">${productInfoDto.productBrand}</h5>
+					</div>
+					<div class="left productName">
+						<h4 class="ms-20 me-20"
+							title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 					</div>
 					<div class="left mb-5">
 						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>
@@ -398,7 +407,7 @@
 					data-info="expensive">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="img-list center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -407,10 +416,13 @@
 					<br>
 					<h5 class="productNoExpensive" style="display: none;">${productInfoDto.productNo}</h5>
 
-					<div class="row ms-10 me-10 left">
-						<h5 class="left ms-20 me-20 font-grey productName"
-							title="${productInfoDto.productName}">[${productInfoDto.productBrand}]
-							${productInfoDto.productName}</h5>
+					<div class="left">
+						<h5 class="left ms-20 me-20 font-grey"
+							title="${productInfoDto.productBrand}">${productInfoDto.productBrand}</h5>
+					</div>
+					<div class="left productName">
+						<h4 class="ms-20 me-20"
+							title="${productInfoDto.productName}">${productInfoDto.productName}</h4>
 					</div>
 					<div class="left mb-5">
 						<h3 class="ms-20 productPrice">${productInfoDto.productPrice}원</h3>

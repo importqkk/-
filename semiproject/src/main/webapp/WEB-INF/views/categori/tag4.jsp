@@ -178,7 +178,7 @@
 				indexr = index3;
 				var productNo = $(".productNoExpensive").eq(indexr).text();
 			}; 			 
-  			$(location).attr("href","/product/detail?productNo="+productNo);
+  			$(location).attr("href","${pageContext.request.contextPath}/product/detail?productNo="+productNo);
 		});
 		
 		
@@ -232,15 +232,15 @@
 
 	<div class="container-1200">
 		<div class="flex center">
-			<a class="w-5 me-50 fas fa-solid fa-border-all" href="all"></a>		
-			<a class="w-5 me-50 fas fa-light fa-face-smile" href="tag1"></a>
-			<a class="w-5 me-50 fas fa-light fa-weight-scale" href="tag2"></a>
-			<a class="w-5 me-50 fas fa-light fa-venus" href="tag3"></a>	
+			<a class="w-5 me-50 fas fa-solid fa-border-all" href="${pageContext.request.contextPath}/all"></a>		
+			<a class="w-5 me-50 fas fa-light fa-face-smile" href="${pageContext.request.contextPath}/tag1"></a>
+			<a class="w-5 me-50 fas fa-light fa-weight-scale" href="${pageContext.request.contextPath}/tag2"></a>
+			<a class="w-5 me-50 fas fa-light fa-venus" href="${pageContext.request.contextPath}/tag3"></a>	
 			<a class="w-5 me-50 fas fa-sharp fa-light fa-bolt-lightning purple-box"></a>
-			<a class="w-5 me-50 fas fa-thin fa-mars" href="tag5"></a>
-			<a class="w-5 me-50 fas fa-light fa-eye" href="tag6"></a>	
-			<a class="w-5 me-50 fas fa-light fa-tooth" href="tag7"></a>
-			<a class="w-5 me-50 fas fa-light fa-bone" href="tag8"></a>
+			<a class="w-5 me-50 fas fa-thin fa-mars" href="${pageContext.request.contextPath}/tag5"></a>
+			<a class="w-5 me-50 fas fa-light fa-eye" href="${pageContext.request.contextPath}/tag6"></a>	
+			<a class="w-5 me-50 fas fa-light fa-tooth" href="${pageContext.request.contextPath}/tag7"></a>
+			<a class="w-5 me-50 fas fa-light fa-bone" href="${pageContext.request.contextPath}/tag8"></a>
 		</div>
 		<div class="flex center">
 			<h5 class="w-5 me-50">전체</h5>
@@ -276,7 +276,7 @@
 					data-info="best">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -316,7 +316,7 @@
 					data-info="new">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -356,7 +356,7 @@
 					data-info="cheap">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >
@@ -396,7 +396,7 @@
 					data-info="expensive">
 					<c:choose>
 		            		<c:when test="${productInfoDto.productImgNo != 0}">
-			            		<img class="center item-img" alt="상품 대표 이미지" src="/img/download?imgNo=${productInfoDto.productImgNo}">
+			            		<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/img/download?imgNo=${productInfoDto.productImgNo}">
 			            	</c:when>
 		            		<c:otherwise>
 		            			<img class="center item-img" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" >

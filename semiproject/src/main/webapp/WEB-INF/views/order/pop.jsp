@@ -66,7 +66,7 @@
             opener.document.getElementsByName('orderBasicAddr')[0].value = $('span#orderBasicAddr'+index).text();
             opener.document.getElementsByName('orderDetailAddr')[0].value = $('span#orderDetailAddr'+index).text();
             opener.document.getElementsByName('orderRequest')[0].value = $('span#orderRequest'+index).text();
-               
+            window.opener.document.getElementsByName('orderRequest')[0].focus();     
                
                window.close(); // 팝업창 닫기
              });
@@ -120,7 +120,7 @@
                 
               </div>
 
-      <form id="myForm" action="/order/popup" method="post">
+      <form id="myForm" action="${pageContext.request.contextPath}/order/popup" method="post">
         <c:forEach var="allInfo" items="${allInfo}" varStatus="loop">
               <div class="mt-20" style="border: 2px solid rgb(119,107,255) ; width: 500px; padding: 10px;">
                   <div class="row">

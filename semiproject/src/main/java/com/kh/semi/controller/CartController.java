@@ -74,7 +74,7 @@ public class CartController {
 		cartDto.setMemberId(memberId);
 		cartDto.setProductNo(productNo);
 		cartDao.cartDeleteItem(cartDto);
-		return "redirect:main";
+		return "redirect:/main";
 	}
 	
 	// 장바구니 상품 수량 변경
@@ -96,7 +96,7 @@ public class CartController {
 		else {
 			attr.addAttribute("mode", "error");
 		}
-		return "redirect:cart";
+		return "redirect:/cart";
 	}
 	
 	// 장바구니 페이지(list)

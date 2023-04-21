@@ -22,7 +22,7 @@
            <h2>권한이 없습니다.</h2>
        </div>
        <div class="w-100 center">
-           <a class="form-btn positive medium w-50" href="/">메인으로</a>
+           <a class="form-btn positive medium w-50" href="${pageContext.request.contextPath}/">메인으로</a>
        </div>
    </div>
 </div>

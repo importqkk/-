@@ -269,34 +269,40 @@ $(function(){
     //포인트적용
     $(function(){
     $(".apply").click(function(){
-    	//총 상품가격
-    	var totalProduct = ${totalproduct};
-    
+       //총 상품가격
+       var totalProduct = ${totalproduct};
+        var fee=3000;
+        //배달비 포함 총가격
+      var totalPriceWithFee=totalProduct+3000;   
+        
         // 사용하는 포인트
         var usePoint = $("input[name='orderUserPoint']").val();
-       
+        usePoint= parseInt(usePoint);
+
         // 사용가능 포인트
         var point = ${point};
-       
-        var fee=3000;
+
+
+        
         // 사용포인트가 사용가능 포인트보다 많으면
         if(usePoint > point){
             alert("보유 적립금 이상으로 입력할 수 없습니다.");
-			
+         
         }else if(usePoint < 0){
-        	alert("0원 이하로 입력할 수 없습니다.");
-        }else {
-        	if(totalProduct==0)
-            // 제품금액
-            
-            //console.log(usePoint);
-            
+           alert("0원 이하로 입력할 수 없습니다.");
+        
+        }
+        //사용 포인트가 배달비+상품가격보다 높을때
+        else if(usePoint>totalPriceWithFee){
+           alert("적립금 사용량이 상품 결제금액을 초과합니다.");
+        }
+        else {
+                          
             // 적립금 사용 후 남은 사용가능 적립금
             var remainingPoint = point - usePoint;
-            //console.log(remainingPoint);
             // 총 금액
-            var totalPrice = totalProduct - usePoint + 3000;
-            //console.log(totalPrice);
+           var totalPrice = totalPriceWithFee - usePoint ;
+            
 
             $("span#usePoint").text(remainingPoint.toLocaleString() + "원");
             $("span#remainingPoint").text(remainingPoint.toLocaleString() + "원");
@@ -381,7 +387,7 @@ $(function(){
 <!-- align-items: center; -->
 <div class="container-1000">
     <h1>주문/결제</h1>
-     <form id="pay" action="/order/buy" method="post">
+     <form id="pay" action="${pageContext.request.contextPath}/order/buy" method="post">
    <div class="flex mt-30 content-top">
        <div class=" w-70 pe-70">
            <p><h2>주문상품</h2></p>
@@ -398,7 +404,7 @@ $(function(){
             <div class="row flex2">
             	<c:choose>
             		<c:when test="${productInfo.productImgNo != 0}">
-            			<img src="/img/download?imgNo=${productInfo.productImgNo}" class="product-img me-20" width="130" height="130">
+            			<img src="${pageContext.request.contextPath}/img/download?imgNo=${productInfo.productImgNo}" class="product-img me-20" width="130" height="130">
             		</c:when>
             		<c:otherwise>
             			<img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">
@@ -433,7 +439,7 @@ $(function(){
 			    	
 			    	<c:choose>
 			    		<c:when test="${cartinfo.imgNo != 0}">
-			    			<img src="/img/download?imgNo=${cartinfo.imgNo}" class="product-img me-20" width="130" height="130"> 
+			    			<img src="${pageContext.request.contextPath}/img/download?imgNo=${cartinfo.imgNo}" class="product-img me-20" width="130" height="130"> 
 			    		</c:when>
 			    		<c:otherwise>
 			    			<img class="product-img me-20" alt="상품 대표 이미지" src="${pageContext.request.contextPath}/static/image/productDummy.png" width="130" height="130">

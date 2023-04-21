@@ -281,7 +281,7 @@
 	            </div>
 	            <!------------ 상품 삭제할 x 아이콘 ------------>
 	            <div class="flex row" style="align-self: baseline;">
-	            	<a href="delete?memberId=${cartProductInfoDto.memberId}&productNo=${cartProductInfoDto.productNo}" class="link">
+	            	<a href="${pageContext.request.contextPath}/delete?memberId=${cartProductInfoDto.memberId}&productNo=${cartProductInfoDto.productNo}" class="link">
 	                	<i class="fa-solid fa-xmark font-h2 delete-btn"></i>
 	                </a>
 	            </div>
@@ -290,7 +290,7 @@
 <!-- ------------------------------------ 반복문 돌릴 부분 end ------------------------------------ -->
 
         <div class="row-large">
-            <a class="form-btn medium neutral w-100" href="/">더 쇼핑하기</a>
+            <a class="form-btn medium neutral w-100" href="${pageContext.request.contextPath}/">더 쇼핑하기</a>
         </div>
 
 <!-- ----------------------------------------- 계산 ---------------------------------------- -->
