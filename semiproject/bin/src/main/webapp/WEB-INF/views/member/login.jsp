@@ -4,16 +4,19 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     <style>
-      h2{
+      h1{
         color:#776BFF;
-        margin-top : 250px;
       }
+      .error{ 
+	    font-size: 20px;
+	    color: red;
+	  }	
     </style>
-  <form action="/member/login" method="post" autocomplete="off">
+  <form action="${pageContext.request.contextPath}/member/login" method="post" autocomplete="off">
 
     <div class="container-400">
-      <div class="row center">
-          <h2>MYFORMULA</h2>
+      <div class="row center pt-100">
+          <h1>MYFORMULA</h1>
         </div>
       <div class="row">
         <input type="text" name="memberId" required class="form-input w-100 medium light" placeholder="아이디" >
@@ -21,8 +24,8 @@
       <div class="row">
         <input type="password" name="memberPw" required class="form-input w-100 medium light" placeholder="비밀번호">
         <c:if test="${param.mode == 'error'}">
-          <div class="row center" style="font-size: 15px; color: red;">
-            <h3>아이디 또는 비밀번호를 잘못 입력했습니다.</h3>
+          <div class="row center">
+            <h3 class="error">아이디 또는 비밀번호를 잘못 입력했습니다.</h3>
           </div>
         </c:if>
       </div>
@@ -30,12 +33,9 @@
         <button type="submit" class="form-btn positive w-100 medium">로그인</button>
       </div>	
       <div class="row center">
-        <a href="${pageContext.request.contextPath}/find" class="link">아이디찾기</a>|<a href="${pageContext.request.contextPath}/find" class="link">비밀번호 찾기</a>|<a href="${pageContext.request.contextPath}/find" class="link">회원가입</a>
+        <a href="${pageContext.request.contextPath}/findId" class="link">아이디찾기</a>|<a href="${pageContext.request.contextPath}/findPw" class="link">비밀번호 찾기</a>|<a href="${pageContext.request.contextPath}/join" class="link">회원가입</a>
       </div>
-  
     </div>
     </form>
-
-
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -95,7 +95,7 @@
               </div>
         </div>
         <!-- 방법을 모르겠어서 form으로 보냄 .. -->
-       <form action="/order/popInsert" method="post">
+       <form action="${pageContext.request.contextPath}/order/popInsert" method="post">
 	       <div class="row">
 	       		<label class="ps-10">수령인</label>
 	       		<input type="text" class="form-input small w-100" name="memberName">
