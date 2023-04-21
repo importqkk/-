@@ -83,7 +83,7 @@
            $("#myForm").append('<input type="hidden" name="post" value="' + $('span#orderPost'+index).text() + '">');
            $("#myForm").append('<input type="hidden" name="basic" value="' + $('span#orderBasicAddr'+index).text() + '">');
            $("#myForm").append('<input type="hidden" name="request" value="' + $('span#orderRequest'+index).text() + '">');
-           $("#myForm").attr("action", "/order/popDelete");
+           $("#myForm").attr("action", "${pageContext.request.contextPath}/order/popDelete");
              $("#myForm").attr("method", "post");
            
          });
