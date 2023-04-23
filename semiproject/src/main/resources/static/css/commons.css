@@ -816,7 +816,7 @@ input[type="radio"]:checked {
     border-radius: 100px;
     outline: none;
     appearance: none;
-    background:url('${pageContext.request.contextPath}/static/image/down-arrow.png') no-repeat 88% 55%/11px auto;
+    background:url('../image/down-arrow.png') no-repeat 88% 55%/11px auto;
 }
 
 /*

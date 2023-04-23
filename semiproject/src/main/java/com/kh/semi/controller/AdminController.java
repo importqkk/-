@@ -137,11 +137,11 @@ public class AdminController {
 						.imgNo(imgNo2)
 					.build());
 		}
-		return "redirect:/registerFinish";
+		return "redirect:registerFinish";
 	}
 	@GetMapping("/productManage/registerFinish")
 	public String registerFinish() {
-		return "redirect:/list";
+		return "redirect:list";
 	}
 	
 	// 상품 목록
@@ -165,7 +165,7 @@ public class AdminController {
 			imgDao.delete(productInfoDao.selectOneForImg(productNo).getDetailImgNo());
 		}
 		productDao.delete(productNo);
-		return "redirect:/list";
+		return "redirect:list";
 	}
 	// 선택 상품 삭제
 	@PostMapping("/productManage/deleteAll")
@@ -179,7 +179,7 @@ public class AdminController {
 			}
 			productDao.delete(productNo);
 		}
-		return "redirect:/list";
+		return "redirect:list";
 	}
 	
 	// 상품 정보 수정
@@ -262,11 +262,11 @@ public class AdminController {
 					.build());
 		}
 		attr.addAttribute("productNo", productDto.getProductNo());
-		return "redirect:/editFinish";
+		return "redirect:editFinish";
 	}
 	@GetMapping("/productManage/editFinish")
 	public String editFinish() {
-		return "redirect:/list";
+		return "redirect:list";
 	}
 	
 	// 판매 목록
@@ -316,11 +316,11 @@ public class AdminController {
 					.mainTitle(mainImgDto.getMainTitle())
 				.build());
 		// 정보 등록
-		return "redirect:/uploadFinish";
+		return "redirect:uploadFinish";
 	}
 	@GetMapping("/mainImg/uploadFinish")
 	public String uploadFinish() {
-		return "redirect:/list";
+		return "redirect:list";
 	}
 	
 	// 메인 이미지 삭제
@@ -328,7 +328,7 @@ public class AdminController {
 	public String mainImgDelete(@RequestParam int mainNo) {
 		imgDao.delete(mainImgDao.mainImgSelectOne(mainNo).getImgNo());
 		mainImgDao.delete(mainNo);
-		return "redirect:/list";
+		return "redirect:list";
 	}
 	// 선택 이미지 삭제
 	@PostMapping("/mainImg/mainImgDeleteAll")
@@ -337,7 +337,7 @@ public class AdminController {
 			imgDao.delete(mainImgDao.mainImgSelectOne(mainNo).getImgNo());
 			mainImgDao.delete(mainNo);
 		}
-		return "redirect:/list";
+		return "redirect:list";
 	}
 
 	
@@ -358,7 +358,7 @@ public class AdminController {
 //		memberDao.insertWaiting(memberDto);
 		
 		attr.addAttribute("page", page);
-		return "redirect:/list";
+		return "redirect:list";
 	}
 	
 //	회원 정보 변경
@@ -376,7 +376,7 @@ public class AdminController {
 		//정보변경
 		memberDao.changeInformationByAdmin(memberDto);
 		attr.addAttribute("memberId", memberDto.getMemberId());
-		return "redirect:/detail";
+		return "redirect:detail";
 	}
 
 	@GetMapping("/member/list")
