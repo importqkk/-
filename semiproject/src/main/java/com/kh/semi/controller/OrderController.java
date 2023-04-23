@@ -154,7 +154,7 @@ public class OrderController {
 			model.addAttribute("orderProduct",Dto);
 			//카트삭제
 			cartDao.cartDeleteAll(memberId);
-			return "redirect:/buyFinish";
+			return "redirect:buyFinish";
 		}//상세페이지에서 주문시 model을 받아서 insert
 		else  {
 			Dto.setOrderNo(no);
@@ -162,7 +162,7 @@ public class OrderController {
 			
 			productDao.increaseSellCount(Dto.getProductCount(), Dto.getProductNo()); //상품판매수량 +
 			productDao.decreaseStock(Dto.getProductCount(), Dto.getProductNo()); //상품재고 -
-			return "redirect:/buyFinish";
+			return "redirect:buyFinish";
 
 		}
 		
@@ -216,7 +216,7 @@ public class OrderController {
 		 //아이디 배치후 주소추가 실행
 		 memberInfoDto.setMemberId(memberId);
 		 memberInfoDao.addinsert(memberInfoDto);
-		 return "redirect:/popup";
+		 return "redirect:popup";
 	 }
 	 
 
@@ -246,7 +246,7 @@ public class OrderController {
 	     }
 	      
 	   }
-	   return "redirect:/popup";
+	   return "redirect:popup";
 	}
 	 
 	//회원의 구매목록 조회
