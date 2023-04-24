@@ -16,7 +16,7 @@
     
        <c:if test="${sessionScope.memberId != null || sessionScope.memberRole == '관리자'}">
     <div class="row right">
-        <a href="${pageContext.request.contextPath}/write" class="form-btn neutral pb-30">글쓰기</a>
+        <a href="${pageContext.request.contextPath}/qa/write" class="form-btn neutral pb-30">글쓰기</a>
     </div>
     </c:if>
     
@@ -44,7 +44,7 @@
 					<td class="center">${qaDto.qaNo}</td>
 					<td class="center">${qaDto.qaHead}</td>
 					<td>
-	      				<a href="${pageContext.request.contextPath}/detail?qaNo=${qaDto.qaNo}" class="link">${qaDto.qaTitle}</a>
+	      				<a href="${pageContext.request.contextPath}/qa/detail?qaNo=${qaDto.qaNo}" class="link">${qaDto.qaTitle}</a>
 					</td>
 					<td class="left">${qaDto.memberId}</td>
 					
@@ -79,7 +79,7 @@
 					      </c:choose>
 					    </c:when>
 					    <c:otherwise>
-					      <a href="${pageContext.request.contextPath}/detail?qaNo=${qaDto.qaNo}" class="link">
+					      <a href="${pageContext.request.contextPath}/qa/detail?qaNo=${qaDto.qaNo}" class="link">
 					        <c:choose>
 					          <c:when test="${qaDto.qaDepth == 1}">
 					            <c:choose>
@@ -123,7 +123,7 @@
     </div>
       <c:if test="${sessionScope.memberId != null || sessionScope.memberRole == '관리자'}">
     <div class="row right">
-        <a href="${pageContext.request.contextPath}/write" class="form-btn neutral pt-30">글쓰기</a>
+        <a href="${pageContext.request.contextPath}/qa/write" class="form-btn neutral pt-30">글쓰기</a>
     </div>
     </c:if>
     
@@ -136,14 +136,14 @@
 				<a class="disabled">&laquo;</a>
 			</c:when>
 			<c:otherwise>
-				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=1">&laquo;</a>
+				<a href="${pageContext.request.contextPath}/qa/list?${vo.parameter}&page=1">&laquo;</a>
 			</c:otherwise>
 		</c:choose>
 		
 		<!-- 이전 -->
 		<c:choose>
 			<c:when test="${vo.prev}">
-				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
+				<a href="${pageContext.request.contextPath}/qa/list?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
 			</c:when>
 			<c:otherwise>
 				<a class="disabled">&lt;</a>
@@ -157,7 +157,7 @@
 					<a class="on">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${i}">${i}</a>
+					<a href="${pageContext.request.contextPath}/qa/list?${vo.parameter}&page=${i}">${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>	
@@ -165,7 +165,7 @@
 		<!-- 다음 -->
 		<c:choose>
 			<c:when test="${vo.next}">
-				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${vo.nextPage}">&gt;</a>
+				<a href="${pageContext.request.contextPath}/qa/list?${vo.parameter}&page=${vo.nextPage}">&gt;</a>
 			</c:when>
 			<c:otherwise>
 				<a class="disabled">&gt;</a>
@@ -178,14 +178,14 @@
 				<a class="disabled">&raquo;</a>
 			</c:when>
 			<c:otherwise>
-				<a href="${pageContext.request.contextPath}/list?${vo.parameter}&page=${vo.totalPage}">&raquo;</a>
+				<a href="${pageContext.request.contextPath}/qa/list?${vo.parameter}&page=${vo.totalPage}">&raquo;</a>
 			</c:otherwise>
 		</c:choose>
     </div>
     
     <!-- 검색창 -->
     <div class="row center">
-		<form action="${pageContext.request.contextPath}/list" method="get">
+		<form action="${pageContext.request.contextPath}/qa/list" method="get">
 		
 			<c:choose>
 				<c:when test="${vo.column == 'qa_content'}">

@@ -41,7 +41,7 @@
 </c:choose>
 </div>
 
-<form action="${pageContext.request.contextPath}/write" method="post" onsubmit="return validateForm()">
+<form action="${pageContext.request.contextPath}/qa/write" method="post" onsubmit="return validateForm()">
 	<%--답글일 때는 정보가 한 개 더 전송되어야 한다(qaParent) --%>
 	<c:if test="${qaParent != null }">
 	
