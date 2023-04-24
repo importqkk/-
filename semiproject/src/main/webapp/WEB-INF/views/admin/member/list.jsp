@@ -29,9 +29,9 @@
                <td>${memberDto.memberRole}</td>
                <td>${memberDto.memberJoin}</td>
                <td>
-                  <a class="btn-border" href="${pageContext.request.contextPath}/detail?memberId=${memberDto.memberId}">상세</a>
-                  <a class="btn-border" href="${pageContext.request.contextPath}/edit?memberId=${memberDto.memberId}">변경</a>
-                  <a class="btn-border" href="${pageContext.request.contextPath}/delete?memberId=${memberDto.memberId}&page=${page}" onclick="return confirm('정말 탈퇴시키겠습니까?')">탈퇴</a>
+                  <a class="btn-border" href="${pageContext.request.contextPath}/admin/member/detail?memberId=${memberDto.memberId}">상세</a>
+                  <a class="btn-border" href="${pageContext.request.contextPath}/admin/member/edit?memberId=${memberDto.memberId}">변경</a>
+                  <a class="btn-border" href="${pageContext.request.contextPath}/admin/member/delete?memberId=${memberDto.memberId}&page=${page}" onclick="return confirm('정말 탈퇴시키겠습니까?')">탈퇴</a>
                </td>
             </tr>   
             </c:forEach>
@@ -94,7 +94,7 @@
     
     <!-- 검색창 -->
        <div class="row center">
-      <form action="${pageContext.request.contextPath}/list" method="get">
+      <form action="list" method="get">
         <div class="flex">
        <c:choose>
           <c:when test="${vo.column == 'member_id'}">

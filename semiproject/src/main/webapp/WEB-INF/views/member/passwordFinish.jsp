@@ -9,7 +9,7 @@
 	</div>
 	<div class="row center">
 		<a href="${pageContext.request.contextPath}/" class="form-btn neutral">홈으로</a>
-		<a href="${pageContext.request.contextPath}/mypage" class="form-btn neutral">마이페이지</a>
+		<a href="${pageContext.request.contextPath}/member/mypage" class="form-btn neutral">마이페이지</a>
 	</div>
 </div>
 

@@ -12,7 +12,7 @@
 	    color: red;
 	  }	
     </style>
-  <form action="${pageContext.request.contextPath}/member/login" method="post" autocomplete="off">
+  <form action="login" method="post" autocomplete="off">
 
     <div class="container-400">
       <div class="row center pt-100">
@@ -33,7 +33,7 @@
         <button type="submit" class="form-btn positive w-100 medium">로그인</button>
       </div>	
       <div class="row center">
-        <a href="${pageContext.request.contextPath}/findId" class="link">아이디찾기</a>|<a href="${pageContext.request.contextPath}/findPw" class="link">비밀번호 찾기</a>|<a href="${pageContext.request.contextPath}/join" class="link">회원가입</a>
+        <a href="${pageContext.request.contextPath}/member/findId" class="link">아이디찾기</a>|<a href="${pageContext.request.contextPath}/member/findPw" class="link">비밀번호 찾기</a>|<a href="${pageContext.request.contextPath}/member/join" class="link">회원가입</a>
       </div>
     </div>
     </form>

@@ -21,7 +21,7 @@
 	</div>
 	<div class="row center">
 		<a href="${pageContext.request.contextPath}/" class="form-btn neutral medium w-30 mt-10">홈으로</a>
-		<a href="${pageContext.request.contextPath}/login" class="form-btn positive medium w-30 mt-10">로그인</a>
+		<a href="${pageContext.request.contextPath}/member/login" class="form-btn positive medium w-30 mt-10">로그인</a>
 	</div>
 </div>
 
