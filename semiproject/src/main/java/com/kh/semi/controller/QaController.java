@@ -190,6 +190,7 @@ public class QaController {
 		
 		attr.addAttribute("qaNo",qaNo);
 		return "redirect:detail";
+
 	}
 	
 	
