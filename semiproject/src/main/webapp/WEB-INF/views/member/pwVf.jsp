@@ -19,7 +19,7 @@
 <script type="text/javascript">
 	
 </script>
-    <form action="${pageContext.request.contextPath}/pwVf" method="post" autocomplete="off" class="pw-form content">
+    <form action="pwVf" method="post" autocomplete="off" class="pw-form content">
     <div class="container-600">
         <div class="row center">  
             <h2>비밀번호 인증</h2>

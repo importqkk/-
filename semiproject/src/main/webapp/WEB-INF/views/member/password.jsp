@@ -13,7 +13,7 @@
     color: red;
   }
 </style>
-<form action="${pageContext.request.contextPath}/password" method="post" class="content password-form">
+<form action="password" method="post" class="content password-form">
 <div class="container-600 mt-70">
 	<div class="row center">
 		<h2>비밀번호 변경</h2>

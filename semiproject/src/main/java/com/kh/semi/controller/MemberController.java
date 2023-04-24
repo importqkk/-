@@ -46,7 +46,7 @@ public class MemberController {
 		 memberDto.setAgreePromotion("Y");
 		}
 		 memberDao.insert(memberDto);
-		 return "redirect:/joinFinish";
+		 return "redirect:joinFinish";
 	 }
 	
 	@GetMapping("/joinFinish")
@@ -65,12 +65,12 @@ public class MemberController {
 
 		if (findDto == null) {
 			attr.addAttribute("mode", "error");
-			return "redirect:/login";
+			return "redirect:login";
 		}
 
 		if (!userDto.getMemberPw().equals(findDto.getMemberPw())) {
 			attr.addAttribute("mode", "error");
-			return "redirect:/login";
+			return "redirect:login";
 		}
 
 		session.setAttribute("memberId", findDto.getMemberId());
@@ -103,7 +103,7 @@ public class MemberController {
 		 }
 		 catch(Exception e) {
 			 attr.addAttribute("mode", "error");
-			 return "redirect:/findId";
+			 return "redirect:findId";
 		 }
 	 }
 //	 비밀번호 찾기
@@ -120,7 +120,7 @@ public class MemberController {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		if(memberDto==null || !memberDto.getMemberEmail().equals(memberEmail)) {
 			attr.addAttribute("mode", "error");
-			return "redirect:/findPw";
+			return "redirect:findPw";
 		}
 		// 이메일이 일치 시 임시 비밀번호 생성
 		String temporaryPW = RandomComponent.generateString();
@@ -163,10 +163,10 @@ public class MemberController {
 		 
 		 if(!memberDto.getMemberPw().equals(currentPw)) {
 			 attr.addAttribute("mode", "error");
-			 return "redirect:/password";
+			 return "redirect:password";
 		 }
 		 memberDao.changePassword(memberId, changePw);
-		 return "redirect:/passwordFinish";		 
+		 return "redirect:passwordFinish";		 
 	 }
 	 
 	 
@@ -190,10 +190,10 @@ public class MemberController {
 
 	     if(!memberDto.getMemberPw().equals(password)) {
 	         attr.addAttribute("mode", "error");
-	         return "redirect:/pwVf";
+	         return "redirect:pwVf";
 	     }
 	     
-	     return "redirect:/edit";
+	     return "redirect:edit";
 	 }
 
 	 
@@ -219,7 +219,7 @@ public class MemberController {
 		 
 		 memberDto.setMemberId(memberId);
 		 memberDao.changeInformation(memberDto);
-		 return "redirect:/editFinish";
+		 return "redirect:editFinish";
 	 }
 	 
 	 @GetMapping("/editFinish")
@@ -245,7 +245,7 @@ public class MemberController {
 		
 		 if(!memberDto.getMemberPw().equals(memberPw)) {
 			 attr.addAttribute("mode", "error");
-			 return "redirect:/delete";
+			 return "redirect:delete";
 		 }
 		 
 		
@@ -254,7 +254,7 @@ public class MemberController {
 		 session.removeAttribute("memberId");
 		 session.removeAttribute("memberRole");
 		 
-		 return "redirect:/deleteFinish";
+		 return "redirect:deleteFinish";
 	 }
 	 
 	 @GetMapping("/deleteFinish")

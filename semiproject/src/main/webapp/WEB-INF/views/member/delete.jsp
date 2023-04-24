@@ -14,7 +14,7 @@
 <script>
 
 </script>
-<form action="${pageContext.request.contextPath}/delete" method="post" autocomplete="off" class="content">
+<form action="delete" method="post" autocomplete="off" class="content">
 <div class="container-600">
 	<div class="row center">
 		<h2>비밀번호 확인</h2>
