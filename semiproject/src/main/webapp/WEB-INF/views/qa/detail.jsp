@@ -259,28 +259,27 @@ function fn_reple_write(){
     </script>
     
     <!-- 표시용 템플릿 -->
-	<script type="text/template" id="view-template">
-  	<div class="view-panel right">
+<script type="text/template" id="view-template">
+  <div class="view-panel right">
     <div class="left font-h2 float head center me-50 pt-5"></div>
-     <div class="left font-h1 title mt-50 mb-30 center "></div>
+    <div class="left font-h1 title mt-50 mb-30 center "></div>
     <hr>
     <div class="contents left font-h2 mt-90 mb-90"></div>
 	
-	<c:if test="${qaDto.memberId == sessionScope.memberId}">
-	<c:if test="${qaDto.depth != 1}">
-		<a class="form-btn neutral edit-btn">수정</a>
-	</c:if>
-		<a class="form-btn neutral ms-20 delete-btn">삭제</a>
-	</c:if>
+    <c:if test="${qaDto.memberId == sessionScope.memberId}">
+        <a class="form-btn neutral edit-btn">수정</a>
+      	<a class="form-btn neutral ms-20 delete-btn">삭제</a>
+    </c:if>
 
-      <c:if test="${sessionScope.memberRole=='관리자'}">
-        <a class="form-btn neutral ms-20 delete-btn">삭제</a>
-		</c:if>
+    <c:if test="${sessionScope.memberRole eq '관리자'}">
+      <a class="form-btn neutral ms-20 delete-btn">삭제</a>
+    </c:if>
 
     <a class="form-btn neutral ms-20" href="${pageContext.request.contextPath}/qa/list">목록으로</a>
   </div>
   <br>
-	</script>
+</script>
+
 
      <!-- 답글편집용 템플릿 -->
     <script type="text/template" id="edit-template-answer">

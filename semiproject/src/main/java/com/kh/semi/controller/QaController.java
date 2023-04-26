@@ -189,7 +189,7 @@ public class QaController {
 		int qaNo = qaService.write(qaDto);
 		
 		attr.addAttribute("qaNo",qaNo);
-		return "redirect:detail";
+		return "redirect:qa/detail";
 
 	}
 	
